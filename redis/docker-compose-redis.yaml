@@ -1,0 +1,12 @@
+version: '3'
+services:
+  redis_6379:
+    image: redis
+    restart: always
+    privileged: true
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+    volumes:
+      - ./6379/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./6379/data/:/data/
