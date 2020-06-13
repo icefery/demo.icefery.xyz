@@ -2,7 +2,7 @@ version: '3'
 services:
   tomcat_8080:
     image: tomcat
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 8080:8080

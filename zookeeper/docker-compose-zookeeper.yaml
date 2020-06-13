@@ -2,8 +2,7 @@ version: '3'
 services:
   zookeeper_2181:
     image: zookeeper
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 2181:2181
-    
