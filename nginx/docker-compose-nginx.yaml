@@ -8,4 +8,4 @@ services:
       - 80:80
     volumes:
       - ./80/conf/nginx.conf:/etc/nginx/nginx.conf
-      - /d/xyz/:/usr/share/nginx/html/
+      - /d/xyz/public/:/usr/share/nginx/html/
