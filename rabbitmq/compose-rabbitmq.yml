@@ -1,9 +1,15 @@
-version: '3'
+version: '3.8'
+
 services:
-  rabbitmq_5672:
+  rabbitmq0:
     image: rabbitmq:3-management
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 5672:5672
       - 15672:15672
+
+networks:
+  default:
+    external:
+      name: local-net

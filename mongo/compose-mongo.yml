@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mongo0:
+    image: mongo-replica-set
+    restart: always
+    privileged: true
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    command: --replSet replica-set --keyFile /data/key/replica-set.key
+  mongo1:
+    image: mongo-replica-set
+    restart: always
+    privileged: true
+    ports:
+      - 27018:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    command: --replSet replica-set --keyFile /data/key/replica-set.key
+  mongo2:
+    image: mongo-replica-set
+    restart: always
+    privileged: true
+    ports:
+      - 27019:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    command: --replSet replica-set --keyFile /data/key/replica-set.key
+
+networks:
+  default:
+    external:
+      name: local-net

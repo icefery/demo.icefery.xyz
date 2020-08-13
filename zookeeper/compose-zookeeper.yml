@@ -1,4 +1,5 @@
-version: '3'
+version: '3.8'
+
 services:
   zookeeper_2181:
     image: zookeeper
@@ -6,3 +7,8 @@ services:
     privileged: true
     ports:
       - 2181:2181
+
+networks:
+  default:
+    external:
+      name: local-net

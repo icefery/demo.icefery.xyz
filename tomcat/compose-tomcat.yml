@@ -1,4 +1,5 @@
-version: '3'
+version: '3.8'
+
 services:
   tomcat_8080:
     image: tomcat
@@ -7,4 +8,9 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./8080/data/:/usr/local/tomcat/webapps/
+      - ./tomcat0/data/:/usr/local/tomcat/webapps/
+
+networks:
+  default:
+    external:
+      name: local-net
