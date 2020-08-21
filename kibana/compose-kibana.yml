@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  kibana:
+    image: kibana:7.8.0
+    privileged: true
+    ports:
+      - 5601:5601
+    volumes:
+      - ./kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+networks:
+  default:
+    external:
+      name: local-net
