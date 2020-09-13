@@ -3,7 +3,7 @@ version: '3.8'
 services:
   redis0:
     image: redis
-    restart: always
+    # restart: always
     privileged: true
     command: redis-server /usr/local/etc/redis/redis.conf
     ports:

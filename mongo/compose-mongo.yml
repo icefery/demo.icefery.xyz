@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongo0:
     image: mongo-replica-set
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 27017:27017
@@ -13,7 +13,7 @@ services:
     command: --replSet replica-set --keyFile /data/key/replica-set.key
   mongo1:
     image: mongo-replica-set
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 27018:27017
@@ -23,7 +23,7 @@ services:
     command: --replSet replica-set --keyFile /data/key/replica-set.key
   mongo2:
     image: mongo-replica-set
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 27019:27017

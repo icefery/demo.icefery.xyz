@@ -3,7 +3,7 @@ version: '3.8'
 services:
   nginx0:
     image: nginx
-    restart: always
+    # restart: always
     privileged: true
     ports:
       - 80:80
