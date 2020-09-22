@@ -1,7 +1,7 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  zookeeper_2181:
+  zk0:
     image: zookeeper
     # restart: always
     privileged: true

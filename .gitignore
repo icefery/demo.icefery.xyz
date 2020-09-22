@@ -2,5 +2,3 @@
 /image/
 # data 目录
 data/
-# 不忽略 tomcat 的目录
-!/tomcat/**/data/
