@@ -2,3 +2,5 @@
 /image/
 # container data
 data/
+# container log
+log/
