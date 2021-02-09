@@ -12,7 +12,6 @@ services:
     ports:
       - 8848:8848
     volumes:
-      - ./nacos/logs/:/home/nacos/logs/
       - ./nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
 
 networks:
