@@ -62,3 +62,9 @@
 
 2021-02-09 20:51:23,404 INFO Completed initialization in 17 ms
 
+2021-02-09 21:00:25,709 INFO [capacityManagement] start correct usage
+
+2021-02-09 21:00:25,726 INFO [capacityManagement] end correct usage, cost: 0s
+
+2021-02-09 21:00:26,066 WARN clearConfigHistory start
+
