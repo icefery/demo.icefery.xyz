@@ -1,0 +1,48 @@
+2021-02-09 20:50:18,594 INFO notifyConnectTimeout:200
+
+2021-02-09 20:50:18,605 INFO notifySocketTimeout:8000
+
+2021-02-09 20:50:18,606 INFO isHealthCheck:true
+
+2021-02-09 20:50:18,606 INFO maxHealthCheckFailCount:12
+
+2021-02-09 20:50:18,607 INFO maxContent:10485760
+
+2021-02-09 20:50:18,609 INFO spring.datasource.platform:""
+
+2021-02-09 20:50:22,490 INFO use local db service for init
+
+2021-02-09 20:50:23,771 WARN Lexical error at line 4, column 66.  Encountered: <EOF> after : "".
+
+2021-02-09 20:50:23,776 WARN Syntax error: Encountered "*" at line 1, column 1.
+
+2021-02-09 20:50:24,549 WARN Lexical error at line 4, column 13.  Encountered: "`" (96), after : "".
+
+2021-02-09 20:50:24,550 WARN Lexical error at line 1, column 13.  Encountered: "`" (96), after : "".
+
+2021-02-09 20:50:24,555 WARN Lexical error at line 1, column 13.  Encountered: "`" (96), after : "".
+
+2021-02-09 20:50:24,556 WARN Lexical error at line 1, column 13.  Encountered: "`" (96), after : "".
+
+2021-02-09 20:50:24,557 INFO use StandaloneDatabaseOperateImpl
+
+2021-02-09 20:50:25,780 WARN DumpService start
+
+2021-02-09 20:50:25,782 INFO start clear all config-info.
+
+2021-02-09 20:50:25,784 WARN clear all config-info failed.
+
+2021-02-09 20:50:25,784 WARN clear all config-info-tenant failed.
+
+2021-02-09 20:50:26,021 INFO start clear all config-info-beta.
+
+2021-02-09 20:50:26,022 WARN clear all config-info-beta failed.
+
+2021-02-09 20:50:26,022 WARN clear all config-info-beta-tenant failed.
+
+2021-02-09 20:50:26,039 INFO start clear all config-info-tag.
+
+2021-02-09 20:50:26,040 WARN clear all config-info-tag failed.
+
+2021-02-09 20:50:26,040 WARN clear all config-info-tag-tenant failed.
+
