@@ -1,14 +1,16 @@
 version: '3'
 
-services: 
+services:
   zookeeper:
     image: zookeeper:3.5
     container_name: zookeeper
     # restart: always
-    ports: 
+    ports:
       - 2181:2181
-    volumes: 
+    volumes:
       - ./zookeeper/conf/zoo.cfg:/conf/zoo.cfg
+      - ./zookeeper/data/:/data/
+      - ./zookeeper/datalog/:/datalog/
 
 networks:
   default:
