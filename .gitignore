@@ -1,6 +1,9 @@
 # image
 /image/
 # container data
-data/
+/**/data/
 # container log
-logs/
+/**/logs/
+# mysql data
+/**/var/lib/mysql/
+
