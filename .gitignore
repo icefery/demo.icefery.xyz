@@ -8,3 +8,9 @@
 
 # mysql data
 /**/var/lib/mysql/
+
+# rocketmq data
+/**/rocketmq/store/
+
+# rabbitmq data
+/**/var/lib/rabbitmq/mnesia/
