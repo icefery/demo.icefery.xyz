@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    # restart: always
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - ./portainer/data/:/data/
+
+networks:
+  default:
+    external:
+      name: local-net

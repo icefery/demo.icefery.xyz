@@ -4,7 +4,7 @@ services:
   sqlserver: 
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver
-    restart: always
+    # restart: always
     ports: 
       - 1433:1433
     volumes: 
