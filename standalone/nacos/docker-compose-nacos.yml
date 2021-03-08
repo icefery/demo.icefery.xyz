@@ -7,6 +7,12 @@ services:
     environment:
       - MODE=standalone
       - PREFER_HOST_MODE=hostname
+      # - SPRING_DATASOURCE_PLATFORM=mysql
+      # - MYSQL_SERVICE_HOST=mysql
+      # - MYSQL_SERVICE_PORT=3306
+      # - MYSQL_SERVICE_DB_NAME=nacos_config
+      # - MYSQL_SERVICE_USER=root
+      # - MYSQL_SERVICE_PASSWORD=root
       - JVM_XMS=512m
       - JVM_XMX=512m
       - JVM_XMN=256m
