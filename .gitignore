@@ -10,7 +10,10 @@
 /**/var/lib/mysql/
 
 # rocketmq data
-/**/rocketmq/store/
+/**/home/rocketmq/store/
 
 # rabbitmq data
 /**/var/lib/rabbitmq/mnesia/
+
+# logstash.conf
+/**/usr/share/logstash/pipeline/logstash.conf
