@@ -14,6 +14,7 @@ services:
     environment:
       - discovery.type=single-node
       - 'ES_JAVA_OPTS=-Xmx512m -Xms512m'
+
   kibana:
     image: docker.elastic.co/kibana/kibana:7.11.1
     container_name: kibana
@@ -22,6 +23,7 @@ services:
       - 5601:5601
     volumes:
       - ./kibana/usr/share/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+
   logstash:
     image: docker.elastic.co/logstash/logstash:7.11.1
     container_name: logstash
@@ -29,7 +31,7 @@ services:
     volumes:
       - ./logstash/usr/share/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       - ./logstash/usr/share/logstash/pipeline/:/usr/share/logstash/pipeline/
-    environment: 
+    environment:
       - 'LS_JAVA_OPTS=-Xmx512m -Xms512m'
 
 networks:

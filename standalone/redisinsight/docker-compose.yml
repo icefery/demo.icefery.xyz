@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+
+networks:
+  default:
+    external:
+      name: local-net

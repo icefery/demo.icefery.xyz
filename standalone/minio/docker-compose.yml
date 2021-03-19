@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    # restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - ./minio/data/:/data/
+      - ./root/.minio/:/root/.minio/
+    environment:
+      - MINIO_ACCESS_KEY=minio_access_key
+      - MINIO_SECRET_KEY=minio_secret_key
+    command: ['server', '/data']
+
+networks:
+  default:
+    external:
+      name: local-net

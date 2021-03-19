@@ -11,6 +11,14 @@ services:
       - ./nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/usr/share/nginx/html/:/usr/share/nginx/html/
 
+  nginx-web-ui:
+    image: cym1102/nginxwebui:latest
+    container_name: nginx-web-ui
+    # restart: always
+    privileged: true
+    ports:
+      - 8080:8080
+
 networks:
   default:
     external:
