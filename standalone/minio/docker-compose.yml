@@ -11,8 +11,8 @@ services:
       - ./minio/data/:/data/
       - ./root/.minio/:/root/.minio/
     environment:
-      - MINIO_ACCESS_KEY=minio_access_key
-      - MINIO_SECRET_KEY=minio_secret_key
+      - MINIO_ACCESS_KEY=root
+      - MINIO_SECRET_KEY=root
     command: ['server', '/data']
 
 networks:
