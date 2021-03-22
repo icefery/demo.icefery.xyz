@@ -95,7 +95,7 @@
 
 | Service | Image              | Tag   | Port       |
 | ------- | ------------------ | ----- | ---------- |
-| nacos   | nacos/nacos-server | 1.4.1 | 8848:8848s |
+| nacos   | nacos/nacos-server | 1.4.1 | 8848:8848  |
 
 #### zookeeper
 
