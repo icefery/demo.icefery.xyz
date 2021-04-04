@@ -17,3 +17,7 @@
 
 # logstash.conf
 /**/usr/share/logstash/pipeline/logstash.conf
+
+
+# nginx ftp server
+/**/usr/share/nginx/html/public/
