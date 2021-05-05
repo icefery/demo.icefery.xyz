@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    hostname: sqlserver
+    ports:
+      - 1433:1433
+    volumes:
+      - ./sqlserver/var/opt/mssql/data/:/var/opt/mssql/data/
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=root:0000
+
+networks:
+  default:
+    external: true
+    name: local_net

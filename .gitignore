@@ -21,3 +21,7 @@
 
 # nginx ftp server
 /**/usr/share/nginx/html/public/
+
+# nginx
+/**/data/
+/**/datalog/

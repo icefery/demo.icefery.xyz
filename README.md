@@ -1,3 +1,3 @@
 ## Description
 
-Local docker-compose files
+docker-compose files

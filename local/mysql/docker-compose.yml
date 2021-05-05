@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    hostname: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql/etc/mysql/conf.d/:/etc/mysql/conf.d/
+      - ./mysql/var/lib/mysql/:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+networks:
+  default:
+    external: true
+    name: local_net
