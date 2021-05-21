@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: mongodb
+    hostname: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_db:/data/db/
+      - mongodb_data_configdb:/data/configdb/
+
+networks:
+  default:
+    external: true
+    name: local_net
+
+volumes:
+  mongodb_data_db:
+    external: true
+    name: mongodb_data_db
+  mongodb_data_configdb:
+    external: true
+    name: mongodb_data_configdb
