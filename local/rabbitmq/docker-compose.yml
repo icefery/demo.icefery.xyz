@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq/
+
+networks:
+  default:
+    external: true
+    name: local_net
+
+volumes:
+  rabbitmq_data:
+    external: true
+    name: rabbitmq_data
