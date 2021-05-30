@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  portainer:
+    image: portainer/portainer-ce
+    container_name: portainer
+    hostname: portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - ./portainer/data/:/data/
+
+networks:
+  default:
+    external: true
+    name: local_net
