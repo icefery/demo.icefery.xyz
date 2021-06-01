@@ -4,6 +4,7 @@
 /**/data/
 # container log
 /**/logs/
+/**/log/
 
 
 # mysql data
@@ -21,8 +22,3 @@
 
 # nginx root
 /**/usr/share/nginx/html/
-
-
-# nginx
-/**/data/
-/**/datalog/
