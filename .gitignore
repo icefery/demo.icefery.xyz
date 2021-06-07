@@ -1,24 +1,25 @@
-# image
+# 镜像
 /image/
-# container data
+
+# 容器数据
 /**/data/
-# container log
+
+# 容器日志
 /**/logs/
 /**/log/
 
-
-# mysql data
+# mysql
 /**/var/lib/mysql/
 
-# rocketmq data
+# rocketmq
 /**/home/rocketmq/store/
 
-# rabbitmq data
+# rabbitmq
 /**/var/lib/rabbitmq/mnesia/
 
-# logstash.conf
+# logstash
 /**/usr/share/logstash/pipeline/logstash.conf
 
-
-# nginx root
-/**/usr/share/nginx/html/
+# nginx
+/**/etc/nginx/http/*.conf
+!/**/etc/nginx/http/localhost.conf
