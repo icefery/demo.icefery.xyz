@@ -15,7 +15,7 @@ services:
 networks:
   default:
     external: true
-    name: local_net
+    name: local
 
 volumes:
   postgresql_data:
