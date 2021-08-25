@@ -1,76 +1,23 @@
 version: '3'
 
-services:
-  zk1:
+services: 
+  zookeeper: 
     image: zookeeper:3.7
-    container_name: zk1
-    hostname: zk1
-    environment:
-      ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
-    ports:
+    container_name: zookeeper
+    hostname: zookeeper
+    ports: 
       - 2181:2181
-    volumes:
-      - zk1_data:/data/
-      - zk1_datalog:/datalog/
-      - zk1_logs:/logs/
-  zk2:
-    image: zookeeper:3.7
-    container_name: zk2
-    hostname: zk2
-    environment:
-      ZOO_MY_ID: 2
-      ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zk3:2888:3888;2181
-    ports:
-      - 2182:2181
-    volumes:
-      - zk2_data:/data/
-      - zk2_datalog:/datalog/
-      - zk2_logs:/logs/
-  zk3:
-    image: zookeeper:3.7
-    container_name: zk3
-    hostname: zk3
-    environment:
-      ZOO_MY_ID: 3
-      ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
-    ports:
-      - 2183:2181
-    volumes:
-      - zk3_data:/data/
-      - zk3_datalog:/datalog/
-      - zk3_logs:/logs/
-
-networks:
+    volumes: 
+      - zookeeper_data:/data/
+      - zookeeper_datalog:/datalog/
+      - zookeeper_logs:/logs/
+    
+networks: 
   default:
     external: true
     name: local
 
-volumes:
-  zk1_data:
-    external: true
-    name: zk1_data
-  zk1_datalog:
-    external: true
-    name: zk1_datalog
-  zk1_logs:
-    external: true
-    name: zk1_logs
-  zk2_data:
-    external: true
-    name: zk2_data
-  zk2_datalog:
-    external: true
-    name: zk2_datalog
-  zk2_logs:
-    external: true
-    name: zk2_logs
-  zk3_data:
-    external: true
-    name: zk3_data
-  zk3_datalog:
-    external: true
-    name: zk3_datalog
-  zk3_logs:
-    external: true
-    name: zk3_logs
+volumes: 
+  zookeeper_data:
+  zookeeper_datalog:
+  zookeeper_logs:
