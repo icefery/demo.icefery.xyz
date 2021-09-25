@@ -6,7 +6,7 @@ services:
     container_name: redis
     hostname: redis
     command: 
-      - --requirepass=0000
+      - --requirepass 0000
     ports:
       - 6379:6379
     volumes:
