@@ -1,0 +1,17 @@
+version: '3'
+
+services: 
+  zookeeper: 
+    image: zookeeper:3.7
+    container_name: zookeeper
+    hostname: zookeeper
+    ports: 
+      - 2181:2181
+    volumes: 
+      - ./zookeeper/data/:/data/
+      - ./zookeeper/datalog/:/datalog/
+    
+networks: 
+  default:
+    external: true
+    name: local

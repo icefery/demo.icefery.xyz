@@ -1,29 +1,13 @@
 # 镜像
 /image/
 
-# 构建数据
+# 构建
 /**/build/
 
-# 容器数据
+# 数据
 /**/data/
 /**/var/lib/
 
-# 容器日志
+# 容日
 /**/logs/
 /**/log/
-
-# mysql
-/**/var/lib/mysql/
-
-# rocketmq
-/**/home/rocketmq/store/
-
-# rabbitmq
-/**/var/lib/rabbitmq/mnesia/
-
-# logstash
-/**/usr/share/logstash/pipeline/logstash.conf
-
-# nginx
-/**/etc/nginx/http/*.conf
-!/**/etc/nginx/http/localhost.conf

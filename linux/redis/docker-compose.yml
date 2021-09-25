@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:6.2
+    container_name: redis
+    hostname: redis
+    command: 
+      - --requirepass=0000
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data/:/data/
+
+networks:
+  default:
+    external: true
+    name: local
