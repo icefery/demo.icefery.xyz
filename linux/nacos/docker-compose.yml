@@ -10,7 +10,7 @@ services:
     ports: 
       - 8848:8848
     volumes: 
-      - ./nacos/home/nacos/logs/:/home/nacos/logs
+      - ../../data/nacos/home/nacos/logs/:/home/nacos/logs/
 
 networks:
   default:

@@ -1,13 +1,7 @@
-# 镜像
 /image/
 
-# 构建
 /**/build/
 
-# 数据
 /**/data/
-/**/var/lib/
 
-# 日志
-/**/logs/
 /**/log/

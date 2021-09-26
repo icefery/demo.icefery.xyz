@@ -8,8 +8,8 @@ services:
     ports: 
       - 2181:2181
     volumes: 
-      - ./zookeeper/data/:/data/
-      - ./zookeeper/datalog/:/datalog/
+      - ../../data/zookeeper/data/:/data/
+      - ../../data/zookeeper/datalog/:/datalog/
     
 networks: 
   default:
