@@ -10,6 +10,8 @@ services:
     ports: 
       - 1521:1521
       - 5500:5500
+    volumes: 
+      - ../../data/oracle/opt/oracle/oradata/:/opt/oracle/oradata/
 
 networks:
   default:

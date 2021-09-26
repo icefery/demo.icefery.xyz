@@ -11,7 +11,7 @@ services:
     ports:
       - 1433:1433
     volumes:
-      - ./sqlserver/var/opt/mssql/data/:/var/opt/mssql/data/
+      - ../../data/sqlserver/var/opt/mssql/data/:/var/opt/mssql/data/
 
 networks:
   default:

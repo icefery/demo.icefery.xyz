@@ -8,16 +8,10 @@ services:
     ports: 
       - 2181:2181
     volumes: 
-      - zookeeper_data:/data/
-      - zookeeper_datalog:/datalog/
-      - zookeeper_logs:/logs/
+      - ../../data/zookeeper/data/:/data/
+      - ../../data/zookeeper/datalog/:/datalog/
     
 networks: 
   default:
     external: true
     name: local
-
-volumes: 
-  zookeeper_data:
-  zookeeper_datalog:
-  zookeeper_logs:

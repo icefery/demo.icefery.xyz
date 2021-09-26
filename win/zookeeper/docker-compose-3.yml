@@ -10,10 +10,6 @@ services:
       ZOO_SERVERS: server.1=0.0.0.0:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=zk3:2888:3888;2181
     ports:
       - 2181:2181
-    volumes:
-      - zk1_data:/data/
-      - zk1_datalog:/datalog/
-      - zk1_logs:/logs/
   zk2:
     image: zookeeper:3.7
     container_name: zk2
@@ -23,10 +19,6 @@ services:
       ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zk3:2888:3888;2181
     ports:
       - 2182:2181
-    volumes:
-      - zk2_data:/data/
-      - zk2_datalog:/datalog/
-      - zk2_logs:/logs/
   zk3:
     image: zookeeper:3.7
     container_name: zk3
@@ -36,23 +28,8 @@ services:
       ZOO_SERVERS: server.1=zk1:2888:3888;2181 server.2=zk2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181
     ports:
       - 2183:2181
-    volumes:
-      - zk3_data:/data/
-      - zk3_datalog:/datalog/
-      - zk3_logs:/logs/
 
 networks:
   default:
     external: true
     name: local
-
-volumes:
-  zk1_data:
-  zk1_datalog:
-  zk1_logs:
-  zk2_data:
-  zk2_datalog:
-  zk2_logs:
-  zk3_data:
-  zk3_datalog:
-  zk3_logs:

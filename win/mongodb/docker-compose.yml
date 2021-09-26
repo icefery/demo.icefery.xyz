@@ -11,8 +11,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data_db:/data/db/
-      - mongodb_data_configdb:/data/configdb/
+      - mongodb_data:/data/
 
 networks:
   default:
@@ -20,9 +19,6 @@ networks:
     name: local
 
 volumes:
-  mongodb_data_db:
+  mongodb_data:
     external: true
-    name: mongodb_data_db
-  mongodb_data_configdb:
-    external: true
-    name: mongodb_data_configdb
+    name: mongodb_data

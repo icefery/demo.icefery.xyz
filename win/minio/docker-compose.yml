@@ -12,8 +12,8 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - ./minio/data/:/data/
-      - ./minio/root/.minio/:/root/.minio/
+      - ../../data/minio/data/:/data/
+      - ../../data/minio/root/.minio/:/root/.minio/
 
 networks:
   default:

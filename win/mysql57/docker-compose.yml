@@ -11,7 +11,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./mysql57/var/lib/mysql/:/var/lib/mysql/
+      - ../../data/mysql57/var/lib/mysql/:/var/lib/mysql/
 
 networks:
   default:

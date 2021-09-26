@@ -10,7 +10,7 @@ services:
     volumes:
       - ./nginx/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/etc/nginx/http/:/etc/nginx/http/
-      - ./nginx/data/:/data/
+      - ../../data/nginx/data/:/data/
 
 networks:
   default:
