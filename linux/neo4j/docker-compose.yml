@@ -7,6 +7,7 @@ services:
     hostname: neo4j
     ports:
       - 7474:7474
+      - 7687:7687
     volumes:
       - ../../data/neo4j/data:/data/
 
