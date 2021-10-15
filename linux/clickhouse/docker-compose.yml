@@ -8,6 +8,7 @@ services:
     ports:
       - 8123:8123
     volumes:
+      - /d/share/:/d/share/
       - ../../data/clickhouse/var/lib/clickhouse/:/var/lib/clickhouse/
 
 networks:

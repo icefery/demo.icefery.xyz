@@ -11,6 +11,7 @@ services:
     ports:
       - 27017:27017
     volumes:
+      - /d/share/:/d/share/
       - ../../data/mongodb/data/:/data/
 
 networks:

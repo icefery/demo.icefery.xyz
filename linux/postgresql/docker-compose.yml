@@ -10,6 +10,7 @@ services:
     ports:
       - 5432:5432
     volumes:
+      - /d/share/:/d/share/
       - ../../data/postgresql/var/lib/postgresql/data/:/var/lib/postgresql/data/
 
 networks:

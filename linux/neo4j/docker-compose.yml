@@ -9,6 +9,7 @@ services:
       - 7474:7474
       - 7687:7687
     volumes:
+      - /d/share/:/d/share/
       - ../../data/neo4j/data:/data/
 
 networks:

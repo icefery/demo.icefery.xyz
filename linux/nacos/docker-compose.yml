@@ -10,6 +10,7 @@ services:
     ports:
       - 8848:8848
     volumes:
+      - /d/share/:/d/share/
       - ../../data/nacos/home/nacos/logs/:/home/nacos/logs/
 
 networks:

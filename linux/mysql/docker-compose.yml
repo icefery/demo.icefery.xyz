@@ -16,6 +16,7 @@ services:
     ports:
       - 3306:3306
     volumes:
+      - /d/share/:/d/share/
       - ../../data/mysql/var/lib/mysql/:/var/lib/mysql/
 
 networks:

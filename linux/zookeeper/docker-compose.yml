@@ -8,6 +8,7 @@ services:
     ports:
       - 2181:2181
     volumes:
+      - /d/share/:/d/share/
       - ../../data/zookeeper/data/:/data/
       - ../../data/zookeeper/datalog/:/datalog/
 
