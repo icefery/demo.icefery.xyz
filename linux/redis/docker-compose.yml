@@ -1,11 +1,11 @@
-version: '3'
+version: "3"
 
 services:
   redis:
     image: redis:6.2
     container_name: redis
     hostname: redis
-    command: 
+    command:
       - --appendonly yes
       - --requirepass 0000
     ports:

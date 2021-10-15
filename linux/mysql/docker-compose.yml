@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   mysql:
@@ -7,11 +7,11 @@ services:
     hostname: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
-    command: 
+    command:
       - --lower_case_table_names=1
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_bin 
+      - --collation-server=utf8mb4_bin
       - --default-time-zone=+8:00
     ports:
       - 3306:3306

@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   elasticsearch:
@@ -6,9 +6,10 @@ services:
     container_name: elasticsearch
     hostname: elasticsearch
     environment:
-      - 'discovery.type=single-node'
-      - 'xpack.security.enabled=true'
-      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - "discovery.type=single-node"
+      - "xpack.security.enabled=true"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "TAKE_FILE_OWNERSHIP=true"
     ports:
       - 9200:9200
     volumes:
@@ -18,11 +19,10 @@ services:
     container_name: kibana
     hostname: kibana
     environment:
-      - 'elasticsearch.hosts=http://elasticsearch:9200'
-      - 'elasticsearch.username=elastic'
-      - 'elasticsearch.password=elastic'
-      - 'i18n.locale=zh-CN'
-
+      - "elasticsearch.hosts=http://elasticsearch:9200"
+      - "elasticsearch.username=elastic"
+      - "elasticsearch.password=elastic"
+      - "i18n.locale=zh-CN"
     ports:
       - 5601:5601
 

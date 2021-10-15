@@ -1,15 +1,15 @@
-version: '3'
+version: "3"
 
-services: 
+services:
   nacos:
     image: nacos/nacos-server:2.0.3
     container_name: nacos
     hostname: nacos
-    environment: 
+    environment:
       - MODE=standalone
-    ports: 
+    ports:
       - 8848:8848
-    volumes: 
+    volumes:
       - ../../data/nacos/home/nacos/logs/:/home/nacos/logs/
 
 networks:

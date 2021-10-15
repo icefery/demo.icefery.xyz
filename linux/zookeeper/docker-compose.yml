@@ -1,17 +1,17 @@
-version: '3'
+version: "3"
 
-services: 
-  zookeeper: 
+services:
+  zookeeper:
     image: zookeeper:3.7
     container_name: zookeeper
     hostname: zookeeper
-    ports: 
+    ports:
       - 2181:2181
-    volumes: 
+    volumes:
       - ../../data/zookeeper/data/:/data/
       - ../../data/zookeeper/datalog/:/datalog/
-    
-networks: 
+
+networks:
   default:
     external: true
     name: local
