@@ -7,7 +7,7 @@ services:
     hostname: rancher
     privileged: true
     ports:
-      - 1080:80
+      - 8443:443
     volumes:
       - /d/share/:/d/share/
 
