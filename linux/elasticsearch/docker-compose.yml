@@ -8,6 +8,7 @@ services:
     environment:
       - "discovery.type=single-node"
       - "xpack.security.enabled=true"
+      - "xpack.security.transport.ssl.enabled=true"
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - "TAKE_FILE_OWNERSHIP=true"
     ports:
