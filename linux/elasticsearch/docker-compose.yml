@@ -2,12 +2,12 @@ version: '3'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    image: elasticsearch:7.14.0
     container_name: elasticsearch
     hostname: elasticsearch
     environment:
       - 'discovery.type=single-node'
-      - 'XPACK_SECURITY_ENABLED=true'
+      - 'xpack.security.enabled=true'
       - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
       - 'TAKE_FILE_OWNERSHIP=true'
     ports:
@@ -16,7 +16,7 @@ services:
       - /d/share/:/d/share/
       - ../../data/elasticsearch/usr/share/elasticsearch/data/:/usr/share/elasticsearch/data/
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.15.1
+    image: kibana:7.14.0
     container_name: kibana
     hostname: kibana
     environment:
@@ -26,6 +26,14 @@ services:
       - 'I18N_LOCALE=zh-CN'
     ports:
       - 5601:5601
+    volumes:
+      - /d/share/:/d/share/
+  logstash:
+    image: logstash:7.14.0
+    container_name: logstash
+    hostname: logstash
+    ports:
+      - 5044:5044
     volumes:
       - /d/share/:/d/share/
 
