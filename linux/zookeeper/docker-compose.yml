@@ -5,7 +5,7 @@ services:
     image: zookeeper:3.7
     container_name: zookeeper
     hostname: zookeeper
-    environments:
+    environment:
       - JVMFLAGS=-Dzookeeper.DigestAuthenticationProvider.superDigest=super:xQJmxLMiHGwaqBvst5y6rkB6HQs=
     ports:
       - 2181:2181
