@@ -17,8 +17,8 @@ services:
     container_name: pgadmin4
     hostname: pgadmin4
     environment:
-      - PGADMIN_DEFAULT_EMAIL='icefery@163.com'
-      - PGADMIN_DEFAULT_PASSWORD='icefery@163.com'
+      - PGADMIN_DEFAULT_EMAIL=icefery@163.com
+      - PGADMIN_DEFAULT_PASSWORD=icefery@163.com
     ports:
       - 5480:80
 
