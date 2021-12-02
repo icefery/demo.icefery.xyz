@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.14.0
+    container_name: elasticsearch
+    hostname: elasticsearch
+    environment:
+      - 'discovery.type=single-node'
+      - 'xpack.security.enabled=true'
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - 'TAKE_FILE_OWNERSHIP=true'
+    ports:
+      - '9200:9200'
+    volumes:
+      - /d/share/:/d/share/
+      - ../../data/elasticsearch/usr/share/elasticsearch/data/:/usr/share/elasticsearch/data/
+  kibana:
+    image: kibana:7.14.0
+    container_name: kibana
+    hostname: kibana
+    environment:
+      - 'ELASTICSEARCH_HOSTS=["http://elasticsearch:9200"]'
+      - 'ELASTICSEARCH_USERNAME=elastic'
+      - 'ELASTICSEARCH_PASSWORD=elastic'
+      - 'I18N_LOCALE=zh-CN'
+    ports:
+      - 5601:5601
+    volumes:
+      - /d/share/:/d/share/
+  logstash:
+    image: logstash:7.14.0
+    container_name: logstash
+    hostname: logstash
+    ports:
+      - 5044:5044
+    volumes:
+      - /d/share/:/d/share/
+
+networks:
+  default:
+    external: true
+    name: local
