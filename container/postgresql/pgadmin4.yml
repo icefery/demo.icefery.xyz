@@ -13,5 +13,10 @@ services:
     volumes:
       - pgadmin4-data:/var/lib/pgadmin/
 
+networks:
+  default:
+    external: true
+    name: local
+
 volumes:
   pgadmin4-data:
