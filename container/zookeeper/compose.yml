@@ -13,6 +13,7 @@ services:
       - /d/share/:/d/share/
       - ../../data/zookeeper/data/:/data/
       - ../../data/zookeeper/datalog/:/datalog/
+      - ../../data/zookeeper/logs/:/logs/
 
 networks:
   default:
