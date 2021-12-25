@@ -1,0 +1,29 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="xyz.icefery.homework.android.exam.xyz.icefery.demo.MainActivity">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home"
+        android:title="Home"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/navigation_baidu_map"
+        android:icon="@mipmap/map"
+        android:title="Map"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/navigation_calculator"
+        android:icon="@mipmap/calculator"
+        android:title="Calculator"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/navigation_honor_of_kings"
+        android:icon="@mipmap/honor_of_kings"
+        android:title="Honor Of Kings"
+        app:showAsAction="never" />
+
+</menu>
