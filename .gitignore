@@ -1,0 +1,31 @@
+# IDEA
+/**/.idea/
+/**/*.iml
+
+# VSCode
+/**/.vscode/
+
+# Maven
+/**/.mvn/
+/**/mvnw
+/**/mvnw.cmd
+/**/target/
+
+# Gradle
+/**/.gradle/
+/**/gradle/
+/**/gradlew
+/**/gradlew.bat
+/**/build/
+
+# NPM
+/**/node_modules/
+/**/package-lock.json
+/**/yarn.lock
+/**/pnpm-lock.yaml
+
+# Spring Boot
+/**/HELP.md
+
+# MacOS
+/**/.DS_Store
