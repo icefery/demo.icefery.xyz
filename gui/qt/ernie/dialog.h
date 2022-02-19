@@ -33,7 +33,6 @@ private:
     Ui::Dialog* ui;
     QVector<QImage> vector; // 保存图片的容器
     int index;              // 当前图片在容器中的索引
-    QTimer timer;           // 定时器
     int timerId;            // 定时器
     bool isStarted;         // 标记摇奖机状态
 };
