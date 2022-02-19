@@ -1,0 +1,11 @@
+/**/*.user
+
+/**/.qmake.stash
+
+/**/ui_*.h
+/**/moc_*.cpp
+/**/qrc_*.cpp
+/**/Makefile
+
+/**/*.o
+/**/*.app/
