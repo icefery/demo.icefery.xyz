@@ -54,11 +54,11 @@ function sync {
 function start {
   "${HADOOP_HOME}/sbin/start-dfs.sh"
   "${HADOOP_HOME}/sbin/start-yarn.sh"
-  "${HADOOP_HOME}/sbin/mapred --daemon start historyserver"
+  "${HADOOP_HOME}/bin/mapred --daemon start historyserver"
 }
 
 function stop {
-  "${HADOOP_HOME}/sbin/mapred stop historyserver"
+  "${HADOOP_HOME}/bin/mapred stop historyserver"
   "${HADOOP_HOME}/sbin/stop-yarn.sh"
   "${HADOOP_HOME}/sbin/stop-dfs.sh"
 }

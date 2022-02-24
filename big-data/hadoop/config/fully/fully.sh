@@ -56,11 +56,11 @@ function sync {
 function start {
   ssh "${NAME_NODE_HOST}"        "${HADOOP_HOME}/sbin/start-dfs.sh"
   ssh "${RESOURCE_MANAGER_HOST}" "${HADOOP_HOME}/sbin/start-yarn.sh"
-  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/sbin/mapred --daemon start historyserver"
+  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred --daemon start historyserver"
 }
 
 function stop {
-  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/sbin/mapred stop historyserver"
+  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred stop historyserver"
   ssh "${RESOURCE_MANAGER_HOST}" "${HADOOP_HOME}/sbin/stop-yarn.sh"
   ssh "${NAME_NODE_HOST}"        "${HADOOP_HOME}/sbin/stop-dfs.sh"
 }
