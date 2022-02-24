@@ -46,7 +46,7 @@ function reset {
 function sync {
   for host in "${WORKERS[@]}"; do
     if [[ "${host}" != "$(hostname)" ]]; then
-      rsync -arv "${HADOOP_HOME}/etc" "${host}:${HADOOP_HOME}"
+      scp -r "${HADOOP_HOME}/etc" "${host}:${HADOOP_HOME}"
     fi
   done
 }
