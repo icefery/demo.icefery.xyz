@@ -1,4 +1,4 @@
-package sink;
+package xyz.icefery.demo.sink;
 
 import org.apache.flume.Channel;
 import org.apache.flume.Context;

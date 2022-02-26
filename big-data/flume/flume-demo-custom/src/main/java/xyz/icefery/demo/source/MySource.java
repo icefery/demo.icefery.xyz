@@ -12,13 +12,11 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MySource extends AbstractSource implements Configurable, PollableSource {
-    private Long delay;
-    private String field;
+    private String prefix;
 
     @Override
     public void configure(Context context) {
-        delay = context.getLong("delay");
-        field = context.getString("field");
+        prefix = context.getString("prefix");
     }
 
     @Override
@@ -28,9 +26,9 @@ public class MySource extends AbstractSource implements Configurable, PollableSo
             Event event = new SimpleEvent();
             for (int i = 0; i < 5; i++) {
                 event.setHeaders(headers);
-                event.setBody((field + i).getBytes());
+                event.setBody((prefix + i).getBytes());
                 getChannelProcessor().processEvent(event);
-                TimeUnit.MILLISECONDS.sleep(delay);
+                TimeUnit.MILLISECONDS.sleep(1000);
             }
             return Status.READY;
         } catch (InterruptedException e) {
