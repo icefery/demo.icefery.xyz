@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>xyz.icefery.demo</groupId>
-    <artifactId>flume-demo-custom-source</artifactId>
+    <artifactId>flume-demo-custom</artifactId>
     <version>0.0.0</version>
 
     <properties>
@@ -18,4 +18,14 @@
             <version>1.9.0</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
 </project>

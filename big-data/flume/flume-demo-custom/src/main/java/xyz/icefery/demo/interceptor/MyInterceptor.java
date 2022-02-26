@@ -1,4 +1,4 @@
-package xyz.icefery.demo.intercerceptor;
+package xyz.icefery.demo.interceptor;
 
 import org.apache.flume.Context;
 import org.apache.flume.Event;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TypeInterceptor implements Interceptor {
+public class MyInterceptor implements Interceptor {
     private List<Event> eventList;
 
     @Override
@@ -20,13 +20,15 @@ public class TypeInterceptor implements Interceptor {
     public Event intercept(Event event) {
         Map<String, String> headers = event.getHeaders();
         String body = new String(event.getBody());
-        // 根据 body 中是否含有 "atguigu" 来决定添加怎样的头信息
-        String type = body.contains("atguigu") ? "first" : "second";
-        headers.put("type", type);
+        if (body.contains("info")) {
+            headers.put("type", "info");
+        } else if (body.contains("error")) {
+            headers.put("type", "error");
+        }
         return event;
     }
 
-    // ；批量事件拦截
+    // 批量事件拦截
     @Override
     public List<Event> intercept(List<Event> events) {
         eventList.clear();
@@ -42,7 +44,7 @@ public class TypeInterceptor implements Interceptor {
     public static class Builder implements Interceptor.Builder {
         @Override
         public Interceptor build() {
-            return new TypeInterceptor();
+            return new MyInterceptor();
         }
 
         @Override
