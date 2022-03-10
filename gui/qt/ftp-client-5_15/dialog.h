@@ -132,7 +132,6 @@ private
     // 下载进度槽函数
     void onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal) {
         int percent = bytesTotal == 0 ? 0 : (bytesReceived / bytesTotal) * 100;
-        qDebug() << "onDownloadProgress()" << percent;
         qDebug() << QString("onDownloadProgress() bytesReceived=%1 bytesTotal=%2 percent=%3").arg(bytesReceived).arg(bytesTotal).arg(percent);
         ui->progressBar->setValue(percent);
     }
