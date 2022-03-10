@@ -60,7 +60,7 @@ function start {
 }
 
 function stop {
-  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred stop historyserver"
+  ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred --daemon stop historyserver"
   ssh "${RESOURCE_MANAGER_HOST}" "${HADOOP_HOME}/sbin/stop-yarn.sh"
   ssh "${NAME_NODE_HOST}"        "${HADOOP_HOME}/sbin/stop-dfs.sh"
 }
