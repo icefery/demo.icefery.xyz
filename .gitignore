@@ -6,7 +6,8 @@
 /**/.vscode/
 
 ## Qt Creator
-/**/build-*-*/
+/**/build-*-Debug/
+/**/build-*-Release/
 
 # Maven
 /**/.mvn/
