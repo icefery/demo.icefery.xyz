@@ -5,6 +5,9 @@
 # VSCode
 /**/.vscode/
 
+## Qt Creator
+/**/build-*-*/
+
 # Maven
 /**/.mvn/
 /**/mvnw
