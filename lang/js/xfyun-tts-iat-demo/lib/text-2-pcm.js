@@ -56,9 +56,6 @@ async function textToPcm(appId, apiSecret, apiKey, text, pcmPath) {
 
         if (message.data.status === 2) {
           ws.close()
-
-          console.log(`${text} => ${pcmPath}`)
-
           resolve()
         }
       })
