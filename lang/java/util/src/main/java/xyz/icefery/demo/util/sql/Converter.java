@@ -2,6 +2,7 @@ package xyz.icefery.demo.util.sql;
 
 import com.google.common.base.CaseFormat;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class Converter {
-    public static final Function<String, String> COLUMN_CONVERTER = (field) -> CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field);
+    public static final Function<Field, String> COLUMN_CONVERTER = (field) -> CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName());
 
     public static final Map<Class<?>, BiFunction<String, Object, String>> VALUE_CONVERTER_MAP = new HashMap<>();
 

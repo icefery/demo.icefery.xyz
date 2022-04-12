@@ -1,6 +1,7 @@
 package xyz.icefery.demo.util.sql;
 
 import com.google.common.base.CaseFormat;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class NativeSQLBuilder {
      * @param valueConverterMap 值转换器
      * @return <code>${table} ()</code>
      */
-    public static <T> List<String> buildColumns(Class<T> cls, Function<String, String> columnConverter, Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap) {
+    public static <T> List<String> buildColumns(Class<T> cls, Function<Field, String> columnConverter, Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap) {
         if (cls == null || columnConverter == null || valueConverterMap == null || valueConverterMap.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -73,7 +74,7 @@ public class NativeSQLBuilder {
             .stream(cls.getDeclaredFields())
             .filter(field -> valueConverterMap.containsKey(field.getType()))
             .peek(field -> field.setAccessible(true))
-            .map(field -> columnConverter.apply(field.getName()))
+            .map(columnConverter)
             .collect(Collectors.toList());
     }
 
