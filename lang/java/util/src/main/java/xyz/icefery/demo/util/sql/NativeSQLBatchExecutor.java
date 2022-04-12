@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class NativeBatchExecutor {
-    private static final Logger log = LoggerFactory.getLogger(NativeBatchExecutor.class);
+public class NativeSQLBatchExecutor {
+    private static final Logger log = LoggerFactory.getLogger(NativeSQLBatchExecutor.class);
 
     public static <T> ThrowableConsumer<Boolean, Exception> batchInsert(ThreadPoolExecutor executor, ThrowableSupplier<Connection, Exception> connectionGetter, ThrowableFunction<List<T>, String, Exception> sqlGetter, List<T> data, int batchSize) throws Exception {
         // 开始时间
@@ -48,7 +48,7 @@ public class NativeBatchExecutor {
                     batchStatus = "failure";
                 }
                 long batchEnd = System.currentTimeMillis();
-                log.info("total={} batchSize={} batchCount={} batchId={} batchStatus={} batchCost={} batchSQL={}", data.size(), batchSize, batches.size(), batchId, batchStatus, batchEnd - batchStart, batchSQL);
+                log.info("total={} batchSize={} batchCount={} batchId={} batchStatus={} batchCost={} batchSQL={}", data.size(), batchSize, batches.size(), batchId, batchStatus, batchEnd - batchStart, batchSQL.replaceAll("\n", " "));
             });
         }
         // 执行任务

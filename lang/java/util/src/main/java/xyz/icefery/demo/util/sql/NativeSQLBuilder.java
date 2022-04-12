@@ -22,8 +22,8 @@ public class NativeSQLBuilder {
             throw new IllegalArgumentException();
         }
         String table = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, cls.getSimpleName());
-        List<String> columns = buildColumns(cls, Converter.COLUMN_CONVERTER, Converter.VALUE_CONVERTER_MAP);
-        List<List<String>> values = buildValues(dialect, cls, Converter.VALUE_CONVERTER_MAP, data);
+        List<String> columns = buildColumns(cls, NativeSQLConverter.COLUMN_CONVERTER, NativeSQLConverter.VALUE_CONVERTER_MAP);
+        List<List<String>> values = buildValues(dialect, cls, NativeSQLConverter.VALUE_CONVERTER_MAP, data);
         return buildInsert(dialect, table, columns, values);
     }
 
@@ -99,7 +99,7 @@ public class NativeSQLBuilder {
                 if (value == null) {
                     type = null;
                 }
-                return Converter.VALUE_CONVERTER_MAP.get(type).apply(dialect, value);
+                return NativeSQLConverter.VALUE_CONVERTER_MAP.get(type).apply(dialect, value);
             } catch (Exception e) {
                 return "NULL";
             }

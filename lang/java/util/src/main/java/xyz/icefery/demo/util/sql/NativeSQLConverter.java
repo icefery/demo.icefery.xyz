@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class Converter {
-    public static final Function<Field, String> COLUMN_CONVERTER = (field) -> CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName());
+public class NativeSQLConverter {
+    public static final Function<Field, String> COLUMN_CONVERTER = field -> CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName());
 
     public static final Map<Class<?>, BiFunction<String, Object, String>> VALUE_CONVERTER_MAP = new HashMap<>();
 
