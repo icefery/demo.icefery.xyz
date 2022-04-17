@@ -31,5 +31,9 @@
 # Spring Boot
 /**/HELP.md
 
+# Python
+/**/venv/
+/**/__pycache__/
+
 # MacOS
 /**/.DS_Store
