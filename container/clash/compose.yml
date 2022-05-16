@@ -5,8 +5,7 @@ services:
     image: dreamacro/clash:v1.10.6
     container_name: clash
     hostname: clash
-    command:
-      - -f /config.yml
+    command: ['-f', '/config.yml']
     ports:
       - 7890:7890
       - 7891:7891
