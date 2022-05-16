@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  clash:
+    image: dreamacro/clash:v1.10.6
+    container_name: clash
+    hostname: clash
+    command:
+      -- -f /config.yml
+    ports:
+      - 8123:8123
+    volumes:
+      - /d/share/:/d/share/
+      - ./clash/config.yml:/config.yml
+
+networks:
+  default:
+    external: true
+    name: local
