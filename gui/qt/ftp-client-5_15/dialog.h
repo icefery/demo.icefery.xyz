@@ -43,8 +43,7 @@ public:
         delete manager;
     }
 
-private
-    slots :
+private slots:
     // 上传按钮点击信号槽函数
     void on_uploadButton_clicked() {
         qDebug() << "on_uploadButton_clicked()";
