@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: local
+  name: clash
+  labels:
+    app: clash
+spec:
+  selector:
+    matchLabels:
+      app: clash
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: clash
+    spec:
+      containers:
+        - name: clash
+          image: dreamacro/clash:v1.10.6
+          args:
+            - -f /config.yml
+          ports:
+            - containerPort: 7890
+            - containerPort: 7891
+          volumeMounts:
+            - mountPath: /config.yml
+              name: config
+      volumes:
+        - name: config
+          hostPath:
+            path: /d/mount/clash/config.yml
+            type: File

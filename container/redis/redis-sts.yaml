@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: local
+  name: redis
+  labels:
+    app: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.0.0
+          args:
+            - --appendonly yes
+            - --requirepass redis
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        storageClassName: nfs-client
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
