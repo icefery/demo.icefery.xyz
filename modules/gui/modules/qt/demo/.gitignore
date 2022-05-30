@@ -1,0 +1,15 @@
+# CMake
+/**/cmake-build-*/
+
+# QMake
+/**/*.qmake.stash
+/**/ui_*.h
+/**/moc_*.cpp
+/**/qrc_*.cpp
+/**/Makefile
+/**/*.o
+/**/*.app/
+
+# Qt Creator
+/**/*.user
+/**/build-*-*/

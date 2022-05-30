@@ -9,3 +9,5 @@
 - [前后端分离模式下的权限设计方案](https://www.cnblogs.com/liuyh/p/8027833.html)
 
 - [CAP 理论的理解](https://www.cnblogs.com/mingorun/p/11025538.html)
+
+- [读-李智慧-大型网站技术架构：核心原理与案例分析](https://blog.csdn.net/xiaoxufox/article/details/53176455)
