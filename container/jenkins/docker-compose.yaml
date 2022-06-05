@@ -11,7 +11,7 @@ services:
     volumes:
       - '/d/mount/jenkins/bitnami/jenkins:/bitnami/jenkins'
       - '/opt/jdk-11:/opt/jdk-11'
-      - '/opt/maven:/maven'
+      - '/opt/maven:/opt/maven'
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/usr/bin/docker:/usr/bin/docker'
       - '/etc/docker/daemon.json:/etc/docker/daemon.json'
