@@ -17,5 +17,5 @@ services:
       - '/etc/docker/daemon.json:/etc/docker/daemon.json'
 networks:
   default:
-    external: true/
+    external: true
     name: local
