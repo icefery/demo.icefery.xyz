@@ -1,14 +1,14 @@
 services:
   web:
-    image: 'gitlab/gitlab-ce:rc'
+    image: 'gitlab/gitlab-ce:15.0.0-ce.0'
     container_name: 'gitlab'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://192.192.192.6:10080'
-        gitlab_rails['gitlab_shell_ssh_port'] = 10022
+        external_url 'http://192.192.192.6:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
     ports:
-      - '10080:80'
-      - '10022:22'
+      - '8929:8929'
+      - '2224:2224'
     volumes:
       - '/d/mount/gitlab/etc/gitlab:/etc/gitlab'
       - '/d/mount/gitlab/var/log/gitlab:/var/log/gitlab'
