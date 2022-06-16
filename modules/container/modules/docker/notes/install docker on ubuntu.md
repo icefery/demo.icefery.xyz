@@ -24,10 +24,6 @@ sed -i 's/download.docker.com/mirrors.aliyun.com\/docker-ce/g' /etc/apt/sources.
 apt-get update && apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-```bash
-apt-get remove docker docker-engine docker.io containerd runc
-```
-
 ## 设置镜像源
 
 ```bash

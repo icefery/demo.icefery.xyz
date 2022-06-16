@@ -7,3 +7,14 @@
   ```bash
   kubectl taint nodes --all node-role.kubernetes.io/master-
   ```
+
+## 常用命令
+
+- 清理 `Completed` 状态的 Pod
+
+  ```bash
+  kubectl get pod --field-selector=status.phase==Succeeded
+
+
+  kubectl delete pod --field-selector=status.phase==Succeeded
+  ```
