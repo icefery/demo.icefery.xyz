@@ -1,10 +1,7 @@
-version: '3'
-
 services:
   mongodb:
     image: mongo:5.0
     container_name: mongodb
-    hostname: mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
@@ -12,8 +9,8 @@ services:
       - 27017:27017
     volumes:
       - /d/share/:/d/share/
-      - ../../data/mongodb/data/configdb/:/data/configdb/
-      - ../../data/mongodb/data/db/:/data/db/
+      - /d/mount/mongodb/data/configdb/:/data/configdb/
+      - /d/mount/mongodb/data/db/:/data/db/
 
 networks:
   default:

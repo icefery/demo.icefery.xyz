@@ -1,0 +1,12 @@
+adminPassword: admin
+
+externalURL: https://harbor.dev
+
+exposureType: ingress
+
+service:
+  type: ClusterIP
+
+ingress:
+  core:
+    hostname: harbor.dev

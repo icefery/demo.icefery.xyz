@@ -1,15 +1,12 @@
-version: '3'
-
 services:
   clickhouse:
     image: yandex/clickhouse-server:21.7
     container_name: clickhouse
-    hostname: clickhouse
     ports:
       - 8123:8123
     volumes:
       - /d/share/:/d/share/
-      - ../../data/clickhouse/var/lib/clickhouse/:/var/lib/clickhouse/
+      - /d/mount/clickhouse/var/lib/clickhouse:/var/lib/clickhouse
 
 networks:
   default:

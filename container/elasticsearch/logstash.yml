@@ -1,10 +1,7 @@
-version: '3'
-
 services:
   logstash:
     image: logstash:7.14.0
     container_name: logstash
-    hostname: logstash
     ports:
       - 5044:5044
     volumes:
