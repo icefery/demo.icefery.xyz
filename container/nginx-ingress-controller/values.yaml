@@ -1,5 +1,12 @@
-ingressClassResource.default: true
+# Nginx Ingress Controller parameters
+ingressClassResource:
+  default: true
 
+# Default backend parameters
+defaultBackend:
+  enabled: false
+
+# Traffic exposure parameters
 service:
   type: NodePort
   nodePorts:
