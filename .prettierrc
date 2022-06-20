@@ -12,7 +12,7 @@
   "semi": false,
   "jsxSingleQuote": false,
   "quoteProps": "as-needed",
-  "arrowParens": "always",
+  "arrowParens": "avoid",
   "trailingComma": "none",
 
   "htmlWhitespaceSensitivity": "css",

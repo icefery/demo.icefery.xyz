@@ -6,9 +6,12 @@
 # VSCode
 /**/.vscode/
 
-## Qt Creator
+# Qt Creator
 /**/build-*-Debug/
 /**/build-*-Release/
+
+# Obsidian
+/**/.obsidian
 
 # Maven
 /**/.mvn/
@@ -27,7 +30,7 @@
 /**/node_modules/
 /**/package-lock.json
 /**/yarn.lock
-/**/pnpm-lock.yaml
+/**/pnpm-*.yaml
 
 # Spring Boot
 /**/HELP.md
