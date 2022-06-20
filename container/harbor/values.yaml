@@ -1,7 +1,9 @@
+# Harbor common parameters
 adminPassword: admin
 
 externalURL: https://harbor.dev
 
+# Traffic Exposure Parameters
 exposureType: ingress
 
 service:
