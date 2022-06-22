@@ -1,0 +1,13 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "pkg": "pkg . --targets linux --compress GZip --output ../build/my-app"
+  },
+  "bin": "main.js",
+  "dependencies": {
+    "express": "4.18.1"
+  },
+  "devDependencies": {
+    "pkg": "5.7.0"
+  }
+}

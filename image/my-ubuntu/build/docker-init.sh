@@ -2,7 +2,7 @@
 
 VERSION_CODENAME=$(cat /etc/os-release | grep "VERSION_CODENAME" | awk -F '=' '{print $2}')
 
-cat >/etc/apt/sources.list <<-EOF
+cat > /etc/apt/sources.list <<- EOF
 deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}           main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-security  main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ ${VERSION_CODENAME}-updates   main restricted universe multiverse

@@ -1,10 +1,7 @@
-version: '3'
-
 services:
   mongo-express:
     image: mongo-express:0.54
     container_name: mongo-express
-    hostname: mongo-express
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongodb
       - ME_CONFIG_MONGODB_PORT=27017
@@ -14,6 +11,8 @@ services:
       - ME_CONFIG_BASICAUTH_PASSWORD=mongo-express
     ports:
       - 27081:8081
+    volumes:
+      - /d/share/:/d/share/
 
 networks:
   default:

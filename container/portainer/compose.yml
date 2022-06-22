@@ -1,16 +1,13 @@
-version: '3'
-
 services:
   portainer:
     image: portainer/portainer-ce
     container_name: portainer
-    hostname: portainer
     ports:
       - 9000:9000
     volumes:
       - /d/share/:/d/share/
       - /var/run/docker.sock:/var/run/docker.sock
-      - ../../data/portainer/data/:/data/
+      - /d/mount/portainer/data/:/data/
 
 networks:
   default:
