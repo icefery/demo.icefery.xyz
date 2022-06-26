@@ -1,7 +1,7 @@
 # Harbor common parameters
 adminPassword: admin
 
-externalURL: https://harbor.dev
+externalURL: https://harbor.local.dev:10443
 
 # Traffic Exposure Parameters
 exposureType: ingress
@@ -11,4 +11,4 @@ service:
 
 ingress:
   core:
-    hostname: harbor.dev
+    hostname: harbor.local.dev
