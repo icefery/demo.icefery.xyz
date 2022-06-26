@@ -10,5 +10,5 @@ defaultBackend:
 service:
   type: NodePort
   nodePorts:
-    http: 80
-    https: 443
+    http: 10080
+    https: 10443
