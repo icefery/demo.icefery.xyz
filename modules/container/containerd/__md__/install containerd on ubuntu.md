@@ -11,7 +11,7 @@ systemctl enable --now containerd
 ## 暴露默认配置
 
 ```bash
-mkdir -p /etc/containerd/ 
+mkdir -p /etc/containerd
 
 containerd config default > /etc/containerd/config.toml
 ```
@@ -27,7 +27,7 @@ source /etc/profile
 ## 设置镜像源
 
 ```bash
-cat <<-EOF >>/etc/containerd/config.toml
+cat <<- EOF >> /etc/containerd/config.toml
 [plugins.cri.registry.mirrors."docker.io"]
   endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
 EOF
