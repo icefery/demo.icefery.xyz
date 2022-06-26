@@ -1,18 +1,22 @@
 .:53 {
-  any
-  errors
-  forward . 8.8.8.8
-  hosts {
-    fallthrough
-  }
-  loadbalance
-  local
-  log
-  reload
-  template IN ANY {
-    match .*dev\.icefery\.xyz
-    answer "{{ .Name }} 60 IN A 192.192.192.6"
-    fallthrough
-  }
-  whoami
+    any
+    cache 5
+    cancel
+    chaos
+    errors
+    forward . 114.114.114.114 8.8.8.8
+    hosts {
+        fallthrough
+    }
+    loadbalance
+    local
+    log
+    minimal
+    reload
+    template IN ANY {
+        match (.*\.)*dev
+        answer "{{ .Name }} 60 IN A 192.192.192.6"
+        fallthrough
+    }
+    whoami
 }
