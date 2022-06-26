@@ -2,15 +2,14 @@ services:
   clash:
     image: dreamacro/clash:v1.10.6
     container_name: clash
-    command: [ '-f', '/config.yaml' ]
+    command: ['-f', '/config.yaml']
     ports:
       - 7890:7890
       - 7891:7891
     volumes:
-      - /d/share/:/d/share/
       - /d/mount/clash/config.yaml:/config.yaml
 
 networks:
   default:
     external: true
-    name: local
+    name: dev
