@@ -1,9 +1,15 @@
+# IDEA
 /**/.idea/
+
+# VSCode
+/**/.vscode/
+
+# Obsidian
+/**/.obsidian/
 
 /**/data/
 
 /**/log/
-
 
 # Node.js
 /**/node_modules/
