@@ -1,6 +1,6 @@
 # DEV
 
-## 克隆
+## Clone
 
 ```bash
 mkdir -p /d
@@ -82,27 +82,35 @@ source /etc/profile
 
 ### local-path-provisioner
 
-- local-path-provisioner
+```bash
+helm repo add containeroo https://charts.containeroo.ch
 
-  ```bash
-  cd container/local-path-provisioner
-
-  helm repo add containeroo https://charts.containeroo.ch
-
-  helm upgrade local-path-provisioner containeroo/local-path-provisioner --install --namespace=kube-system --values=values.yaml --version 0.0.22
-  ```
-
-- hostpath-provisioner
-  ```bash
-  helm repo add rimusz https://charts.rimusz.net
-
-  helm install hostpath-provisioner rimusz/hostpath-provisioner --version 0.2.13
-  ```
+helm upgrade local-path-provisioner containeroo/local-path-provisioner \
+  --install \
+  --namespace=kube-system \
+  --values=container/local-path-provisioner/values.yaml \
+  --version=0.0.22
+```
 
 ### CoreDNS
 
 ```bash
 helm repo add coredns https://coredns.github.io/helm
 
-helm install my-coredns coredns/coredns --version 1.19.4
+helm upgrade coredns coredns/coredns \
+  --install \
+  --namespace=kube-system \
+  --version 1.19.4
+```
+
+### Traefik
+
+```bash
+helm repo add traefik https://helm.traefik.io/traefik
+
+helm upgrade traefik traefik/traefik \
+  --install \
+  --namespace=kube-system \
+  --values=container/traefik/values.yaml \
+  --version=10.24.0
 ```
