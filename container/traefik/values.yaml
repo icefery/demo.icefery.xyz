@@ -1,23 +1,26 @@
 ingressClass:
+  enabled: true
   isDefaultClass: true
-
-additionalArguments:
-  - "--serverstransport.insecureskipverify=true"
-  - "--api.insecure=true"
 
 ports:
   traefik:
     port: 9000
     expose: true
     exposedPort: 9000
-    protocol: TCP
     nodePort: 9000
+    protocol: TCP
   web:
     port: 8000
     expose: true
-    exposedPort: 8000
+    exposedPort: 80
+    nodePort: 80
     protocol: TCP
-    nodePort: 8000
+  websecure:
+    port: 8443
+    expose: true
+    exposedPort: 443
+    nodePort: 80
+    protocol: TCP
 
 service:
   type: NodePort

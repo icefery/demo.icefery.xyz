@@ -79,3 +79,30 @@ helm completion bash >/etc/bash_completion.d/helm
 
 source /etc/profile
 ```
+
+### local-path-provisioner
+
+- local-path-provisioner
+
+  ```bash
+  cd container/local-path-provisioner
+
+  helm repo add containeroo https://charts.containeroo.ch
+
+  helm upgrade local-path-provisioner containeroo/local-path-provisioner --install --namespace=kube-system --values=values.yaml --version 0.0.22
+  ```
+
+- hostpath-provisioner
+  ```bash
+  helm repo add rimusz https://charts.rimusz.net
+
+  helm install hostpath-provisioner rimusz/hostpath-provisioner --version 0.2.13
+  ```
+
+### CoreDNS
+
+```bash
+helm repo add coredns https://coredns.github.io/helm
+
+helm install my-coredns coredns/coredns --version 1.19.4
+```

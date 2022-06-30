@@ -12,5 +12,5 @@ helm upgrade traefik traefik/traefik \
     --create-namespace \
     --namespace traefik \
     --version 10.21.1 \
-    --values values.yaml 
+    --values values.yaml
 ```
