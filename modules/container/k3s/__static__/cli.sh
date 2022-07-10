@@ -10,7 +10,7 @@ function uninstall_k3s() {
 }
 
 function install_k3s() {
-    curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh - --kube-apiserver-arg service-node-port-range=1-65535 --disable traefik --disable metrics-server
+    curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - --service-node-port-range 1-65535 --disable traefik --disable metrics-server
     cat registries.yaml > /etc/rancher/k3s/registries.yam
     systemctl restart k3s
 
