@@ -1,0 +1,16 @@
+services:
+  neo4j:
+    image: neo4j:4.3
+    container_name: neo4j
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - /d/share/:/d/share/
+      - /d/mount/neo4j/data/:/data/
+      - /d/mount/neo4j/logs/:/logs/
+
+networks:
+  default:
+    external: true
+    name: local

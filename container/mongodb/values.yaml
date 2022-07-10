@@ -1,0 +1,7 @@
+auth:
+  rootPassword: root
+
+service:
+  type: NodePort
+  nodePorts:
+    mongodb: 27017

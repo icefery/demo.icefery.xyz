@@ -1,0 +1,18 @@
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    ports:
+      - 27017:27017
+    volumes:
+      - /d/share/:/d/share/
+      - /d/mount/mongodb/data/configdb/:/data/configdb/
+      - /d/mount/mongodb/data/db/:/data/db/
+
+networks:
+  default:
+    external: true
+    name: local

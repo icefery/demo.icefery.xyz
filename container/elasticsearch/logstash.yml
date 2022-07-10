@@ -1,0 +1,13 @@
+services:
+  logstash:
+    image: logstash:7.14.0
+    container_name: logstash
+    ports:
+      - 5044:5044
+    volumes:
+      - /d/share/:/d/share/
+
+networks:
+  default:
+    external: true
+    name: local

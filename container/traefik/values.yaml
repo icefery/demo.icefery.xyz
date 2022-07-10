@@ -1,0 +1,28 @@
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+
+ports:
+  traefik:
+    port: 9000
+    expose: true
+    exposedPort: 9000
+    nodePort: 9000
+    protocol: TCP
+  web:
+    port: 80
+    expose: true
+    exposedPort: 80
+    nodePort: 30080
+    protocol: TCP
+  websecure:
+    port: 443
+    expose: true
+    exposedPort: 443
+    nodePort: 30443
+    protocol: TCP
+    tls:
+      enabled: true
+
+service:
+  type: NodePort

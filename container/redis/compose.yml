@@ -1,0 +1,17 @@
+services:
+  redis:
+    image: redis:6.2
+    container_name: redis
+    command:
+      - --appendonly yes
+      - --requirepass redis
+    ports:
+      - 6379:6379
+    volumes:
+      - /d/share/:/d/share/
+      - /d/mount/redis/data/:/data/
+
+networks:
+  default:
+    external: true
+    name: local

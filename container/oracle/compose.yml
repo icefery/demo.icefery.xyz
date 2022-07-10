@@ -1,0 +1,17 @@
+services:
+  oracle:
+    image: oracle/database:18.4.0-xe
+    container_name: oracle
+    environment:
+      - ORACLE_PWD=0000
+    ports:
+      - 1521:1521
+      - 5500:5500
+    volumes:
+      - /d/share/:/d/share/
+      - /d/mount/oracle/opt/oracle/oradata/:/opt/oracle/oradata/
+
+networks:
+  default:
+    external: true
+    name: local

@@ -1,0 +1,15 @@
+ingress:
+  enabled: true
+  hostname: kubeapps.dev
+
+frontend:
+  replicaCount: 1
+
+dashboard:
+  replicaCount: 1
+
+kubeops:
+  replicaCount: 1
+
+kubeappsapis:
+  replicaCount: 1

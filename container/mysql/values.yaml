@@ -1,0 +1,11 @@
+auth:
+  rootPassword: root
+  database: demo
+  username: demo
+  password: demo
+
+primary:
+  service:
+    type: NodePort
+    nodePorts:
+      mysql: 3306

@@ -1,0 +1,16 @@
+services:
+  nacos:
+    image: nacos/nacos-server:2.0.3
+    container_name: nacos
+    environment:
+      - MODE=standalone
+    ports:
+      - 8848:8848
+    volumes:
+      - /d/share/:/d/share/
+      - /d/mount/nacos/home/nacos/logs/:/home/nacos/logs/
+
+networks:
+  default:
+    external: true
+    name: local
