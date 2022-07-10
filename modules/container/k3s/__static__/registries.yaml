@@ -1,0 +1,4 @@
+mirrors:
+  docker.io:
+    endpoint:
+      - "https://uwk49ut2.mirror.aliyuncs.com"

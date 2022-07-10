@@ -9,7 +9,7 @@ function build() {
 }
 
 function push() {
-    docker login --username icefery --password-stdin
+    docker login
     docker tag "icefery/${APP_NAME}:${APP_VERSION}" "icefery/${APP_NAME}:latest"
     docker push "icefery/${APP_NAME}:latest"
 }
