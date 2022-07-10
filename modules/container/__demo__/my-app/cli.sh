@@ -13,3 +13,5 @@ function push() {
     docker tag "icefery/${APP_NAME}:${APP_VERSION}" "icefery/${APP_NAME}:latest"
     docker push "icefery/${APP_NAME}:latest"
 }
+
+$1
