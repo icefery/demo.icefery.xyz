@@ -8,4 +8,5 @@ app.get('/*', (req, res) => {
 })
 
 const port = 3000
+
 const server = http.createServer(app).listen(port, () => console.log(`Listening on :${port}`))
