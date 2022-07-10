@@ -1,6 +1,6 @@
 FROM node:lts AS build
 WORKDIR /my-app/
-COPY package.json src/index.js /my-app/
+COPY package.json index.js /my-app/
 RUN ["npm", "install", "--production"]
 
 FROM node:lts-alpine
