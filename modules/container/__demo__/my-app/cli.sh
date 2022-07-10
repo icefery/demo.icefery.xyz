@@ -5,7 +5,7 @@ APP_NAME="my-app"
 APP_VERSION="$(jq -r .version < ./package.json)"
 
 function build() {
-    docker build -t "icefery/${APP_NAME}:${APP_VERSION}" ./docker
+    docker build -t "icefery/${APP_NAME}:${APP_VERSION}" .
 }
 
 function push() {
