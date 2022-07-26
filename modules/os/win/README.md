@@ -8,7 +8,11 @@
 
 - [收集的一些优秀软件](https://ld246.com/article/1590298847904)
 
+## 常见问题
+
 - 应用商店无法更新。错误代码: 0x80131500
-  > - [代码: 0x80131500 如何解决](https://jingyan.baidu.com/article/49711c6140487abb451b7c5b.html)
-  - WIN + R 打开 `inetcpl.cpl `
-  - 选中 "高级" 勾选 "使用 TLS 1.2" 选项
+  > - [微软应用商店错误代码“0x80131500”怎么修复？](https://blog.csdn.net/q1246192888/article/details/122412728)
+
+  ![](https://img-blog.csdnimg.cn/img_convert/080a7786019f13e961a5a98ee7d60b98.png)
+  ![](https://img-blog.csdnimg.cn/ae26681fd8334de5b5e0c5e88e7f0f81.png)
+  ![](https://img-blog.csdnimg.cn/80f202e542aa4f72b27d001350bb365d.png)
