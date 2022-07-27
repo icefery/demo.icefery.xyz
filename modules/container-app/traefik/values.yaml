@@ -13,16 +13,27 @@ ports:
     port: 80
     expose: true
     exposedPort: 80
-    nodePort: 30080
+    nodePort: 80
     protocol: TCP
   websecure:
     port: 443
     expose: true
     exposedPort: 443
-    nodePort: 30443
+    nodePort: 443
     protocol: TCP
-    tls:
-      enabled: true
 
 service:
   type: NodePort
+
+securityContext:
+  capabilities:
+    drop: []
+    add:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsGroup: 0
+  runAsNonRoot: false
+  runAsUser: 0
+
+podSecurityContext:
+  fsGroup: 0

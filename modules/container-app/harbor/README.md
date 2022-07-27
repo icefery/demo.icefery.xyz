@@ -1,16 +1,16 @@
 # Harbor
 
-## Install
-
-### Helm
+## 安装
 
 ```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add harbor https://helm.goharbor.io
 
-helm upgrade harbor bitnami/harbor \
-    --install \
-    --create-namespace \
-    --namespace harbor \
-    --version 13.2.7 \
-    --values values.yaml
+helm repo update
+
+helm upgrade harbor harbor/harbor \
+  --install \
+  --create-namespace \
+  --namespace harbor \
+  --values values.yaml \
+  --version 1.9.3
 ```

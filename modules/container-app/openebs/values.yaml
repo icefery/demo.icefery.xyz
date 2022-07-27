@@ -1,0 +1,3 @@
+localprovisioner:
+  hostpathClass:
+    isDefaultClass: true

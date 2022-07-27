@@ -1,14 +1,11 @@
-# Harbor common parameters
-adminPassword: admin
+expose:
+  tls:
+    enabled: false
+  ingress:
+    hosts:
+      core: core.harbor.dev.icefery.xyz
+      notary: notary.harbor.dev.icefery.xyz
 
-externalURL: https://harbor.local.dev:10443
+externalURL: http://core.harbor.dev.icefery.xyz:80
 
-# Traffic Exposure Parameters
-exposureType: ingress
-
-service:
-  type: ClusterIP
-
-ingress:
-  core:
-    hostname: harbor.local.dev
+harborAdminPassword: 'admin'
