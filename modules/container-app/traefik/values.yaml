@@ -21,6 +21,8 @@ ports:
     exposedPort: 443
     nodePort: 443
     protocol: TCP
+    tls:
+      enabled: true
 
 service:
   type: NodePort

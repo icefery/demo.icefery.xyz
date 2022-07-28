@@ -1,11 +1,11 @@
 expose:
   tls:
-    enabled: false
+    enabled: true
   ingress:
     hosts:
       core: core.harbor.dev.icefery.xyz
       notary: notary.harbor.dev.icefery.xyz
 
-externalURL: http://core.harbor.dev.icefery.xyz:80
+externalURL: https://core.harbor.dev.icefery.xyz
 
 harborAdminPassword: 'admin'

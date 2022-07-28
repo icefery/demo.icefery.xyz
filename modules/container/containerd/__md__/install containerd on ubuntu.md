@@ -1,11 +1,13 @@
 ## 安装
 
 ```bash
-wget https://github.com/containerd/nerdctl/releases/download/v0.20.0/nerdctl-full-0.20.0-linux-amd64.tar.gz
+wget https://github.com/containerd/nerdctl/releases/download/v0.22.0/nerdctl-full-0.22.0-linux-amd64.tar.gz
 
-tar Cxzvvf /usr/local nerdctl-full-0.20.0-linux-amd64.tar.gz
+tar Cxzvvf /usr/local nerdctl-full-0.22.0-linux-amd64.tar.gz
 
 systemctl enable --now containerd
+
+systemctl enable --now buildkit
 ```
 
 ## 暴露默认配置
@@ -26,9 +28,16 @@ source /etc/profile
 
 ## 设置镜像源
 
+> https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
+
 ```bash
-cat <<- EOF >> /etc/containerd/config.toml
-[plugins.cri.registry.mirrors."docker.io"]
+mkdir -p /etc/containerd
+
+cat > /etc/containerd/config.toml <<- "EOF"
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+[plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
   endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
 EOF
 ```
