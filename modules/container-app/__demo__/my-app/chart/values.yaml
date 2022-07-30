@@ -1,7 +1,0 @@
-image:
-  repository: icefery/my-app
-  pullPolicy: IfNotPresent
-  tag: latest
-
-ingress:
-  host: my-app.dev.icefery.xyz
