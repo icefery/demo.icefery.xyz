@@ -19,13 +19,32 @@ helm upgrade harbor harbor/harbor \
 
 ### 配置 Containerd 镜像仓库
 
-> https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
+> - https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
+> - https://github.com/containerd/containerd/blob/main/docs/hosts.md
+
+- `/etc/containerd/certs.d/docker.io/hosts.toml`
+
+  ```toml
+  server = "https://uwk49ut2.mirror.aliyuncs.com"
+  ```
+
+- `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml`
+
+  ```toml
+  server = "http://core.harbor.dev.icefery.xyz"
+  [host."http://core.harbor.dev.icefery.xyz"]
+    skip_verify = true
+  ```
 
 - `/etc/containerd/config.toml`
 
-  ```bash
+  > Although we have deprecated the old CRI config pattern for specifying registry.mirrors and registry.configs you can still specify your credentials via [CRI config](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md#configure-registry-credentials).
+
+  ```toml
   version = 2
 
+  [plugins."io.containerd.grpc.v1.cri".registry]
+    config_path = "/etc/containerd/certs.d"
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
     endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
@@ -111,3 +130,9 @@ helm cm-push --username=admin --password=admin my-app/chart/ http://core.harbor.
 ```
 
 > 直接推送到已添加的仓库中不需要再验证用户和密码，但是使用 Harbor 作为统一的单一索引入口点时会默认推送到 `library` 项目。
+
+## 常见问题
+
+#### Docker 无法 `push` 到 HTTP 镜像仓库
+
+> [docker pull push invalid character 'p' after top-level value: "404 page not found\n" #12248](https://github.com/goharbor/harbor/issues/12248)
