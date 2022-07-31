@@ -1,0 +1,39 @@
+global:
+  edition: ce
+  hosts:
+    domain: dev.icefery.xyz
+    https: false
+  ingress:
+    configureCertmanager: false
+    class: none
+    tls:
+      enabled: false
+
+certmanager:
+  install: false
+
+nginx-ingress:
+  enabled: false
+
+prometheus:
+  install: false
+
+registry:
+  enabled: false
+
+gitlab-runner:
+  install: false
+
+gitlab:
+  webservice:
+    minReplicas: 1
+    maxReplicas: 1
+  sidekiq:
+    minReplicas: 1
+    maxReplicas: 1
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+  kas:
+    minReplicas: 1
+    maxReplicas: 1
