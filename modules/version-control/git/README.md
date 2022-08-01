@@ -10,14 +10,26 @@
 
 ## 常见问题
 
-- detected dubious ownership in repository at xxx To add an exception for this directory
+#### detected dubious ownership in repository at xxx To add an exception for this directory
 
-    ```bash
-    git config --global --add safe.directory xxx
-    ```
+```bash
+git config --global --add safe.directory xxx
+```
 
-  或者
+或者
 
-    ```bash
-    export GIT_TEST_DEBUG_UNSAFE_DIRECTORIES=true
-    ```
+```bash
+export GIT_TEST_DEBUG_UNSAFE_DIRECTORIES=true
+```
+
+#### Windows 上 Git 保留可执行文件权限
+
+> https://www.cnblogs.com/LoveBB/p/16076897.html
+
+```bash
+git update-index --chmod=+x a.sh
+```
+
+```bash
+git ls-tree HEAD
+```
