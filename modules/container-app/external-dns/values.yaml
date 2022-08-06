@@ -1,0 +1,4 @@
+provider: coredns
+
+coredns:
+  etcdEndpoints: "http://etcd.etcd.svc.cluster.local:2379"

@@ -1,0 +1,29 @@
+serviceType: NodePort
+
+isClusterService: false
+
+servers:
+  - zones:
+      - zone: .
+    port: 53
+    nodePort: 53
+    plugins:
+      - name: errors
+      - name: health
+        configBlock: |-
+          lameduck 5s
+      - name: ready
+      - name: hosts
+        configBlock: |-
+          fallthrough
+      - name: etcd
+        configBlock: |-
+          endpoint http://etcd.etcd.svc.cluster.local:2379
+          fallthrough
+      - name: forward
+        parameters: . 114.114.114.114 8.8.8.8
+      - name: cache
+        parameters: 30
+      - name: loop
+      - name: reload
+      - name: loadbalance

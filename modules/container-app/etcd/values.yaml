@@ -1,0 +1,8 @@
+auth:
+  rbac:
+    create: false
+
+service:
+  type: NodePort
+  nodePorts:
+    client: 2379
