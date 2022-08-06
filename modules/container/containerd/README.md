@@ -12,12 +12,10 @@ systemctl enable --now containerd
 systemctl enable --now buildkit
 ```
 
-### 暴露默认配置
+### 查看默认配置
 
 ```bash
-mkdir -p /etc/containerd
-
-containerd config default > /etc/containerd/config.toml
+containerd config default
 ```
 
 ### 命令补全
@@ -34,9 +32,13 @@ source /etc/profile
 > - https://github.com/containerd/containerd/blob/main/docs/hosts.md
 
 ```bash
-mkdir -p /etc/containerd/certs.d
+mkdir -p /etc/containerd/certs.d/docker.io
 
-echo 'server = "https://uwk49ut2.mirror.aliyuncs.com"' > /etc/containerd/certs.d/docker.io/hosts.toml
+cat > /etc/containerd/certs.d/docker.io/hosts.toml <<- "EOF"
+server = "https://uwk49ut2.mirror.aliyuncs.com"
+[host."https://uwk49ut2.mirror.aliyuncs.com"]
+  capabilities = ["pull", "resolve"]
+EOF
 ```
 
 ```bash
@@ -57,8 +59,8 @@ mkdir -p /etc/systemd/system/containerd.service.d
 
 cat > /etc/systemd/system/containerd.service.d/proxy.conf <<- "EOF"
 [Service]
-Environment="HTTP_PROXY=http://127.0.0.1:7890"
-Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+Environment="HTTP_PROXY=http://192.192.192.10:7890"
+Environment="HTTPS_PROXY=http://192.192.192.10:7890"
 EOF
 
 systemctl daemon-reload
