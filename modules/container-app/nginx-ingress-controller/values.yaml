@@ -1,0 +1,18 @@
+publishService:
+  enabled: true
+
+kind: DaemonSet
+
+daemonset:
+  useHostPort: true
+
+hostNetwork: true
+
+nodeSelector:
+  kubernetes.io/hostname: dev
+
+defaultBackend:
+  enabled: false
+
+service:
+  type: ClusterIP

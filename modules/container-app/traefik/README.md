@@ -3,17 +3,22 @@
 ## 安装
 
 ```bash
+helm uninstall -n traefik traefik
+
+kubectl delete -n traefik pvc --all
+```
+
+```bash
 helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update
 
-helm upgrade traefik traefik/traefik \
-  --install \
-  --create-namespace \
-  --namespace traefik \
-  --values values.yaml \
-  --version 10.24.0
+helm upgrade traefik traefik/traefik --install --namespace traefik --create-namespace --values values.yaml --version 10.24.0
 ```
+
+## TODO
+
+- Ingress 资源的 `ADDRESS` 列不显示地址
 
 ## 常见问题
 
