@@ -2,14 +2,26 @@
 
 ## 自定义 DNS 服务
 
+### Docker
+
 ```bash
 mkdir -p /d/mount/coredns/
 
 cp -f Corefile /d/mount/coredns/
 
-nerdctl network create dev
+nerdctl network create compose
 
 nerdctl compose up -d
+```
+
+### Helm
+
+```bash
+helm repo add coredns https://coredns.github.io/helm
+
+helm repo update
+
+helm upgrade coredns coredns/coredns --install --namespace coredns --create-namespace --values values.yaml --version 1.19.4
 ```
 
 ## 在 K8S 集群内引入自定义 DNS 服务

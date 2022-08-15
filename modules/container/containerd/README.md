@@ -35,9 +35,9 @@ source /etc/profile
 mkdir -p /etc/containerd/certs.d/docker.io
 
 cat > /etc/containerd/certs.d/docker.io/hosts.toml <<- "EOF"
-server = "https://uwk49ut2.mirror.aliyuncs.com"
+server = "https://registry-1.docker.io"
 [host."https://uwk49ut2.mirror.aliyuncs.com"]
-  capabilities = ["pull", "resolve"]
+  capabilities = ["pull"]
 EOF
 ```
 

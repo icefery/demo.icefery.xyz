@@ -6,5 +6,5 @@
         endpoint http://192.192.192.6:2379
         fallthrough
     }
-    forward . 114.114.114.114 8.8.8.8
+    forward . 114.114.114.114
 }
