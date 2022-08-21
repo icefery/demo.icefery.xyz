@@ -1,11 +1,17 @@
-expose:
-  tls:
-    enabled: true
-  ingress:
-    hosts:
-      core: core.harbor.dev.icefery.xyz
-      notary: notary.harbor.dev.icefery.xyz
+adminPassword: admin
 
 externalURL: http://core.harbor.dev.icefery.xyz
 
-harborAdminPassword: 'admin'
+exposureType: ingress
+
+ingress:
+  core:
+    hostname: core.harbor.dev.icefery.xyz
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  notary:
+    hostname: notary.harbor.tc.icefery.xyz
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"

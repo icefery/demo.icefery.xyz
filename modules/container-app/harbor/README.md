@@ -3,21 +3,16 @@
 ## 安装
 
 ```bash
-helm repo add harbor https://helm.goharbor.io
+helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo update
 
-helm upgrade harbor harbor/harbor \
-  --install \
-  --create-namespace \
-  --namespace harbor \
-  --values values.yaml \
-  --version 1.9.3
+helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespace --values values.yaml --version 15.1.0
 ```
 
 ## 镜像仓库
 
-### 配置 Containerd 镜像仓库
+#### 配置 Containerd 镜像仓库
 
 > - https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
 > - https://github.com/containerd/containerd/blob/main/docs/hosts.md
@@ -25,7 +20,9 @@ helm upgrade harbor harbor/harbor \
 - `/etc/containerd/certs.d/docker.io/hosts.toml`
 
   ```toml
-  server = "https://uwk49ut2.mirror.aliyuncs.com"
+  server = "https://registry-1.docker.io"
+  [host."https://uwk49ut2.mirror.aliyuncs.com"]
+    capabilities = ["pull"]
   ```
 
 - `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml`
@@ -57,7 +54,7 @@ helm upgrade harbor harbor/harbor \
     password = "admin"
   ```
 
-### 配置 K3S 内置 Containerd 镜像仓库
+#### 配置 K3S 内置 Containerd 镜像仓库
 
 > https://docs.rancher.cn/docs/k3s/installation/private-registry/_index
 
@@ -79,7 +76,7 @@ helm upgrade harbor harbor/harbor \
         password: admin
   ```
 
-### 推送镜像
+#### 推送镜像
 
 > nerdctl 并不走 CRI 的 `tls.insecure_skip_verify`，需要添加 `--insecure-registry` 选项。
 
@@ -90,43 +87,43 @@ docker login http://core.harbor.dev.icefery.xyz --username=admin --password=admi
 ```
 
 ```bash
-docker push core.harbor.dev.icefery.xyz/icefery/my-app:0.0.1
+docker push core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
-# nerdctl push core.harbor.dev.icefery.xyz/icefery/my-app:0.0.1 --insecure-registry
+# nerdctl push core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
 ```
 
 ```bash
-docker pull core.harbor.dev.icefery.xyz/icefery/my-app:0.0.1
+docker pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
-# nerdctl pull core.harbor.dev.icefery.xyz/icefery/my-app:0.0.1 --insecure-registry
+# nerdctl pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
 ```
 
-## 配置 Helm Chart 仓库
+## Chart 仓库
 
-### 拉取
+#### 拉取
 
 ```bash
 # 添加 Harbor 作为统一的单一索引入口点
-helm repo add --username=admin --password=admin chartmuseum http://core.harbor.dev.icefery.xyz/chartrepo
+# helm repo add --username=admin --password=admin chartmuseum http://core.harbor.dev.icefery.xyz/chartrepo
 
 # 将 Harbor 项目添加为单独的索引入口点
-# helm repo add --username=admin --password=admin chartmuseum-icefery http://core.harbor.dev.icefery.xyz/chartrepo/icefery
+helm repo add --username=admin --password=admin chartmuseum-library http://core.harbor.dev.icefery.xyz/chartrepo/library
 ```
 
 ```bash
 helm search repo my-app
 ```
 
-### 推送
+#### 推送
 
 ```bash
 helm plugin install https://github.com/chartmuseum/helm-push
 ```
 
 ```bash
-helm cm-push --username=admin --password=admin my-app/chart/ http://core.harbor.dev.icefery.xyz/chartrepo/icefery
+# helm cm-push --username=admin --password=admin my-app/chart/ http://core.harbor.dev.icefery.xyz/chartrepo/library
 
-# helm cm-push my-app/chart/ chartmuseum-icefery
+helm cm-push my-app/chart/ chartmuseum-library
 ```
 
 > 直接推送到已添加的仓库中不需要再验证用户和密码，但是使用 Harbor 作为统一的单一索引入口点时会默认推送到 `library` 项目。

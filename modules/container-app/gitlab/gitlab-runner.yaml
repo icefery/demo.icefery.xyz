@@ -1,0 +1,15 @@
+gitlabUrl: http://gitlab.dev.icefery.xyz/
+
+runnerRegistrationToken: <TOKEN>
+
+rbac:
+  create: true
+  clusterWideAccess: true
+
+runners:
+  config: |
+    [[runners]]
+      [runners.kubernetes]
+        namespace = "{{.Release.Namespace}}"
+        image = "ubuntu:22.04"
+  privileged: true

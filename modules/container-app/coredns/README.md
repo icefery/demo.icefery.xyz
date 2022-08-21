@@ -2,7 +2,7 @@
 
 ## 自定义 DNS 服务
 
-### Docker
+#### Docker 安装 CoreDNS
 
 ```bash
 mkdir -p /d/mount/coredns/
@@ -14,7 +14,7 @@ nerdctl network create compose
 nerdctl compose up -d
 ```
 
-### Helm
+### Helm 安装 CoreDNS
 
 ```bash
 helm repo add coredns https://coredns.github.io/helm

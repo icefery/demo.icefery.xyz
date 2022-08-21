@@ -15,7 +15,7 @@ wget -O /d/mount/clash/config.yaml <订阅链接>
 ### 终端
 
 ```bash
-cat <<-"EOF" >>/etc/bash.bashrc
+cat >> /etc/custom.sh <<- "EOF"
 function start-proxy() {
   export http_proxy=http://127.0.0.1:7890
   export https_proxy=${http_proxy}
@@ -36,7 +36,7 @@ source /etc/profile
 ```bash
 mkdir -p /etc/systemd/system/docker.service.d
 
-cat <<-EOF >/etc/systemd/system/docker.service.d/proxy.conf
+cat > /etc/systemd/system/docker.service.d/proxy.conf <<- "EOF"
 [Service]
 Environment="HTTP_PROXY=http://127.0.0.1:7890"
 Environment="HTTPS_PROXY=http://127.0.0.1:7890"

@@ -3,12 +3,6 @@
 ## 安装
 
 ```bash
-helm uninstall -n traefik traefik
-
-kubectl delete -n traefik pvc --all
-```
-
-```bash
 helm repo add traefik https://helm.traefik.io/traefik
 
 helm repo update

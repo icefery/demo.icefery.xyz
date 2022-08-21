@@ -10,8 +10,6 @@ servers:
     plugins:
       - name: errors
       - name: health
-        configBlock: |-
-          lameduck 5s
       - name: ready
       - name: hosts
         configBlock: |-

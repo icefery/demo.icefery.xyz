@@ -8,6 +8,10 @@ global:
     class: none
     tls:
       enabled: false
+  rails:
+    bootsnap:
+      enabled: false
+  time_zone: Asia/Shanghai
 
 certmanager:
   install: false
@@ -17,9 +21,6 @@ nginx-ingress:
 
 prometheus:
   install: false
-
-registry:
-  enabled: false
 
 gitlab-runner:
   install: false
@@ -35,5 +36,10 @@ gitlab:
     minReplicas: 1
     maxReplicas: 1
   kas:
+    minReplicas: 1
+    maxReplicas: 1
+
+registry:
+  hpa:
     minReplicas: 1
     maxReplicas: 1
