@@ -1,5 +1,5 @@
 deployment:
-  kind: DaemonSet
+  kind: Deployment
 
 ingressClass:
   enabled: true
@@ -11,13 +11,16 @@ providers:
     allowCrossNamespace: true
     allowExternalNameServices: true
     allowEmptyServices: true
-
   kubernetesIngress:
     enabled: true
     allowExternalNameServices: true
     allowEmptyServices: true
     publishedService:
       enabled: true
+
+logs:
+  general:
+    level: INFO
 
 ports:
   traefik:
@@ -49,14 +52,14 @@ service:
   externalIPs:
     - 192.192.192.6
 
-hostNetwork: true
+hostNetwork: false
 
 # nodeSelector:
 #   kubernetes.io/hostname: dev
 
-ecurityContext:
+securityContext:
   capabilities:
-    drop: [ ]
+    drop: []
     add:
       - ALL
   readOnlyRootFilesystem: false
