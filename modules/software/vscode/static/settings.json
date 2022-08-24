@@ -7,7 +7,7 @@
   "prettier.singleQuote": true,
   "prettier.bracketSpacing": true,
   "prettier.proseWrap": "preserve",
-  "prettier.jsxBracketSameLine": false,
+  "prettier.bracketSameLine": false,
   "prettier.semi": false,
   "prettier.jsxSingleQuote": false,
   "prettier.quoteProps": "as-needed",
@@ -23,9 +23,10 @@
   "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
   "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[xml]": { "editor.defaultFormatter": "redhat.vscode-xml" },
   // Security
   "security.workspace.trust.enabled": false,
   // Auto Save
@@ -42,12 +43,9 @@
   "workbench.iconTheme": "material-icon-theme",
   // Terminal
   "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "code-runner.runInTerminal": true,
-  // SSH
-  "remote.SSH.remotePlatform": {
-    "192.192.192.6": "linux"
-  },
   // Git
   "git.confirmSync": false,
   "window.zoomLevel": 1,

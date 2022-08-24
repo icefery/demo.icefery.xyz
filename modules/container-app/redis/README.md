@@ -1,16 +1,13 @@
 # Redis
 
-## Install
+## Helm 安装 Redis
 
 ### Helm
 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm upgrade redis bitnami/redis \
-    --install \
-    --create-namespace \
-    --namespace redis \
-    --version 16.12.2 \
-    --values values.yaml
+helm repo update
+
+helm upgrade redis bitnami/redis --install --namespace redis --create-namespace --values values.yaml --version 17.0.11
 ```

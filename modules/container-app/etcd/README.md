@@ -11,7 +11,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo update
 
-helm upgrade etcd bitnami/etcd --install --namespace etcd --create-namespace --values values.yaml --version 8.3.7
+helm upgrade etcd bitnami/etcd --install --namespace etcd --create-namespace --values values.yaml --version 8.4.0
 ```
 
 ## TODO

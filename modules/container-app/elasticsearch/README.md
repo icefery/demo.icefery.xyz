@@ -13,10 +13,7 @@ bin/elasticsearch-setup-passwords interactive
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm upgrade elasticsearch bitnami/elasticsearch \
-  --install \
-  --create-namespace \
-  --namespace elasticsearch \
-  --version 18.2.13 \
-  --values values.yaml
+helm repo update
+
+helm upgrade elasticsearch bitnami/elasticsearch --install --namespace elasticsearch --create-namespace --values values.yaml --version 19.1.11
 ```
