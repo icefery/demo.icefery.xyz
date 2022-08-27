@@ -9,23 +9,34 @@ mysql -p
 ```
 
 ```sql
-CREATE DATABASE IF NOT EXISTS demo;
+CREATE
+DATABASE IF NOT EXISTS demo;
 
-CREATE USER 'demo'@'%' IDENTIFIED BY 'demo';
+CREATE
+USER 'demo'@'%' IDENTIFIED BY 'demo';
 
 REVOKE ALL ON *.* FROM 'demo'@'%';
 
-GRANT ALL ON demo.* TO 'demo'@'%';
+GRANT
+ALL
+ON demo.* TO 'demo'@'%';
 
-GRANT SELECT ON *.* TO 'demo'@'%';
+GRANT
+SELECT
+ON *.* TO 'demo'@'%';
 
-FLUSH PRIVILEGES;
+FLUSH
+PRIVILEGES;
 ```
 
 ```sql
-USE mysql;
+USE
+mysql;
 
-DELETE FROM user WHERE user = 'root' AND host = '%';
+DELETE
+FROM user
+WHERE user = 'root'
+  AND host = '%';
 ```
 
 ### Helm
@@ -33,10 +44,7 @@ DELETE FROM user WHERE user = 'root' AND host = '%';
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm upgrade mysql bitnami/mysql \
-    --install \
-    --create-namespace \
-    --namespace mysql \
-    --version 9.1.7 \
-    --values values.yaml
+helm repo update
+
+helm upgrade mysql bitnami/mysql --install --namespace mysql --create-namespace --values values.yaml --version 9.2.6
 ```

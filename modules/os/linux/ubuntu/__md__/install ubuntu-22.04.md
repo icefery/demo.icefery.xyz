@@ -28,16 +28,26 @@ reboot
 
 #### Mirror
 
-```bash
-cat <<-EOF >/etc/apt/sources.list
-deb http://mirrors.aliyun.com/ubuntu/ jammy           main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-security  main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-updates   main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
-EOF
+- 阿里云
 
-apt update && apt full-upgrade -y
-```
+  ```bash
+  cat <<-EOF >/etc/apt/sources.list
+  deb http://mirrors.aliyun.com/ubuntu/ jammy           main restricted universe multiverse
+  deb http://mirrors.aliyun.com/ubuntu/ jammy-security  main restricted universe multiverse
+  deb http://mirrors.aliyun.com/ubuntu/ jammy-updates   main restricted universe multiverse
+  deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+  EOF
+
+  apt update && apt full-upgrade -y
+  ```
+
+- 腾讯云
+  ```bash
+  deb http://mirrors.tencentyun.com/ubuntu/ jammy           main restricted universe multiverse
+  deb http://mirrors.tencentyun.com/ubuntu/ jammy-security  main restricted universe multiverse
+  deb http://mirrors.tencentyun.com/ubuntu/ jammy-updates   main restricted universe multiverse
+  deb http://mirrors.tencentyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+  ```
 
 #### Env
 

@@ -1,16 +1,11 @@
 # MongoDB
 
-## Install
-
-### Helm
+## Helm 安装 MongoDB
 
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm upgrade mongodb bitnami/mongodb \
-    --install \
-    --create-namespace \
-    --namespace mongodb \
-    --version 12.1.20 \
-    --values values.yaml
+helm repo update
+
+helm upgrade mongodb bitnami/mongodb --install --namespace mongodb --create-namespace --values values.yaml --version 13.0.2
 ```
