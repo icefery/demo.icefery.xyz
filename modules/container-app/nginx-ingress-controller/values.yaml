@@ -10,7 +10,7 @@ defaultBackend:
 service:
   type: NodePort
   nodePorts:
-    http: 80
-    https: 443
+    http: 30080
+    https: 30443
   externalIPs:
     - 192.192.192.6

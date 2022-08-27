@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: docker.io/bitnami/mongodb:6.0
+    container_name: mongodb
+    environment:
+      MONGODB_ROOT_USER: root
+      MONGODB_ROOT_PASSWORD: root
+      MONGODB_DATABASE: demo
+      MONGODB_USERNAME: demo
+      MONGODB_PASSWORD: demo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/bitnami/mongodb
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  mongodb:

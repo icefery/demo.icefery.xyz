@@ -45,6 +45,7 @@ apt update && apt full-upgrade -y
 cat <<-EOF >>/etc/bash.bashrc
 alias ls='ls -hAF --color=auto --time-style=long-iso'
 alias ll='ls -l'
+alias drop-cache='echo 3 > /proc/sys/vm/drop_caches drop_caches'
 export PS1='[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;33m\]\h\[\e[00m\]:\[\e[01;32m\]\w\[\e[00m\]]\$ '
 export TZ=Asia/Shanghai
 EOF
@@ -57,4 +58,16 @@ source /etc/profile
 ```bash
 export https_proxy=http://192.192.192.10:7890
 export http_proxy=http://192.192.192.10:7890
+```
+
+#### DNS
+
+```bash
+apt remove bind9 --purge --autoremove -y
+
+sed -i -e '/#DNSStubListener=/c DNSStubListener=no' /etc/systemd/resolved.conf
+
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+systemctl restart systemd-resolved
 ```

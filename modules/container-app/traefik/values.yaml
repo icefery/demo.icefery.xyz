@@ -36,14 +36,14 @@ ports:
     expose: true
     exposedPort: 80
     # hostPort: 80
-    nodePort: 80
+    nodePort: 30080
   websecure:
     port: 443
     protocol: TCP
     expose: true
     exposedPort: 443
     # hostPort: 443
-    nodePort: 443
+    nodePort: 30443
     tls:
       enabled: true
 
