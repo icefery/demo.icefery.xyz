@@ -10,6 +10,5 @@ runners:
   config: |
     [[runners]]
       [runners.kubernetes]
-        namespace = "{{.Release.Namespace}}"
         image = "ubuntu:22.04"
   privileged: true

@@ -32,6 +32,21 @@ helm repo update
 helm upgrade gitlab-runner gitlab/gitlab-runner --install --namespace gitlab --create-namespace --values gitlab-runner.yaml --version 0.43.1
 ```
 
+## Linux 安装 GitLab Runner
+
+```bash
+curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+
+chmod +x /usr/local/bin/gitlab-runner
+
+# 直接使用 root 用户运行 runner 但是工作目录依然在原先的用户主目录下
+mkdir -p /home/gitlab-runner
+
+gitlab-runner install --user=root --working-directory=/home/gitlab-runner
+
+gitlab-runner start
+```
+
 ## Helm 安装 GitLab Agent
 
 ```bash
