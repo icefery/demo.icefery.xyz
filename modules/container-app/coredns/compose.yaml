@@ -1,7 +1,6 @@
 services:
   coredns:
     image: coredns/coredns:1.9.3
-    restart: always
     container_name: coredns
     ports:
       - 53:53/tcp
