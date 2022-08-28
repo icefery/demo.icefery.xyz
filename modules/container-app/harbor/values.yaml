@@ -1,6 +1,6 @@
 adminPassword: admin
 
-externalURL: http://core.harbor.dev.icefery.xyz
+externalURL: http://core.harbor.dev.icefery.xyz:30080
 
 exposureType: ingress
 
