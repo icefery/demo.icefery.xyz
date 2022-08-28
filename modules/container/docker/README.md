@@ -14,6 +14,8 @@ sudo rm -rf /var/lib/containerd
 
 ### 安装
 
+> https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
+
 ```bash
 curl -fsSL https://get.docker.com | bash
 ```
