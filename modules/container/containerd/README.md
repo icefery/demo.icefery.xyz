@@ -10,6 +10,8 @@ tar Cxzvvf /usr/local nerdctl-full-0.22.0-linux-amd64.tar.gz
 systemctl enable --now containerd
 
 systemctl enable --now buildkit
+
+nerdctl run --privileged --rm tonistiigi/binfmt --install all
 ```
 
 ### 查看默认配置
