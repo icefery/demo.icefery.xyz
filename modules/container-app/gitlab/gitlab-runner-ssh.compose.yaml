@@ -1,0 +1,11 @@
+services:
+  gitlab-runner-ssh:
+    image: gitlab/gitlab-runner:ubuntu-v15.3.0
+    container_name: gitlab-runner-ssh
+    volumes:
+      - /root/.ssh/gitlab-runner:/root/.ssh/gitlab-runner
+
+networks:
+  default:
+    external: true
+    name: compose
