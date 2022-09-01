@@ -8,6 +8,8 @@ global:
     class: none
     tls:
       enabled: false
+  kas:
+    enabled: false
   rails:
     bootsnap:
       enabled: false
@@ -21,6 +23,9 @@ nginx-ingress:
 
 prometheus:
   install: false
+
+registry:
+  enabled: false
 
 gitlab-runner:
   install: true
@@ -53,13 +58,5 @@ gitlab:
     minReplicas: 1
     maxReplicas: 1
   gitlab-shell:
-    minReplicas: 1
-    maxReplicas: 1
-  kas:
-    minReplicas: 1
-    maxReplicas: 1
-
-registry:
-  hpa:
     minReplicas: 1
     maxReplicas: 1

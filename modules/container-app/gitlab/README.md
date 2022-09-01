@@ -15,11 +15,13 @@ nerdctl exec -it gitlab cat /etc/gitlab/initial_root_password
 #### Helm 安装 GitLab
 
 ```bash
-helm repo add gitlab http://charts.gitlab.io/
+# helm repo add gitlab http://charts.gitlab.io/
+helm repo add gitlab-jh https://charts.gitlab.cn
 
 helm repo update
 
-helm upgrade gitlab gitlab/gitlab --install --namespace gitlab --create-namespace --values gitlab.yaml --version 6.2.2
+# helm upgrade gitlab gitlab/gitlab --install --namespace gitlab --create-namespace --values gitlab.yaml --version 6.3.2
+helm upgrade gitlab gitlab-jh/gitlab --install --namespace gitlab --create-namespace --values gitlab.yaml --version 6.3.2
 
 kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
