@@ -69,3 +69,47 @@ systemctl daemon-reload
 
 systemctl restart containerd
 ```
+
+## 构建多平台镜像
+
+> - https://docs.docker.com/build/buildx/multiplatform-images/
+> - https://docs.docker.com/engine/reference/commandline/manifest/
+
+#### 配置 QEMU 多平台支持
+
+```bash
+# docker run --privileged --rm tonistiigi/binfmt --install all
+
+nerdctl run --privileged --rm tonistiigi/binfmt --install all
+
+ls -1 /proc/sys/fs/binfmt_misc/qemu*
+```
+
+#### 通过 `docker` 构建
+
+```bash
+# 创建 Builder
+docker buildx create --use
+docker buildx ls
+
+# 构建多个平台镜像并推送到 DockerHub
+docker login
+docker buildx build --tag icefery/my-app:0.0.1 --platform linux/amd64,linux/arm64 --push .
+
+# 构建单个平台并导出到本地
+docker buildx build --tag icefery/my-app:0.0.1 --platform linux/arm64 --load .
+```
+
+> 导出到本地只能构建一个镜像，本地不支持同时导出 manifest lists。
+
+#### 通过 `nerdctl` 构建
+
+```bash
+nerdctl build -t icefery/my-app:0.0.1 --platform linux/arm64,linux/amd64 .
+
+nerdctl image ls
+
+nerdctl login
+
+nerdctl push --all-platforms icefery/my-app:0.0.1
+```

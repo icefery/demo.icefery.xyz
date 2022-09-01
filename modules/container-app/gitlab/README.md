@@ -99,6 +99,16 @@ helm upgrade gitlab-agent gitlab/gitlab-agent \
   --set config.kasAddress=ws://kas.dev.icefery.xyz
 ```
 
+## GitLab MinIO
+
+#### 查看 Access Key 和 Secrey Key
+
+```bash
+kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.accesskey}' | base64 --decode
+
+kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.secretkey}' | base64 --decode
+```
+
 ## 注意事项
 
 #### GitLab 并不能识别 Ingress Controller 暴露的非 80 和 443 以外的端口
