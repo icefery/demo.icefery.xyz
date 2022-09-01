@@ -10,9 +10,27 @@ helm repo update
 helm upgrade traefik traefik/traefik --install --namespace traefik --create-namespace --values values.yaml --version 10.24.0
 ```
 
-## TODO
+#### 暴露 dashboard
 
-- Ingress 资源的 `ADDRESS` 列不显示地址
+```bash
+cat > dashboard.yaml <<- "EOF"
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`traefik.dev.icefery.xyz`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+EOF
+
+kubectl apply -f dashboard.yaml
+```
 
 ## 常见问题
 
