@@ -23,7 +23,7 @@ kubectl exec -n nexus pods/<POD> -- cat /nexus-data/admin.password
 - { type: proxy,  name: maven-proxy-aliyun-spring,        url: https://maven.aliyun.com/repository/spring }
 - { type: proxy,  name: maven-proxy-aliyun-spring-plugin, url: https://maven.aliyun.com/repository/spring-plugin }
 - { type: proxy,  name: maven-proxy-aliyun-gradle-plugin, url: https://maven.aliyun.com/repository/gradle-plugin }
-- { type: proxy,  name: maven-proxy-repo,                 url: https://repo1.maven.org/maven2 }
+- { type: proxy,  name: maven-proxy-repo,                 url: https://repo.maven.apache.org/maven2 }
 - { type: hosted, name: maven-custom }
 - { type: group,  name: maven-public }
 ```
