@@ -20,5 +20,5 @@ spec:
     - 192.192.192.6-192.192.192.6
 EOF
 
-kubectl apply -f IPAddressPool.yam
+kubectl apply -f IPAddressPool.yaml
 ```
