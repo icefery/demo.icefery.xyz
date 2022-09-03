@@ -3,13 +3,23 @@
 ## 安装
 
 ```bash
-wget https://github.com/containerd/nerdctl/releases/download/v0.22.0/nerdctl-full-0.22.0-linux-amd64.tar.gz
+REPO="containerd/nerdctl"
+TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r ".tag_name")
+ASSET="nerdctl-full-${TAG//v/}-linux-$(dpkg --print-architecture).tar.gz"
 
-tar Cxzvvf /usr/local nerdctl-full-0.22.0-linux-amd64.tar.gz
+wget "https://github.com/${REPO}/releases/download/${TAG}/${ASSET}" -O "${ASSET}"
+
+tar Cxzvvf /usr/local "${ASSET}"
 
 systemctl enable --now containerd
 
 systemctl enable --now buildkit
+
+nerdctl completion bash > /etc/bash_completion.d/nerdctl
+
+source /etc/profile
+
+nerdctl network create compose
 
 nerdctl run --privileged --rm tonistiigi/binfmt --install all
 ```

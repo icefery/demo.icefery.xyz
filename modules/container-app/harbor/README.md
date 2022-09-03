@@ -25,20 +25,20 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
     capabilities = ["pull"]
   ```
 
-- `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz:30080/hosts.toml`
+- `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml`
 
   ```toml
-  server = "http://core.harbor.dev.icefery.xyz:30080"
-  [host."http://core.harbor.dev.icefery.xyz:30080"]
+  server = "http://core.harbor.dev.icefery.xyz"
+  [host."http://core.harbor.dev.icefery.xyz"]
     skip_verify = true
   ```
 
 - `/etc/containerd/config.toml`
 
   > Although we have deprecated the old CRI config pattern for specifying registry.mirrors and registry.configs you can
-  still specify your credentials
-  via [CRI config](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md#configure-registry-credentials)
-  .
+  > still specify your credentials
+  > via [CRI config](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md#configure-registry-credentials)
+  > .
 
   ```toml
   version = 2
@@ -48,11 +48,11 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
     endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."core.harbor.dev.icefery.xyz:30080"]
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."core.harbor.dev.icefery.xyz"]
     endpoint = ["http://core.harbor.dev.icefery.xyz"]
-  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz:30080".tls]
+  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".tls]
     insecure_skip_verify = true
-  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz:30080".auth]
+  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".auth]
     username = "admin"
     password = "admin"
   ```
@@ -67,11 +67,11 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
     docker.io:
       endpoint:
         - "https://uwk49ut2.mirror.aliyuncs.com"
-    "core.harbor.dev.icefery.xyz:30080":
+    "core.harbor.dev.icefery.xyz":
       endpoint:
-        - "http://core.harbor.dev.icefery.xyz:30080"
+        - "http://core.harbor.dev.icefery.xyz"
   configs:
-    "core.harbor.dev.icefery.xyz:30080":
+    "core.harbor.dev.icefery.xyz":
       tls:
         insecure_skip_verify: true
       auth:
@@ -84,21 +84,21 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
 > nerdctl 并不走 CRI 的 `tls.insecure_skip_verify`，需要添加 `--insecure-registry` 选项。
 
 ```bash
-docker login http://core.harbor.dev.icefery.xyz:30080 --username=admin --password=admin
+docker login http://core.harbor.dev.icefery.xyz --username=admin --password=admin
 
-# nerdctl login http://core.harbor.dev.icefery.xyz:30080 --username=admin --password=admin --insecure-registry
+# nerdctl login http://core.harbor.dev.icefery.xyz --username=admin --password=admin --insecure-registry
 ```
 
 ```bash
-docker push core.harbor.dev.icefery.xyz:30080/library/my-app:0.0.1
+docker push core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
-# nerdctl push core.harbor.dev.icefery.xyz:30080/library/my-app:0.0.1 --insecure-registry
+# nerdctl push core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
 ```
 
 ```bash
-docker pull core.harbor.dev.icefery.xyz:30080/library/my-app:0.0.1
+docker pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
-# nerdctl pull core.harbor.dev.icefery.xyz:30080/library/my-app:0.0.1 --insecure-registry
+# nerdctl pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
 ```
 
 ## Chart 仓库
@@ -107,10 +107,10 @@ docker pull core.harbor.dev.icefery.xyz:30080/library/my-app:0.0.1
 
 ```bash
 # 添加 Harbor 作为统一的单一索引入口点
-# helm repo add chartmuseum-global http://core.harbor.dev.icefery.xyz:30080/chartrepo --username=admin --password=admin
+# helm repo add chartmuseum-global http://core.harbor.dev.icefery.xyz/chartrepo --username=admin --password=admin
 
 # 将 Harbor 项目添加为单独的索引入口点
-helm repo add chartmuseum-library http://core.harbor.dev.icefery.xyz:30080/chartrepo/library --username=admin --password=admin
+helm repo add chartmuseum-library http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin
 ```
 
 ```bash
@@ -124,7 +124,7 @@ helm plugin install https://github.com/chartmuseum/helm-push
 ```
 
 ```bash
-# helm cm-push chart/ http://core.harbor.dev.icefery.xyz:30080/chartrepo/library --username=admin --password=admin
+# helm cm-push chart/ http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin
 
 helm cm-push chart/ chartmuseum-library
 ```
