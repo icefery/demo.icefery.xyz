@@ -10,8 +10,10 @@ SELECT
     partition_keys.pkey_type    AS partition_column_type,
     partition_keys.pkey_comment AS partition_column_comment
 FROM dbs
-    JOIN tbls ON tbls.db_id = dbs.db_id
-    JOIN table_params ON table_params.tbl_id = tbls.tbl_id ON table_params.param_key = 'comment'
-    JOIN columns_v2 ON columns_v2.cd_id = tbls.sd_id
-    JOIN partition_keys ON partition_keys.tbl_id = tbls.tbl_id
+    LEFT JOIN tbls           ON tbls.db_id = dbs.db_id
+    LEFT JOIN table_params   ON table_params.tbl_id = tbls.tbl_id AND table_params.param_key = 'comment'
+    LEFT JOIN sds            ON sds.sd_id = tbls.sd_id
+    LEFT JOIN columns_v2     ON columns_v2.cd_id = sds.cd_id
+    LEFT JOIN partition_keys ON partition_keys.tbl_id = tbls.tbl_id
+ORDER BY dbs.`name`, tbls.tbl_name, columns_v2.integer_idx
 ```
