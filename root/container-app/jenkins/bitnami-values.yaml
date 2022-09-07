@@ -7,4 +7,4 @@ service:
 
 ingress:
   enabled: true
-  hostname: jenkins.dev
+  hostname: jenkins.dev.icefery.xyz

@@ -7,10 +7,7 @@
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-helm upgrade jenkins bitnami/jenkins \
-    --install \
-    --create-namespace \
-    --namespace jenkins \
-    --version 10.2.4 \
-    --values values.yaml
+helm repo update
+
+helm upgrade jenkins bitnami/jenkins --install --namespace jenkins --create-namespace --values values-bitnami.yaml --version 11.0.0
 ```
