@@ -1,0 +1,87 @@
+---
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nacos
+  labels:
+    app: nacos
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos
+  namespace: nacos
+  labels:
+    app: nacos
+spec:
+  selector:
+    app: nacos
+  type: NodePort
+  ports:
+    - { name: http, port: 8848, targetPort: 8848, nodePort: 8848 }
+    - { name: client-rpc, port: 9848, targetPort: 9848, nodePort: 9848 }
+    - { name: raft-rpc, port: 9849, targetPort: 9849, nodePort: 9849 }
+
+---
+# Headless Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nacos-headless
+  namespace: nacos
+  labels:
+    app: nacos
+spec:
+  selector:
+    app: nacos
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - { name: http, port: 8848, targetPort: 8848 }
+    - { name: client-rpc, port: 9848, targetPort: 9848 }
+    - { name: raft-rpc, port: 9849, targetPort: 9849 }
+
+---
+# StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nacos
+  namespace: nacos
+  labels:
+    app: nacos
+spec:
+  selector:
+    matchLabels:
+      app: nacos
+  serviceName: nacos-headless
+  template:
+    metadata:
+      labels:
+        app: nacos
+    spec:
+      containers:
+        - name: nacos
+          image: nacos/nacos-server:v2.1.0
+          env:
+            - { name: MODE, value: standalone }
+          ports:
+            - { name: http, containerPort: 8848 }
+            - { name: client-rpc, containerPort: 9848 }
+            - { name: raft-rpc, containerPort: 9849 }
+          volumeMounts:
+            - mountPath: /home/nacos/data
+              name: data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        labels:
+          app: nacos
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources:
+          requests:
+            storage: 8Gi
