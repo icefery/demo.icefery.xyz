@@ -1,6 +1,6 @@
 services:
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver
     hostname: sqlserver
     environment:
@@ -9,10 +9,12 @@ services:
     ports:
       - 1433:1433
     volumes:
-      - /d/share/:/d/share/
-      - /d/mount/sqlserver/var/opt/mssql/data/:/var/opt/mssql/data/
+      - sqlserver-data:/var/opt/mssql/
 
 networks:
   default:
     external: true
-    name: local
+    name: compose
+
+volumes:
+  sqlserver-data:
