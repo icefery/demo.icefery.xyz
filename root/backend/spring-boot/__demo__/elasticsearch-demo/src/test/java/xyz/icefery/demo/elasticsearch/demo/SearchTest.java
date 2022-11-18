@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import xyz.icefery.demo.elasticsearch.demo.service.HeroService;
-
 import java.util.Map;
 
 @Slf4j
@@ -26,6 +25,5 @@ public class SearchTest {
     }
 
     @Test
-    void test2() {
-    }
+    void test2() {}
 }

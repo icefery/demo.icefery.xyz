@@ -1,6 +1,5 @@
 package xyz.icefery.demo.elasticsearch.demo.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -15,7 +14,6 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 import xyz.icefery.demo.elasticsearch.demo.entity.Hero;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

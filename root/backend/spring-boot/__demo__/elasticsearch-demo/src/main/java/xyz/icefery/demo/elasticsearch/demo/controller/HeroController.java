@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.icefery.demo.elasticsearch.demo.service.HeroService;
-
 import java.util.Map;
 
 @RestController
@@ -18,5 +17,4 @@ public class HeroController {
     public Map<String, Object> highlightSearch(@PathVariable("keyword") String keyword) {
         return heroService.hightlightSearch(keyword);
     }
-
 }

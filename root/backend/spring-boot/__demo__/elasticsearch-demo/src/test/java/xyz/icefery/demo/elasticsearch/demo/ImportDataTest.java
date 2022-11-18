@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import xyz.icefery.demo.elasticsearch.demo.entity.Hero;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
