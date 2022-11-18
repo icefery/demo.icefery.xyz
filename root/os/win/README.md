@@ -11,6 +11,7 @@
 ## 常见问题
 
 - 应用商店无法更新。错误代码: 0x80131500
+
   > - [微软应用商店错误代码“0x80131500”怎么修复？](https://blog.csdn.net/q1246192888/article/details/122412728)
 
   ![](https://img-blog.csdnimg.cn/img_convert/080a7786019f13e961a5a98ee7d60b98.png)

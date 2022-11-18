@@ -19,5 +19,3 @@
 - [设计 shell 脚本选项：getopt（转）](https://www.cnblogs.com/ajianbeyourself/p/12454161.html)
 
 - [报错 kernel:NMI watchdog: BUG: soft lockup - CPU#0 stuck for 26s](https://blog.csdn.net/weixin_46399792/article/details/114371139)
-
-
