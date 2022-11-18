@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
 import java.io.Serializable;
 
 /**
@@ -20,11 +19,9 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @TableName("sys_role_user")
 public class RoleUser implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     private Long roleId;
 
     private Long userId;
-
 }

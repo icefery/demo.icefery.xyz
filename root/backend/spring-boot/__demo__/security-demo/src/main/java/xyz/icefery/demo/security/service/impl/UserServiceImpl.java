@@ -11,7 +11,6 @@ import xyz.icefery.demo.security.mapper.UserMapper;
 import xyz.icefery.demo.security.service.RoleService;
 import xyz.icefery.demo.security.service.RoleUserService;
 import xyz.icefery.demo.security.service.UserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +24,18 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-    @Autowired private RoleUserService roleUserService;
-    @Autowired private RoleService     roleService;
+    @Autowired
+    private RoleUserService roleUserService;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public List<Role> getRoleListById(Long id) {
         List<RoleUser> roleUserList = roleUserService.list(new LambdaQueryWrapper<RoleUser>().eq(RoleUser::getUserId, id));
         return roleUserList
-                .stream()
-                .map(roleUser -> roleService.getById(roleUser.getRoleId()))
-                .collect(Collectors.toList());
+            .stream()
+            .map(roleUser -> roleService.getById(roleUser.getRoleId()))
+            .collect(Collectors.toList());
     }
 
 }

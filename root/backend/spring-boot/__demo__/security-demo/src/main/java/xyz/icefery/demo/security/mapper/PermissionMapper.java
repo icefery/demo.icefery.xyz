@@ -1,11 +1,11 @@
 package xyz.icefery.demo.security.mapper;
 
-import xyz.icefery.demo.security.entity.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import xyz.icefery.demo.security.entity.Permission;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author icefery

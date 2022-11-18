@@ -11,7 +11,6 @@ import xyz.icefery.demo.security.mapper.PermissionMapper;
 import xyz.icefery.demo.security.service.PermissionService;
 import xyz.icefery.demo.security.service.RolePermissionService;
 import xyz.icefery.demo.security.service.RoleService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,16 +24,18 @@ import java.util.stream.Collectors;
  */
 @Service
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements PermissionService {
-    @Autowired private RolePermissionService rolePermissionService;
-    @Autowired private RoleService           roleService;
+    @Autowired
+    private RolePermissionService rolePermissionService;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public List<Role> getRoleListById(Long id) {
         List<RolePermission> rolePermissionList =
-                rolePermissionService.list(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getPermissionId, id));
+            rolePermissionService.list(new LambdaQueryWrapper<RolePermission>().eq(RolePermission::getPermissionId, id));
         return rolePermissionList
-                .stream()
-                .map(rolePermission -> roleService.getById(rolePermission.getRoleId()))
-                .collect(Collectors.toList());
+            .stream()
+            .map(rolePermission -> roleService.getById(rolePermission.getRoleId()))
+            .collect(Collectors.toList());
     }
 }

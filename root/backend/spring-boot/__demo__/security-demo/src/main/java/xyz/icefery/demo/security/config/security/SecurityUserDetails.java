@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import xyz.icefery.demo.security.entity.Role;
 import xyz.icefery.demo.security.entity.User;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,9 +21,9 @@ public class SecurityUserDetails implements UserDetails {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.grantedAuthorityList = roleList
-                .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
+            .stream()
+            .map(role -> new SimpleGrantedAuthority(role.getName()))
+            .collect(Collectors.toList());
     }
 
     @Override

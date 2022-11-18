@@ -7,7 +7,6 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
 
 @Data
@@ -18,7 +17,7 @@ public class JwtConfig {
     // 密钥
     private String secret;
     // 过期时间
-    private Long   expiration;
+    private Long expiration;
     // 请求头
     private String tokenHeader;
 

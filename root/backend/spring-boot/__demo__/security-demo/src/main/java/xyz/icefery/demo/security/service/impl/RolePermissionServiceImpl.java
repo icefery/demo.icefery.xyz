@@ -1,14 +1,14 @@
 package xyz.icefery.demo.security.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 import xyz.icefery.demo.security.entity.RolePermission;
 import xyz.icefery.demo.security.mapper.RolePermissionMapper;
 import xyz.icefery.demo.security.service.RolePermissionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author icefery

@@ -12,7 +12,6 @@ import org.springframework.util.AntPathMatcher;
 import xyz.icefery.demo.security.entity.Permission;
 import xyz.icefery.demo.security.entity.Role;
 import xyz.icefery.demo.security.service.PermissionService;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -20,8 +19,10 @@ import java.util.List;
 @Slf4j
 @Component
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
-    @Autowired private AntPathMatcher    antPathMatcher;
-    @Autowired private PermissionService permissionService;
+    @Autowired
+    private AntPathMatcher antPathMatcher;
+    @Autowired
+    private PermissionService permissionService;
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {

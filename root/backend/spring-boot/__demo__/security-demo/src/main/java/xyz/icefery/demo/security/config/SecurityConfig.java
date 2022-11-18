@@ -3,7 +3,12 @@ package xyz.icefery.demo.security.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AccountExpiredException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -24,11 +29,27 @@ import xyz.icefery.demo.security.config.security.UrlFilterInvocationSecurityMeta
 @Slf4j
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired private JwtConfig                  jwtConfig;
-    @Autowired private JwtAuthenticationFilter    jwtAuthenticationFilter;
-    @Autowired private SecurityUserDetailsService securityUserDetailsService;
-    @Autowired private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
-    @Autowired private UrlAccessDecisionManager                  urlAccessDecisionManager;
+    @Autowired
+    private JwtConfig jwtConfig;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private SecurityUserDetailsService securityUserDetailsService;
+    @Autowired
+    private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
+    @Autowired
+    private UrlAccessDecisionManager urlAccessDecisionManager;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -91,7 +112,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 response.getWriter().write("登录过期 | 未登录");
             })
             // 权限不足
-            .accessDeniedHandler((request, response, accessdeniedException) -> {
+            .accessDeniedHandler((request, response, accessDeniedException) -> {
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("text/plain;charset=utf-8");
                 response.getWriter().write("权限不足");
@@ -102,18 +123,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 禁用 session
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Override

@@ -1,11 +1,11 @@
 package xyz.icefery.demo.security.service;
 
-import xyz.icefery.demo.security.entity.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.icefery.demo.security.entity.RolePermission;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author icefery
