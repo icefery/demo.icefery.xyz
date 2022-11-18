@@ -39,7 +39,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-security"
     // spring-webmvc
     implementation "org.springframework.boot:spring-boot-starter-web"
-    // lombox
+    // lombok
     compileOnly "org.projectlombok:lombok"
     // mysql
     runtimeOnly "mysql:mysql-connector-java"

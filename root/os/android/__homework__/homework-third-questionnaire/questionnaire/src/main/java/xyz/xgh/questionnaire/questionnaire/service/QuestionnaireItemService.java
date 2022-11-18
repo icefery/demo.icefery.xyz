@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.xgh.questionnaire.questionnaire.entity.QuestionnaireItem;
 import xyz.xgh.questionnaire.questionnaire.mapper.QuestionnaireItemMapper;
-
 import java.util.List;
 
 @Service

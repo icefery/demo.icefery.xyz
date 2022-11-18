@@ -6,7 +6,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.xgh.questionnaire.questionnaire.util.R;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
@@ -24,7 +23,7 @@ public class GlobalExceptionHandler {
             // RequestParam invalid
             message = ((ConstraintViolationException) e).getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
         } else if (e instanceof MethodArgumentNotValidException) {
-            // RequestBody inlvaid
+            // RequestBody invalid
             message = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
         } else if (e instanceof BindException) {
             // Type invalid

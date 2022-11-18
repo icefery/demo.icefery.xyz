@@ -33,7 +33,6 @@ import xyz.xgh.questionnaire.questionnaire.service.TenantService;
 import xyz.xgh.questionnaire.questionnaire.util.HttpServletUtil;
 import xyz.xgh.questionnaire.questionnaire.util.JwtUtil;
 import xyz.xgh.questionnaire.questionnaire.util.R;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -48,41 +47,6 @@ import java.util.Map;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TenantService tenantService;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // cors
-        http = http
-            .cors()
-            .and()
-            // disable csrf
-            .csrf().disable()
-            // disable session
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and();
-
-        http = http
-            .authorizeRequests()
-            .antMatchers("/tenant/login", "/tenant/register", "/**/questionnaire/find/id/**", "/**/questionnaire-item/create").permitAll()
-            .anyRequest().authenticated()
-            .and();
-
-        http = http
-            .formLogin()
-            .loginProcessingUrl("/tenant/login").permitAll()
-            .successHandler(successHandler())
-            .failureHandler(failureHandler())
-            .and();
-
-        http = http
-            .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPoint())
-            .accessDeniedHandler(accessDeniedHandler())
-            .and();
-
-        http = http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
@@ -93,33 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/webjars/**"
         );
     }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetailsService userDetailsService = username -> {
-            if (StringUtils.isBlank(username)) {
-                throw new UsernameNotFoundException(username);
-            }
-            Tenant find = tenantService.findTenantByUsername(username);
-            if (find == null) {
-                throw new UsernameNotFoundException(username);
-            }
-            return new User(username, find.getPassword(), AuthorityUtils.NO_AUTHORITIES);
-        };
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    @Override
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }
-
     public AuthenticationSuccessHandler successHandler() {
         return (request, response, authentication) -> {
             String username = request.getParameter("username");
@@ -135,7 +76,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
-
     // 认证失败
     public AuthenticationFailureHandler failureHandler() {
         return (request, response, exception) -> {
@@ -148,7 +88,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
-
     // 权限不足
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return (request, response, authException) -> {
@@ -156,14 +95,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
-
     public AccessDeniedHandler accessDeniedHandler() {
         return (request, response, accessDeniedException) -> {
             R<?> r = R.failure(R.Code.PERMISSION_DENIED, accessDeniedException.getMessage());
             HttpServletUtil.responseJson(response, r);
         };
     }
-
     public OncePerRequestFilter jwtTokenFilter() {
         return new OncePerRequestFilter() {
             @Override
@@ -198,5 +135,57 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }
             }
         };
+    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // cors
+        http = http
+            .cors()
+            .and()
+            // disable csrf
+            .csrf().disable()
+            // disable session
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and();
+
+        http = http
+            .authorizeRequests()
+            .antMatchers("/tenant/login", "/tenant/register", "/**/questionnaire/find/id/**", "/**/questionnaire-item/create").permitAll()
+            .anyRequest().authenticated()
+            .and();
+
+        http = http
+            .formLogin()
+            .loginProcessingUrl("/tenant/login").permitAll()
+            .successHandler(successHandler())
+            .failureHandler(failureHandler())
+            .and();
+
+        http = http
+            .exceptionHandling()
+            .authenticationEntryPoint(authenticationEntryPoint())
+            .accessDeniedHandler(accessDeniedHandler())
+            .and();
+
+        http = http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        UserDetailsService userDetailsService = username -> {
+            if (StringUtils.isBlank(username)) {
+                throw new UsernameNotFoundException(username);
+            }
+            Tenant find = tenantService.findTenantByUsername(username);
+            if (find == null) {
+                throw new UsernameNotFoundException(username);
+            }
+            return new User(username, find.getPassword(), AuthorityUtils.NO_AUTHORITIES);
+        };
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+    @Bean
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
     }
 }

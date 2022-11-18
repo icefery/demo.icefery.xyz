@@ -10,7 +10,6 @@ import xyz.xgh.questionnaire.questionnaire.entity.Tenant;
 import xyz.xgh.questionnaire.questionnaire.service.TenantService;
 import xyz.xgh.questionnaire.questionnaire.util.R;
 
-
 @Validated
 @RestController
 @RequestMapping("/tenant")
@@ -19,7 +18,7 @@ public class TenantController {
     private TenantService tenantService;
 
     @PostMapping("/register")
-    public R<String> register(@RequestBody Tenant tenant){
+    public R<String> register(@RequestBody Tenant tenant) {
         String id = tenantService.registerTenant(tenant);
         return R.success(id);
     }

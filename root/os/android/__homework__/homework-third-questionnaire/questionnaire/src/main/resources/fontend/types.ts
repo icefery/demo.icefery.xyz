@@ -38,7 +38,6 @@ interface Question {
   config: QuestionConfig
 }
 
-
 // 题目配置
 interface QuestionConfig {
   // 位置型题目配置
@@ -50,9 +49,8 @@ interface QuestionConfig {
 type RadioValue = { options: string[]; checked: '' }
 type CheckboxValue = { name: string; checked: boolean }[]
 type LocationValue = { province?: string; city?: string; area?: string }
-type DatetimeValue = { year?: string; month?: string, day?: string; hour?: string; minute?: string; second?: string }
+type DatetimeValue = { year?: string; month?: string; day?: string; hour?: string; minute?: string; second?: string }
 type ImageValue = { base64: string }[]
-
 
 // 测试问卷
 const testQuestionnaire: Questionnaire = {
@@ -104,4 +102,3 @@ const testQuestionnaireItem: QuestionnaireItem = {
     }
   ]
 }
-

@@ -9,8 +9,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class R<T> {
     private Integer code;
-    private String  message;
-    private T       data;
+    private String message;
+    private T data;
 
     public static <T> R<T> success(T data) {
         return new R<T>().setCode(Code.SUCCESS.code).setMessage(Code.SUCCESS.message).setData(data);
@@ -40,8 +40,6 @@ public class R<T> {
 
         PERMISSION_DENIED(2004, "访问拒绝 | 权限不足"),
 
-
-
         ARG_INVALID(4, "参数不合法"),
 
         CUSTOM_EXCEPTION(5, "自定义异常"),
@@ -49,7 +47,6 @@ public class R<T> {
         UNKNOWN_EXCEPTION(9, "未知异常");
 
         public final Integer code;
-        public final String  message;
+        public final String message;
     }
 }
-  

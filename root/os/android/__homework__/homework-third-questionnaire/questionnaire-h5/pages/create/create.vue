@@ -14,7 +14,7 @@
         <!-- 题型 -->
         <u-form-item label="类型">
           <u-subsection
-            style="width: 100%;"
+            style="width: 100%"
             :animation="true"
             :list="types"
             :current="types.findIndex(item => item.value === question.type)"
@@ -60,17 +60,9 @@
             <u-icon name="plus-circle" size="40" @click="() => addCheckboxOption(question)"></u-icon>
           </template>
 
-
-
-
-
-
-
-
-
           <!-- 位置 -->
           <template v-else-if="question.type === 'location'">
-            <u-button style="width: 100%;" @click="() => (question.control.pickerShow = true)">
+            <u-button style="width: 100%" @click="() => (question.control.pickerShow = true)">
               {{ computedLocationDefaultRegion(question).join(' ') }}
             </u-button>
             <u-picker
@@ -83,7 +75,7 @@
           </template>
           <!-- 时间 -->
           <template v-else-if="question.type === 'datetime'">
-            <u-button style="width: 100%;" @click="() => (question.control.pickerShow = true)">
+            <u-button style="width: 100%" @click="() => (question.control.pickerShow = true)">
               {{ computedDatetimeDisplayValue(question) }}
             </u-button>
             <u-picker
@@ -94,14 +86,6 @@
               :params="computedPickerParam(question.config.datetimeParams)"
             />
           </template>
-
-
-
-
-
-
-
-
 
           <!-- 图片 -->
           <template v-else-if="question.type === 'image'">
@@ -133,8 +117,8 @@
       </template>
 
       <u-form-item>
-        <u-button style="width: 50%;" class="u-margin-right-10" @click="addQuestion()"><u-icon name="plus" /></u-button>
-        <u-button style="width: 50%;" class="u-margin-left-10" @click="commitQuestionnaire()"><u-icon name="checkbox-mark" /></u-button>
+        <u-button style="width: 50%" class="u-margin-right-10" @click="addQuestion()"><u-icon name="plus" /></u-button>
+        <u-button style="width: 50%" class="u-margin-left-10" @click="commitQuestionnaire()"><u-icon name="checkbox-mark" /></u-button>
       </u-form-item>
     </u-form>
   </view>
@@ -187,7 +171,10 @@ export default {
           break
         // 多选
         case 'checkbox':
-          question.value = [{ name: '选项 1', checked: false }, { name: '选项 2', checked: false }]
+          question.value = [
+            { name: '选项 1', checked: false },
+            { name: '选项 2', checked: false }
+          ]
           question.control.cachedOptionNo = 2
           break
         // 位置

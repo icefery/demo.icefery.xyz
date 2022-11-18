@@ -2,7 +2,6 @@ package xyz.xgh.questionnaire.questionnaire.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
