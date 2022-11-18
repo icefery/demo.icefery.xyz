@@ -17,6 +17,8 @@ kubectl exec -n nexus pods/<POD> -- cat /nexus-data/admin.password
 
 #### Maven
 
+<!-- prettier-ignore-start -->
+
 ```yaml
 - { type: proxy,  name: maven-proxy-aliyun-public,        url: https://maven.aliyun.com/repository/public }
 - { type: proxy,  name: maven-proxy-aliyun-google,        url: https://maven.aliyun.com/repository/google }
@@ -27,6 +29,8 @@ kubectl exec -n nexus pods/<POD> -- cat /nexus-data/admin.password
 - { type: hosted, name: maven-custom }
 - { type: group,  name: maven-public }
 ```
+
+<!-- prettier-ignore-end -->
 
 ## 注意事项
 
