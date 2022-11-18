@@ -1,10 +1,10 @@
 ### 环境
 
-| 环境   | 版本   | 其它                                                         |
-| ------ | ------ | ------------------------------------------------------------ |
-| JDK    | 11     |                                                              |
+| 环境   | 版本   | 其它                                                             |
+| ------ | ------ | ---------------------------------------------------------------- |
+| JDK    | 11     |                                                                  |
 | MySQL  | 8.0.23 | 用户名（`root`）密码（`root`）配置（`lower_case_table_names=1`） |
-| Tomcat | 9.0.38 | 参数（`-Dfile.encoding=UTF-8`）                              |
+| Tomcat | 9.0.38 | 参数（`-Dfile.encoding=UTF-8`）                                  |
 
 ### 依赖
 
@@ -32,7 +32,7 @@
 
 ```
 test/
-|--pom.xml 
+|--pom.xml
 |--db
    |--test.sql                                     # 数据库初始化脚本
 |--src/main/
@@ -49,9 +49,9 @@ test/
                |--CreateServlet
                |--ListServlet
    |--webapp/                                      # WEB 根目录
-      |--WEB-INF/                                   
+      |--WEB-INF/
          |--web.xml
-         |--index.jsp                              # 展示页面                             
+         |--index.jsp                              # 展示页面
 ```
 
 ### 预览

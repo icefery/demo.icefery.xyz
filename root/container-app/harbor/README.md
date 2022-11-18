@@ -66,12 +66,12 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
   mirrors:
     docker.io:
       endpoint:
-        - "https://uwk49ut2.mirror.aliyuncs.com"
-    "core.harbor.dev.icefery.xyz":
+        - 'https://uwk49ut2.mirror.aliyuncs.com'
+    'core.harbor.dev.icefery.xyz':
       endpoint:
-        - "http://core.harbor.dev.icefery.xyz"
+        - 'http://core.harbor.dev.icefery.xyz'
   configs:
-    "core.harbor.dev.icefery.xyz":
+    'core.harbor.dev.icefery.xyz':
       tls:
         insecure_skip_verify: true
       auth:

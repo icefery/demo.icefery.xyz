@@ -8,10 +8,10 @@ ingress:
   core:
     hostname: core.harbor.dev.icefery.xyz
     annotations:
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: 'false'
+      nginx.ingress.kubernetes.io/ssl-redirect: 'false'
   notary:
     hostname: notary.harbor.dev.icefery.xyz
     annotations:
-      ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      ingress.kubernetes.io/ssl-redirect: 'false'
+      nginx.ingress.kubernetes.io/ssl-redirect: 'false'

@@ -46,7 +46,7 @@ async function pcmToText(appId, apiSecret, apiKey, pcmPath) {
     const url = buildURL()
     const ws = new WebSocket(url)
 
-    const send = (data) => {
+    const send = data => {
       const frameDataSection = {
         status: status,
         format: 'audio/L16;rate=16000',
@@ -81,11 +81,11 @@ async function pcmToText(appId, apiSecret, apiKey, pcmPath) {
       str = arr.length > 1 ? arr[1] : ''
       resolve(str)
     })
-      .on('error', (error) => console.log(error))
+      .on('error', error => console.log(error))
       .on('open', () => {
         str = ''
         const readStream = fs.createReadStream(config.file, { highWaterMark: config.highWaterMark })
-        readStream.on('data', (chunk) => send(chunk))
+        readStream.on('data', chunk => send(chunk))
         // 最终帧发送结束
         readStream.on('end', () => {
           status = FRAME.STATUS_LAST_FRAME
@@ -105,13 +105,13 @@ async function pcmToText(appId, apiSecret, apiKey, pcmPath) {
 
         iatResult[message.data.result.sn] = message.data.result
         if (message.data.result.pgs === 'rpl') {
-          message.data.result.rg.forEach((i) => (iatResult[i] = null))
+          message.data.result.rg.forEach(i => (iatResult[i] = null))
         }
 
-        iatResult.forEach((i) => {
+        iatResult.forEach(i => {
           if (i !== null) {
-            i.ws.forEach((j) => {
-              j.cw.forEach((k) => (str += k.w))
+            i.ws.forEach(j => {
+              j.cw.forEach(k => (str += k.w))
             })
           }
         })

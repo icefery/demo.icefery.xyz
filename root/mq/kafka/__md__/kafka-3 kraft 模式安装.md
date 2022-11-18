@@ -9,11 +9,9 @@
 
   ![请添加图片描述](https://img-blog.csdnimg.cn/1ec389e73ffd43679565f4b125160fd2.png)
 
-
 - `config/kraft/server.properties`
 
   ![请添加图片描述](https://img-blog.csdnimg.cn/0251b1ff07274bb7b0795128977ef0b4.png)
-
 
 - 生成集群 ID
 
@@ -22,7 +20,6 @@
   ```
 
   ![请添加图片描述](https://img-blog.csdnimg.cn/1e44a45a84134d3a9d4461372c67335e.png)
-
 
 - 格式化存储目录
 
@@ -43,5 +40,3 @@
   ```bash
   bin/kafka-topics.sh --create --topic foo --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
   ```
-
-  

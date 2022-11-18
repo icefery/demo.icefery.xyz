@@ -59,7 +59,6 @@
   LOCK TABLES table_name READ;
   ```
 
-
 - 表独占写锁（排它锁）
 
   ```sql

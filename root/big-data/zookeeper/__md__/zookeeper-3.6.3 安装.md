@@ -45,7 +45,7 @@ mv zoo_sample.cfg zoo.cfg
   # Purge task interval in hours
   # Set to "0" to disable auto purge feature
   #autopurge.purgeInterval=1
-  
+
   ## Metrics Providers
   #
   # https://prometheus.io Metrics Exporter
@@ -53,5 +53,3 @@ mv zoo_sample.cfg zoo.cfg
   #metricsProvider.httpPort=7000
   #metricsProvider.exportJvmInfo=true
   ```
-
-  

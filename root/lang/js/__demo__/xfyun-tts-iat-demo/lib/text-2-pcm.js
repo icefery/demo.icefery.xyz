@@ -30,35 +30,33 @@ async function textToPcm(appId, apiSecret, apiKey, text, pcmPath) {
 
     // WebSocket
     const ws = new WebSocket(buildURL())
-    ws
-      .on('open', () => {
-        if (fs.existsSync(pcmPath)) {
-          fs.rmSync(pcmPath)
-        }
-        const message = {
-          common: { app_id: appId },
-          business: { aue: 'raw', auf: 'audio/L16;rate=16000', vcn: 'xiaoyan', tte: 'UTF8' },
-          data: { status: 2, text: Buffer.from(text).toString('base64') }
-        }
-        ws.send(JSON.stringify(message))
-      })
-      .on('message', message => {
-        message = JSON.parse(message)
+    ws.on('open', () => {
+      if (fs.existsSync(pcmPath)) {
+        fs.rmSync(pcmPath)
+      }
+      const message = {
+        common: { app_id: appId },
+        business: { aue: 'raw', auf: 'audio/L16;rate=16000', vcn: 'xiaoyan', tte: 'UTF8' },
+        data: { status: 2, text: Buffer.from(text).toString('base64') }
+      }
+      ws.send(JSON.stringify(message))
+    }).on('message', message => {
+      message = JSON.parse(message)
 
-        if (message.code !== 0) {
-          ws.close()
-          return
-        }
+      if (message.code !== 0) {
+        ws.close()
+        return
+      }
 
-        const buffer = Buffer.from(message.data.audio, 'base64')
-        fs.mkdirSync(path.dirname(pcmPath), { recursive: true })
-        fs.writeFileSync(pcmPath, buffer, { flag: 'a' })
+      const buffer = Buffer.from(message.data.audio, 'base64')
+      fs.mkdirSync(path.dirname(pcmPath), { recursive: true })
+      fs.writeFileSync(pcmPath, buffer, { flag: 'a' })
 
-        if (message.data.status === 2) {
-          ws.close()
-          resolve()
-        }
-      })
+      if (message.data.status === 2) {
+        ws.close()
+        resolve()
+      }
+    })
   })
 }
 

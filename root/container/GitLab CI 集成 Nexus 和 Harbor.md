@@ -270,12 +270,12 @@ Nexus 有三种类型的仓库：
 参考以下的配置，通过代理阿里云云效 Maven 和默认的 `repo.maven.apache.org` 基本可以缓存大部分仓库的访问。
 
 ```yaml
-- { type: proxy, name: maven-proxy-aliyun-public,        url: https://maven.aliyun.com/repository/public }
-- { type: proxy, name: maven-proxy-aliyun-google,        url: https://maven.aliyun.com/repository/google }
-- { type: proxy, name: maven-proxy-aliyun-spring,        url: https://maven.aliyun.com/repository/spring }
+- { type: proxy, name: maven-proxy-aliyun-public, url: https://maven.aliyun.com/repository/public }
+- { type: proxy, name: maven-proxy-aliyun-google, url: https://maven.aliyun.com/repository/google }
+- { type: proxy, name: maven-proxy-aliyun-spring, url: https://maven.aliyun.com/repository/spring }
 - { type: proxy, name: maven-proxy-aliyun-spring-plugin, url: https://maven.aliyun.com/repository/spring-plugin }
 - { type: proxy, name: maven-proxy-aliyun-gradle-plugin, url: https://maven.aliyun.com/repository/gradle-plugin }
-- { type: proxy, name: maven-proxy-repo,                 url: https://repo.maven.apache.org/maven2 }
+- { type: proxy, name: maven-proxy-repo, url: https://repo.maven.apache.org/maven2 }
 ```
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2c3bfcb22e1e43669bd561befd946243.png)

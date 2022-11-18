@@ -21,4 +21,3 @@ SHOW TABLE STATUS LIKE 'table_name';
 ```sql
 SELECT @@tx_isolation;
 ```
-
