@@ -7,8 +7,12 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 public class Main {
     public static void main(String[] args) throws Exception {
         JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
-        Client client = dcf.createClient("http://localhost:8080/webservice/product?wsdl");
-        Object[] objects = client.invoke("hello", "icefery");
+        Object[] objects;
+        try (
+            Client client = dcf.createClient("http://localhost:8080/webservice/product?wsdl")
+        ) {
+            objects = client.invoke("hello", "icefery");
+        }
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(objects);
         System.out.println(json);

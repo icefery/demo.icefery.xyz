@@ -9,12 +9,10 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import xyz.icefery.demo.webservice.ProductService;
-import xyz.icefery.demo.webservice.ProductServiceImpl;
 import javax.xml.ws.Endpoint;
 
 @Configuration
 public class WebServiceConfig {
-
     @Autowired
     private ProductService productService;
 
