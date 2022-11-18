@@ -1,6 +1,6 @@
 ##### Spring 依赖
 
-```js
+```
 spring-webmvc
 |--spring-aop
 |--spring-beans
@@ -20,7 +20,7 @@ spring-jdbc
 
 ##### Jackson 依赖
 
-```js
+```
 jackson-datatype-jsr310
 |--jackson-annotations
 |--jackson-core
@@ -31,9 +31,8 @@ jackson-datatype-jsr310
 
 ##### Logback 依赖
 
-```js
+```
 logback-classic
 |--logback-core
 |--slf4j-api
 ```
-

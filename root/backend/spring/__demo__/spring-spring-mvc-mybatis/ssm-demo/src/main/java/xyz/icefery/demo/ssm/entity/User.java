@@ -2,7 +2,6 @@ package xyz.icefery.demo.ssm.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import java.time.LocalDate;
 
 @Data
