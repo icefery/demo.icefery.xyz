@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>xyz.icefery.homework</groupId>
   <artifactId>web-ssh-test6</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
 
   <packaging>war</packaging>
 
@@ -103,7 +102,7 @@
       <version>${struts.version}</version>
     </dependency>
 
-    <!-- Lombox -->
+    <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>

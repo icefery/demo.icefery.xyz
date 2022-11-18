@@ -5,7 +5,6 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import xyz.icefery.homework.websshtest6.dao.BookDAO;
 import xyz.icefery.homework.websshtest6.entity.Book;
-
 import java.util.List;
 
 /**

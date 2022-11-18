@@ -41,4 +41,3 @@
 
 1. Spring 整合 Struts 时，除了依赖其`spring-web`模块，还依赖于 Struts 的插件 `struts2-spring-plugin`
 2. 直接在 Action 上定义公共的逻辑视图——物理视图的映射能简化 Action 方法
-

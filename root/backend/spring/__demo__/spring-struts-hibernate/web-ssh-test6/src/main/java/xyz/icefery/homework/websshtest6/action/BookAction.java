@@ -3,13 +3,16 @@ package xyz.icefery.homework.websshtest6.action;
 import com.opensymphony.xwork2.ActionSupport;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.struts2.convention.annotation.*;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import xyz.icefery.homework.websshtest6.entity.Book;
 import xyz.icefery.homework.websshtest6.service.BookService;
-
 import java.util.Collections;
 import java.util.List;
 
