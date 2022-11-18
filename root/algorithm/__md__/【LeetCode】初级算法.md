@@ -226,7 +226,6 @@ public void reverseString(char[] s) {
 
 ### 【字符串】[整数反转](https://leetcode-cn.com/problems/reverse-integer/)
 
-
 ```java
 public int reverse(int x) {
     int rev = 0;
