@@ -93,3 +93,5 @@ var UninstallOrder KindSortOrder = []string{
     "Namespace",
 }
 ```
+
+#### [Helm template 快速入门](https://juejin.cn/post/6844904199818313735)

@@ -2,7 +2,7 @@
 
 ## 收藏
 
-###### Oracle 创建一个表如果不指定表空间是不是就是用默认的 `system` 表空间
+#### Oracle 创建一个表如果不指定表空间是不是就是用默认的 `system` 表空间
 
 > https://bbs.csdn.net/topics/390217815
 
@@ -29,8 +29,10 @@
 
 3. 如果 1) 和 2) 都没有设置，才会使用 `system` 表空间。
 
-###### Oracle 查询历史 SQL 记录
+#### Oracle 查询历史 SQL 记录
 
 ```sql
 select * from v$sqlarea where sql_text like '%select * from user%'
 ```
+
+#### [Oracle 根据当前时间获取最近 5 年，最近 6 个月，最近 30 天的时间](https://blog.csdn.net/maple_fix/article/details/74926226)

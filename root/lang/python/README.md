@@ -21,3 +21,15 @@
     ```bash
     source /etc/profile
     ```
+
+## 收藏
+
+#### [Python 调用 C 动态链接库，包括结构体参数、回调函数等](https://segmentfault.com/a/1190000013339754)
+
+#### [Python：实例讲解 Python 中的魔法函数（高级语法）](https://zhuanlan.zhihu.com/p/344951719)
+
+#### [sqlalchemy2.0 使用记录](https://www.jianshu.com/p/dd06b1ec5d62)
+
+#### [你真的了解 python 中的换行以及转义吗?](https://www.cnblogs.com/traditional/p/12236925.html)
+
+#### [3-Pandas 数据初探索之缺失值处理与丢弃数据（填充 fillna()、删除 drop()、drop_duplicates()、dropna()）](https://www.cnblogs.com/Cheryol/p/13382560.html)

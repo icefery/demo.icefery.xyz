@@ -24,3 +24,7 @@
   # 显示文件夹 foo 和 bar 中文件的区别
   diff <(ls foo) <(ls bar)
   ```
+
+## 收藏
+
+#### [Shell 编码规范手册(shellcheck 错误汇总)](https://blog.csdn.net/qq_38123721/article/details/114117300)
