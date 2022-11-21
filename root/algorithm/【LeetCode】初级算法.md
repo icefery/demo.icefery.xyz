@@ -1,4 +1,4 @@
-### 【数组】[删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+#### 【数组】[删除排序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
 
 ```java
 public int removeDuplicates(int[] nums) {
@@ -18,7 +18,7 @@ public int removeDuplicates(int[] nums) {
 }
 ```
 
-### 【数组】[买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+#### 【数组】[买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
 ```java
 public int maxProfit(int[] prices) {
@@ -31,7 +31,7 @@ public int maxProfit(int[] prices) {
 }
 ```
 
-### 【数组】[旋转数组](https://leetcode-cn.com/problems/rotate-array/)
+####【数组】[旋转数组](https://leetcode-cn.com/problems/rotate-array/)
 
 ```java
 public void rotate(int[] nums, int k) {
@@ -57,7 +57,7 @@ public void rotate(int[] nums, int k) {
 }
 ```
 
-### 【数组】[存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/)
+####【数组】[存在重复元素](https://leetcode-cn.com/problems/contains-duplicate/)
 
 ```java
 public boolean containsDuplicate(int[] nums) {
@@ -71,7 +71,7 @@ public boolean containsDuplicate(int[] nums) {
 }
 ```
 
-### 【数组】[只出现一次的数字](https://leetcode-cn.com/problems/single-number/)
+####【数组】[只出现一次的数字](https://leetcode-cn.com/problems/single-number/)
 
 - 任何数和 0 做异或运算，结果仍然是原来的数
 - 任何数和其自身做异或运算，结果是 0
@@ -87,7 +87,7 @@ public int singleNumber(int[] nums) {
 }
 ```
 
-### 【数组】[两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+####【数组】[两个数组的交集 II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
 
 ```java
 public int[] intersect(int[] nums1, int[] nums2) {
@@ -118,7 +118,7 @@ public int[] intersect(int[] nums1, int[] nums2) {
 }
 ```
 
-### 【数组】[加一](https://leetcode-cn.com/problems/plus-one/)
+####【数组】[加一](https://leetcode-cn.com/problems/plus-one/)
 
 ```java
 public int[] plusOne(int[] digits) {
@@ -137,7 +137,7 @@ public int[] plusOne(int[] digits) {
 }
 ```
 
-### 【数组】[移动零](https://leetcode-cn.com/problems/move-zeroes/)
+####【数组】[移动零](https://leetcode-cn.com/problems/move-zeroes/)
 
 ```java
 public void moveZeroes(int[] nums) {
@@ -155,7 +155,7 @@ public void moveZeroes(int[] nums) {
 }
 ```
 
-### 【数组】[两数之和](https://leetcode-cn.com/problems/two-sum/)
+####【数组】[两数之和](https://leetcode-cn.com/problems/two-sum/)
 
 ```java
 public int[] twoSum(int[] nums, int target) {
@@ -170,7 +170,7 @@ public int[] twoSum(int[] nums, int target) {
 }
 ```
 
-### 【数组】[有效的数独](https://leetcode-cn.com/problems/valid-sudoku/)
+####【数组】[有效的数独](https://leetcode-cn.com/problems/valid-sudoku/)
 
 ```java
 public boolean isValidSudoku(char[][] board) {
@@ -195,7 +195,7 @@ public boolean isValidSudoku(char[][] board) {
 }
 ```
 
-### 【数组】[旋转图像](https://leetcode-cn.com/problems/rotate-image/)
+####【数组】[旋转图像](https://leetcode-cn.com/problems/rotate-image/)
 
 ```java
 public void rotate(int[][] matrix) {
@@ -212,7 +212,7 @@ public void rotate(int[][] matrix) {
 }
 ```
 
-### 【字符串】[反转字符串](https://leetcode-cn.com/problems/reverse-string/)
+####【字符串】[反转字符串](https://leetcode-cn.com/problems/reverse-string/)
 
 ```java
 public void reverseString(char[] s) {
@@ -224,7 +224,7 @@ public void reverseString(char[] s) {
 }
 ```
 
-### 【字符串】[整数反转](https://leetcode-cn.com/problems/reverse-integer/)
+####【字符串】[整数反转](https://leetcode-cn.com/problems/reverse-integer/)
 
 ```java
 public int reverse(int x) {
@@ -241,7 +241,7 @@ public int reverse(int x) {
 }
 ```
 
-### 【字符串】[字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
+####【字符串】[字符串中的第一个唯一字符](https://leetcode-cn.com/problems/first-unique-character-in-a-string/)
 
 ```java
 public int firstUniqChar(String s) {
@@ -268,7 +268,7 @@ public int firstUniqChar(String s) {
 }
 ```
 
-### 【字符串】[有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+####【字符串】[有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
 
 ```java
 public boolean isAnagram(String s, String t) {
@@ -291,7 +291,7 @@ public boolean isAnagram(String s, String t) {
 }
 ```
 
-### 【字符串】[验证回文串](https://leetcode-cn.com/problems/valid-palindrome/)
+####【字符串】[验证回文串](https://leetcode-cn.com/problems/valid-palindrome/)
 
 ```java
 public boolean isPalindrome(String s) {
@@ -316,13 +316,13 @@ public boolean isPalindrome(String s) {
 }
 ```
 
-### 【字符串】字符串转换整数
+####【字符串】字符串转换整数
 
-### 【字符串】实现`strStr()`
+####【字符串】实现`strStr()`
 
-### 【字符串】外观数列
+####【字符串】外观数列
 
-### 【字符串】[最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
+####【字符串】[最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
 
 ![](https://assets.leetcode-cn.com/solution-static/14/14_fig2.png)
 
@@ -345,7 +345,7 @@ public String longestCommonPrefix(String[] strs) {
 }
 ```
 
-### 【链表】[删除链表中的节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
+####【链表】[删除链表中的节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
 ```java
 public ListNode deleteNode(ListNode head, int val) {
@@ -359,7 +359,7 @@ public ListNode deleteNode(ListNode head, int val) {
 }
 ```
 
-### 【链表】[删除链表的倒数第 N 个节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
+####【链表】[删除链表的倒数第 N 个节点](https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/)
 
 ```java
 public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -379,7 +379,7 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 }
 ```
 
-### 【链表】[反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
+####【链表】[反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)
 
 ```java
 public ListNode reverseList(ListNode head) {
@@ -395,7 +395,7 @@ public ListNode reverseList(ListNode head) {
 }
 ```
 
-### 【链表】[合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+####【链表】[合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
 
 ```java
 public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -416,13 +416,13 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 }
 ```
 
-### 【链表】[回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+####【链表】[回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
 
 ```java
 
 ```
 
-### 【链表】[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+####【链表】[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
 
 ```java
 public boolean hasCycle(ListNode head) {
@@ -442,7 +442,7 @@ public boolean hasCycle(ListNode head) {
 }
 ```
 
-### 【树】[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+####【树】[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
 > 如果我们知道了左子树和右子树的最大深度 `l` 和 `r`，那么该二叉树的最大深度即为 `max(l,r)+1`。
 
@@ -458,7 +458,7 @@ public int maxDepth(TreeNode root) {
 }
 ```
 
-### 【树】[验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+####【树】[验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
 
 ```java
 public boolean isValidBST(TreeNode root) {
@@ -480,7 +480,7 @@ public boolean isValidBST(TreeNode root) {
 }
 ```
 
-### 【树】[对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
+####【树】[对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
 
 ```java
 public boolean isSymmetric(TreeNode root) {
@@ -497,7 +497,7 @@ public boolean check(TreeNode p, TreeNode q) {
 }
 ```
 
-### 【树】[二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+####【树】[二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
 
 ```java
 public List<List<Integer>> levelOrder(TreeNode root) {
@@ -526,7 +526,7 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 }
 ```
 
-### 【树】[将有序数组转化为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
+####【树】[将有序数组转化为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
 
 ```java
 public TreeNode sortedArrayToBST(int[] nums) {
@@ -544,7 +544,7 @@ public TreeNode helper(int[] nums, int left, int right) {
 }
 ```
 
-### 【排序和搜索】合并两个有序数组
+####【排序和搜索】合并两个有序数组
 
 ```java
 public void merge(int[] nums1, int m, int[] nums2, int n) {
@@ -567,17 +567,17 @@ public void merge(int[] nums1, int m, int[] nums2, int n) {
 }
 ```
 
-### 【排序和搜索】第一个错误的版本
+####【排序和搜索】第一个错误的版本
 
-### 【动态规划】爬楼梯
+####【动态规划】爬楼梯
 
-### 【动态规划】买卖股票的最佳时机
+####【动态规划】买卖股票的最佳时机
 
-### 【动态规划】最大子序和
+####【动态规划】最大子序和
 
-### 【动态规划】打家劫舍
+####【动态规划】打家劫舍
 
-### 【设计问题】[打乱数组](https://leetcode-cn.com/problems/shuffle-an-array/)
+####【设计问题】[打乱数组](https://leetcode-cn.com/problems/shuffle-an-array/)
 
 ```java
 class Solution {
@@ -605,7 +605,7 @@ class Solution {
 }
 ```
 
-### 【设计问题】[最小栈](https://leetcode-cn.com/problems/min-stack/)
+####【设计问题】[最小栈](https://leetcode-cn.com/problems/min-stack/)
 
 ```java
 class MinStack {
@@ -633,7 +633,7 @@ class MinStack {
 }
 ```
 
-### 【数学】Fizz Buzz
+####【数学】Fizz Buzz
 
 ```java
 public List<String> fizzBuzz(int n) {
@@ -655,7 +655,7 @@ public List<String> fizzBuzz(int n) {
 }
 ```
 
-### 【数学】计数质数
+####【数学】计数质数
 
 ```java
 public int countPrimes(int n) {
@@ -675,7 +675,7 @@ public boolean isPrime(int x) {
 }
 ```
 
-### 【数学】3 的幂
+####【数学】3 的幂
 
 - 试除法
 
@@ -695,7 +695,7 @@ public boolean isPrime(int x) {
   }
   ```
 
-### 【数学】罗马数字转整数
+####【数学】罗马数字转整数
 
 ```java
 public int romanToInt(String s) {
@@ -721,7 +721,7 @@ public int romanToInt(String s) {
 }
 ```
 
-### 【其它】位 1 的个数
+####【其它】位 1 的个数
 
 ```java
 public int hammingWeight(int n) {
@@ -734,7 +734,7 @@ public int hammingWeight(int n) {
 }
 ```
 
-### 【其它】汉明距离
+####【其它】汉明距离
 
 ```java
 public int hammingDistance(int x, int y) {
@@ -748,7 +748,7 @@ public int hammingDistance(int x, int y) {
 }
 ```
 
-### 【其它】[颠倒二进制位](https://leetcode-cn.com/problems/reverse-bits/)
+####【其它】[颠倒二进制位](https://leetcode-cn.com/problems/reverse-bits/)
 
 ```java
 private static final int M1 = 0x55555555; // 01010101010101010101010101010101
@@ -765,7 +765,7 @@ public int reverseBits(int n) {
 }
 ```
 
-### 【其它】[杨辉三角](https://leetcode-cn.com/problems/pascals-triangle)
+####【其它】[杨辉三角](https://leetcode-cn.com/problems/pascals-triangle)
 
 ![](https://pic.leetcode-cn.com/1626927345-DZmfxB-PascalTriangleAnimated2.gif)
 
@@ -787,7 +787,7 @@ public List<List<Integer>> generate(int numRows) {
 }
 ```
 
-### 【其它】[有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+####【其它】[有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
 ```java
 public boolean isValid(String a) {
@@ -811,4 +811,4 @@ public boolean isValid(String a) {
 }
 ```
 
-### 【其它】缺失数字
+####【其它】缺失数字
