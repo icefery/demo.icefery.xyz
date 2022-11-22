@@ -1013,7 +1013,7 @@ Kubernetes + heapster + Influxdb + Grafana。
 
 #### 2.3 原理
 
-![](kubernetes%20notes/2022-05-27-16-05-27-image.png)
+![](kubernetes notes/2022-05-27-16-05-27-image.png)
 
 ##### 2.3.1 Heapster
 

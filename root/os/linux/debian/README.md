@@ -1,6 +1,27 @@
+# Debian
+
+## 安装
+
+### 静态 IP
+
+```bash
+cat > /etc/network/interfaces <<- EOF
+auto lo
+iface lo inet loopback
+
+auto ens33
+iface ens33 inet static
+  address 192.168.9.100
+  netmask 255.255.255.0
+  gateway 192.168.9.254
+EOF
+
+systemctl restart networking
+```
+
 ## 基础服务
 
-#### 安装 DNSmasq
+### DNSmasq
 
 ```bash
 apt install -y dnsmasq
@@ -11,7 +32,7 @@ echo "address=/dev.icefery.xyz/192.192.192.6" > /etc/dnsmasq.conf
 
 ## 常见问题
 
-#### Failed to allocate directory watch: Too many open files
+### Failed to allocate directory watch: Too many open files
 
 > https://zhuanlan.zhihu.com/p/222506941
 
