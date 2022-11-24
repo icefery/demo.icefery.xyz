@@ -44,3 +44,11 @@ EOF
 
 sysctl -p
 ```
+
+### FATA[0000] get apparmor_parser version: apparmor_parser resolves to executable in current directory (./apparmor_parser)
+
+> [解决 FATA[0000] Get http:///var/run... sudo apt-get install apparmor 好神奇](https://blog.csdn.net/qq_40088463/article/details/110863372)
+
+```bash
+apt install apparmor
+```
