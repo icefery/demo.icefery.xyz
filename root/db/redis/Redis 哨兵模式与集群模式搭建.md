@@ -6,8 +6,7 @@
 
 ### 主从复制作用
 
-通过持久化功能，Redis
-保证了即使在服务器重启的时候也不会丢失（或少量丢失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。
+通过持久化功能，Redis 保证了即使在服务器重启的时候也不会丢失（或少量丢失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。但是由于数据是存储在一台服务器上的，如果这台服务器出现硬盘故障等问题，也会导致数据丢失。
 
 为了避免单点故障，通常的做法是将数据复制多个副本以部署在不同的服务器上，这样即使有一台服务器出现故障，其他服务器依然可以继续提供服务。
 
@@ -33,13 +32,14 @@
 
 - Redis 不具备自动容错和恢复功能，主机从机的宕机都会导致部分读写请求失败，需要等待机器重启或者手动切 IP 才能恢复（也就是要人工介入）；
 - 主机宕机，宕机前有部分数据未能及时同步到从机，切换 IP 后还会引入数据不一致的问题，降低了系统的可用性；
-- 如果多个 Slave 断线了，需要重启的时候，尽量不要再同一时间段进行重启。因为只要 Slave 启动，就会发送 sync 请求和主机全量同步，当多个
-  Slave 重启的时候，可能会导致 Master IO 剧增从而宕机；
+- 如果多个 Slave 断线了，需要重启的时候，尽量不要再同一时间段进行重启。因为只要 Slave 启动，就会发送 sync 请求和主机全量同步，当多个 Slave 重启的时候，可能会导致 Master IO 剧增从而宕机；
 - Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂；
+
+<br/><br/>
 
 ## 哨兵模式
 
-![](https://upload-images.jianshu.io/upload_images/11320039-3f40b17c0412116c.png?imageMogr2/auto-orient/strip|imageView2/2/w/747/format/webp)
+![](https://upload-images.jianshu.io/upload_images/11320039-3f40b17c0412116c.png)
 
 ### 哨兵模式作用
 
@@ -52,9 +52,9 @@
 
 ### 哨兵模式搭建(相同主机不同端口)
 
-#### master
+#### 配置文件
 
-- `redis_6379.conf`
+- Master(`redis_6379.conf`)
 
   ```properties
   bind 0.0.0.0
@@ -67,14 +67,9 @@
   logfile redis_6379.log
   ```
 
-- 启动进程
-  ```bash
-  redis-server redis_6379.conf
-  ```
+- Slave(`redis_6380.conf`)
 
-#### slave-1
-
-- `redis_6380.conf`
+  > 对应修改其它从节点配置文件的端口。
 
   ```properties
   bind 0.0.0.0
@@ -90,38 +85,8 @@
   masterauth 1234
   ```
 
-- 启动进程
-
-  ```bash
-  redis-server redis_6380.conf
-  ```
-
-#### slave-2
-
-- `redis-6381.conf`
-
-  ```properties
-  bind 0.0.0.0
-  port 6381
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis_6381.pid
-  dbfilename dump_6381.rdb
-  logfile redis_6381.log
-
-  replicaof 127.0.0.1 6379
-  masterauth 1234
-  ```
-
-- 启动进程
-  ```bash
-  redis-server redis_6381.conf
-  ```
-
-##### sentinel-1
-
-- `sentinel_26379.conf`
+- Sentinel(`sentinel_26379.conf`)
+  > 对应修改其它哨兵节点配置文件的端口，并且需要指定主节点服务器的 IP，否则 Java 客户端连接不成功。
   ```properties
   port 26379
   requirepass 1234
@@ -129,52 +94,21 @@
   daemonize yes
   pidfile /var/run/redis-sentinel_26379.pid
   logfile redis-sentinel_26379.log
-  sentinel monitor master 127.0.0.1 6379 2
+  # sentinel monitor <master-group-name> <ip> <port> <quorum>
+  sentinel monitor master 192.192.192.101 6379 2
   sentinel auth-pass master 1234
   ```
-- 启动进程
 
-  ```bash
-  redis-sentinel sentinel_26379.conf
-  ```
+#### 启动集群
 
-#### sentinel-2
-
-- `sentinel_26380.conf`
-  ```properties
-  port 26380
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis-sentinel_26380.pid
-  logfile redis-sentinel_26380.log
-  sentinel monitor master 127.0.0.1 6379 2
-  sentinel auth-pass master 1234
-  ```
-- 启动进程
-
-  ```bash
-  redis-sentinel sentinel_26380.conf
-  ```
-
-#### sentinel-3
-
-- `sentinel_26379.conf`
-  ```properties
-  port 26381
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis-sentinel_26381.pid
-  logfile redis-sentinel_26381.log
-  sentinel monitor master 127.0.0.1 6379 2
-  sentinel auth-pass master 1234
-  ```
-- 启动进程
-
-  ```bash
-  redis-sentinel sentinel_26381.conf
-  ```
+```bash
+redis-server redis_6379.conf
+redis-server redis_6380.conf
+redis-server redis_6381.conf
+redis-sentinel sentinel_26379.conf
+redis-sentinel sentinel_26380.conf
+redis-sentinel sentinel_26381.conf
+```
 
 #### 查看集群信息
 
@@ -183,6 +117,30 @@ redis-cli -h 127.0.0.1 -p 6379 -a 1234
 
 127.0.0.1:6379> info replication
 ```
+
+#### Spring Boot 连接
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+```yaml
+spring:
+  redis:
+    sentinel:
+      nodes:
+        - 192.192.192.101:26379
+        - 192.192.192.101:26380
+        - 192.192.192.101:26381
+      password: 1234
+      master: master
+    password: 1234
+```
+
+<br/><br/>
 
 ## 集群模式
 
@@ -199,6 +157,8 @@ redis-cli -h 127.0.0.1 -p 6379 -a 1234
 
 #### 集群配置文件
 
+- Master(`redis_6379.conf`)
+  > 对应修改其它主节点的端口号。
 - `redis_6379.conf`
 
   ```properties
@@ -216,41 +176,18 @@ redis-cli -h 127.0.0.1 -p 6379 -a 1234
   masterauth 1234
   ```
 
-- 复制六份配置文件并修改对应端口
-
-  ```bash
-  cp redis_6379.conf redis_6380.conf
-  sed -i 's/6379/6380/g' redis_6380.conf
-
-  cp redis_6379.conf redis_6381.conf
-  sed -i 's/6379/6381/g' redis_6381.conf
-
-  cp redis_6379.conf redis_6382.conf
-  sed -i 's/6379/6382/g' redis_6382.conf
-
-  cp redis_6379.conf redis_6383.conf
-  sed -i 's/6379/6383/g' redis_6383.conf
-
-  cp redis_6379.conf redis_6384.conf
-  sed -i 's/6379/6384/g' redis_6384.conf
-  ```
-
-- 启动进程
-
-  ```bash
-  redis-server redis_6379.conf
-  redis-server redis_6380.conf
-  redis-server redis_6381.conf
-  redis-server redis_6382.conf
-  redis-server redis_6383.conf
-  redis-server redis_6384.conf
-  ```
-
-#### 创建集群
+#### 启动集群
 
 ```bash
+redis-server redis_6379.conf
+redis-server redis_6380.conf
+redis-server redis_6381.conf
+redis-server redis_6382.conf
+redis-server redis_6383.conf
+redis-server redis_6384.conf
+
 # --cluster-replicas 1 指定创建 master 时同时创建一个 slave
-redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.0.0.1:6382 127.0.0.1:6383 127.0.0.1:6384 --cluster-replicas 1 -a 1234
+redis-cli --cluster create 192.192.192.101:6379 192.192.192.101:6380 192.192.192.101:6381 192.192.192.101:6382 192.192.192.101:6383 192.192.192.101:6384 --cluster-replicas 1 -a 1234
 ```
 
 #### 查看集群信息
@@ -260,4 +197,20 @@ redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.0.0.
 redis-cli -c -h 127.0.0.1 -p 6379 -a 1234
 
 127.0.0.1:6379> cluster nodes
+```
+
+#### Spring Boot 连接
+
+```yaml
+spring:
+  redis:
+    cluster:
+      nodes:
+        - 192.192.192.101:6379
+        - 192.192.192.101:6380
+        - 192.192.192.101:6381
+        - 192.192.192.101:6382
+        - 192.192.192.101:6383
+        - 192.192.192.101:6384
+    password: 1234
 ```
