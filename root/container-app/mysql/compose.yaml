@@ -13,10 +13,12 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /d/share/:/d/share/
-      - /d/mount/mysql/var/lib/mysql/:/var/lib/mysql/
+      - mysql-data:/var/lib/mysql
 
 networks:
   default:
     external: true
-    name: local
+    name: compose
+
+volumes:
+  mysql-data:
