@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.192.192.101/demo
+    username: root
+    password: root
+  data:
+    redis:
+      host: 192.192.192.101
+      port: 6379
