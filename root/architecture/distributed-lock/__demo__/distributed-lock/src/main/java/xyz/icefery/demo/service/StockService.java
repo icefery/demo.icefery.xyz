@@ -17,11 +17,11 @@ public class StockService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    public void checkAndLock() {
-        Lock lock = new RedisDistributedLock(redisTemplate, "lock");
+    public void deduct() {
+        Lock lock = new RedisDistributedLock(redisTemplate);
         lock.lock();
         try {
-            test();
+            reentrant();
             Optional<StockEntity> optional = stockRepository.findById(1L);
             optional.ifPresent(stock -> {
                 if (stock.getStock() > 0) {
@@ -34,10 +34,10 @@ public class StockService {
         }
     }
 
-    public void test() {
-        Lock lock = new RedisDistributedLock(redisTemplate, "lock");
+    public void reentrant() {
+        Lock lock = new RedisDistributedLock(redisTemplate);
         lock.lock();
-        System.out.println("test()");
+        System.out.println("reentrant()");
         lock.unlock();
     }
 }

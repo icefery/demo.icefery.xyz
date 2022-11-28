@@ -10,9 +10,9 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    @GetMapping("/stock/check/lock")
-    public String checkAndLock() {
-        stockService.checkAndLock();
+    @GetMapping("/stock/deduct")
+    public String deduct() {
+        stockService.deduct();
         return "success";
     }
 }
