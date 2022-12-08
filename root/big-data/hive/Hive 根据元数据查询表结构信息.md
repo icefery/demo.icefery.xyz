@@ -1,23 +1,23 @@
 ## 查询表结构信息
 
 ```sql
-SELECT
-    DBS.NAME                    AS SCHEMA_NAME,
-    TBLS.TBL_NAME               AS TABLE_NAME,
-    TABLE_PARAMS.PARAM_VALUE    AS TABLE_COMMENT,
-    COLUMNS_V2.COLUMN_NAME      AS COLUMN_NAME,
-    COLUMNS_V2.TYPE_NAME        AS COLUMN_TYPE,
-    COLUMNS_V2.COMMENT          AS COLUMN_COMMENT,
-    PARTITION_KEYS.PKEY_NAME    AS PARTITION_COLUMN_NAME,
-    PARTITION_KEYS.PKEY_TYPE    AS PARTITION_COLUMN_TYPE,
-    PARTITION_KEYS.PKEY_COMMENT AS PARTITION_COLUMN_COMMENT
-FROM hive.DBS
-    LEFT JOIN hive.TBLS           ON TBLS.DB_ID = DBS.DB_ID
-    LEFT JOIN hive.TABLE_PARAMS   ON TABLE_PARAMS.TBL_ID = TBLS.TBL_ID AND TABLE_PARAMS.PARAM_KEY = 'COMMENT'
-    LEFT JOIN hive.SDS            ON SDS.SD_ID = TBLS.SD_ID
-    LEFT JOIN hive.COLUMNS_V2     ON COLUMNS_V2.CD_ID = SDS.CD_ID
-    LEFT JOIN hive.PARTITION_KEYS ON PARTITION_KEYS.TBL_ID = TBLS.TBL_ID
-ORDER BY DBS.NAME, TBLS.TBL_NAME, COLUMNS_V2.INTEGER_IDX
+select
+    DBS.name                    as schema_name,
+    TBLS.tbl_name               as table_name,
+    TABLE_PARAMS.param_value    as table_comment,
+    COLUMNS_V2.column_name      as column_name,
+    COLUMNS_V2.type_name        as column_type,
+    COLUMNS_V2.comment          as column_comment,
+    PARTITION_KEYS.pkey_name    as partition_column_name,
+    PARTITION_KEYS.pkey_type    as partition_column_type,
+    PARTITION_KEYS.pkey_comment as partition_column_comment
+from hive.DBS
+    left join hive.TBLS           on TBLS.db_id = DBS.db_id
+    left join hive.TABLE_PARAMS   on TABLE_PARAMS.tbl_id = TBLS.tbl_id and TABLE_PARAMS.param_key = 'comment'
+    left join hive.SDS            on SDS.sd_id = TBLS.sd_id
+    left join hive.COLUMNS_V2     on COLUMNS_V2.cd_id = SDS.cd_id
+    left join hive.PARTITION_KEYS on PARTITION_KEYS.tbl_id = TBLS.tbl_id
+order by DBS.name, TBLS.tbl_name, COLUMNS_V2.integer_idx
 ```
 
 ## 收藏
