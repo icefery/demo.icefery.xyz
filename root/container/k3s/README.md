@@ -23,7 +23,7 @@ mirrors:
 EOF
 ```
 
-#### 安装
+#### 单节点安装
 
 ```bash
 # 可禁用的组件有 coredns | servicelb | traefik | local-storage | metrics-server
@@ -33,6 +33,30 @@ curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh 
   --disable traefik \
   --disable metrics-server
 ```
+
+#### 高可用安装
+
+- 第一个节点
+
+  ```bash
+  curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_TOKEN=SECRET sh -s - server \
+    --cluster-init \
+    --service-node-port-range 1-65535 \
+    --disable servicelb \
+    --disable traefik \
+    --disable metrics-server
+  ```
+
+- 第二、第三个节点
+
+  ```bash
+  curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_TOKEN=SECRET sh -s - server \
+    --server https://192.192.192.101:6443\
+    --service-node-port-range 1-65535 \
+    --disable servicelb \
+    --disable traefik \
+    --disable metrics-server
+  ```
 
 #### 配置 `KUBECONFIG` 环境变量
 
