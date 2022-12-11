@@ -48,3 +48,27 @@ helm repo update
 
 helm upgrade mysql bitnami/mysql --install --namespace mysql --create-namespace --values values.yaml --version 9.2.6
 ```
+
+## Replication
+
+### Master
+
+```sql
+show master status;
+```
+
+### Slave
+
+```sql
+change master to
+    master_host='192.192.192.101',
+    master_port=3306,
+    master_user='root',
+    master_password='root',
+    master_log_file=<File>,
+    master_log_pos=<Position>;
+
+start slave;
+
+show slave status;
+```
