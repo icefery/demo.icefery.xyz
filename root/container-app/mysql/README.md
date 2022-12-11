@@ -60,6 +60,8 @@ show master status;
 ### Slave
 
 ```sql
+stop slave;
+
 change master to
     master_host='192.192.192.101',
     master_port=3306,
