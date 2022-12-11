@@ -1,5 +1,7 @@
 {
   "scripts": {
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "sh-mode": "git ls-files --stage | grep '\\.sh' | awk '{print $1,$4}'",
+    "sh-change-mode": "git ls-files --stage | grep '\\.sh' | awk '{print $4}' | xargs git update-index --chmod +x"
   }
 }
