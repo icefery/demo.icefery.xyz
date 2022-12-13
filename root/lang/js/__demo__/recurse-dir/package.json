@@ -1,5 +1,5 @@
 {
-  "name": "@icefery/utils",
+  "name": "@icefery/recurse-dir",
   "version": "0.0.4",
   "main": "lib/index.js",
   "scripts": {
