@@ -5,8 +5,9 @@ import path from 'path'
 /**
  * 扁平化读取目录文件
  */
-export function flatRead(root: string, gitignore: string = '', input: string = '', output: string[] = []): string[] {
-  const ig = ignore().add(gitignore)
+export function flatRead(root: string, gitignore: string, input: string = '', output: string[] = []): string[] {
+  const content = fs.readFileSync(gitignore, 'utf-8')
+  const ig = ignore().add(content)
   const fp = path.join(root, input)
   const fr = path.join('root', input)
   if (input === '' || !ig.ignores(fr)) {
@@ -19,3 +20,4 @@ export function flatRead(root: string, gitignore: string = '', input: string = '
   }
   return output
 }
+

@@ -3,10 +3,11 @@ export interface IModule {
   moduleTitle: string
   moduleReadme: string
   markdownList?: IMarkdown[]
-  imageList?: string[]
-  staticList?: string[]
+  guideList?: IGuide[]
+  imageList?: IImage[]
+  staticList?: IStatic[]
   demoList?: IDemo[]
-  homeworkList?: string[]
+  homeworkList?: IHomework[]
 }
 
 export interface IMarkdown {
@@ -15,14 +16,29 @@ export interface IMarkdown {
   markdownTitle: string
 }
 
+export interface IGuide {
+  moduleName: string
+  guideName: string
+}
+
+export interface IImage {
+  moduleName: string
+  imageName: string
+}
+
+export interface IStatic {
+  moduleName: string
+  staticName: string
+}
+
 export interface IDemo {
   moduleName: string
   demoName: string
-  demoTitle: string
 }
 
 export interface IHomework {
   moduleName: string
   homeworkName: string
-  homeworkTitle: string
 }
+
+export type IUnion = IModule | IMarkdown | IGuide | IImage | IStatic | IDemo | IHomework
