@@ -1,44 +1,45 @@
-# IDEA
+### mac
+/**/.DS_Store
+
+### idea
 /**/.idea/
 /**/*.iml
 /**/out/
 
-# VSCode
+### vscode
 /**/.vscode/
 
-# Qt Creator
+### qt creator
 /**/build-*-Debug/
 /**/build-*-Release/
 
-# Obsidian
+### obsidian
 /**/.obsidian
 
-# Maven
+### maven
 /**/.mvn/
 /**/mvnw
 /**/mvnw.cmd
 /**/target/
 
-# Gradle
+### gradle
 /**/.gradle/
 /**/gradle/
 /**/gradlew
 /**/gradlew.bat
 /**/build/
 
-# NPM
+### npm
 /**/node_modules/
 /**/package-lock.json
 /**/yarn.lock
+/**/yarn-*.log
 /**/pnpm-*.yaml
 /**/dist/
 
-# Spring Boot
+### spring boot
 /**/HELP.md
 
-# Python
+# python
 /**/venv/
 /**/__pycache__/
-
-# MacOS
-/**/.DS_Store
