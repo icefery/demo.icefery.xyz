@@ -134,7 +134,7 @@ export function resolveHomework(root: string, flatList: string[]): IHomework[] {
   )
 }
 
-export function resolve(root: string, gitignore: string): IModule[] {
+export function read(root: string, gitignore: string): IModule[] {
   const flatList = flatRead(root, gitignore)
 
   const moduleList = resolveModule(root, flatList)
@@ -145,7 +145,7 @@ export function resolve(root: string, gitignore: string): IModule[] {
   const demoList = resolveDemo(root, flatList)
   const homeworkList = resolveHomework(root, flatList)
 
-  const result = moduleList.map<IModule>(module => {
+  return moduleList.map<IModule>(module => {
     const condition = (it: IUnion) => it.moduleName === module.moduleName
     return {
       ...module,
@@ -157,6 +157,4 @@ export function resolve(root: string, gitignore: string): IModule[] {
       homeworkList: homeworkList.filter(condition)
     }
   })
-
-  return result
 }
