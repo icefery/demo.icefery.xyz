@@ -20,4 +20,3 @@ export function flatRead(root: string, gitignore: string, input: string = '', ou
   }
   return output
 }
-

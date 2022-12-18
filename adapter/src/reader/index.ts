@@ -35,7 +35,7 @@ export function resolveMarkdown(root: string, flatList: string[]): IMarkdown[] {
       .sort((a, b) => a.length - b.length)
       .map<IMarkdown>(it => {
         const moduleName = path.dirname(it) === '.' ? '' : path.dirname(it)
-        const markdownName = it
+        const markdownName = path.basename(it)
         const markdownTitle = extractTitle(path.join(root, it))
         return { moduleName, markdownName, markdownTitle }
       })
