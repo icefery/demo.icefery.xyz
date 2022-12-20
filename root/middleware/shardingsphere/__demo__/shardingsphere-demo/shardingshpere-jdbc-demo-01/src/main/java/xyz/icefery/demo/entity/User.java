@@ -1,6 +1,5 @@
 package xyz.icefery.demo.entity;
 
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -13,10 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Data
-@TableName
-@Table
+@TableName(value = "t_user")
+@Table(name = "t_user")
 @Entity
 public class User {
     @TableId(type = IdType.AUTO)

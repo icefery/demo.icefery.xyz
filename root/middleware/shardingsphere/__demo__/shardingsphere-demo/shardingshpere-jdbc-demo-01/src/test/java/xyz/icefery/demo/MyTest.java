@@ -49,7 +49,7 @@ public class MyTest {
     // JPA | 显示事务 | 读写
     @Test
     @Transactional
-    public void jpa__read_write() {
+    public void jpa__read__write() {
         for (int i = 0; i < 5; i++) {
             User user = new User();
             user.setUsername(UUID.randomUUID().toString());
