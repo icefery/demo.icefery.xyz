@@ -1,0 +1,14 @@
+services:
+  shardingsphere-proxy:
+    image: apache/shardingsphere-proxy:5.2.0
+    container_name: shardingsphere-proxy
+    ports:
+      - 3307:3307
+    volumes:
+      - /d/mount/shardingsphere-proxy/opt/shardingsphere-proxy/conf:/opt/shardingsphere-proxy/conf
+      - /d/mount/shardingsphere-proxy/opt/shardingsphere-proxy/ext-lib:/opt/shardingsphere-proxy/ext-lib
+
+networks:
+  default:
+    external: true
+    name: compose

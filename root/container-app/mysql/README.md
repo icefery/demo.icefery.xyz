@@ -9,34 +9,23 @@ mysql -p
 ```
 
 ```sql
-CREATE
-DATABASE IF NOT EXISTS demo;
+create database if not exists demo;
 
-CREATE
-USER 'demo'@'%' IDENTIFIED BY 'demo';
+create user 'demo'@'%' identified by 'demo';
 
-REVOKE ALL ON *.* FROM 'demo'@'%';
+revoke all on *.* from 'demo'@'%';
 
-GRANT
-ALL
-ON demo.* TO 'demo'@'%';
+grant all on demo.* to 'demo'@'%';
 
-GRANT
-SELECT
-ON *.* TO 'demo'@'%';
+grant select on *.* to 'demo'@'%';
 
-FLUSH
-PRIVILEGES;
+flush privileges;
 ```
 
 ```sql
-USE
-mysql;
+use mysql;
 
-DELETE
-FROM user
-WHERE user = 'root'
-  AND host = '%';
+delete from user where user = 'root' and host = '%';
 ```
 
 ### Helm
@@ -60,17 +49,17 @@ show master status;
 ### Slave
 
 ```sql
-stop slave;
+stop replica;
 
-change master to
-    master_host='192.192.192.101',
-    master_port=3306,
-    master_user='root',
-    master_password='root',
-    master_log_file=<File>,
-    master_log_pos=<Position>;
+change replication source to
+    source_host='192.192.192.101',
+    source_port=3306,
+    source_user='root',
+    source_password='root',
+    source_log_file=<File>,
+    source_log_pos=<Position>;
 
-start slave;
+start replica;
 
-show slave status;
+show replica status;
 ```

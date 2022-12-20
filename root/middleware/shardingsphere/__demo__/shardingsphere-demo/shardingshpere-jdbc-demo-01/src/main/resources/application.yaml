@@ -5,22 +5,22 @@ spring:
       type: Standalone
     # 数据源配置
     datasource:
-      names: master,slave1,slave2
+      names: master,replica_0,replica_1
       master:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://192.192.192.101:3306/demo
         username: root
         password: root
-      slave1:
+      replica_0:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://192.192.192.101:3307/demo
         username: root
         password: root
-      slave2:
+      replica_1:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.jdbc.Driver
+        driver-class-name: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://192.192.192.101:3308/demo
         username: root
         password: root
@@ -34,7 +34,7 @@ spring:
             # 静态读写分离
             static-strategy:
               write-data-source-name: master
-              read-data-source-names: slave1,slave2
+              read-data-source-names: replica_0,replica_1
         # 负责均衡算法配置
         load-balancers:
           my_lb:

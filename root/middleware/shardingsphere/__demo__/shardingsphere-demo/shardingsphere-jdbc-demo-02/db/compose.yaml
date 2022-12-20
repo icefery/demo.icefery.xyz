@@ -1,7 +1,7 @@
 services:
-  mysql-ds0:
+  mysql-ds-0:
     image: mysql:8.0
-    container_name: mysql-ds0
+    container_name: mysql-ds-0
     environment:
       MYSQL_ROOT_PASSWORD: root
     command:
@@ -12,10 +12,10 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - mysql-ds0-data:/var/lib/mysql
-  mysql-ds1:
+      - mysql-ds-0-data:/var/lib/mysql
+  mysql-ds-1:
     image: mysql:8.0
-    container_name: mysql-ds1
+    container_name: mysql-ds-1
     environment:
       MYSQL_ROOT_PASSWORD: root
     command:
@@ -26,7 +26,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - mysql-ds1-data:/var/lib/mysql
+      - mysql-ds-1-data:/var/lib/mysql
 
 networks:
   default:
@@ -34,5 +34,5 @@ networks:
     name: compose
 
 volumes:
-  mysql-ds0-data:
-  mysql-ds1-data:
+  mysql-ds-0-data:
+  mysql-ds-1-data:

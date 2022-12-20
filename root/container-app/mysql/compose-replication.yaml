@@ -13,9 +13,9 @@ services:
       - 3306:3306
     volumes:
       - mysql-master-data:/var/lib/mysql
-  mysql-slave1:
+  mysql-replica-0:
     image: mysql:8.0
-    container_name: mysql-slave1
+    container_name: mysql-replica-0
     environment:
       MYSQL_ROOT_PASSWORD: root
     command:
@@ -26,10 +26,10 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - mysql-slave1-data:/var/lib/mysql
-  mysql-slave2:
+      - mysql-replica-0-data:/var/lib/mysql
+  mysql-replica-1:
     image: mysql:8.0
-    container_name: mysql-slave2
+    container_name: mysql-replica-1
     environment:
       MYSQL_ROOT_PASSWORD: root
     command:
@@ -40,7 +40,7 @@ services:
     ports:
       - 3308:3306
     volumes:
-      - mysql-salve2-data:/var/lib/mysql
+      - mysql-replica-1-data:/var/lib/mysql
 
 networks:
   default:
@@ -49,5 +49,5 @@ networks:
 
 volumes:
   mysql-master-data:
-  mysql-slave1-data:
-  mysql-salve2-data:
+  mysql-replica-0-data:
+  mysql-replica-1-data:
