@@ -16,7 +16,7 @@
 
 ### 1.3 设置窗口的位置和大小
 
-```c++
+```cpp
 void move(int x, int y);
 void resize(int w, int h);
 ```
@@ -58,8 +58,8 @@ QObject:connect(
 
 #### 点击按钮关闭标签、退出程序
 
-```c++
-#include <QApplication>
+```cpp
+#include<QApplication>
 #include<QDialog>
 #include<QLabel>
 #include<QPushButton>

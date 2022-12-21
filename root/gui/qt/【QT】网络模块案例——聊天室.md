@@ -472,7 +472,6 @@
       }
   }
 
-
   void Dialog::on_sendButton_clicked() {
       QString message = ui->messageEdit->text();
       if (message == "") {
