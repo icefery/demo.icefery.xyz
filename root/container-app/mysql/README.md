@@ -51,6 +51,8 @@ show master status;
 ```sql
 stop replica;
 
+reset replica;
+
 change replication source to
     source_host='192.192.192.101',
     source_port=3306,

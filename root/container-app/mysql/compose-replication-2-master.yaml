@@ -1,0 +1,74 @@
+services:
+  mysql-master-0:
+    image: mysql:8.0
+    container_name: mysql-master-0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --server-id=1
+      - --lower-case-table-names=1
+      - --default-authentication-plugin=mysql_native_password
+      - --default-time-zone=+8:00
+      - --log-slave-updates=ON
+      - --auto-increment-increment=2
+      - --auto-increment-offset=1
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-master-0-data:/var/lib/mysql
+  mysql-replica-0:
+    image: mysql:8.0
+    container_name: mysql-replica-0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --server-id=2
+      - --lower-case-table-names=1
+      - --default-authentication-plugin=mysql_native_password
+      - --default-time-zone=+8:00
+    ports:
+      - 3307:3306
+    volumes:
+      - mysql-replica-0-data:/var/lib/mysql
+  mysql-master-1:
+    image: mysql:8.0
+    container_name: mysql-master-1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --server-id=3
+      - --lower-case-table-names=1
+      - --default-authentication-plugin=mysql_native_password
+      - --default-time-zone=+8:00
+      - --log-slave-updates=ON
+      - --auto-increment-increment=2
+      - --auto-increment-offset=2
+    ports:
+      - 3308:3306
+    volumes:
+      - mysql-master-1-data:/var/lib/mysql
+  mysql-replica-1:
+    image: mysql:8.0
+    container_name: mysql-replica-1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --server-id=4
+      - --lower-case-table-names=1
+      - --default-authentication-plugin=mysql_native_password
+      - --default-time-zone=+8:00
+    ports:
+      - 3309:3306
+    volumes:
+      - mysql-replica-1-data:/var/lib/mysql
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  mysql-master-0-data:
+  mysql-replica-0-data:
+  mysql-master-1-data:
+  mysql-replica-1-data:
