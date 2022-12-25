@@ -1,0 +1,27 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: account-service
+  datasource:
+    url: jdbc:mysql://192.192.192.101:3306/demo
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.192.192.101:8848
+        namespace: public
+        username: nacos
+        password: nacos
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+seata:
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: 192.192.192.101:8091
