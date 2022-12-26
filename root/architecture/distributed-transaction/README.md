@@ -89,9 +89,9 @@
 
 BASE 是三个单词的缩写：
 
-- Basically Available（基本可用）
-- Soft state（软状态）
-- Eventually consistent（最终一致性）
+- Basically Available(基本可用)
+- Soft state(软状态)
+- Eventually consistent(最终一致性)
 
 而我们解决分布式事务，就是根据上述理论来实现。
 
@@ -125,11 +125,11 @@ BASE 是三个单词的缩写：
 
 分布式事务的解决手段之一，就是两阶段提交协议。
 
-1994 年，X/Open 组织定义了分布式事务处理的 DTP（Distributed Transaction Processing）模型。该模型包括这样几个角色：
+1994 年，X/Open 组织定义了分布式事务处理的 DTP(Distributed Transaction Processing)模型。该模型包括这样几个角色：
 
 - 应用程序(Application Program)
 - 事务管理器(Transaction Manager)
-- 资源管理器(Resource Manager)：一般是数据库
+- 资源管理器(Resource Manager)
 - 通信资源管理器(Communication Resource Manager)
 - 通信协议(Communication Protocol)
 
