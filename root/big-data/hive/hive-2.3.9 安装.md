@@ -104,15 +104,15 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
   #!/bin/bash
   case $1 in
   start)
-  	nohup bin/hive --service metastore 1>/dev/null 2>&1 &
-  	nohup bin/hive --service hiveserver2 1>/dev/null 2>&1 &
+    nohup bin/hive --service metastore 1>/dev/null 2>&1 &
+    nohup bin/hive --service hiveserver2 1>/dev/null 2>&1 &
   ;;
   stop)
-  	kill -9 $(jps -ml | grep 'HiveMetaStore' | awk '{print $1}')
-  	kill -9 $(jps -ml | grep 'HiveServer2' | awk '{print $1}')
+    kill -9 $(jps -ml | grep 'HiveMetaStore' | awk '{print $1}')
+    kill -9 $(jps -ml | grep 'HiveServer2' | awk '{print $1}')
   ;;
   *)
-  	echo 'USAGE: run.sh <start | stop>'
+    echo 'USAGE: $0 <start | stop>'
   esac
   ```
 
