@@ -112,7 +112,7 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
     kill -9 $(jps -ml | grep 'HiveServer2' | awk '{print $1}')
   ;;
   *)
-    echo 'USAGE: $0 <start | stop>'
+    echo "USAGE: $0 <start | stop>"
   esac
   ```
 

@@ -76,7 +76,7 @@ function jps {
 }
 
 function help {
-  echo "USAGE: ./$0 <init | reset | sync | start | stop | ha | jps>"
+  echo "USAGE: $0 <init | reset | sync | start | stop | ha | jps>"
 }
 
 check

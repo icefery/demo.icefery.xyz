@@ -30,5 +30,5 @@ function stop {
 }
 
 function help {
-  echo "USAGE:  ./$0 <init | start | stop>"
+  echo "USAGE:  $0 <init | start | stop>"
 }

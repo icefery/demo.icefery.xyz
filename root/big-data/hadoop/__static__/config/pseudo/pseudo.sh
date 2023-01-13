@@ -32,7 +32,7 @@ function jps {
 }
 
 function help {
-  echo "USAGE: ./$0 <init | reset | start | stop | jps>"
+  echo "USAGE: $0 <init | reset | start | stop | jps>"
 }
 
 check

@@ -332,7 +332,7 @@ bin/mapred --daemon start historyserver
   	done
   ;;
   *)
-  	echo 'USAGE: run.sh <start | stop | rsync | jps>'
+  	echo "USAGE: $0 <start | stop | rsync | jps>"
   esac
   ```
 
