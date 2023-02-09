@@ -70,3 +70,9 @@ root soft nofile 102400
 root hard nofile 102400
 EOF
 ```
+
+### 部分依赖需要手动升级命令
+
+```bash
+apt list --upgradable 2> /dev/null | grep -v 'Listing' | cut -d '/' -f 1 | xargs apt upgrade -y
+```
