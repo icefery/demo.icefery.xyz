@@ -16,3 +16,11 @@ git branch --show-current
 ```bash
 git config --global credential.helper store
 ```
+
+### 使用 `git clone <URL> --depth=<NUMBER>` 后推送新远程仓库
+
+```bash
+git remote add old <OLD_URL>
+git fetch --unshallow old
+git push --set-upstream origin
+```
