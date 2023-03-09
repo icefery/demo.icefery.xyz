@@ -8,15 +8,30 @@ indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 
+# maven
+[pom.xml]
+indent_style = space
+indent_size = 4
+
+# gradle
+[{build.gradle,settings.gradle,build.gradle.kts,settings.gradle.kts}]
+indent_style = space
+indent_size = 4
+
 # java
-[{*.java, pom.xml, build.gradle, build.gradle.kts, settings.gradle, settings.gradle.kts}]
+[*.java]
 indent_style = space
 indent_size = 4
 
 # kotlin
-[{*.kt, *.kts}]
+[*.{kt,kts}]
 indent_style = space
 indent_size = 4
+
+# scala
+[*.scala]
+indent_style = space
+indent_size = 2
 
 # sql
 [*.sql]
