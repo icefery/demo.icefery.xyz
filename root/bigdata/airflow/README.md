@@ -94,7 +94,7 @@ case "$1" in
     conda activate airflow
     airflow webserver -p 8080 -D
     airflow scheduler -D
-    conda deactivate airflow
+    conda deactivate
     ;;
 'stop')
     ps -ef | grep -E 'airflow-webserver|airflow scheduler' | grep -v 'grep' | awk '{print $2}' | xargs kill
