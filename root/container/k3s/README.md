@@ -27,7 +27,7 @@ EOF
 
 ```bash
 # 可禁用的组件有 coredns | servicelb | traefik | local-storage | metrics-server
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - \
+curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.21.14+k3s1 sh -s - \
   --service-node-port-range 1-65535 \
   --disable servicelb \
   --disable traefik \
@@ -51,7 +51,7 @@ curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh 
 
   ```bash
   curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_TOKEN=SECRET sh -s - server \
-    --server https://192.192.192.101:6443\
+    --server https://192.192.192.101:6443 \
     --service-node-port-range 1-65535 \
     --disable servicelb \
     --disable traefik \
