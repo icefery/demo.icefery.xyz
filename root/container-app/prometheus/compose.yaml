@@ -7,6 +7,11 @@ services:
     volumes:
       - ./prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
       - prometheus-data:/opt/bitnami/prometheus/data
+  pushgateway:
+    image: bitnami/pushgateway:1.5.1
+    container_name: pushgateway
+    ports:
+      - 9091:9091
   node_exporter:
     image: bitnami/node-exporter:1.5.0
     container_name: node-exporter
