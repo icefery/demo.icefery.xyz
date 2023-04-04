@@ -73,7 +73,7 @@ export http_proxy=http://192.192.192.10:7890
 #### DNS
 
 ```bash
-apt remove bind9 --purge --autoremove -y
+apt remove bind9* --purge --autoremove -y
 
 sed -i -e '/#DNSStubListener=/c DNSStubListener=no' /etc/systemd/resolved.conf
 

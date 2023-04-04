@@ -36,3 +36,9 @@ select * from v$sqlarea where sql_text like '%select * from user%'
 ```
 
 #### [Oracle 根据当前时间获取最近 5 年，最近 6 个月，最近 30 天的时间](https://blog.csdn.net/maple_fix/article/details/74926226)
+
+### 查看所有表
+
+```sql
+select * from all_tables where table_name like '%%'
+```
