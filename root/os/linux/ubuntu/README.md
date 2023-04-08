@@ -1,78 +1,172 @@
 # Ubuntu
 
-## 收藏
+## 一、安装
 
-### Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+### 1.1 登录配置
 
-```bash
-rm /var/lib/ubuntu-release-upgrader/release-upgrade-available
+```shell
+# 启用 root 用户通过密码登录 SSH
+sudo sed -i '/PermitRootLogin/c PermitRootLogin yes' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+
+# 设置 root 用户密码
+sudo passwd root
 ```
 
-### ubuntu 上 `/dev/loop0` 到 `/dev/loop7` 占到 100% 的处理
+### 1.2 网络配置
 
-```bash
-df -h
-
-sudo apt autoremove --purge snapd
+```shell
+sudo vim /etc/netplan/00-installer-config.yaml
+sudo netplan apply
 ```
 
-### `too many open files`
-
-```bash
-#Each line describes a limit for a user in the form:
-#
-#<domain>        <type>  <item>  <value>
-#
-#Where:
-#<domain> can be:
-#        - a user name
-#        - a group name, with @group syntax
-#        - the wildcard *, for default entry
-#        - the wildcard %, can be also used with %group syntax,
-#                 for maxlogin limit
-#        - NOTE: group and wildcard limits are not applied to root.
-#          To apply a limit to the root user, <domain> must be
-#          the literal username root.
-#
-#<type> can have the two values:
-#        - "soft" for enforcing the soft limits
-#        - "hard" for enforcing hard limits
-#
-#<item> can be one of the following:
-#        - core - limits the core file size (KB)
-#        - data - max data size (KB)
-#        - fsize - maximum filesize (KB)
-#        - memlock - max locked-in-memory address space (KB)
-#        - nofile - max number of open file descriptors
-#        - rss - max resident set size (KB)
-#        - stack - max stack size (KB)
-#        - cpu - max CPU time (MIN)
-#        - nproc - max number of processes
-#        - as - address space limit (KB)
-#        - maxlogins - max number of logins for this user
-#        - maxsyslogins - max number of logins on the system
-#        - priority - the priority to run user process with
-#        - locks - max number of file locks the user can hold
-#        - sigpending - max number of pending signals
-#        - msgqueue - max memory used by POSIX message queues (bytes)
-#        - nice - max nice priority allowed to raise to values: [-20, 19]
-#        - rtprio - max realtime priority
-#        - chroot - change root to directory (Debian-specific)
-#
-#<domain>      <type>  <item>         <value>
+```yml
+network:
+  ethernets:
+    ens33:
+      addresses:
+        - 192.192.192.6/24
+      nameservers:
+        addresses:
+          - 114.114.114.114
+        search: []
+      routes:
+        - to: default
+          via: 192.192.192.1
+  version: 2
 ```
 
-```bash
-cat > /etc/security/limits.conf <<- "EOF"
+### 1.3 应用配置
+
+```shell
+# 卸载 snap
+sudo apt remove snapd --purge --autoremove -y
+
+# 解决 systemd-resolve 占用 53 端口
+sudo apt remove bind9* --purge --autoremove -y
+sudo sed -i -e '/#DNSStubListener=/c DNSStubListener=no' /etc/systemd/resolved.conf
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+sudo systemctl restart systemd-resolved
+```
+
+### 1.4 更新配置
+
+```shell
+# 换源
+sudo tee /etc/apt/sources.list <<- "EOF"
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy           main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy-security  main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy-updates   main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ jammy-backports main restricted universe multiverse
+EOF
+
+# 更新
+sudo apt update
+apt full-upgrade -y
+sudo apt list --upgradable 2> /dev/null | grep -v 'Listing' | cut -d '/' -f 1 | xargs sudo apt upgrade -y
+```
+
+### 1.5 系统配置
+
+```shell
+# 禁用 swap
+sudo swapoff -a
+sudo sed -i '/swap/s/^\(.*\)$/#\1/g' /etc/fstab
+sudo rm -rf /swap.img
+
+# 配置最大文件句柄数
+tee /etc/security/limits.conf <<- "EOF"
 *    soft nofile 102400
 *    hard nofile 102400
 root soft nofile 102400
 root hard nofile 102400
 EOF
+
+# 重启
+reboot
 ```
 
-### 部分依赖需要手动升级命令
+### 1.6 环境变量配置
 
-```bash
-apt list --upgradable 2> /dev/null | grep -v 'Listing' | cut -d '/' -f 1 | xargs apt upgrade -y
+```shell
+# 删除用户默认配置
+rm -rf ~/.bashrc .profile
+
+# 全局配置
+sudo tee /etc/profile.d/custom.sh <<- "EOF"
+alias ll='ls -AlhF --color=auto --time-style=long-iso'
+export PS1='[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;33m\]\h\[\e[00m\]:\[\e[01;32m\]\w\[\e[00m\]]\$ '
+export TZ=Asia/Shanghai
+function start_proxy() {
+  export http_proxy=http://192.192.192.10:7890
+  export https_proxy=$http_proxy
+  export no_proxy=192.192.192.*
+}
+function stop_proxy() {
+  unset http_proxy
+  unset https_proxy
+  unset no_proxy
+}
+EOF
+
+# 刷新
+source /etc/profile
+```
+
+## 二、VMWare
+
+### 2.1 安装 VM Tools
+
+```shell
+sudo apt remove open-vm-tools --purge --autoremove -y
+sudo apt install open-vm-tools -y
+sudo apt install open-vm-tools-desktop -y
+```
+
+## 三、MySQL
+
+### 3.1 安装 MySQL
+
+```shell
+# 安装
+sudo apt search mysql-server
+sudo apt install mysql-server -y
+
+# 重置
+sudo systemctl stop mysql
+sudo rm -rf /var/lib/mysql/* /etc/mysql/*
+
+# 配置
+sudo tee /etc/mysql/my.cnf <<- "EOF"
+[mysqld]
+user                          = mysql
+bind-address                  = 0.0.0.0
+lower-case-table-names        = 1
+default-time-zone             = +8:00
+default-authentication-plugin = mysql_native_password
+EOF
+
+# 初始化
+sudo mysqld --initialize
+
+# 重启
+sudo systemctl start mysql
+
+# 登录
+mysql -uroot -p
+```
+
+### 3.2 修改密码
+
+```sql
+-- 修改密码
+alter user 'user'@'localhost' identified by 'root';
+
+-- 配置可远程登录
+use mysql;
+select user, host, plugin from user;
+update user set host = '%' where user = 'root';
+
+-- 刷新权限
+flush privileges;
 ```
