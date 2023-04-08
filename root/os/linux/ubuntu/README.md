@@ -62,7 +62,7 @@ EOF
 
 # 更新
 sudo apt update
-apt full-upgrade -y
+sudo apt full-upgrade -y
 sudo apt list --upgradable 2> /dev/null | grep -v 'Listing' | cut -d '/' -f 1 | xargs sudo apt upgrade -y
 ```
 
