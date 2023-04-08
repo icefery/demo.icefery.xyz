@@ -6,7 +6,7 @@
 
 ```shell
 # 下载解压
-curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.17.2 TARGET_ARCH=x86_64 sh -
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.17.1 TARGET_ARCH=x86_64 sh -
 mv istio-1.17.1 /opt/env/istio
 cd /opt/env/istio
 
