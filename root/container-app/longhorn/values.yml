@@ -1,3 +1,6 @@
+defaultSettings:
+  defaultDataPath: /data/longhorn
+
 longhornUI:
   replicas: 1
 
@@ -9,3 +12,7 @@ longhornAdmissionWebhook:
 
 longhornRecoveryBackend:
   replicas: 1
+
+ingress:
+  enabled: true
+  host: longhorn.example.org
