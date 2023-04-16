@@ -17,7 +17,7 @@
 
 最终的各个组件之间的关系如下图所示：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/a210d7fc49dc4b78838daf2d3465310d.png)
+![](https://img-blog.csdnimg.cn/a210d7fc49dc4b78838daf2d3465310d.png)
 
 ### 环境准备
 
@@ -201,4 +201,4 @@ ExternalDNS 也是为了图镜像易于访问直接使用 [Bitnami Chart](https:
 
 ## 效果
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/863d26a896c34aabb6d7831ce23b4ac4.png)
+![](https://img-blog.csdnimg.cn/863d26a896c34aabb6d7831ce23b4ac4.png)

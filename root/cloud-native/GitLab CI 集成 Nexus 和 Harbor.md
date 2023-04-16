@@ -99,7 +99,7 @@ helm upgrade gitlab gitlab-jh/gitlab --install --namespace gitlab --create-names
 kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/f19d579eb1884b9ab56a2a55608c627c.png)
+![](https://img-blog.csdnimg.cn/f19d579eb1884b9ab56a2a55608c627c.png)
 <br/>
 
 ### Harbor
@@ -258,7 +258,7 @@ helm upgrade nexus sonatype/nexus-repository-manager --install --namespace nexus
 kubectl exec -n nexus pods/<POD> -- cat /nexus-data/admin.password
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/c5dfdc4c888f4ec380488d096f0ca355.png)
+![](https://img-blog.csdnimg.cn/c5dfdc4c888f4ec380488d096f0ca355.png)
 
 #### Maven 代理仓库配置
 
@@ -279,7 +279,7 @@ Nexus 有三种类型的仓库：
 - { type: proxy, name: maven-proxy-repo, url: https://repo.maven.apache.org/maven2 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2c3bfcb22e1e43669bd561befd946243.png)
+![](https://img-blog.csdnimg.cn/2c3bfcb22e1e43669bd561befd946243.png)
 
 <br/><br/>
 
@@ -305,11 +305,11 @@ GitLab Runner 各种类型的 Runner 对比如下[Executors](https://docs.gitlab
 
 通过 Helm 安装 GitLab 时已经默认安装了一个 Kubernetes 执行器，这里给需要它设置一个执行器的标签（`executor=kubernetes`）。标签是用于给 GitLab CI 选择 GitLab Runner 的，后续在创建注册 Shell 执行器的 GitLab Runner 时也会为其添加标签。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ee1102c9422544b99eb4ce179e2a7a02.png)
+![](https://img-blog.csdnimg.cn/ee1102c9422544b99eb4ce179e2a7a02.png)
 
 #### Shell 执行器
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20eba10d72ab43679fea1c9d5634f373.png)
+![](https://img-blog.csdnimg.cn/20eba10d72ab43679fea1c9d5634f373.png)
 
 其中将 GitLab Runner 安装为服务的命令需要调整一下：
 
@@ -352,7 +352,7 @@ gitlab-runner install --user=root --working-directory=/home/gitlab-runner
 
 注册完 GitLab Runner 后如果没有填写 Tag 还可以在 GitLab 进行修改：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/fbec46014f2c42d48c377984b8fe0092.png)
+![](https://img-blog.csdnimg.cn/fbec46014f2c42d48c377984b8fe0092.png)
 <br/>
 
 ### Maven 项目
@@ -363,19 +363,19 @@ gitlab-runner install --user=root --working-directory=/home/gitlab-runner
 
 - `pom.xml`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/0708c9e31aee4129a458c5eadaadbe62.png)
+  ![](https://img-blog.csdnimg.cn/0708c9e31aee4129a458c5eadaadbe62.png)
 
 - `App.java`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/c951ae2b72de4f2a95a83c8cb3ff7bfc.png)
+  ![](https://img-blog.csdnimg.cn/c951ae2b72de4f2a95a83c8cb3ff7bfc.png)
 
 - `Dockerfile`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/05637f5a6d3c4aa58ff21bb11bd50d36.png)
+  ![](https://img-blog.csdnimg.cn/05637f5a6d3c4aa58ff21bb11bd50d36.png)
 
 - `kubectl.yaml`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/13e25ad49fa844138f091fa670952193.png)
+  ![](https://img-blog.csdnimg.cn/13e25ad49fa844138f091fa670952193.png)
 
 #### GitLab CI 流水线
 
@@ -446,11 +446,11 @@ deploy-to-kubernetes:
 
 由于 Maven 后续的高版本中会阻止 HTTP 类型仓库的访问，导致 `pom.xml` 中配置的 `<repository>` 和 `<pluginRepository>` 无效，因此需要先删除该文件，当然将本地的 `settings.xml` 文件带入项目版本控制随着流水线一起 `mvn --settings ci/settings.xml clean package` 也可行。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/079bdb73beba442e9f46ca8e54ad950d.png)
+![](https://img-blog.csdnimg.cn/079bdb73beba442e9f46ca8e54ad950d.png)
 
 #### 缓存到 Nexus 中的 Jar
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/4cb925c7499849ae8d5fe6a160c15221.png)
+![](https://img-blog.csdnimg.cn/4cb925c7499849ae8d5fe6a160c15221.png)
 
 <br/>
 
@@ -460,15 +460,15 @@ deploy-to-kubernetes:
 
 - `index.js`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/6c9e65fdd1dd4f788c57c008b34a5be3.png)
+  ![](https://img-blog.csdnimg.cn/6c9e65fdd1dd4f788c57c008b34a5be3.png)
 
 - `Dockerfile`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/1c100f745caf4c989ddf1a05e724dac0.png)
+  ![](https://img-blog.csdnimg.cn/1c100f745caf4c989ddf1a05e724dac0.png)
 
 - `chart/templates/my-app-npm.yaml`
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/beeacc8dab354a70a73cc9f01f89e4c9.png)
+  ![](https://img-blog.csdnimg.cn/beeacc8dab354a70a73cc9f01f89e4c9.png)
 
 #### GitLab CI 流水线
 
@@ -549,7 +549,7 @@ deploy-to-kubernetes:
 
 #### 上传到 Harbor 的镜像
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/b6427f275830403f8729eb13226e5d2a.png)
+![](https://img-blog.csdnimg.cn/b6427f275830403f8729eb13226e5d2a.png)
 
 <br/><br/>
 
@@ -561,11 +561,11 @@ deploy-to-kubernetes:
 
 GitLab CI 默认是本地缓存，对于 Kubernetes 等通过启动一个容器执行的 GitLab Runner 来说即便设置了缓存下次也无法进行复用。在通过 Helm 安装 GitLab 时我们在配置了图表自带的 MinIO 作为 CI 作业的分布式缓存：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d3c456b2eed44e9298d8012838e45439.png)
+![](https://img-blog.csdnimg.cn/d3c456b2eed44e9298d8012838e45439.png)
 
 因此在通过 Maven 构建 Jar 包时可以直接复用缓存（从 MinIO 下载）：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/37421fc4fce74a3596794562192553ce.png)
+![](https://img-blog.csdnimg.cn/37421fc4fce74a3596794562192553ce.png)
 
 要查看 GitLab 图表中自带的 MinIO 或者需要为其它 GitLab Runner 配置分布式缓存，需要先拿到其 AccessKey 和 Secret Key：
 
@@ -575,7 +575,7 @@ kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.accesskey}'
 kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.secretkey}' | base64 --decode
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/d96ac33393de40c1982f09b2e0ee020a.png)
+![](https://img-blog.csdnimg.cn/d96ac33393de40c1982f09b2e0ee020a.png)
 
 <br/>
 

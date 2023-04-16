@@ -125,7 +125,7 @@
   </ui>
   ```
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/38c81f2cde8f49ad82d3e4c45c50280c.png)
+  ![](https://img-blog.csdnimg.cn/38c81f2cde8f49ad82d3e4c45c50280c.png)
 
 - `dialog.h`
 
@@ -397,7 +397,7 @@
   </ui>
   ```
 
-  ![在这里插入图片描述](https://img-blog.csdnimg.cn/a504a68f0d9d4982bcfba72dabdec3b2.png)
+  ![](https://img-blog.csdnimg.cn/a504a68f0d9d4982bcfba72dabdec3b2.png)
 
 - `dialog.h`
 
@@ -519,4 +519,4 @@
 
 #### 效果
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/da8453bbc0d245ef9f4c24ca82283979.png)
+![](https://img-blog.csdnimg.cn/da8453bbc0d245ef9f4c24ca82283979.png)

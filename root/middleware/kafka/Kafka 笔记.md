@@ -202,7 +202,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --c
 bin/kafka-consumer-groups.sh --describe --bootstrap-server localhost:9092 --group test-group
 ```
 
-![请添加图片描述](https://img-blog.csdnimg.cn/420ec442ebd54c4784c9fe11a82a1573.png)
+![](https://img-blog.csdnimg.cn/420ec442ebd54c4784c9fe11a82a1573.png)
 
 重点关注以下几个信息：
 

@@ -16,7 +16,7 @@
 
 ##### 2.1.1 分词器效果：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200823152326415.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hZMTc5MDAyNjc4Nw==,size_16,color_FFFFFF,t_70#pic_center)
+![](https://img-blog.csdnimg.cn/20200823152326415.png)
 
 ##### 2.1.2 GitHub 地址：
 
@@ -37,7 +37,7 @@ elasticsearch/
 
 另外容器卷挂载的方式还有个好处就是可以更加方便的添加用户词典：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200823152345617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hZMTc5MDAyNjc4Nw==,size_16,color_FFFFFF,t_70#pic_center)
+![](https://img-blog.csdnimg.cn/20200823152345617.png)
 
 ##### 2.1.4 好东西分享出来：
 
@@ -92,7 +92,7 @@ networks:
 bin/elasticsearch-setup-passwords interactive
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200823152404153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hZMTc5MDAyNjc4Nw==,size_16,color_FFFFFF,t_70#pic_center)
+![](https://img-blog.csdnimg.cn/20200823152404153.png)
 
 注意事项：
 
@@ -333,7 +333,7 @@ GET /hero/_search
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2020082315242967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hZMTc5MDAyNjc4Nw==,size_16,color_FFFFFF,t_70#pic_center)
+![](https://img-blog.csdnimg.cn/2020082315242967.png)
 
 <br/>
 
@@ -516,7 +516,7 @@ public class HeroController {
 
 效果：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200823152915847.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1hZMTc5MDAyNjc4Nw==,size_16,color_FFFFFF,t_70#pic_center)
+![](https://img-blog.csdnimg.cn/20200823152915847.png)
 
 ##### 3.7.4 IDEA Thymeleaf 踩坑点
 
