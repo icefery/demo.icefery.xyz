@@ -43,6 +43,11 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
+# shell
+[.sh]
+indent_style = space
+indent_size = 4
+
 # go
 [.go]
 indent_style = tab
