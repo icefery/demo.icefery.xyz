@@ -2,7 +2,7 @@
   "scripts": {
     "prettier": "prettier --write .",
     "git-chmod-preview": "git ls-files --stage | grep '\\.sh' | awk '{print $1,$4}'",
-    "git-chmod": "git ls-files --stage | grep '\\.sh' | awk '{print $4}' | xargs git update-index --chmod +x",
+    "git-chmod": "git ls-files --stage | grep '\\.sh' | awk '{print $4}' | xargs chmod +x && git update-index --chmod +x",
     "git-clean-preview": "git clean -d -f -x -n",
     "git-clean": "git clean -dfx"
   }
