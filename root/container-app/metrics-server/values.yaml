@@ -2,6 +2,6 @@ apiService:
   create: true
 
 extraArgs:
-  - --metric-resolution=30s
-  - --kubelet-insecure-tls=true
-  - --kubelet-preferred-address-types=Hostname,InternalDNS,InternalIP,ExternalDNS,ExternalIP
+  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+  - --kubelet-use-node-status-port
+  - --metric-resolution=15s

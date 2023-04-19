@@ -1,6 +1,8 @@
-serviceType: NodePort
+fullnameOverride: coredns
 
-isClusterService: false
+service:
+  clusterIP: 10.43.0.10
+  name: coredns
 
 servers:
   - zones:
@@ -10,16 +12,19 @@ servers:
     plugins:
       - name: errors
       - name: health
+        configBlock: |-
+          lameduck 5s
       - name: ready
-      - name: hosts
+      - name: kubernetes
+        parameters: cluster.local in-addr.arpa ip6.arpa
         configBlock: |-
-          fallthrough
-      - name: etcd
-        configBlock: |-
-          endpoint http://etcd.etcd.svc.cluster.local:2379
-          fallthrough
+          pods insecure
+          fallthrough in-addr.arpa ip6.arpa
+          ttl 30
+      - name: prometheus
+        parameters: 0.0.0.0:9153
       - name: forward
-        parameters: . 114.114.114.114 8.8.8.8
+        parameters: . /etc/resolv.conf
       - name: cache
         parameters: 30
       - name: loop
