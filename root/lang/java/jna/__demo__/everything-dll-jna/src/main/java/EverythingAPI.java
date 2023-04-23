@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface EverythingAPI extends Library {
     static List<Result> query(String str, boolean matchCase, boolean matchWholeWord, boolean enableRegex) {
-        String a = "11";
-
         List<Result> list = new ArrayList<>();
         Everything64.INSTANCE.Everything_SetSearchA(str);
         boolean success = Everything64.INSTANCE.Everything_QueryA(true);
