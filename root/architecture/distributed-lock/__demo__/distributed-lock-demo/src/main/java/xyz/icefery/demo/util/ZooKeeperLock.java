@@ -15,7 +15,6 @@ import java.util.concurrent.CountDownLatch;
 public class ZooKeeperLock extends AbstractLock {
     // [path, depth]
     private static final ThreadLocal<Tuple2<String, Integer>> THREAD_LOCAL = new ThreadLocal<>();
-    private static final ThreadLocal<Integer> THREAD_LOCAL_DEPTH = new ThreadLocal<>();
 
     private final CuratorFramework curatorFramework;
     private final String name;
