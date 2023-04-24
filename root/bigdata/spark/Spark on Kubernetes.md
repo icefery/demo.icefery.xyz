@@ -1,4 +1,8 @@
-## Native Kubernetes
+## Spark on Native Kubernetes
+
+### 架构
+
+![](https://spark.apache.org/docs/latest/img/k8s-cluster-mode.png)
 
 ### RBAC
 
@@ -45,3 +49,7 @@ bin/spark-submit \
   --conf spark.kubernetes.container.image=apache/spark:v${SPARK_VERSION} \
   local:///opt/spark/examples/jars/spark-examples_2.12-${SPARK_VERSION}.jar
 ```
+
+## 收藏
+
+### [Spark on K8s 在茄子科技的实践](https://zhuanlan.zhihu.com/p/620805734)
