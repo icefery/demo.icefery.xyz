@@ -27,3 +27,9 @@
 ![](https://img-blog.csdnimg.cn/img_convert/080a7786019f13e961a5a98ee7d60b98.png)
 ![](https://img-blog.csdnimg.cn/ae26681fd8334de5b5e0c5e88e7f0f81.png)
 ![](https://img-blog.csdnimg.cn/80f202e542aa4f72b27d001350bb365d.png)
+
+#### 关闭休眠
+
+```shell
+powercfg -h off
+```

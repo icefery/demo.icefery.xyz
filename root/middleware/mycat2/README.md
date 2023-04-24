@@ -49,7 +49,7 @@ chmod +x -R /opt/env/mycat/bin
 1. 添加数据源
 
    ```sql
-   /*+ mycat:createDataSource{ "name":"ds0",    "url":"jdbc:mysql://192.192.192.101:3306/demo", "user":"root", "password":"root" } */;
+   /*+ mycat:createDataSource{ "name":"ds0", "url":"jdbc:mysql://192.192.192.101:3306/demo", "user":"root", "password":"root" } */;
    /*+ mycat:createDataSource{ "name":"ds1", "url":"jdbc:mysql://192.192.192.101:3307/demo", "user":"root", "password":"root" } */;
    /*+ mycat:createDataSource{ "name":"ds2", "url":"jdbc:mysql://192.192.192.101:3308/demo", "user":"root", "password":"root" } */;
    /*+ mycat:showDataSources{} */;
