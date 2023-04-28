@@ -31,3 +31,32 @@ from (
     order by t.table_schema, t.table_name, c.ordinal_position
 )
 ```
+
+#### 进程管理
+
+```sql
+-- 查看数据库当前的进程 看一下有无正在执行的慢 SQL 记录线程
+select
+    procpid,
+    start,
+    now() - start as lap,
+    current_query
+from (
+    select
+        backendid,
+        pg_stat_get_backend_pid(s.backendid) as procpid,
+        pg_stat_get_backend_activity_start(s.backendid) as start,
+        pg_stat_get_backend_activity(s.backendid) as current_query
+    from (
+        select pg_stat_get_backend_idset() as backendid
+    ) as s
+) as s
+where current_query != '<idle>'
+order by lap desc;
+
+-- 杀事务
+select pg_cancel_backend(pid);
+
+--查询具体表的执行情况
+select * from pg_stat_activity where query ~ '表名';
+```
