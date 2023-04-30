@@ -1,4 +1,4 @@
-NAMESPACE=kube-system
+NAMESPACE=longhorn-system
 VERSION=1.4.1
 
 function helm::install() {

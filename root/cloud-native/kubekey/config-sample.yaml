@@ -33,6 +33,6 @@ spec:
   registry:
     privateRegistry: ''
     namespaceOverride: ''
-    registryMirrors: ['https://registry.docker-cn.com']
+    registryMirrors: ['https://hub-mirror.c.163.com', 'https://uwk49ut2.mirror.aliyuncs.com']
     insecureRegistries: []
   addons: []

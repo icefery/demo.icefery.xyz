@@ -15,7 +15,7 @@ EOF
 
     if [[ ! -x "/usr/local/bin/k3s" ]]; then
         export INSTALL_K3S_MIRROR=cn
-        export INSTALL_K3S_VERSION=v1.24.7+k3s1
+        export INSTALL_K3S_VERSION=v1.24.13+k3s1
         # 可禁用的组件有 coredns | servicelb | traefik | local-storage | metrics-server
         curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | bash -s - \
             --disable coredns \
@@ -23,10 +23,10 @@ EOF
             --disable traefik \
             --disable local-storage \
             --disable metrics-server \
-            --cluster-cidr 10.42.0.0/16 \
-            --service-cidr 10.43.0.0/16 \
+            --cluster-cidr 10.8.0.0/16 \
+            --service-cidr 10.16.0.0/16 \
             --service-node-port-range 1-65535 \
-            --cluster-dns 10.43.0.10
+            --cluster-dns 10.16.0.10
         k3s completion bash | tee /etc/bash_completion.d/k3s > /dev/null
         kubectl completion bash | tee /etc/bash_completion.d/kubectl > /dev/null
         crictl completion bash | tee /etc/bash_completion.d/crictl > /dev/null
@@ -47,6 +47,9 @@ function init() {
     CONTAINER_APP=../../container-app
     # coredns
     cd $CONTAINER_APP/coredns
+    bash script.sh helm::install
+    # metallb
+    cd $CONTAINER_APP/metallb
     bash script.sh helm::install
     # metrcis-server
     cd $CONTAINER_APP/metrics-server

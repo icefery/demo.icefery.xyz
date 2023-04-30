@@ -1,34 +1,8 @@
 # Docker
 
-## 安装
+## 快速开始
 
-### 卸载
-
-```bash
-sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-sudo rm -rf /var/lib/docker
-
-sudo rm -rf /var/lib/containerd
-```
-
-### 安装
-
-> https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
-
-```bash
-curl -fsSL https://get.docker.com | bash
-```
-
-### 镜像源
-
-```bash
-echo '{ "registry-mirrors": ["https://uwk49ut2.mirror.aliyuncs.com"] }' > /etc/docker/daemon.json
-
-systemctl daemon-reload
-
-systemctl restart docker
-```
+> [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
 
 ## 收藏
 
@@ -36,13 +10,49 @@ systemctl restart docker
 
 - [docker 挂载数据卷](https://www.cnblogs.com/kerwincui/p/12544603.html)
 
-## 常见问题
+- `Warning: Stopping docker.service, but it can still be activated by: docker.socket`
 
-### `Warning: Stopping docker.service, but it can still be activated by: docker.socket`
+  > https://blog.csdn.net/weixin_43885975/article/details/117809901
 
-> https://blog.csdn.net/weixin_43885975/article/details/117809901
+  > 这是因为除了 `docker.service` 单元文件，还有一个 `docker.socket` 单元文件用于套接字激活。该警告意味着：如果你试图连接到 `docker.socket`，而 Docker 服务没有运行，系统将自动启动 docker。
 
-> 这是因为除了 `docker.service` 单元文件，还有一个 `docker.socket` 单元文件用于套接字激活。该警告意味着：如果你试图连接到 `docker.socket`，而 Docker 服务没有运行，系统将自动启动 docker。
+  ```shell
+  sudo systemctl disable docker.socket
+  ```
 
-- 方法一：`rm /lib/systemd/system/docker.socket`
-- 方法二：`sudo systemctl stop docker.socket`
+- 设置 TCP Socket
+
+  ```shell
+  systemctl edit docker.service
+  ```
+
+  ```shell
+  [Service]
+  ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+  ```
+
+## 常用命令
+
+- 删除已停止的容器
+
+  ```shell
+  docker rm $(docker ps -a | grep Exited | awk '{print $1}')
+  ```
+
+- 获取最新镜像版本号
+
+  ```shell
+  VERSION=$(docker image ls | grep 'nginx' | awk '{print $2}' | sort -r | head -n 1)
+  ```
+
+- 自动清理空间
+
+  ```shell
+  docker system prune
+  ```
+
+- 查看占用
+
+  ```shell
+  docker system df
+  ```

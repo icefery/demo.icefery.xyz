@@ -1,24 +1,17 @@
-## Helm 安装 MetalLB
+# MetalLB
 
-```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
+## Layer2 模式
 
-helm repo update
+#### IPVS 模式下启用 strictARP
 
-helm upgrade metallb bitnami/metallb --install --namespace metallb --create-namespace --version 4.1.1
+> [INSTALLATION](https://metallb.universe.tf/installation/)
+
+```shell
+kubectl -n kube-system edit configmaps kube-proxy
 ```
 
-```bash
-cat > IPAddressPool.yaml <<- "EOF"
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: first-pool
-  namespace: metallb
-spec:
-  addresses:
-    - 192.192.192.6-192.192.192.6
-EOF
-
-kubectl apply -f IPAddressPool.yaml
+```yaml
+mode: ipvs
+ipvs:
+  strictARP: true
 ```

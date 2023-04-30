@@ -17,6 +17,7 @@ providers:
     allowEmptyServices: true
     publishedService:
       enabled: true
+
 ports:
   traefik:
     port: 9000

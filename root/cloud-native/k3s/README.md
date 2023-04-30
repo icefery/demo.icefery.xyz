@@ -1,83 +1,34 @@
 # K3S
 
-## 安装
-
-#### 卸载
-
-```bash
-/usr/local/bin/k3s-uninstall.sh
-
-/usr/local/bin/k3s-agent-uninstall.sh
-```
+## 快速开始
 
 #### 配置 Containerd 镜像源
 
-```bash
-mkdir -p /etc/rancher/k3s
-
-cat > /etc/rancher/k3s/registries.yaml <<- "EOF"
-mirrors:
-  docker.io:
-    endpoint:
-      - "https://uwk49ut2.mirror.aliyuncs.com"
-EOF
-```
-
-#### 单节点安装
-
-```bash
-# 可禁用的组件有 coredns | servicelb | traefik | local-storage | metrics-server
-curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.21.14+k3s1 sh -s - \
-  --service-node-port-range 1-65535 \
-  --disable servicelb \
-  --disable traefik \
-  --disable metrics-server
-```
+> [私有镜像仓库配置](https://docs.k3s.io/zh/installation/private-registry)
 
 #### 高可用安装
 
-- 第一个节点
+```shell
+export INSTALL_K3S_MIRROR=cn
+export INSTALL_K3S_VERSION=v1.24.13+k3s1
 
-  ```bash
-  curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_TOKEN=SECRET sh -s - server \
+# 第一个节点
+curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | K3S_TOKEN=SECRET sh -s - server \
     --cluster-init \
-    --service-node-port-range 1-65535 \
     --disable servicelb \
-    --disable traefik \
-    --disable metrics-server
-  ```
+    --disable traefik
 
-- 第二、第三个节点
-
-  ```bash
-  curl -sfL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn K3S_TOKEN=SECRET sh -s - server \
-    --server https://192.192.192.101:6443 \
-    --service-node-port-range 1-65535 \
+# 第二第三个节点
+curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | K3S_TOKEN=SECRET sh -s - server \
+    --server https://192.168.8.101:6443 \
     --disable servicelb \
-    --disable traefik \
-    --disable metrics-server
-  ```
-
-#### 配置 `KUBECONFIG` 环境变量
-
-```bash
-echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >> /etc/custom.sh
-
-source /etc/profile
+    --disable traefik
 ```
 
-#### 配置 `kubectl` 命令补全
-
-```bash
-kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
-
-source /etc/profile
-```
-
-## 常用命令
+## 收藏
 
 #### 使用 `nerdctl` 访问 Containerd
 
-```bash
+```shell
 nerdctl --address /var/run/k3s/containerd/containerd.sock ps -a
 ```

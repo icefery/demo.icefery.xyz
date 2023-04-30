@@ -1,4 +1,4 @@
-NAMESPACE=kube-system
+NAMESPACE=metrics-server
 VERSION=6.2.17
 
 function helm::install() {

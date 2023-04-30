@@ -16,6 +16,21 @@ sudo passwd root
 ### 1.2 网络配置
 
 ```shell
+# 参考 centos7 配置本地 hosts
+sudo tee /etc/hosts > /dev/null <<- 'EOF'
+127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1       localhost localhost.localdomain localhost4 localhost4.localdomain4
+EOF
+
+# 禁用 ipv6
+sudo tee /etc/sysctl.conf > /dev/null <<- 'EOF'
+net.ipv6.conf.all.disable_ipv6=1
+net.ipv6.conf.default.disable_ipv6=1
+net.ipv6.conf.lo.disable_ipv6=1
+EOF
+sudo sysctl -p
+
+# 配置 ip gateway dns
 sudo vim /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
@@ -25,14 +40,14 @@ network:
   ethernets:
     ens33:
       addresses:
-        - 192.192.192.6/24
+        - 192.168.8.101/24
       nameservers:
         addresses:
           - 114.114.114.114
         search: []
       routes:
         - to: default
-          via: 192.192.192.1
+          via: 192.168.8.1
   version: 2
 ```
 
@@ -43,10 +58,21 @@ network:
 sudo apt remove snapd --purge --autoremove -y
 
 # 解决 systemd-resolve 占用 53 端口
-sudo apt remove bind9* --purge --autoremove -y
 sudo sed -i -e '/#DNSStubListener=/c DNSStubListener=no' /etc/systemd/resolved.conf
 sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
+
+# 配置 vim
+sudo tee /etc/vim/vimrc.local > /dev/null <<- 'EOF'
+set autoread
+set cursorline
+set nopaste
+set expandtab
+set tabstop=4
+set softtabstop=4
+set siftwidth=4
+set laststatus=2
+EOF
 ```
 
 ### 1.4 更新配置
@@ -95,12 +121,14 @@ rm -rf ~/.bashrc .profile
 # 全局配置
 sudo tee /etc/profile.d/custom.sh <<- "EOF"
 alias ll='ls -AlhF --color=auto --time-style=long-iso'
+
 export PS1='[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;33m\]\h\[\e[00m\]:\[\e[01;32m\]\w\[\e[00m\]]\$ '
 export TZ=Asia/Shanghai
+
 function start_proxy() {
-  export http_proxy=http://192.192.192.10:7890
+  export http_proxy=http://192.168.8.10:7890
   export https_proxy=$http_proxy
-  export no_proxy=192.192.192.*
+  export no_proxy=192.168.8.*
 }
 function stop_proxy() {
   unset http_proxy
@@ -108,6 +136,7 @@ function stop_proxy() {
   unset no_proxy
 }
 EOF
+sudo chmod 777 /etc/profile.d/custom.sh
 
 # 刷新
 source /etc/profile
