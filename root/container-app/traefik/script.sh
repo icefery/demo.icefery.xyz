@@ -1,4 +1,4 @@
-NAMESPACE=kube-system
+NAMESPACE=traefik
 VERSION=10.24.0
 
 function helm::install() {
