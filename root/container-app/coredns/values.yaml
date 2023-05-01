@@ -1,14 +1,13 @@
 fullnameOverride: coredns
 
 service:
-  clusterIP: 10.43.0.10
+  clusterIP: 10.16.0.10
   name: coredns
 
 servers:
   - zones:
       - zone: .
     port: 53
-    nodePort: 53
     plugins:
       - name: errors
       - name: health
