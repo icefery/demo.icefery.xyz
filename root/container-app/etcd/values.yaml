@@ -4,6 +4,3 @@ auth:
 
 service:
   type: NodePort
-  nodePorts:
-    client: 2379
-    peer: 2380

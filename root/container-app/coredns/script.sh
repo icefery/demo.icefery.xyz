@@ -1,10 +1,10 @@
-NAMESPACE=kube-system
+NAMESPACE=coredns
 VERSION=1.22.0
 
 function helm::install() {
     helm repo add coredns https://coredns.github.io/helm
     helm repo update
-    helm install coredns coredns/coredns --namespace ${NAMESPACE} --values values.yaml
+    helm install coredns coredns/coredns --namespace ${NAMESPACE} --create-namespace --values values.yaml
 }
 
 function helm::uninstall() {

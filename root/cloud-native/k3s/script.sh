@@ -44,22 +44,20 @@ function uninstall() {
 }
 
 function init() {
-    CONTAINER_APP=../../container-app
-    # coredns
-    cd $CONTAINER_APP/coredns
-    bash script.sh helm::install
-    # metallb
-    cd $CONTAINER_APP/metallb
-    bash script.sh helm::install
-    # metrcis-server
-    cd $CONTAINER_APP/metrics-server
-    bash script.sh helm::install
-    # traefik
-    cd $CONTAINER_APP/traefik
-    bash script.sh helm::install
-    # longhorn
-    cd $CONTAINER_APP/longhorn
-    bash script.sh helm::install
+    CONTAINER_APP_PATH=$(realpath -e -s ../../container-app)
+    CONTAINER_APP_LIST=(
+        coredns
+        metallb
+        metrics-server
+        traefik
+        longhorn
+        etcd
+        external-dns
+    )
+    for app in ${CONTAINER_APP_LIST[@]}; do
+        cd ${CONTAINER_APP_PATH}/app
+        bash script.sh helm::install
+    done
 }
 
 LIST=(
