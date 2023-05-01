@@ -5,7 +5,7 @@ VERSION=6.7.4
 function helm::install() {
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update
-    helm upgrade ${RELEASE} bitnami/external-dns --install --namespace ${NAMESPACE} --values values.yaml
+    helm upgrade ${RELEASE} bitnami/external-dns --install --namespace ${NAMESPACE} --create-namespace --values values.yaml
 }
 
 function helm::uninstall() {

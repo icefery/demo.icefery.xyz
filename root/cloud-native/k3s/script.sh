@@ -36,6 +36,8 @@ EOF
         curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
         helm completion bash | tee /etc/bash_completion.d/helm > /dev/null
     fi
+
+    source /etc/profile
 }
 
 function uninstall() {
@@ -56,7 +58,9 @@ function init() {
     )
     for app in ${CONTAINER_APP_LIST[@]}; do
         cd ${CONTAINER_APP_PATH}/${app}
-        bash script.sh helm::install
+        if [[ $(helm list --no-headers -A | grep -c ${app}) == 0 ]]; then
+            bash script.sh helm::install
+        fi
     done
 }
 
