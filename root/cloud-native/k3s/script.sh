@@ -55,7 +55,7 @@ function init() {
         external-dns
     )
     for app in ${CONTAINER_APP_LIST[@]}; do
-        cd ${CONTAINER_APP_PATH}/app
+        cd ${CONTAINER_APP_PATH}/${app}
         bash script.sh helm::install
     done
 }
