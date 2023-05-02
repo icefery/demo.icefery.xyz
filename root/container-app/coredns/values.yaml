@@ -25,6 +25,7 @@ servers:
           ttl 30
       - name: etcd
         configBlock: |-
+          path /skydns
           endpoint http://10.16.23.79:2379
           fallthrough
       - name: prometheus
