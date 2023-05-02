@@ -5,6 +5,6 @@ auth:
 service:
   type: NodePort
   clusterIP: 10.16.23.79
-  ports:
+  nodePorts:
     client: 2379
     peer: 2380
