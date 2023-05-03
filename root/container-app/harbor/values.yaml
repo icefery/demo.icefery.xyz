@@ -1,17 +1,17 @@
 adminPassword: admin
 
-externalURL: http://core.harbor.dev.icefery.xyz
+externalURL: http://harbor.example.org
 
 exposureType: ingress
 
 ingress:
   core:
-    hostname: core.harbor.dev.icefery.xyz
+    hostname: harbor.example.org
     annotations:
       ingress.kubernetes.io/ssl-redirect: 'false'
       nginx.ingress.kubernetes.io/ssl-redirect: 'false'
   notary:
-    hostname: notary.harbor.dev.icefery.xyz
+    hostname: notary.harbor.example.org
     annotations:
       ingress.kubernetes.io/ssl-redirect: 'false'
       nginx.ingress.kubernetes.io/ssl-redirect: 'false'

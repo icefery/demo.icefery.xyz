@@ -1,19 +1,33 @@
 # Elasticsearch
 
-## Install
+## 快速开始
 
-### Docker
+#### 交互式设置 X-Pack 密码认证
 
 ```bash
 bin/elasticsearch-setup-passwords interactive
 ```
 
-### Helm
+## 收藏
 
-```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
+- [ES8 unable to authenticate user [kibana_system] for REST request#10076](https://github.com/bitnami/charts/issues/10076)
 
-helm repo update
-
-helm upgrade elasticsearch bitnami/elasticsearch --install --namespace elasticsearch --create-namespace --values values.yaml --version 19.1.11
+```yaml
+kibana:
+  elasticsearch:
+    security:
+      auth:
+        enabled: true
+        createSystemUser: true
+        kibanaPassword: kibana_system
+        elasticsearchPasswordSecret: elasticsearch
+      tls:
+        enabled: true
+        existingSecret: elasticsearch-master-crt
+        # coordinating-only
+        # existingSecret: elasticsearch-coordinating-crt
+        usePemCerts: true
+  ingress:
+    enabled: true
+    hostname: kibana.example.org
 ```
