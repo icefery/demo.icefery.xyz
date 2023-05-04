@@ -60,3 +60,19 @@ select pg_cancel_backend(pid);
 --查询具体表的执行情况
 select * from pg_stat_activity where query ~ '表名';
 ```
+
+#### 修改序列起始值
+
+> 针对不支持修改原有序列起始值的场景。
+
+```sql
+-- 创建临时序列
+CREATE SEQUENCE pms.temp_id_seq INCREMENT BY 1 START 1;
+-- 绑定临时序列
+ALTER TABLE pms.pms_product ALTER COLUMN id SET DEFAULT nextval('pms.temp_id_seq');
+-- 重建原有序列
+DROP SEQUENCE pms.pms_product_id_seq;
+CREATE SEQUENCE pms.pms_product_id_seq INCREMENT BY 1 START 1000000;
+-- 绑定原有序列
+ALTER TABLE pms.pms_product ALTER COLUMN id SET DEFAULT nextval('pms.pms_product_id_seq');
+```
