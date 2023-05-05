@@ -70,7 +70,7 @@ set nopaste
 set expandtab
 set tabstop=4
 set softtabstop=4
-set siftwidth=4
+set shiftwidth=4
 set laststatus=2
 EOF
 ```
