@@ -63,7 +63,7 @@ select * from pg_stat_activity where query ~ '表名';
 
 #### 修改序列起始值
 
-> 针对不支持修改原有序列起始值的场景。
+> 针对不支持 `ALTER SEQUENCE` 操作的场景。
 
 ```sql
 -- 创建临时序列
@@ -76,3 +76,27 @@ CREATE SEQUENCE pms.pms_product_id_seq INCREMENT BY 1 START 1000000;
 -- 绑定原有序列
 ALTER TABLE pms.pms_product ALTER COLUMN id SET DEFAULT nextval('pms.pms_product_id_seq');
 ```
+
+#### 数组截取
+
+> 提取表名中的信息。
+
+```sql
+select segments[2] as province_code, segments[3] as topic_code, array_to_string(segments[4:(array_length(segments, 1))], '_')
+from (
+    select string_to_array(table_name, '_') as segments
+    from (
+        select 'stg_bi_topic1_t_a_b_l_e_1' as table_name union all
+        select 'stg_tj_topic2_t_a_b_l_e_2' as table_name union all
+        select 'stg_sh_topic3_t_a_b_l_e_3' as table_name union all
+        select 'stg_cq_topic4_t_a_b_l_e_4' as table_name
+    ) t1
+) t2
+```
+
+| province_code | topic_code | table_name  |
+| ------------- | ---------- | ----------- |
+| bi            | topic1     | t_a_b_l_e_1 |
+| tj            | topic2     | t_a_b_l_e_2 |
+| sh            | topic3     | t_a_b_l_e_3 |
+| cq            | topic4     | t_a_b_l_e_4 |

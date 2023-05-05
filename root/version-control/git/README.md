@@ -33,3 +33,11 @@ git update-index --chmod=+x a.sh
 ```bash
 git ls-tree HEAD
 ```
+
+#### 配置默认编辑器
+
+```shell
+git config --global core.editor vim
+# 测试
+git commit --amend
+```
