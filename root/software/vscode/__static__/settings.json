@@ -50,5 +50,7 @@
   "git.confirmSync": false,
   "window.zoomLevel": 1,
   // Edit csv
-  "csv-edit.initiallyIsInReadonlyMode": true
+  "csv-edit.initiallyIsInReadonlyMode": true,
+  // shell-format
+  "shellformat.flag": "-s -i 4 -ci -sr"
 }
