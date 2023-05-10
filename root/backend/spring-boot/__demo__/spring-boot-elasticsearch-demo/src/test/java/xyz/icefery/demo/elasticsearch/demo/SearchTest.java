@@ -23,7 +23,4 @@ public class SearchTest {
         String json = objectMapper.writeValueAsString(map);
         log.info(json);
     }
-
-    @Test
-    void test2() {}
 }

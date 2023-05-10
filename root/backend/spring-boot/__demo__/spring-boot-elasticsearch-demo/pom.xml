@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>xyz.icefery.demo</groupId>
-    <artifactId>elasticsearch-demo</artifactId>
+    <artifactId>spring-boot-elasticsearch-demo</artifactId>
     <version>1.0.0</version>
 
     <properties>
@@ -67,7 +67,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.0.RELEASE</version>
                 <configuration>
-                    <mainClass>xyz.icefery.demo.elasticsearch.demo.ElasticsearchDemoApplication</mainClass>
+                    <mainClass>xyz.icefery.demo.elasticsearch.demo.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>

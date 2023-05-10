@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>xyz.icefery.demo</groupId>
-    <artifactId>spring-boot-mybatis</artifactId>
+    <artifactId>spring-boot-mybatis-demo</artifactId>
     <version>0.0.1</version>
 
     <properties>
