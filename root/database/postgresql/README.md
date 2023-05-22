@@ -100,3 +100,24 @@ from (
 | tj            | topic2     | t_a_b_l_e_2 |
 | sh            | topic3     | t_a_b_l_e_3 |
 | cq            | topic4     | t_a_b_l_e_4 |
+
+#### 查看表结构信息
+
+```sql
+create or replace view metadata AS
+select
+    pg_namespace.nspname          as schema_name,
+    pg_class.relname              as table_name,
+    obj_description(pg_class.oid) as table_comment,
+    pg_attribute.attname          as column_name,
+    concat_ws('', pg_type.typname, substring(format_type(pg_attribute.atttypid, pg_attribute.atttypmod) from '\(.*\)')) as column_type,
+    pg_attribute.attnum           as column_order,
+    pg_description.description    as column_comment
+from      pg_catalog.pg_namespace
+left join pg_catalog.pg_class       on pg_class.relnamespace = pg_namespace.oid
+left join pg_catalog.pg_attribute   on pg_attribute.attrelid = pg_class.oid
+left join pg_catalog.pg_type        on pg_type.oid           = pg_attribute.atttypid
+left join pg_catalog.pg_description on pg_description.objoid = pg_attribute.attrelid and pg_description.objsubid = pg_attribute.attnum
+where pg_class.relkind = 'r' and pg_attribute.attnum > 0
+order by schema_name, table_name, column_order
+```
