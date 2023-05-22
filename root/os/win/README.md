@@ -30,6 +30,16 @@
 
 #### 关闭休眠
 
+> Win + R 输入 `powershell` Ctrl + Shift 以管理员模式打开
+
 ```shell
 powercfg -h off
+```
+
+#### 清理 DNS 和 ARP 缓存
+
+```shell
+ipconfig.exe /flushdns
+
+netsh.exe interface ip delete arpcache
 ```
