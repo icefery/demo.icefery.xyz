@@ -1,6 +1,15 @@
-import { inorder, postorder, preorder, toList, type TreeNode } from '../src/binary-tree'
+import { inorder, levelorder, postorder, preorder, toList, type TreeNode } from '../src/binary-tree'
 
-const a: TreeNode<string> = {
+/*
+    A
+   / \
+  B   C
+   \   \
+    D   E
+   / \
+  F   G
+*/
+const tree: TreeNode<string> = {
   element: 'A',
   left: {
     element: 'B',
@@ -22,11 +31,14 @@ const a: TreeNode<string> = {
   }
 }
 
-const preorderList = toList(a, preorder)
+const preorderList = toList(tree, preorder)
 console.log(preorderList.join(' ')) // A B D F G C E
 
-const inorderList = toList(a, inorder)
+const inorderList = toList(tree, inorder)
 console.log(inorderList.join(' ')) // B F D G A C E
 
-const postorderList = toList(a, postorder)
+const postorderList = toList(tree, postorder)
 console.log(postorderList.join(' ')) // F G D B E C A
+
+const levelorderList = toList(tree, levelorder)
+console.log(levelorderList.join(' ')) // A B C D E F G
