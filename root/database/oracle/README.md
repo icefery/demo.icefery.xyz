@@ -42,3 +42,21 @@ select * from v$sqlarea where sql_text like '%select * from user%'
 ```sql
 select * from all_tables where table_name like '%%'
 ```
+
+### 查询表结构信息
+
+```sql
+select
+    tc.owner      as "schema_name",
+    tc.table_name as "table_name",
+    tc.comments   as "table_comment",
+    c.column_name as "column_name",
+    c.data_type   as "column_type",
+    c.column_id   as "column_order",
+    cc.comments   as "column_comment"
+from all_tab_comments      tc
+left join all_tab_columns  c  on c.owner = tc.owner and c.table_name = tc.table_name
+left join all_col_comments cc on cc.owner = c.owner and cc.table_name = c.table_name and cc.column_name = c.column_name
+where tc.table_type = 'TABLE'
+order by tc.owner, tc.table_name, c.column_id
+```
