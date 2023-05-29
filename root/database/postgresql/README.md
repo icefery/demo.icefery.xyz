@@ -103,6 +103,8 @@ from (
 
 #### 查看表结构信息
 
+> [PostgreSQL 中系统表](https://blog.csdn.net/qq_33459369/article/details/124021543)
+
 ```sql
 create or replace view metadata AS
 select

@@ -30,3 +30,7 @@ wget https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-h
 ```bash
 sbin/start-all.sh
 ```
+
+## 收藏
+
+#### [Spark 任务提交流程说明](https://blog.csdn.net/ran_hao/article/details/125569872)

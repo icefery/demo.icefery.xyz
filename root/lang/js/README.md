@@ -13,3 +13,5 @@
 - [为什么 npm 要为每个项目单独安装一遍 node_modules？](https://www.jianshu.com/p/6359cc3ac3c6)
 
 - [electron-vue 跨平台桌面应用开发实战教程（七）——ffi 调用 C++（Windows 平台）](https://my.oschina.net/david1025/blog/3173842)
+
+- [NodeJS VM 和 VM2 沙箱逃逸](https://xz.aliyun.com/t/11859)

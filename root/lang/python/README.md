@@ -33,3 +33,5 @@
 #### [你真的了解 python 中的换行以及转义吗?](https://www.cnblogs.com/traditional/p/12236925.html)
 
 #### [3-Pandas 数据初探索之缺失值处理与丢弃数据（填充 fillna()、删除 drop()、drop_duplicates()、dropna()）](https://www.cnblogs.com/Cheryol/p/13382560.html)
+
+#### [Python 利用多线程实时读取 subprocess.Popen 的程序输出的 stdout 和 stderr，并且向其中实时传入 input 信息。](https://blog.csdn.net/weixin_41102672/article/details/106385663)

@@ -38,3 +38,7 @@ kubectl get namespaces ${NS} -o json > ${NS}.json
 # 调用接口
 curl -k -H "Content-Type:application/json" -X PUT --data-binary @${NS}.json http://127.0.0.1:8081/api/v1/namespaces/${NS}/finalize
 ```
+
+## 收藏
+
+#### [为 pod 配置服务账户(Service Account)](https://www.coderdocument.com/docs/kubernetes/v1.14/tasks/configure_pods_and_containers/configure_service_accounts_for_pods.html)

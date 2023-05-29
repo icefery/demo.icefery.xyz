@@ -27,3 +27,7 @@
 ### [报错 kernel:NMI watchdog: BUG: soft lockup - CPU#0 stuck for 26s](https://blog.csdn.net/weixin_46399792/article/details/114371139)
 
 ### [Linux 下 3 种常用的网络测速工具](https://juejin.cn/post/6844904152108105742)
+
+### [linux 网状互信的处理方法](https://www.wangt.cc/2020/12/linux网状互信的处理方法/)
+
+### [Bash 版的 join,map 和 filter](https://blog.lujun9972.win/blog/2019/06/28/bash版的join,map和filter/)
