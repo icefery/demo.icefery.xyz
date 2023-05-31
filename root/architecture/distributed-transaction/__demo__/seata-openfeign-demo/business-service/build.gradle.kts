@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    // spring-booot
+    // spring-boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     // spring-cloud
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.0.0")
