@@ -51,12 +51,17 @@ select
     tc.table_name as "table_name",
     tc.comments   as "table_comment",
     c.column_name as "column_name",
-    c.data_type   as "column_type",
+    (case
+        when c.data_precision is not null and c.data_scale is not null                               then c.data_type || '(' || c.data_precision || ','|| c.data_scale|| ')'
+        when c.data_precision is not null and c.data_scale is     null                               then c.data_type || '(' || c.data_precision || ')'
+        when c.data_precision is     null and c.data_scale is     null and c.data_length is not null then c.data_type || '(' || c.data_length || ')'
+        else c.data_type
+    end) as "column_type",
     c.column_id   as "column_order",
     cc.comments   as "column_comment"
-from all_tab_comments      tc
+from      all_tab_comments tc
 left join all_tab_columns  c  on c.owner = tc.owner and c.table_name = tc.table_name
 left join all_col_comments cc on cc.owner = c.owner and cc.table_name = c.table_name and cc.column_name = c.column_name
-where tc.table_type = 'TABLE'
+where tc.table_type = 'TABLE' and tc.owner not in ('SYS', 'SYSTEM')
 order by tc.owner, tc.table_name, c.column_id
 ```
