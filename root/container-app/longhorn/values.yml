@@ -10,6 +10,7 @@ csi:
 defaultSettings:
   defaultDataPath: /data/longhorn
   defaultReplicaCount: 1
+  deletingConfirmationFlag: true
 
 longhornUI:
   replicas: 1

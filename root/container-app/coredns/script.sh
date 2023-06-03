@@ -1,4 +1,4 @@
-NAMESPACE=coredns
+NAMESPACE=kube-system
 VERSION=1.22.0
 
 function helm::install() {

@@ -10,6 +10,11 @@ mirrors:
     endpoint:
       - https://hub-mirror.c.163.com
       - https://uwk49ut2.mirror.aliyuncs.com
+configs:
+  ghcr.io:
+    auth:
+      username:
+      password:
 EOF
     fi
 
@@ -26,7 +31,8 @@ EOF
             --cluster-cidr 10.8.0.0/16 \
             --service-cidr 10.16.0.0/16 \
             --service-node-port-range 1-65535 \
-            --cluster-dns 10.16.0.10
+            --cluster-dns 10.16.0.10 \
+            --kube-proxy-arg proxy-mode=ipvs
         k3s completion bash | tee /etc/bash_completion.d/k3s > /dev/null
         kubectl completion bash | tee /etc/bash_completion.d/kubectl > /dev/null
         crictl completion bash | tee /etc/bash_completion.d/crictl > /dev/null
@@ -49,12 +55,12 @@ function init() {
     CONTAINER_APP_PATH=$(realpath -e -s ../../container-app)
     CONTAINER_APP_LIST=(
         coredns
-        metallb
-        metrics-server
-        traefik
-        longhorn
         etcd
         external-dns
+        metrics-server
+        metallb
+        traefik
+        longhorn
     )
     for app in ${CONTAINER_APP_LIST[@]}; do
         cd ${CONTAINER_APP_PATH}/${app}

@@ -1,4 +1,4 @@
-NAMESPACE=external-dns
+NAMESPACE=kube-system
 RELEASE=external-dns
 VERSION=6.7.4
 

@@ -3,8 +3,5 @@ auth:
     create: false
 
 service:
-  type: NodePort
+  type: LoadBalancer
   clusterIP: 10.16.23.79
-  nodePorts:
-    client: 2379
-    peer: 2380

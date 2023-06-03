@@ -38,7 +38,7 @@ mkdir -p /etc/systemd/system/docker.service.d
 
 cat > /etc/systemd/system/docker.service.d/proxy.conf <<- "EOF"
 [Service]
-Environment="HTTP_PROXY=http://127.0.0.1:7890"
-Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+Environment="HTTP_PROXY=http://192.168.8.10:7890"
+Environment="HTTPS_PROXY=http://192.168.8.10:7890"
 EOF
 ```

@@ -1,4 +1,4 @@
-NAMESPACE=etcd
+NAMESPACE=kube-system
 RELEASE=etcd
 VERSION=8.10.1
 
