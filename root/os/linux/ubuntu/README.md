@@ -30,6 +30,10 @@ net.ipv6.conf.lo.disable_ipv6=1
 EOF
 sudo sysctl -p
 
+# GRUB 禁用 ipv6
+sudo sed -i 's GRUB_CMDLINE_LINUX="" GRUB_CMDLINE_LINUX="ipv6.disable=1" g' /etc/default/grub
+sudo update-grub
+
 # 配置 ip gateway dns
 sudo vim /etc/netplan/00-installer-config.yaml
 sudo netplan apply
