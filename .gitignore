@@ -14,7 +14,7 @@
 /**/build-*-Release/
 
 ### obsidian
-/**/.obsidian
+/**/.obsidian/
 
 ### maven
 /**/.mvn/
@@ -37,9 +37,12 @@
 /**/pnpm-*.yaml
 /**/dist/
 
-### spring boot
-/**/HELP.md
+### go
+/**/go.sum
 
 ### python
 /**/venv/
 /**/__pycache__/
+
+### spring boot
+/**/HELP.md

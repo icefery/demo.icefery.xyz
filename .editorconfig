@@ -44,10 +44,11 @@ indent_style = space
 indent_size = 4
 
 # shell
-[.sh]
+[*.sh]
 indent_style = space
 indent_size = 4
 
 # go
-[.go]
+[*.go]
 indent_style = tab
+indent_size = 4

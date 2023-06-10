@@ -26,6 +26,10 @@ helm upgrade gitlab gitlab-jh/gitlab --install --namespace gitlab --create-names
 kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.data.password}' | base64 --decode ; echo
 ```
 
+## GitLab CI
+
+> [指定自定义 CI/CD 配置文件](https://docs.gitlab.cn/jh/ci/pipelines/settings.html#指定自定义-cicd-配置文件)
+
 ## GitLab Runner
 
 #### Shell 执行器
