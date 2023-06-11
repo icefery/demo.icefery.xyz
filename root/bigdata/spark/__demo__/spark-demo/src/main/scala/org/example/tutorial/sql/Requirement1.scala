@@ -1,7 +1,7 @@
-package org.example.sql
+package org.example.tutorial.sql
 
+import org.apache.spark.sql.{functions, Encoder, Encoders, SparkSession}
 import org.apache.spark.sql.expressions.Aggregator
-import org.apache.spark.sql.{Encoder, Encoders, SparkSession, functions}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 

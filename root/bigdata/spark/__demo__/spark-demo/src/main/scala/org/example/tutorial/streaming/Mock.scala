@@ -1,4 +1,4 @@
-package org.example.streaming
+package org.example.tutorial.streaming
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 import java.util.Properties

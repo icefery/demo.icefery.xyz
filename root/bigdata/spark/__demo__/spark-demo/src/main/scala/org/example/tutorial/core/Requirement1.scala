@@ -1,7 +1,7 @@
-package org.example.core
+package org.example.tutorial.core
 
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.rdd.RDD
 
 object Requirement1 {
   def main(args: Array[String]): Unit = {

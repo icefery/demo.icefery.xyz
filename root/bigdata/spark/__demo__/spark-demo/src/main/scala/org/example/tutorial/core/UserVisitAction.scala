@@ -1,4 +1,4 @@
-package org.example.core
+package org.example.tutorial.core
 
 // @formatter:off
 case class UserVisitAction(

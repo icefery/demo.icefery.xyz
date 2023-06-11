@@ -1,4 +1,4 @@
-package org.example.streaming
+package org.example.tutorial.streaming
 
 import com.alibaba.druid.pool.DruidDataSourceFactory
 import java.sql.PreparedStatement

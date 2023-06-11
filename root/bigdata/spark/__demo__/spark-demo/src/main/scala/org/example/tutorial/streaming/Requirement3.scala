@@ -1,4 +1,4 @@
-package org.example.streaming
+package org.example.tutorial.streaming
 
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
