@@ -65,3 +65,5 @@ left join all_col_comments cc on cc.owner = c.owner and cc.table_name = c.table_
 where tc.table_type = 'TABLE' and tc.owner not in ('SYS', 'SYSTEM')
 order by tc.owner, tc.table_name, c.column_id
 ```
+
+### [Oracle EBS 初始化用户密码](https://www.cnblogs.com/toowang/p/6019886.html)
