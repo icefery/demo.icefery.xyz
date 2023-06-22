@@ -37,6 +37,10 @@
 /**/pnpm-*.yaml
 /**/dist/
 
+### xmake
+/**/.xmake/
+/**/build/
+
 ### go
 /**/go.sum
 
