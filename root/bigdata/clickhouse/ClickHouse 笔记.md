@@ -597,7 +597,7 @@ clickhouse-client --query "select * from t_order_mt where create_time = '2020-06
          total_amount Decimal(16,2),
          create_time  Datetime
      )
-     engine =ReplicatedMergeTree('/clickhouse/tables/shard-01/t_order_rep','replica-01')
+     engine = ReplicatedMergeTree('/clickhouse/tables/shard-01/t_order_rep','replica-01')
      partition by toYYYYMMDD(create_time)
      primary key (id)
      order by (id,sku_id);
@@ -612,7 +612,7 @@ clickhouse-client --query "select * from t_order_mt where create_time = '2020-06
          total_amount Decimal(16,2),
          create_time  Datetime
      )
-     engine =ReplicatedMergeTree('/clickhouse/tables/shard-01/t_order_rep','replica-02')
+     engine = ReplicatedMergeTree('/clickhouse/tables/shard-01/t_order_rep','replica-02')
      partition by toYYYYMMDD(create_time)
      primary key (id)
      order by (id, sku_id);
