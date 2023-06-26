@@ -123,3 +123,11 @@ left join pg_catalog.pg_description on pg_description.objoid = pg_attribute.attr
 where pg_class.relkind = 'r' and pg_attribute.attnum > 0
 order by schema_name, table_name, column_order
 ```
+
+#### PG 拿到所有 ID 放在 IN 中
+
+> `''` 表示转义一个单引号
+
+```sql
+select array_to_string(array_agg('''' || id ||''''), ', ') from a;
+```

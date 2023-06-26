@@ -41,6 +41,9 @@
 /**/.xmake/
 /**/build/
 
+### cmake
+/**/cmake-build-*/
+
 ### go
 /**/go.sum
 
