@@ -106,7 +106,8 @@ from (
 > [PostgreSQL 中系统表](https://blog.csdn.net/qq_33459369/article/details/124021543)
 
 ```sql
-create or replace view metadata AS
+-- 查看表结构信息
+create or replace view dim.metadata AS
 select
     pg_namespace.nspname          as schema_name,
     pg_class.relname              as table_name,
@@ -122,6 +123,38 @@ left join pg_catalog.pg_type        on pg_type.oid           = pg_attribute.attt
 left join pg_catalog.pg_description on pg_description.objoid = pg_attribute.attrelid and pg_description.objsubid = pg_attribute.attnum
 where pg_class.relkind = 'r' and pg_attribute.attnum > 0
 order by schema_name, table_name, column_order
+```
+
+```sql
+-- 输出全部建表语句
+select array_to_string(array_agg(table_definition), E';\n')
+from (
+    select table_name, 'create table ' || table_name || '(' || string_agg(column_definition, ', ') || ')' as table_definition
+    from (
+        select (schema_name || '.' || table_name) as table_name, (column_name || ' ' || column_type) as column_definition
+        from dim.metadata
+        where 1 = 1
+        and schema_name in ('dim')
+        and (schema_name || '.' || table_name) in (
+            'dim.temp_1'
+        )
+    )
+    group by table_name
+)
+```
+
+```sql
+-- 输出全部建索引语句
+select array_to_string(array_agg(indexdef), E';\n')
+from (
+    select indexname, indexdef
+    from pg_indexes
+    where 1 = 1
+    and schemaname in ('dim')
+    and (schemaname || '.' || tablename) in (
+        'dim.temp_1'
+    )
+) t
 ```
 
 #### PG 拿到所有 ID 放在 IN 中

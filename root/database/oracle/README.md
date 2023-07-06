@@ -67,3 +67,9 @@ order by tc.owner, tc.table_name, c.column_id
 ```
 
 ### [Oracle EBS 初始化用户密码](https://www.cnblogs.com/toowang/p/6019886.html)
+
+### 查看视图定义
+
+```sql
+SELECT dbms_metadata.get_ddl('VIEW', '<VIEW_NAME>') FROM dual
+```
