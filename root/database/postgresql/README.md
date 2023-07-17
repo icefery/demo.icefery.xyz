@@ -164,3 +164,22 @@ from (
 ```sql
 select array_to_string(array_agg('''' || id ||''''), ', ') from a;
 ```
+
+#### PG `WITH` 递归
+
+```sql
+-- 向下递归
+with recursive tree AS (
+    select m.id, m.parent_id, m.code, m.name from menu m where m.id = #{id}
+    union all
+    select m.id, m.parent_id, m.code, m.name from menu m join tree on m.parent_id = tree.id
+)
+select * from tree;
+-- 向上递归
+with recursive tree AS (
+    select m.id, m.parent_id, m.code, m.name from menu m where m.id = #{id}
+    union all
+    select m.id, m.parent_id, m.code, m.name from menu m join tree on m.id = tree.parent_id
+)
+select * from tree;
+```
