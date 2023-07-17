@@ -101,7 +101,7 @@ select count(1) from (select c_custkey, avg(age) from customer group by c_custke
 ```
 
 ```sql
-SELECT count(1) FROM (SELECT 1 FROM customer group by c_custkey) AS derived_t1;
+select count(1) from (select 1 from customer group by c_custkey) as derived_t1;
 ```
 
 ### 查询折叠
@@ -111,5 +111,5 @@ select * from (select c_custkey, c_name from customer) as derived_t1;
 ```
 
 ```sql
-SELECT c_custkey, c_name FROM customer
+select c_custkey, c_name from customer
 ```
