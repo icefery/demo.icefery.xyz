@@ -123,3 +123,10 @@ nerdctl login
 
 nerdctl push --all-platforms icefery/my-app:0.0.1
 ```
+
+## 常见问题
+
+#### `FATA[0000] failed to create shim task: OCI runtime create failed: runc create failed: mountpoint for devices not found: unknown`
+
+- [docker 启动问题 mountpoint for devices not found](https://blog.csdn.net/weixin_47023868/article/details/116025586)
+- [https://github.com/tianon/cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
