@@ -43,3 +43,7 @@ ipconfig.exe /flushdns
 
 netsh.exe interface ip delete arpcache
 ```
+
+#### `winget` 命令
+
+> 应用商店搜索“应用安装程序”并下载安装。
