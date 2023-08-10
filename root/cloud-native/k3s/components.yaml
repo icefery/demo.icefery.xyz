@@ -1,0 +1,201 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: coredns
+spec:
+  repo: https://coredns.github.io/helm
+  chart: coredns
+  targetNamespace: kube-system
+  valuesContent: |-
+    fullnameOverride: coredns
+    serviceType: LoadBalancer
+    service:
+      clusterIP: 10.16.0.10
+      name: coredns
+    servers:
+      - zones:
+          - zone: .
+        port: 53
+        plugins:
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          - name: ready
+          - name: kubernetes
+            parameters: cluster.local in-addr.arpa ip6.arpa
+            configBlock: |-
+              pods insecure
+              fallthrough in-addr.arpa ip6.arpa
+              ttl 30
+          - name: etcd
+            configBlock: |-
+              path /skydns
+              endpoint http://10.16.23.79:2379
+              fallthrough
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: cache
+            parameters: 30
+          - name: loop
+          - name: reload
+          - name: loadbalance
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: etcd
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: etcd
+  targetNamespace: kube-system
+  valuesContent: |-
+    auth:
+      rbac:
+        create: false
+    service:
+      type: LoadBalancer
+      clusterIP: 10.16.23.79
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: external-dns
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: external-dns
+  targetNamespace: kube-system
+  valuesContent: |-
+    provider: coredns
+    coredns:
+      etcdEndpoints: http://etcd.kube-system.svc.cluster.local:2379
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metrics-server
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: metrics-server
+  targetNamespace: kube-system
+  valuesContent: |-
+    apiService:
+      create: true
+    extraArgs:
+      - --kubelet-insecure-tls
+      - --kubelet-use-node-status-port
+      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      - --metric-resolution=15s
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metallb
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: metallb
+  targetNamespace: metallb-system
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik
+spec:
+  repo: https://traefik.github.io/charts
+  chart: traefik
+  targetNamespace: traefik-system
+  valuesContent: |-
+    deployment:
+      kind: Deployment
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        publishedService:
+          enabled: true
+    ports:
+      traefik:
+        port: 9000
+        protocol: TCP
+        expose: true
+        exposedPort: 9000
+      metrics:
+        port: 9100
+        protocol: TCP
+        expose: true
+        exposedPort: 9100
+      web:
+        port: 80
+        protocol: TCP
+        expose: true
+        exposedPort: 80
+      websecure:
+        port: 443
+        protocol: TCP
+        expose: true
+        exposedPort: 443
+        tls:
+          enabled: true
+    service:
+      type: LoadBalancer
+    securityContext:
+      capabilities:
+        drop: []
+        add:
+          - ALL
+      readOnlyRootFilesystem: false
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+    podSecurityContext:
+      fsGroup: 0
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+spec:
+  repo: https://charts.longhorn.io
+  chart: longhorn
+  targetNamespace: longhorn-system
+  valuesContent: |-
+    persistence:
+      defaultClassReplicaCount: 1
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    defaultSettings:
+      defaultDataPath: /data/longhorn
+      defaultReplicaCount: 1
+      deletingConfirmationFlag: true
+    longhornUI:
+      replicas: 1
+    longhornConversionWebhook:
+      replicas: 1
+    longhornAdmissionWebhook:
+      replicas: 1
+    longhornRecoveryBackend:
+      replicas: 1
+    ingress:
+      enabled: true
+      host: longhorn.example.org
