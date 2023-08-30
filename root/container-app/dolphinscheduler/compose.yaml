@@ -1,24 +1,29 @@
 services:
   dolphinscheduler-zookeeper:
-    image: bitnami/zookeeper:3.6.2
+    image: bitnami/zookeeper:3.8.0
+    container_name: dolphinscheduler-zookeeper
     profiles: ['all']
     environment:
       ALLOW_ANONYMOUS_LOGIN: yes
       ZOO_4LW_COMMANDS_WHITELIST: srvr,ruok,wchs,cons
     volumes:
       - dolphinscheduler-zookeeper:/bitnami/zookeeper
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'bash', '-c', 'cat < /dev/null > /dev/tcp/127.0.0.1/2181']
       interval: 5s
       timeout: 60s
       retries: 120
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-postgresql:
-    image: bitnami/postgresql:11.11.0
+    image: bitnami/postgresql:15.4.0
+    container_name: dolphinscheduler-postgresql
     profiles: ['all', 'schema']
     environment:
+      TZ: Asia/Shanghai
       POSTGRESQL_USERNAME: dolphinscheduler
       POSTGRESQL_PASSWORD: dolphinscheduler
       POSTGRESQL_DATABASE: dolphinscheduler
@@ -26,16 +31,19 @@ services:
       - '5432:5432'
     volumes:
       - dolphinscheduler-postgresql:/bitnami/postgresql
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'bash', '-c', 'cat < /dev/null > /dev/tcp/127.0.0.1/5432']
       interval: 5s
       timeout: 60s
       retries: 120
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-schema-initializer:
-    image: apache/dolphinscheduler-tools:3.1.7
+    image: apache/dolphinscheduler-tools:3.1.5
+    container_name: dolphinscheduler-schema-initializer
     profiles: ['schema']
     depends_on:
       dolphinscheduler-postgresql:
@@ -43,7 +51,6 @@ services:
     environment:
       TZ: Asia/Shanghai
       DATABASE: postgresql
-      SPRING_JACKSON_TIME_ZONE: UTC
       SPRING_DATASOURCE_URL: jdbc:postgresql://dolphinscheduler-postgresql:5432/dolphinscheduler
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
@@ -53,11 +60,14 @@ services:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
       - dolphinscheduler-resource-local:/dolphinscheduler
-    networks:
-      - dolphinscheduler
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-api:
-    image: apache/dolphinscheduler-api:3.1.7
+    image: apache/dolphinscheduler-api:3.1.5
+    container_name: dolphinscheduler-api
     profiles: ['all']
     depends_on:
       dolphinscheduler-zookeeper:
@@ -65,7 +75,6 @@ services:
     environment:
       TZ: Asia/Shanghai
       DATABASE: postgresql
-      SPRING_JACKSON_TIME_ZONE: UTC
       SPRING_DATASOURCE_URL: jdbc:postgresql://dolphinscheduler-postgresql:5432/dolphinscheduler
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
@@ -77,16 +86,19 @@ services:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
       - dolphinscheduler-resource-local:/dolphinscheduler
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'curl', 'http://localhost:12345/dolphinscheduler/actuator/health']
       interval: 30s
       timeout: 5s
       retries: 3
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-alert:
-    image: apache/dolphinscheduler-alert-server:3.1.7
+    image: apache/dolphinscheduler-alert-server:3.1.5
+    container_name: dolphinscheduler-alert
     profiles: ['all']
     depends_on:
       dolphinscheduler-zookeeper:
@@ -94,23 +106,25 @@ services:
     environment:
       TZ: Asia/Shanghai
       DATABASE: postgresql
-      SPRING_JACKSON_TIME_ZONE: UTC
       SPRING_DATASOURCE_URL: jdbc:postgresql://dolphinscheduler-postgresql:5432/dolphinscheduler
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
       REGISTRY_ZOOKEEPER_CONNECT_STRING: dolphinscheduler-zookeeper:2181
     volumes:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'curl', 'http://localhost:50053/actuator/health']
       interval: 30s
       timeout: 5s
       retries: 3
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-master:
-    image: apache/dolphinscheduler-master:3.1.7
+    image: apache/dolphinscheduler-master:3.1.5
+    container_name: dolphinscheduler-master
     profiles: ['all']
     depends_on:
       dolphinscheduler-zookeeper:
@@ -118,7 +132,6 @@ services:
     environment:
       TZ: Asia/Shanghai
       DATABASE: postgresql
-      SPRING_JACKSON_TIME_ZONE: UTC
       SPRING_DATASOURCE_URL: jdbc:postgresql://dolphinscheduler-postgresql:5432/dolphinscheduler
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
@@ -126,16 +139,19 @@ services:
     volumes:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'curl', 'http://localhost:5679/actuator/health']
       interval: 30s
       timeout: 5s
       retries: 3
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
   dolphinscheduler-worker:
-    image: apache/dolphinscheduler-worker:3.1.7
+    image: apache/dolphinscheduler-worker:3.1.5
+    container_name: dolphinscheduler-worker
     profiles: ['all']
     depends_on:
       dolphinscheduler-zookeeper:
@@ -143,7 +159,6 @@ services:
     environment:
       TZ: Asia/Shanghai
       DATABASE: postgresql
-      SPRING_JACKSON_TIME_ZONE: UTC
       SPRING_DATASOURCE_URL: jdbc:postgresql://dolphinscheduler-postgresql:5432/dolphinscheduler
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
@@ -153,21 +168,24 @@ services:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
       - dolphinscheduler-resource-local:/dolphinscheduler
-    networks:
-      - dolphinscheduler
     healthcheck:
       test: ['CMD', 'curl', 'http://localhost:1235/actuator/health']
       interval: 30s
       timeout: 5s
       retries: 3
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
 
 networks:
-  dolphinscheduler:
-    driver: bridge
+  default:
+    external: true
+    name: compose
 
 volumes:
-  dolphinscheduler-postgresql:
   dolphinscheduler-zookeeper:
+  dolphinscheduler-postgresql:
   dolphinscheduler-worker-data:
   dolphinscheduler-logs:
   dolphinscheduler-shared-local:
