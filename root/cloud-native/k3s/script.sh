@@ -1,9 +1,7 @@
 function install() {
-    if [[ ! -d "/etc/rancher/k3s" ]]; then
-        mkdir -p /etc/rancher/k3s
-        tee /etc/profile.d/k3s.sh > /dev/null <<- 'EOF'
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-EOF
+    mkdir -p /etc/rancher/k3s
+
+    if [[ ! -f "/etc/rancher/k3s/registries.yam" ]]; then
         tee /etc/rancher/k3s/registries.yaml > /dev/null <<- 'EOF'
 mirrors:
   docker.io:
@@ -18,68 +16,58 @@ configs:
 EOF
     fi
 
+    if [[ ! -f "/etc/profile.d/k3s.sh" ]]; then
+        tee /etc/profile.d/k3s.sh > /dev/null <<- 'EOF'
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+eval "$(k3s completion bash)"
+eval "$(kubectl completion bash)"
+EOF
+    fi
+
     if [[ ! -x "/usr/local/bin/k3s" ]]; then
-        export INSTALL_K3S_MIRROR=cn
-        export INSTALL_K3S_VERSION=v1.24.13+k3s1
-        # 可禁用的组件有 coredns | servicelb | traefik | local-storage | metrics-server
-        curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | bash -s - \
+        curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.23.17+k3s1 bash -s - server \
+            --data-dir /data/k3s/var/lib/rancher/k3s \
+            --cluster-cidr 10.8.0.0/16 \
+            --service-cidr 10.16.0.0/16 \
+            --cluster-dns 10.16.0.10 \
+            --service-node-port-range 1-65535 \
+            --kube-proxy-arg proxy-mode=ipvs \
             --disable coredns \
             --disable servicelb \
             --disable traefik \
             --disable local-storage \
-            --disable metrics-server \
-            --cluster-cidr 10.8.0.0/16 \
-            --service-cidr 10.16.0.0/16 \
-            --service-node-port-range 1-65535 \
-            --cluster-dns 10.16.0.10 \
-            --kube-proxy-arg proxy-mode=ipvs
-        k3s completion bash | tee /etc/bash_completion.d/k3s > /dev/null
-        kubectl completion bash | tee /etc/bash_completion.d/kubectl > /dev/null
-        crictl completion bash | tee /etc/bash_completion.d/crictl > /dev/null
+            --disable metrics-server
     fi
 
     if [[ ! -x "/usr/local/bin/helm" ]]; then
         curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-        helm completion bash | tee /etc/bash_completion.d/helm > /dev/null
     fi
 
     source /etc/profile
 }
 
 function uninstall() {
-    /usr/local/bin/k3s-uninstall.sh
-    /usr/local/bin/k3s-agent-uninstall.sh
-}
+    if [[ -x "/usr/local/bin/k3s-uninstall.sh" ]]; then
+        /usr/local/bin/k3s-uninstall.sh
+    fi
 
-function init() {
-    CONTAINER_APP_PATH=$(realpath -e -s ../../container-app)
-    CONTAINER_APP_LIST=(
-        coredns
-        etcd
-        external-dns
-        metrics-server
-        metallb
-        traefik
-        longhorn
-    )
-    for app in ${CONTAINER_APP_LIST[@]}; do
-        cd ${CONTAINER_APP_PATH}/${app}
-        if [[ $(helm list --no-headers -A | grep -c ${app}) == 0 ]]; then
-            bash script.sh helm::install
-        fi
-    done
+    if [[ -x "/usr/local/bin/k3s-agent-uninstall.sh" ]]; then
+        /usr/local/bin/k3s-agent-uninstall.sh
+    fi
+
+    rm -rf /var/lib/rancher
+    rm -rf /data/k3s/var/lib/rancher
 }
 
 LIST=(
     install
     uninstall
-    init
 )
 
-if [[ -n "$1" ]]; then
+if [[ -n $1 ]]; then
     $1
 else
-    select f in ${LIST[@]}; do
+    select f in "${LIST[@]}"; do
         $f
     done
 fi
