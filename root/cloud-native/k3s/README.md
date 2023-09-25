@@ -82,7 +82,7 @@ curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh
     --disable traefik \
     --disable local-storage \
     --disable metrics-server \
-    --server https://tc-242:6443 \
+    --server https://<HOST>:6443 \
     --token <TOKEN>
 ```
 
