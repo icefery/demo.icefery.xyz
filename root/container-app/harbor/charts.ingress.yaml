@@ -1,0 +1,33 @@
+### harbor
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: harbor
+  namespace: default
+  labels:
+    app: harbor
+spec:
+  repo: https://coredns.github.io/helm
+  chart: coredns
+  targetNamespace: default
+  bootstrap: true
+  valuesContent: |-
+    adminPassword: admin
+    externalURL: http://harbor.example.org:30080
+    ipFamily:
+      ipv6:
+        enabled: false
+      ipv4:
+        enabled: true
+    exposureType: ingress
+    service:
+      type: LoadBalancer
+    ingress:
+      core:
+        hostname: harbor.example.org
+        annotations:
+          ingress.kubernetes.io/ssl-redirect: 'false'
+          nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    metrics:
+      enabled: true
