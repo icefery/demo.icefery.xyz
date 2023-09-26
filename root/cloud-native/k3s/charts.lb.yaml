@@ -18,6 +18,9 @@ spec:
     service:
       clusterIP: 10.16.0.10
       name: coredns
+    prometheus:
+      service:
+        enabled: true
     servers:
       - zones:
           - zone: .
