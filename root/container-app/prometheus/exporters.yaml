@@ -1,0 +1,143 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+
+### mysqld-exporter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqld-exporter
+  namespace: monitoring
+  labels:
+    app: mysqld-exporter
+spec:
+  selector:
+    app: mysqld-exporter
+  ports:
+    - { name: metrics, port: 9104 }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqld-exporter
+  namespace: monitoring
+  labels:
+    app: mysqld-exporter
+spec:
+  selector:
+    matchLabels:
+      app: mysqld-exporter
+  template:
+    metadata:
+      labels:
+        app: mysqld-exporter
+    spec:
+      containers:
+        - name: mysqld-exporter
+          image: docker.io/bitnami/mysqld-exporter:0.15.0-debian-11-r59
+          env:
+            - { name: MYSQLD_EXPORTER_PASSWORD, value: 'root' }
+          args:
+            - --mysqld.username=root
+            - --mysqld.address=192.168.8.101:3306
+          ports:
+            - { name: metrics, containerPort: 9104 }
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 500m
+
+### postgres-exporter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-exporter
+  namespace: monitoring
+  labels:
+    app: postgres-exporter
+spec:
+  selector:
+    app: postgres-exporter
+  ports:
+    - { name: metrics, port: 9187 }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-exporter
+  namespace: monitoring
+  labels:
+    app: postgres-exporter
+spec:
+  selector:
+    matchLabels:
+      app: postgres-exporter
+  template:
+    metadata:
+      labels:
+        app: postgres-exporter
+    spec:
+      containers:
+        - name: postgres-exporter
+          image: docker.io/bitnami/postgres-exporter:0.14.0-debian-11-r2
+          env:
+            - { name: DATA_SOURCE_URI, value: '192.168.8.101:5432/postgres' }
+            - { name: DATA_SOURCE_USER, value: 'postgres' }
+            - { name: DATA_SOURCE_PASS, value: 'postgres' }
+          ports:
+            - { name: metrics, containerPort: 9187 }
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 500m
+
+### redis-exporter
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-exporter
+  namespace: monitoring
+  labels:
+    app: redis-exporter
+spec:
+  selector:
+    app: redis-exporter
+  ports:
+    - { name: metrics, port: 9121 }
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-exporter
+  namespace: monitoring
+  labels:
+    app: redis-exporter
+spec:
+  selector:
+    matchLabels:
+      app: redis-exporter
+  template:
+    metadata:
+      labels:
+        app: redis-exporter
+    spec:
+      containers:
+        - name: redis-exporter
+          image: docker.io/bitnami/redis-exporter:1.54.0-debian-11-r16
+          env:
+            - { name: REDIS_ADDR, value: 'redis://192.168.8.101:6379' }
+            - { name: REDIS_PASSWORD, value: 'redis' }
+          ports:
+            - { name: metrics, containerPort: 9121 }
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 500m
