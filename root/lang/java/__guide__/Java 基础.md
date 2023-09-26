@@ -26,9 +26,7 @@
 > 在以下 3 种特殊情况下，`finally` 块不会被执行
 >
 > 1. 在 `try` 或 `finally` 块中用了 `System.exit(int)` 退出程序。但是 `System.exit(int)` 在异常语句之后，`finally` 还是会被执行。
->
 > 2. 程序所在的线程死亡。
->
 > 3. 关闭 CPU。
 
 > 在 `try` 语句和 `finally` 语句中都有 `return` 语句时，在方法返回之前， `finally` 语句的内容将被执行，并且 `finally` 语句的返回值将会覆盖原始的返回值。

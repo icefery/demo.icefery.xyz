@@ -447,7 +447,7 @@ public class HeroController {
 直接使用`v-html`指令显示带有样式的字段
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

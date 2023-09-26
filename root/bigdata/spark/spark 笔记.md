@@ -2701,7 +2701,7 @@ object Requirement2 {
 - 展示页面
 
   ```html
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
     <head>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js"></script>
