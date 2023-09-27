@@ -1,17 +1,22 @@
 ### harbor
 ---
+apiVersion: Namespace
+kind: Namespace
+metadata:
+  name: harbor
+
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: harbor
-  namespace: default
+  namespace: harbor
   labels:
     app: harbor
 spec:
-  repo: https://coredns.github.io/helm
-  chart: coredns
-  targetNamespace: default
-  bootstrap: true
+  repo: https://charts.bitnami.com/bitnami
+  chart: harbor
+  targetNamespace: harbor
   valuesContent: |-
     adminPassword: admin
     externalURL: http://192.168.8.101:30080
