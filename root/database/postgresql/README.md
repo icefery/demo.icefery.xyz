@@ -1,38 +1,18 @@
 # PostgreSQL
 
-## 常用命令
-
-- 复制表结构
-
-  ```sql
-  CREATE TABLE src ( LIKE dst INCLUDING ALL );
-  ```
-
 ## 收藏
 
 #### [PostgreSQL 博文、资料、学习笔记、系列教程汇总](https://www.cnblogs.com/aixing/p/14918624.html)
 
 #### [PostgreSQL-with 子句实现递归](https://zhuanlan.zhihu.com/p/159555056)
 
-#### 查看所有表结构信息
+#### PG 复制表结构
 
 ```sql
-select ('alter table ' || schema_name || '.' || table_name || ' alter column ' || column_name || ' type text;') as sql
-from (
-    select
-        t.table_schema as schema_name,
-        t.table_name,
-        c.column_name,
-        c.ordinal_position as column_order,
-        c.data_type as column_type
-    from information_schema.tables t
-    join information_schema.columns c on c.table_schema = t.table_schema and c.table_name = t.table_name
-    where t.table_schema = 'stg' and c.data_type != 'text'
-    order by t.table_schema, t.table_name, c.ordinal_position
-)
+create table src ( like dst including all );
 ```
 
-#### 进程管理
+#### PG 进程管理
 
 ```sql
 -- 查看数据库当前的进程 看一下有无正在执行的慢 SQL 记录线程
@@ -61,7 +41,7 @@ select pg_cancel_backend(pid);
 select * from pg_stat_activity where query ~ '表名';
 ```
 
-#### 修改序列起始值
+#### PG 修改序列起始值
 
 > 针对不支持 `ALTER SEQUENCE` 操作的场景。
 
@@ -77,7 +57,7 @@ CREATE SEQUENCE pms.pms_product_id_seq INCREMENT BY 1 START 1000000;
 ALTER TABLE pms.pms_product ALTER COLUMN id SET DEFAULT nextval('pms.pms_product_id_seq');
 ```
 
-#### 数组截取
+#### PG 数组截取
 
 > 提取表名中的信息。
 
@@ -101,46 +81,34 @@ from (
 | sh            | topic3     | t_a_b_l_e_3 |
 | cq            | topic4     | t_a_b_l_e_4 |
 
-#### 查看表结构信息
+#### PG 查看表结构信息
 
 > [PostgreSQL 中系统表](https://blog.csdn.net/qq_33459369/article/details/124021543)
 
 ```sql
 -- 查看表结构信息
-create or replace view dim.metadata AS
-select
-    pg_namespace.nspname          as schema_name,
-    pg_class.relname              as table_name,
-    obj_description(pg_class.oid) as table_comment,
-    pg_attribute.attname          as column_name,
-    concat_ws('', pg_type.typname, substring(format_type(pg_attribute.atttypid, pg_attribute.atttypmod) from '\(.*\)')) as column_type,
-    pg_attribute.attnum           as column_order,
-    pg_description.description    as column_comment
-from      pg_catalog.pg_namespace
-left join pg_catalog.pg_class       on pg_class.relnamespace = pg_namespace.oid
-left join pg_catalog.pg_attribute   on pg_attribute.attrelid = pg_class.oid
-left join pg_catalog.pg_type        on pg_type.oid           = pg_attribute.atttypid
-left join pg_catalog.pg_description on pg_description.objoid = pg_attribute.attrelid and pg_description.objsubid = pg_attribute.attnum
-where pg_class.relkind = 'r' and pg_attribute.attnum > 0
-order by schema_name, table_name, column_order
-```
-
-```sql
--- 输出全部建表语句
-select array_to_string(array_agg(table_definition), E';\n')
+select table_schema, table_name, table_type, table_comment, column_name, column_type, column_order, column_comment, column_nullable, column_default
 from (
-    select table_name, 'create table ' || table_name || '(' || string_agg(column_definition, ', ') || ')' as table_definition
-    from (
-        select (schema_name || '.' || table_name) as table_name, (column_name || ' ' || column_type) as column_definition
-        from dim.metadata
-        where 1 = 1
-        and schema_name in ('dim')
-        and (schema_name || '.' || table_name) in (
-            'dim.temp_1'
-        )
-    )
-    group by table_name
-)
+    select
+        pg_namespace.nspname          as table_schema,
+        pg_class.relname              as table_name,
+        (case pg_class.relkind when 'r' then 't' when 'v' then 'v' end) as table_type,
+        obj_description(pg_class.oid) as table_comment,
+        pg_attribute.attname          as column_name,
+        concat_ws('', pg_type.typname, substring(format_type(pg_attribute.atttypid, pg_attribute.atttypmod) from '\(.*\)')) as column_type,
+        pg_attribute.attnum           as column_order,
+        pg_description.description    as column_comment,
+        not pg_attribute.attnotnull   as column_nullable,
+        pg_get_expr(pg_attrdef.adbin, pg_attrdef.adrelid) as column_default
+    from      pg_catalog.pg_namespace
+    left join pg_catalog.pg_class       on pg_class.relnamespace = pg_namespace.oid
+    left join pg_catalog.pg_attribute   on pg_attribute.attrelid = pg_class.oid
+    left join pg_catalog.pg_attrdef     on pg_attrdef.adrelid    = pg_attribute.attrelid and pg_attrdef.adnum = pg_attribute.attnum
+    left join pg_catalog.pg_type        on pg_type.oid           = pg_attribute.atttypid
+    left join pg_catalog.pg_description on pg_description.objoid = pg_attribute.attrelid and pg_description.objsubid = pg_attribute.attnum
+    where pg_namespace.nspname not in ('information_schema', 'pg_catalog', 'pg_toast') and pg_class.relkind in ('r', 'v') and pg_attribute.attnum > 0 and pg_attribute.attisdropped = false
+    order by table_schema, table_name, column_order
+) t
 ```
 
 ```sql
