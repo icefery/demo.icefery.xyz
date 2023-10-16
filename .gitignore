@@ -44,6 +44,10 @@
 ### cmake
 /**/cmake-build-*/
 
+### cargo
+/**/Cargo.lock
+/**/target/
+
 ### go
 /**/go.sum
 
