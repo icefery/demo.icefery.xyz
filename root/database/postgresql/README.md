@@ -31,7 +31,7 @@ from (
         select pg_stat_get_backend_idset() as backendid
     ) as s
 ) as s
-where current_query != '<idle>'
+where current_query !~* '(<idle>|<insufficient privilege>|SET application_name|SET SESSION search_path|SHOW search_path)'
 order by lap desc;
 
 -- 杀事务
