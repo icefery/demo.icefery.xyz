@@ -28,6 +28,8 @@ services:
       POSTGRESQL_USERNAME: dolphinscheduler
       POSTGRESQL_PASSWORD: dolphinscheduler
       POSTGRESQL_DATABASE: dolphinscheduler
+      POSTGRESQL_TIMEZONE: Asia/Shanghai
+      POSTGRESQL_LOG_TIMEZONE: Asia/Shanghai
     ports:
       - '5432:5432'
     volumes:
@@ -44,7 +46,7 @@ services:
         hard: 65535
 
   dolphinscheduler-schema-initializer:
-    image: apache/dolphinscheduler-tools:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-tools:3.2.0
     container_name: dolphinscheduler-schema-initializer
     profiles: ['schema']
     depends_on:
@@ -70,7 +72,7 @@ services:
         hard: 65535
 
   dolphinscheduler-api:
-    image: apache/dolphinscheduler-api:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-api:3.2.0
     container_name: dolphinscheduler-api
     profiles: ['all']
     depends_on:
@@ -103,7 +105,7 @@ services:
         hard: 65535
 
   dolphinscheduler-alert:
-    image: apache/dolphinscheduler-alert-server:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-alert-server:3.2.0
     container_name: dolphinscheduler-alert
     profiles: ['all']
     depends_on:
@@ -131,7 +133,7 @@ services:
         hard: 65535
 
   dolphinscheduler-master:
-    image: apache/dolphinscheduler-master:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-master:3.2.0
     container_name: dolphinscheduler-master
     profiles: ['all']
     depends_on:
@@ -161,7 +163,7 @@ services:
         hard: 65535
 
   dolphinscheduler-worker:
-    image: apache/dolphinscheduler-worker:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-worker:3.2.0
     container_name: dolphinscheduler-worker
     profiles: ['all']
     depends_on:
