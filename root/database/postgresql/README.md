@@ -86,7 +86,6 @@ from (
 > [PostgreSQL 中系统表](https://blog.csdn.net/qq_33459369/article/details/124021543)
 
 ```sql
--- 查看表结构信息
 select table_schema, table_name, table_type, table_comment, column_name, column_type, column_order, column_comment, column_nullable, column_default
 from (
     select
@@ -111,18 +110,41 @@ from (
 ) t
 ```
 
+#### PG 查看索引信息
+
 ```sql
--- 输出全部建索引语句
-select array_to_string(array_agg(indexdef), E';\n')
+select table_schema, table_name, index_name, index_def
 from (
-    select indexname, indexdef
+    select schemaname as table_schema, tablename as table_name, indexname as index_name, indexdef as index_def
     from pg_indexes
-    where 1 = 1
-    and schemaname in ('dim')
-    and (schemaname || '.' || tablename) in (
-        'dim.temp_1'
-    )
+    where schemaname not in ('information_schema', 'pg_catalog', 'pg_toast')
+    order by table_schema, table_name, index_name
 ) t
+```
+
+#### PG 查看分区信息
+
+```sql
+select table_schema， table_name, partition_name
+from (
+    select
+        n.nspname as table_schema,
+        c.relname as table_name,
+        p.relname as partition_name
+    from pg_namespace n
+    join pg_class c on c.relnamespace = n.oid
+    join (select * from pg_partition where pg_partition.parttype = 'r') r on r.parentid = c.oid
+    join (select * from pg_partition where pg_partition.parttype = 'p') p on p.parentid = r.parentid
+    where n.nspname not in ('information_schema', 'pg_catalog', 'pg_toast')
+    order by table_schema, table_name, partition_name
+) t
+```
+
+#### 查看表空间信息
+
+```sql
+select spcname as tablespace_name, pg_size_pretty(pg_tablespace_size(spcname)) as tablespace_size
+from pg_tablespace
 ```
 
 #### PG 拿到所有 ID 放在 IN 中
