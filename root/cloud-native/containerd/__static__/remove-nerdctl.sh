@@ -74,6 +74,7 @@ LIST=(
     share/doc/nerdctl/docs/overlaybd.md
     share/doc/nerdctl/docs/registry.md
     share/doc/nerdctl/docs/rootless.md
+    share/doc/nerdctl/docs/soci.md
     share/doc/nerdctl/docs/stargz.md
     share/doc/nerdctl-full/
     share/doc/nerdctl-full/README.md
@@ -82,7 +83,7 @@ LIST=(
 
 for f in "${LIST[@]}"; do
     f="/usr/local/$f"
-    if [[ -f "$f" ]]; then
+    if [[ -f $f ]]; then
         echo "$f is file"
         rm "$f"
     fi
@@ -90,7 +91,7 @@ done
 
 for f in "${LIST[@]}"; do
     f="/usr/local/$f"
-    if [[ -d "$f" && $(ls -A "$f") == "" ]]; then
+    if [[ -d $f && $(ls -A "$f") == "" ]]; then
         echo "$f is empty directory"
         rmdir "$f"
     fi
