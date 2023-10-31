@@ -19,7 +19,7 @@ sudo passwd root
 # 参考 centos7 配置本地 hosts
 sudo tee /etc/hosts > /dev/null <<- 'EOF'
 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1       localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1       localhost localhost.localdomain localhost6 localhost6.localdomain6
 EOF
 
 # 禁用 ipv6
@@ -124,10 +124,11 @@ rm -rf ~/.bashrc .profile
 
 # 全局配置
 sudo tee /etc/profile.d/custom.sh <<- "EOF"
-alias ll='ls -AlhF --color=auto --time-style=long-iso'
-
 export PS1='[\[\e[01;32m\]\u\[\e[00m\]@\[\e[01;33m\]\h\[\e[00m\]:\[\e[01;32m\]\w\[\e[00m\]]\$ '
-export TZ=Asia/Shanghai
+export TZ='Asia/Shanghai'
+export TIME_STYLE='+%Y-%m-%d %H:%M:%S'
+
+alias ll='ls -AlhF --color=auto'
 
 function start_proxy() {
   export http_proxy=http://192.168.8.10:7890
