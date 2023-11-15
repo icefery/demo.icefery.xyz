@@ -130,3 +130,9 @@ nerdctl push --all-platforms icefery/my-app:0.0.1
 
 - [docker 启动问题 mountpoint for devices not found](https://blog.csdn.net/weixin_47023868/article/details/116025586)
 - [https://github.com/tianon/cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
+
+#### `ctr` 拉取 HTTP 镜像
+
+```shell
+ctr image pull --plain-http <image>
+```
