@@ -1,6 +1,7 @@
 {
   "scripts": {
     "prettier": "prettier --write .",
+    "shfmt": "shfmt --write --simplify --indent=4 --binary-next-line --space-redirects --keep-padding .",
     "dos2unix": "git ls-files --exclude-standard --others | xargs dos2unix --remove-bom --safe",
     "git-chmod-preview": "git ls-files --stage | grep '\\.sh' | awk '{print $1,$4}'",
     "git-chmod": "git ls-files --stage | grep '\\.sh' | awk '{print $4}' | xargs chmod +x && git update-index --chmod +x",

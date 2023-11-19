@@ -1,12 +1,11 @@
 function install() {
     mkdir -p /etc/rancher/k3s
 
-    if [[ ! -f "/etc/rancher/k3s/registries.yam" ]]; then
+    if [[ ! -f "/etc/rancher/k3s/registries.yaml" ]]; then
         tee /etc/rancher/k3s/registries.yaml > /dev/null <<- 'EOF'
 mirrors:
   docker.io:
     endpoint:
-      - https://hub-mirror.c.163.com
       - https://uwk49ut2.mirror.aliyuncs.com
 configs:
   ghcr.io:
@@ -59,15 +58,14 @@ function uninstall() {
     rm -rf /data/k3s/var/lib/rancher
 }
 
-LIST=(
+case $1 in
+install)
     install
+    ;;
+uninstall)
     uninstall
-)
-
-if [[ -n $1 ]]; then
-    $1
-else
-    select f in "${LIST[@]}"; do
-        $f
-    done
-fi
+    ;;
+*)
+    echo "Usage: $1 <install|uninstall>"
+    ;;
+esac

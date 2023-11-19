@@ -9,7 +9,7 @@ metadata:
     app: metallb
 spec:
   addresses:
-    - 192.168.8.32-192.168.8.64
+    - 192.168.31.128-192.168.31.192
 
 ---
 apiVersion: metallb.io/v1beta1

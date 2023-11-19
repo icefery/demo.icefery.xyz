@@ -103,3 +103,13 @@ curl -fsSL https://rancher-mirror.oss-cn-beijing.aliyuncs.com/k3s/k3s-install.sh
 ```shell
 nerdctl --address /var/run/k3s/containerd/containerd.sock ps -a
 ```
+
+#### bitnami 镜像卷映射权限不足
+
+```shell
+docker compose up -d
+
+chown -R 1001:1001 /data/compose
+
+docker compose restart
+```
