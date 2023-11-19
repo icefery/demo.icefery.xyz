@@ -18,10 +18,10 @@ LIST=(
     helm::uninstall
 )
 
-if [[ -n "$1" ]]; then
+if [[ -n $1 ]]; then
     $1
 else
-    select f in ${LIST[@]}; do
+    select f in "${LIST[@]}"; do
         $f
     done
 fi

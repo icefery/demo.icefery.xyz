@@ -20,7 +20,7 @@ function download_cli() {
     ln -snf "$KNATIVE_HOME/bin/kn-func" "$KNATIVE_HOME/bin/func"
 
     if [[ ! -f "/etc/profile.d/knative.sh" ]]; then
-        tee /etc/profile.d/knative.sh <<-"EOF"
+        tee /etc/profile.d/knative.sh <<- "EOF"
 export KNATIVE_HOME=$KNATIVE_HOME
 export PATH=\$KNATIVE_HOME/bin:\$PATH
 source <(kn completion bash)
@@ -44,7 +44,7 @@ LIST=(
     install_knative
 )
 
-if [[ -n "$1" ]]; then
+if [[ -n $1 ]]; then
     $1
 else
     select f in "${LIST[@]}"; do
