@@ -71,5 +71,24 @@ order by tc.owner, tc.table_name, c.column_id
 ### 查看视图定义
 
 ```sql
-SELECT dbms_metadata.get_ddl('VIEW', '<VIEW_NAME>') FROM dual
+select dbms_metadata.get_ddl('VIEW', '<VIEW_NAME>') from dual
+```
+
+```sql
+select * from all_views where owner not in ('SYS', 'SYSTEM')
+```
+
+### 查看所有对象
+
+```sql
+select
+    owner                                     as "对象归属",
+    object_type                               as "对象类型",
+    object_name                               as "对象名称",
+    object_id                                 as "对象标识",
+    status                                    as "对象状态",
+    to_char(created, 'yyyy-mm-dd hh24:mi:ss') as "对象创建时间"
+from sys.all_objects
+where owner not in ('sys', 'system')
+order by owner, object_type, object_name
 ```
