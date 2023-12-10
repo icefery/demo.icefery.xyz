@@ -1,0 +1,80 @@
+image:
+  registry: ghcr.io/icefery
+  tag: 3.2.0
+  tools: dolphinscheduler-tools
+  api: dolphinscheduler-api
+  master: dolphinscheduler-master
+  worker: dolphinscheduler-worker
+  alert: dolphinscheduler-alert-server
+
+postgresql:
+  enabled: false
+
+mysql:
+  enabled: false
+
+minio:
+  enabled: false
+
+externalDatabase:
+  enabled: true
+  type: postgresql
+  host: 192.168.31.101
+  port: 5432
+  username: dolphinscheduler
+  password: dolphinscheduler
+  database: dolphinscheduler
+  params: stringtype=unspecified
+  driverClassName: org.postgresql.Driver
+
+zookeeper:
+  enabled: true
+
+conf:
+  common:
+    resource.storage.type: HDFS
+    resource.hdfs.fs.defaultFS: file:///
+
+common:
+  configmap:
+    PYTHON_LAUNCHER: /opt/soft/python/bin/python
+  sharedStoragePersistence:
+    enabled: true
+    storageClassName: longhorn
+    storage: 8Gi
+  fsFileResourcePersistence:
+    enabled: true
+    storageClassName: longhorn
+    storage: 8Gi
+
+master:
+  enabled: true
+  replicas: 1
+  env:
+    JAVA_OPTS: '-Xms1g -Xmx1g -Xmn512m'
+    MASTER_EXEC_THREADS: 10
+
+worker:
+  enabled: true
+  replicas: 1
+  env:
+    JAVA_OPTS: '-Xms1g -Xmx1g -Xmn512m'
+    WORKER_EXEC_THREADS: 10
+
+alert:
+  enabled: true
+  replicas: 1
+  env:
+    JAVA_OPTS: '-Xms512m -Xmx512m -Xmn256m'
+
+api:
+  enabled: true
+  replicas: 1
+  env:
+    JAVA_OPTS: '-Xms512m -Xmx512m -Xmn256m'
+  service:
+    type: LoadBalancer
+
+ingress:
+  enabled: true
+  host: dolphinscheduler.example.org
