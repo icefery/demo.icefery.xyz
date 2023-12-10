@@ -10,7 +10,7 @@ start)
 stop)
     ps -ef | grep redis | grep -v grep | awk '{print $2}' | xargs kill -9
     ;;
-    *)
+*)
     echo "USAGE: $0 <start|stop>"
     ;;
 esac

@@ -20,13 +20,13 @@ function init {
 }
 
 function start {
-    nohup "${HIVE_HOME}/bin/hive" --service metastore   &> /dev/null &
+    nohup "${HIVE_HOME}/bin/hive" --service metastore &> /dev/null &
     nohup "${HIVE_HOME}/bin/hive" --service hiveserver2 &> /dev/null &
 }
 
 function stop {
     kill -9 $("${JAVA_HOME}/bin/jps" -ml | grep 'HiveMetaStore' | awk '{print $1}')
-    kill -9 $("${JAVA_HOME}/bin/jps" -ml | grep 'HiveServer2'   | awk '{print $1}')
+    kill -9 $("${JAVA_HOME}/bin/jps" -ml | grep 'HiveServer2' | awk '{print $1}')
 }
 
 function help {
@@ -36,8 +36,8 @@ function help {
 check
 
 case $1 in
-init)  init  ;;
+init) init ;;
 start) start ;;
-stop)  stop  ;;
-*)     help  ;;
+stop) stop ;;
+*) help ;;
 esac

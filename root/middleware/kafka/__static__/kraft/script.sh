@@ -38,8 +38,8 @@ function help {
 check
 
 case $1 in
-init)  init  ;;
+init) init ;;
 start) start ;;
-stop)  stop  ;;
-*)     help  ;;
+stop) stop ;;
+*) help ;;
 esac

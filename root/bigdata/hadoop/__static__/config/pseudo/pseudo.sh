@@ -38,10 +38,10 @@ function help {
 check
 
 case "$1" in
-init)  init  ;;
+init) init ;;
 reset) reset ;;
 start) start ;;
-stop)  stop  ;;
-jps)   jps   ;;
-*)     help  ;;
+stop) stop ;;
+jps) jps ;;
+*) help ;;
 esac

@@ -54,15 +54,15 @@ function sync {
 }
 
 function start {
-    ssh "${NAME_NODE_HOST}"        "${HADOOP_HOME}/sbin/start-dfs.sh"
+    ssh "${NAME_NODE_HOST}" "${HADOOP_HOME}/sbin/start-dfs.sh"
     ssh "${RESOURCE_MANAGER_HOST}" "${HADOOP_HOME}/sbin/start-yarn.sh"
-    ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred --daemon start historyserver"
+    ssh "${HISTORY_SERVER_HOST}" "${HADOOP_HOME}/bin/mapred --daemon start historyserver"
 }
 
 function stop {
-    ssh "${HISTORY_SERVER_HOST}"   "${HADOOP_HOME}/bin/mapred --daemon stop historyserver"
+    ssh "${HISTORY_SERVER_HOST}" "${HADOOP_HOME}/bin/mapred --daemon stop historyserver"
     ssh "${RESOURCE_MANAGER_HOST}" "${HADOOP_HOME}/sbin/stop-yarn.sh"
-    ssh "${NAME_NODE_HOST}"        "${HADOOP_HOME}/sbin/stop-dfs.sh"
+    ssh "${NAME_NODE_HOST}" "${HADOOP_HOME}/sbin/stop-dfs.sh"
 }
 
 function jps {
@@ -79,11 +79,11 @@ function help {
 check
 
 case $1 in
-init)  init  ;;
+init) init ;;
 reset) reset ;;
-sync)  sync  ;;
+sync) sync ;;
 start) start ;;
-stop)  stop  ;;
-jps)   jps   ;;
-*)     help  ;;
+stop) stop ;;
+jps) jps ;;
+*) help ;;
 esac

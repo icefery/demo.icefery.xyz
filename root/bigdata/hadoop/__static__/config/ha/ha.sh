@@ -82,12 +82,12 @@ function help {
 check
 
 case $1 in
-init)  init  ;;
+init) init ;;
 reset) reset ;;
-sync)  sync  ;;
+sync) sync ;;
 start) start ;;
-stop)  stop  ;;
-ha)    ha    ;;
-jps)   jps   ;;
-*)     help  ;;
+stop) stop ;;
+ha) ha ;;
+jps) jps ;;
+*) help ;;
 esac
