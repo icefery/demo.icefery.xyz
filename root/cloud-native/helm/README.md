@@ -95,3 +95,7 @@ var UninstallOrder KindSortOrder = []string{
 ```
 
 #### [Helm template 快速入门](https://juejin.cn/post/6844904199818313735)
+
+#### `Error: UPGRADE FAILED: create: failed to create: Request entity too large: limit is 3145728`
+
+> HelmChart 目录太大。可能是将很大的二进制文件下载到了该目录下。
