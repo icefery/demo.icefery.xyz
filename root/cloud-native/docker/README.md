@@ -6,30 +6,59 @@
 
 ## 收藏
 
-- [关于 Dockerfile 中 echo 的用法](https://www.jianshu.com/p/7c7c6c2c6f6b#comments)
+### [关于 Dockerfile 中 echo 的用法](https://www.jianshu.com/p/7c7c6c2c6f6b#comments)
 
-- [docker 挂载数据卷](https://www.cnblogs.com/kerwincui/p/12544603.html)
+### [docker 挂载数据卷](https://www.cnblogs.com/kerwincui/p/12544603.html)
 
-- `Warning: Stopping docker.service, but it can still be activated by: docker.socket`
+### [`Warning: Stopping docker.service, but it can still be activated by: docker.socket`](https://blog.csdn.net/weixin_43885975/article/details/117809901)
 
-  > https://blog.csdn.net/weixin_43885975/article/details/117809901
+### 远程访问
 
-  > 这是因为除了 `docker.service` 单元文件，还有一个 `docker.socket` 单元文件用于套接字激活。该警告意味着：如果你试图连接到 `docker.socket`，而 Docker 服务没有运行，系统将自动启动 docker。
+> https://docs.docker.com/config/daemon/remote-access/#configuring-remote-access-with-systemd-unit-file
 
-  ```shell
-  sudo systemctl disable docker.socket
+#### 方式一
+
+- `/etc/systemd/system/multi-user.target.wants/docker.service`
+
+  ```toml
+  ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
   ```
 
-- 设置 TCP Socket
+#### 方式二
 
-  ```shell
-  systemctl edit docker.service
+- `/etc/systemd/system/multi-user.target.wants/docker.service`
+
+  ```toml
+  ExecStart=/usr/bin/dockerd
   ```
 
-  ```shell
-  [Service]
-  ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+- `/etc/docker/daemon.json`
+
+  ```json
+  {
+    "data-root": "/opt/data/docker",
+    "registry-mirrors": ["https://uwk49ut2.mirror.aliyuncs.com"],
+    "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2375"]
+  }
   ```
+
+#### 注意项
+
+访问指令只能选择一处进行配置，否则会报错：
+
+```text
+unable to configure the Docker daemon with file /etc/docker/daemon.json: the following directives are specified both as a flag and in the configuration file: hosts: (from flag: [fd:// unix:///var/run/docker.sock], from file: [tcp://0.0.0.0:2375])
+```
+
+#### 测试
+
+```shell
+sudo daemon-reload
+
+sudo systemctl restart docker
+
+sudo netstat -lntp | grep dockerd
+```
 
 ## 常用命令
 
