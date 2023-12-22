@@ -47,3 +47,7 @@
 ### [linux 网状互信的处理方法](https://www.wangt.cc/2020/12/linux网状互信的处理方法/)
 
 ### [Bash 版的 join,map 和 filter](https://blog.lujun9972.win/blog/2019/06/28/bash版的join,map和filter/)
+
+### [Linux 磁盘空间占满，但搜不到大文件](https://blog.csdn.net/weixin_38746118/article/details/131312383)
+
+### [ssh 批量免密登录](https://blog.csdn.net/m0_57808069/article/details/129725893)

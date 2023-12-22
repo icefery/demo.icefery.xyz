@@ -13,3 +13,5 @@
 #### [带你手写 HashMap](https://www.cnblogs.com/hkblogs/p/9151160.html)
 
 #### [对 HashMap 的思考及手写实现](https://www.jianshu.com/p/b638f19aeb64)
+
+#### [JNI 的替代者—使用 JNA 访问 Java 外部功能接口](https://www.cnblogs.com/lanxuezaipiao/p/3635556.html)
