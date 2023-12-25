@@ -14,6 +14,22 @@
             <mirrorOf>*</mirrorOf>
         </mirror>
     </mirrors>
+    <proxies>
+        <proxy>
+            <id>http-proxy</id>
+            <active>true</active>
+            <protocol>http</protocol>
+            <host>127.0.0.1</host>
+            <port>7890</port>
+        </proxy>
+        <proxy>
+            <id>https-proxy</id>
+            <active>true</active>
+            <protocol>https</protocol>
+            <host>127.0.0.1</host>
+            <port>7890</port>
+        </proxy>
+    </proxies>
 </settings>
 ```
 
