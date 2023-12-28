@@ -26,6 +26,12 @@ _=/usr/bin/env
 
 ### 修改密码
 
+```shell
+su -l -s /bin/bash gpadmin
+
+psql -d postgres
+```
+
 ```sql
 alter user gpadmin with password 'gpadmin';
 ```
