@@ -31,11 +31,12 @@ from (
         select pg_stat_get_backend_idset() as backendid
     ) as s
 ) as s
-where current_query !~* '(<idle>|<insufficient privilege>|SET application_name|SET SESSION search_path|SHOW search_path)'
+where current_query !~* '(<idle>|<insufficient privilege>|SET application_name|SET search_path|SET SESSION search_path|SHOW search_path)'
 order by lap desc;
 
 -- 杀事务
 select pg_cancel_backend(pid);
+select pg_terminate_backend(pid);
 
 --查询具体表的执行情况
 select * from pg_stat_activity where query ~ '表名';
