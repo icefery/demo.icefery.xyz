@@ -47,16 +47,16 @@ select * from all_tables where table_name like '%%'
 
 ```sql
 select
-    tc.owner                                                     as "schema_name",
-    tc.table_name                                                as "table_name",
+    tc.owner      as "schema_name",
+    tc.table_name as "table_name",
     (case
         when tc.table_type = 'TABLE' then 't'
         when tc.table_type = 'VIEW'  then 'v'
         else tc.table_type
-    end)                                                         as "table_type",
-    tc.comments                                                  as "table_comment",
-    c.column_name                                                as "column_name",
-    c.column_id                                                  as "column_order",
+    end)                                                                         as "table_type",
+    tc.comments                                                                  as "table_comment",
+    c.column_name                                                                as "column_name",
+    row_number() over(partition by tc.owner, tc.table_name order by c.column_id) as "column_order",
     (case
         when c.data_type in ('CHAR', 'VARCHAR2', 'NCHAR', 'NVARCHAR2')                            then c.data_type || '(' || to_char(c.char_length) || ')'
         when c.data_type = 'NUMBER' and c.data_precision is not null and c.data_scale is not null then c.data_type || '(' || to_char(c.data_precision) || ',' || to_char(c.data_scale) || ')'
@@ -79,6 +79,7 @@ left join (
 where 1 = 1
 and tc.owner not in ('SYS', 'SYSTEM')
 and tc.table_type in ('TABLE', 'VIEW')
+and c.data_type not in ('ROWID', 'UROWID')
 order by tc.owner, tc.table_name, c.column_id
 ```
 
