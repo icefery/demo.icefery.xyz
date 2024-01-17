@@ -109,3 +109,23 @@ from sys.all_objects
 where owner not in ('sys', 'system')
 order by owner, object_type, object_name
 ```
+
+### 查看会话信息
+
+```sql
+select
+    s.sid,
+    s.serial#,
+    s.username,
+    t.sql_text,
+    (case
+        when last_call_et >= 86400 then floor(last_call_et / 86400) || ' days ' || floor(mod(last_call_et, 86400) / 3600) || ' hours ' || floor(mod(mod(last_call_et, 86400), 3600) / 60) || ' minutes ' || mod(mod(last_call_et, 86400), 60) || ' seconds'
+        when last_call_et >= 3600  then floor(last_call_et / 3600) || ' hours ' || floor(mod(last_call_et, 3600) / 60) || ' minutes ' || mod(last_call_et, 60) || ' seconds'
+        else floor(last_call_et / 60) || ' minutes ' || mod(last_call_et, 60) || ' seconds'
+    end) as "elapsed time"
+from v$session s
+join v$sqltext t on s.sql_id = t.sql_id
+where 1 = 1
+    and s.last_call_et > 1 * 60 * 60
+    and t.sql_text like 'insert %'
+```
