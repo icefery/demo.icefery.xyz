@@ -31,10 +31,10 @@ type DeepReadonly<T extends Record<string | symbol, any>> = {
 type Curried<A, R> = A extends []
   ? () => R
   : A extends [infer ARG]
-  ? (param: ARG) => R
-  : A extends [infer ARG, ...infer REST]
-  ? (param: ARG) => Curried<REST, R>
-  : never
+    ? (param: ARG) => R
+    : A extends [infer ARG, ...infer REST]
+      ? (param: ARG) => Curried<REST, R>
+      : never
 
 declare function curry<A extends any[], R>(fn: (...args: A) => R): Curried<A, R>
 
