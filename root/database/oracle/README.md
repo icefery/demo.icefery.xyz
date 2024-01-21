@@ -49,20 +49,37 @@ select * from all_tables where table_name like '%%'
 select
     tc.owner      as "schema_name",
     tc.table_name as "table_name",
-    tc.comments   as "table_comment",
-    c.column_name as "column_name",
     (case
-        when c.data_precision is not null and c.data_scale is not null                               then c.data_type || '(' || c.data_precision || ','|| c.data_scale|| ')'
-        when c.data_precision is not null and c.data_scale is     null                               then c.data_type || '(' || c.data_precision || ')'
-        when c.data_precision is     null and c.data_scale is     null and c.data_length is not null then c.data_type || '(' || c.data_length || ')'
+        when tc.table_type = 'TABLE' then 't'
+        when tc.table_type = 'VIEW'  then 'v'
+        else tc.table_type
+    end)                                                                         as "table_type",
+    tc.comments                                                                  as "table_comment",
+    c.column_name                                                                as "column_name",
+    row_number() over(partition by tc.owner, tc.table_name order by c.column_id) as "column_order",
+    (case
+        when c.data_type in ('CHAR', 'VARCHAR2', 'NCHAR', 'NVARCHAR2')                            then c.data_type || '(' || to_char(c.char_length) || ')'
+        when c.data_type = 'NUMBER' and c.data_precision is not null and c.data_scale is not null then c.data_type || '(' || to_char(c.data_precision) || ',' || to_char(c.data_scale) || ')'
+        when c.data_type = 'NUMBER' and c.data_precision is not null                              then c.data_type || '(' || to_char(c.data_precision) || ')'
         else c.data_type
-    end) as "column_type",
-    c.column_id   as "column_order",
-    cc.comments   as "column_comment"
-from      all_tab_comments tc
-left join all_tab_columns  c  on c.owner = tc.owner and c.table_name = tc.table_name
-left join all_col_comments cc on cc.owner = c.owner and cc.table_name = c.table_name and cc.column_name = c.column_name
-where tc.table_type = 'TABLE' and tc.owner not in ('SYS', 'SYSTEM')
+        end)                                                     as "column_type",
+    (case when c.nullable = 'Y' then 1 else 0 end)               as "column_nullable",
+    c.data_default                                               as "column_default",
+    (case when pk_col.column_name is not null then 1 else 0 end) as "column_primary_key",
+    cc.comments                                                  as "column_comment"
+from all_tab_comments tc
+join all_tab_columns  c  on c.owner  = tc.owner and c.table_name  = tc.table_name
+join all_col_comments cc on cc.owner = c.owner  and cc.table_name = c.table_name and cc.column_name = c.column_name
+left join (
+    select acc.owner, acc.table_name, acc.column_name
+    from all_cons_columns acc
+    join all_constraints ac on ac.owner = acc.owner and ac.constraint_name = acc.constraint_name
+    where ac.constraint_type = 'P'
+) pk_col on pk_col.owner = tc.owner and pk_col.table_name = tc.table_name and pk_col.column_name = c.column_name
+where 1 = 1
+and tc.owner not in ('SYS', 'SYSTEM')
+and tc.table_type in ('TABLE', 'VIEW')
+and c.data_type not in ('ROWID', 'UROWID')
 order by tc.owner, tc.table_name, c.column_id
 ```
 
