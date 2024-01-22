@@ -35,6 +35,19 @@ services:
     volumes:
       - /data/compose/bitnami/postgresql/data:/bitnami/postgresql/data
 
+  clash:
+    image: ghcr.io/icefery/clash-premium:2023.08.17
+    restart: always
+    container_name: clash
+    command:
+      - -f
+      - /config.yaml
+    ports:
+      - 7890:7890
+      - 9090:7890
+    volumes:
+      - /data/compose/config.yaml:/config.yaml
+
 networks:
   default:
     name: compose

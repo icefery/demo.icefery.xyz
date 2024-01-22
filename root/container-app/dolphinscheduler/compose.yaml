@@ -46,7 +46,7 @@ services:
         hard: 65535
 
   dolphinscheduler-schema-initializer:
-    image: ghcr.io/icefery/dolphinscheduler-tools:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-tools:3.1.9
     container_name: dolphinscheduler-schema-initializer
     profiles: ['schema']
     depends_on:
@@ -72,7 +72,7 @@ services:
         hard: 65535
 
   dolphinscheduler-api:
-    image: ghcr.io/icefery/dolphinscheduler-api:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-api:3.1.9
     container_name: dolphinscheduler-api
     profiles: ['all']
     depends_on:
@@ -105,7 +105,7 @@ services:
         hard: 65535
 
   dolphinscheduler-alert:
-    image: ghcr.io/icefery/dolphinscheduler-alert-server:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-alert-server:3.1.9
     container_name: dolphinscheduler-alert
     profiles: ['all']
     depends_on:
@@ -133,7 +133,7 @@ services:
         hard: 65535
 
   dolphinscheduler-master:
-    image: ghcr.io/icefery/dolphinscheduler-master:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-master:3.1.9
     container_name: dolphinscheduler-master
     profiles: ['all']
     depends_on:
@@ -163,7 +163,7 @@ services:
         hard: 65535
 
   dolphinscheduler-worker:
-    image: ghcr.io/icefery/dolphinscheduler-worker:3.2.0
+    image: ghcr.io/icefery/dolphinscheduler-worker:3.1.9
     container_name: dolphinscheduler-worker
     profiles: ['all']
     depends_on:

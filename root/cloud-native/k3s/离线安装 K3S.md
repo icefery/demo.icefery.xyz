@@ -53,14 +53,18 @@ metadata:
 spec:
   repo: https://coredns.github.io/helm
   chart: coredns
+  version: 1.29.0
   targetNamespace: kube-system
   bootstrap: true
   valuesContent: |-
     fullnameOverride: coredns
     serviceType: ClusterIP
+    prometheus:
+      service:
+        enabled: true
     service:
-      clusterIP: 10.16.0.10
       name: coredns
+      clusterIP: 10.16.0.10
     servers:
       - zones:
           - zone: .
@@ -100,6 +104,7 @@ metadata:
 spec:
   repo: https://charts.bitnami.com/bitnami
   chart: metrics-server
+  version: 6.8.0
   targetNamespace: kube-system
   bootstrap: true
   valuesContent: |
@@ -130,6 +135,7 @@ metadata:
 spec:
   repo: https://traefik.github.io/charts
   chart: traefik
+  version: 26.0.0
   targetNamespace: traefik-system
   bootstrap: true
   valuesContent: |-
@@ -180,7 +186,7 @@ spec:
     securityContext:
       capabilities:
         drop: []
-        add: [ALL]
+        add: [NET_BIND_SERVICE]
       readOnlyRootFilesystem: false
     podSecurityContext:
       runAsGroup: 0
@@ -206,6 +212,7 @@ metadata:
 spec:
   repo: https://charts.longhorn.io
   chart: longhorn
+  version: 1.5.3
   targetNamespace: longhorn-system
   bootstrap: true
   valuesContent: |-
@@ -221,12 +228,6 @@ spec:
       defaultReplicaCount: 1
       deletingConfirmationFlag: true
     longhornUI:
-      replicas: 1
-    longhornConversionWebhook:
-      replicas: 1
-    longhornAdmissionWebhook:
-      replicas: 1
-    longhornRecoveryBackend:
       replicas: 1
     ingress:
       enabled: true
@@ -248,7 +249,7 @@ kubectl apply -f charts.yaml
    ```
 
    | os     | os version | glibc version |
-   | ------ | ---------- | ------------- |
+   | :----- | :--------- | :------------ |
    | centos | 7.9        | 2.17          |
    | centos | 8.4        | 2.28          |
    | ubuntu | 18.04      | 2.27          |
@@ -304,10 +305,10 @@ wget https://get.k3s.io -O install.sh
 
 ```shell
 # 下载 helm chart 包
-helm repo add coredns  https://coredns.github.io/helm     && helm pull coredns/coredns        --version 1.26.0
-helm repo add bitnami  https://charts.bitnami.com/bitnami && helm pull bitnami/metrics-server --version 6.5.2
-helm repo add traefik  https://traefik.github.io/charts   && helm pull traefik/traefik        --version 24.0.0
-helm repo add longhorn https://charts.longhorn.io         && helm pull longhorn/longhorn      --version 1.5.1
+helm repo add coredns  https://coredns.github.io/helm     && helm pull coredns/coredns        --version 1.29.0
+helm repo add bitnami  https://charts.bitnami.com/bitnami && helm pull bitnami/metrics-server --version 6.8.0
+helm repo add traefik  https://traefik.github.io/charts   && helm pull traefik/traefik        --version 26.0.0
+helm repo add longhorn https://charts.longhorn.io         && helm pull longhorn/longhorn      --version 1.5.3
 
 # 导出镜像
 k3s ctr image ls -q | grep -v 'sha256' | sort -u | xargs k3s ctr image export image.tar
@@ -333,7 +334,7 @@ install ./linux-amd64/helm /usr/local/bin
 chmod +x ./install.sh
 ```
 
-### 4.2 引导第一个 Server 节点启动
+### 4.2 启动 Server 节点
 
 ```shell
 # 引导 Server
@@ -349,13 +350,13 @@ INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.23.17+k3s1 ./install.sh server \
     --disable traefik \
     --disable local-storage \
     --disable metrics-server \
-    --datastore-endpoint="mysql://<USERNAME>:<PASSWORD>@tcp(<HOST>:3306)/<DATABASE>"
+    --datastore-endpoint "mysql://<USERNAME>:<PASSWORD>@tcp(<HOST>:<PORT>)/<DATABASE>"
 
 # 查看 Token
 cat /data/k3s/var/lib/rancher/k3s/server/token
 ```
 
-### 4.3 引导其它 Server 节点加入
+### 4.3 加入其它 Server 节点
 
 > 配置标识在所有 Server 节点必须是相同的。
 
@@ -372,16 +373,16 @@ INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.23.17+k3s1 ./install.sh server \
     --disable traefik \
     --disable local-storage \
     --disable metrics-server \
-    --datastore-endpoint="mysql://<USERNAME>:<PASSWORD>@tcp(<HOST>:3306)/<DATABASE>" \
+    --datastore-endpoint "mysql://<USERNAME>:<PASSWORD>@tcp(<HOST>:<PORT>)/<DATABASE>" \
     --token <TOKEN>
 ```
 
-### 4.4 引导 Agent 节点加入
+### 4.4 加入 Agent 节点
 
 ```shell
-INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.23.17+k3s1 ./install.sh server \
+INSTALL_K3S_MIRROR=cn INSTALL_K3S_VERSION=v1.23.17+k3s1 ./install.sh agent \
     --data-dir /data/k3s/var/lib/rancher/k3s \
-    --datastore-endpoint="mysql://<USERNAME>:<PASSWORD>@tcp(<HOST>:3306)/<DATABASE>" \
+    --server "https://<HOST>:6443" \
     --token <TOKEN>
 ```
 
@@ -404,5 +405,5 @@ apt install ./deb/*.deb
 k3s ctr image import ./image.tar
 
 # coredns
-helm install coredns coredns-1.26.0.tgz --namespace kube-system --values <VALUES_YAML_FILE>
+helm install coredns coredns-1.29.0.tgz --namespace kube-system --values <VALUES_YAML_FILE>
 ```
