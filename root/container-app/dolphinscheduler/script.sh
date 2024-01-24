@@ -1,14 +1,16 @@
+IMAGE_REGISTRY="ghcr.io/icefery"
+
 DRIVER_MYSQL_VERSION="8.0.16"
 DRIVER_ORACLE_VERSION="19.9.0.0"
 
-DOLPHINSCHEDULER_SERVICES=(
+DOLPHINSCHEDULER_SERVICE_LIST=(
     dolphinscheduler-tools
     dolphinscheduler-api
     dolphinscheduler-master
     dolphinscheduler-worker
     dolphinscheduler-alert-server
 )
-DOLPHINSCHEDULER_VERSION="3.2.0"
+DOLPHINSCHEDULER_VERSION="3.1.9"
 
 function prepare() {
     mkdir -p ./__static__
@@ -47,10 +49,20 @@ COPY mysql-connector-java-${DRIVER_MYSQL_VERSION}.jar ojdbc8-${DRIVER_ORACLE_VER
 EOF
 }
 
-function build-image() {
-    for service in "${DOLPHINSCHEDULER_SERVICES[@]}"; do
+function build_local() {
+    for service in "${DOLPHINSCHEDULER_SERVICE_LIST[@]}"; do
         docker buildx build \
-            --tag "ghcr.io/icefery/${service}:${DOLPHINSCHEDULER_VERSION}" \
+            --tag "${IMAGE_REGISTRY}/${service}:${DOLPHINSCHEDULER_VERSION}" \
+            --file "./__static__/${service}.dockerfile" \
+            --load \
+            ./__static__
+    done
+}
+
+function build_push() {
+    for service in "${DOLPHINSCHEDULER_SERVICE_LIST[@]}"; do
+        docker buildx build \
+            --tag "${IMAGE_REGISTRY}/${service}:${DOLPHINSCHEDULER_VERSION}" \
             --file "./__static__/${service}.dockerfile" \
             --platform "linux/amd64,linux/arm64" \
             --push \
@@ -62,10 +74,13 @@ case $1 in
 prepare)
     prepare
     ;;
-build-image)
-    build-image
+build-local)
+    build-local
+    ;;
+build-push)
+    build_push
     ;;
 *)
-    echo "Usage: $0 <prepare|build-image>"
+    echo "USAGE: $0 <prepare | build-local | build-push>"
     ;;
 esac

@@ -1,6 +1,6 @@
 services:
   dolphinscheduler-zookeeper:
-    image: bitnami/zookeeper:3.7.1
+    image: docker.io/bitnami/zookeeper:3.8.3
     container_name: dolphinscheduler-zookeeper
     profiles: ['all']
     environment:
@@ -20,7 +20,7 @@ services:
         hard: 65535
 
   dolphinscheduler-postgresql:
-    image: bitnami/postgresql:15.2.0
+    image: docker.io/bitnami/postgresql:15.5.0
     container_name: dolphinscheduler-postgresql
     profiles: ['all', 'schema']
     environment:
@@ -147,7 +147,7 @@ services:
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
       REGISTRY_ZOOKEEPER_CONNECT_STRING: dolphinscheduler-zookeeper:2181
-      JAVA_OPTIONS: '-Dmaster.exec-threads=10'
+      JAVA_OPTS: '-Xms4g -Xmx4g -Xmn2g -XX:+PrintGCDetails -Dmaster.exec-threads=5'
     volumes:
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
       - dolphinscheduler-shared-local:/opt/soft
@@ -177,7 +177,7 @@ services:
       SPRING_DATASOURCE_USERNAME: dolphinscheduler
       SPRING_DATASOURCE_PASSWORD: dolphinscheduler
       REGISTRY_ZOOKEEPER_CONNECT_STRING: dolphinscheduler-zookeeper:2181
-      JAVA_OPTIONS: '-Dworker.exec-threads=10'
+      JAVA_OPTS: '-Xms4g -Xmx4g -Xmn2g -XX:+PrintGCDetails -Dworker.exec-threads=20'
     volumes:
       - dolphinscheduler-worker-data:/tmp/dolphinscheduler
       - dolphinscheduler-logs:/opt/dolphinscheduler/logs
