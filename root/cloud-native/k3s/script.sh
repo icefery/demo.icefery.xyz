@@ -39,6 +39,7 @@ EOF
             --service-cidr 10.16.0.0/16 \
             --cluster-dns 10.16.0.10 \
             --service-node-port-range 1-65535 \
+            --kubelet-arg image-gc-high-threshold=100 \
             --kube-proxy-arg proxy-mode=ipvs \
             --disable coredns \
             --disable servicelb \
