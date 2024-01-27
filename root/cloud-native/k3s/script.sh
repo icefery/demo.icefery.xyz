@@ -19,7 +19,7 @@ EOF
         tee /etc/default/k3s > /dev/null <<- 'EOF'
 HTTP_PROXY=http://192.168.31.101:7890
 HTTPS_PROXY=http://192.168.31.101:7890
-NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local,.example.org,uwk49ut2.mirror.aliyuncs.com,
+NO_PROXY=127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,.svc,.cluster.local,.example.org,uwk49ut2.mirror.aliyuncs.com
 EOF
     fi
 
