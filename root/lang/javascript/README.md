@@ -1,4 +1,4 @@
-# JS
+# JavaScript
 
 ## 收藏
 
