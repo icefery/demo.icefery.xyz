@@ -13,8 +13,8 @@ select
     columns.column_name                                                                                as column_name,
     columns.ordinal_position                                                                           as column_order,
     columns.column_type                                                                                as column_type,
-    (case when columns.is_nullable = 'YES' then 1 when columns.is_nullable = 'NO' then 0 end)          as column_nullable,
-    (case when columns.column_key = 'PRI' then 1 end)                                                  as column_primary_key,
+    (case when columns.is_nullable = 'YES' then 1 else 0 end)                                          as column_nullable,
+    (case when columns.column_key  = 'PRI' then 1 else 0 end)                                          as column_primary_key,
     columns.column_default                                                                             as column_default,
     columns.column_comment                                                                             as column_comment
 from information_schema.tables
