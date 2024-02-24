@@ -1,0 +1,23 @@
+services:
+  trino:
+    image: docker.io/trinodb/trino:439
+    container_name: trino
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 8080:8080
+    configs:
+      - { source: postgresql_properties, target: //etc/trino/catalog/postgresql.properties }
+
+networks:
+  default:
+    name: compose
+    external: true
+
+configs:
+  postgresql_properties:
+    content: |
+      connector.name=postgresql
+      connection-url=jdbc:postgresql://postgresql:5432/demo
+      connection-user=postgres
+      connection-password=postgres
