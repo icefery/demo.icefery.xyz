@@ -1,0 +1,22 @@
+services:
+  zeppelin:
+    image: docker.io/apache/zeppelin:0.11.0
+    container_name: zeppelin
+    user: root
+    environment:
+      ZEPPELIN_LOG_DIR: /logs
+      ZEPPELIN_NOTEBOOK_DIR: /notebook
+    ports:
+      - 38081:8080
+    volumes:
+      - zeppelin-log:/logs
+      - zeppelin-data:/notebook
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  zeppelin-log:
+  zeppelin-data:
