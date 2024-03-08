@@ -13,12 +13,12 @@ export PATH=$CARGO_HOME/bin:$PATH
 
 mkdir -pv ${CARGO_HOME}
 
-cat <<- 'EOF' | tee ${CARGO_HOME}/config > /dev/null
-[source.crates-io]
-replace-with = 'mirror'
+cat <<- 'EOF' | tee ${CARGO_HOME}/config.toml > /dev/null
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
-[source.mirror]
-registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+[source.crates-io]
+replace-with = "tuna"
 EOF
 ```
 

@@ -1,5 +1,17 @@
 # Python
 
+## minconda
+
+### 卸载
+
+```shell
+conda init --reverse --all
+
+rm -rf ~/.condarc ~/.conda ~/.continuum
+
+rm -rf /opt/env/miniconda
+```
+
 ## 常见问题
 
 - pip is being invoked by an old script wrapper. This will fail in a future version of pip
