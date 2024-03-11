@@ -18,8 +18,12 @@ function stop_proxy() {
     unset https_proxy
 }
 
+function config_brew() {
+    [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+}
+
 function config_miniconda() {
-    [[ $(command -v conda) ]] && eval "$(conda shell.zsh hook 2> /dev/null)"
+    [[ -x /opt/env/miniconda/bin/conda ]] && eval "$(/opt/env/miniconda/bin/conda shell.zsh hook 2> /dev/null)"
 }
 
 function config_fnm() {
@@ -51,7 +55,18 @@ EOF
     fi
 }
 
+function config_zsh() {
+    if type brew &> /dev/null; then
+        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+        FPATH="$(brew --prefix)/share/zsh-completions:${FPATH}"
+        autoload -Uz compinit
+        compinit
+    fi
+}
+
+config_brew
 config_miniconda
 config_fnm
 config_cargo
 config_pip
+config_zsh

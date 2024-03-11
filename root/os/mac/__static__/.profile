@@ -3,6 +3,7 @@ export LANG="en_US.UTF-8"
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
 
 # homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_INSTALL_FROM_API=1
 export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
