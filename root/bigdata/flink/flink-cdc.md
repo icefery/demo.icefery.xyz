@@ -7,9 +7,9 @@
 ### 1.1 建库建表
 
 ```sql
-create schema public;
+create database demo;
 
-create table public.t_product (
+create table demo.t_product (
     id    bigint,
     dt    datetime,
     name  varchar(64),
@@ -17,7 +17,7 @@ create table public.t_product (
     primary key(id)
 );
 
-insert into public.t_product values
+insert into demo.t_product values
     (1, current_timestamp, 'A', 99.99),
     (2, current_timestamp, 'B', 88.88);
 ```
@@ -54,7 +54,7 @@ create table t_product_source (
     'port'          = '3306',
     'username'      = 'cdc_readonly',
     'password'      = 'cdc_readonly',
-    'database-name' = 'public',
+    'database-name' = 'demo',
     'table-name'    = 't_product',
     'server-time-zone' = 'Asia/Shanghai',
     'scan.startup.mode' = 'initial'
@@ -275,6 +275,71 @@ create table t_product_source (
     'schema-name'   = '',
     'table-name'    = '',
     'scan.startup.mode' = 'initial'
+);
+
+set 'sql-client.execution.result-mode' = 'tableau';
+
+select * from t_product_source;
+```
+
+<br/><br/>
+
+## 五、MongoDB CDC
+
+### 5.1 建库建集合
+
+```javascript
+use dmeo;
+
+db.t_product.insertMany([
+  { dt: new Date(), name: 'A', price: 99.99 },
+  { dt: new Date(), name: 'B', price: 88.88 }
+]);
+```
+
+### 5.2 启用 CDC
+
+```javascript
+use admin;
+
+db.createRole({
+  role: 'cdc_readonly',
+  privileges: [
+    {
+      resource: { db: '', collection: '' },
+      actions: ['splitVector', 'listDatabases', 'listCollections', 'collStats', 'find', 'changeStream']
+    }
+  ],
+  roles: [{ role: 'read', db: 'config' }]
+});
+
+db.createUser({
+  user: 'cdc_readonly',
+  pwd: 'cdc_readonly',
+  roles: [{ role: 'cdc_readonly', db: 'admin' }]
+});
+```
+
+### 5.3 `flink-sql-connector-mongodb-cdc`
+
+```sql
+create table t_product_source (
+    database_name   string           metadata from 'database_name'   virtual,
+    collection_name string           metadata from 'collection_name' virtual,
+    op_ts           timestamp_ltz(3) metadata from 'op_ts'           virtual,
+    _id   string,
+    dt    timestamp(0),
+    name  string,
+    price decimal(38,2),
+    primary key(_id) not enforced
+) with (
+  'connector'  = 'mongodb-cdc',
+  'hosts'      = '192.168.8.101:27017',
+  'username'   = 'cdc_readonly',
+  'password'   = 'cdc_readonly',
+  'database'   = 'demo',
+  'collection' = 't_product',
+  'scan.startup.mode' = 'initial'
 );
 
 set 'sql-client.execution.result-mode' = 'tableau';

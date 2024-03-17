@@ -1,0 +1,56 @@
+services:
+  mongodb-configsvr-primary:
+    image: docker.io/bitnami/mongodb-sharded:7.0
+    container_name: mongodb-configsvr-primary
+    environment:
+      #
+      MONGODB_SHARDING_MODE: configsvr
+      MONGODB_ADVERTISED_HOSTNAME: mongodb-configsvr-primary
+      MONGODB_ROOT_PASSWORD: root
+      MONGODB_REPLICA_SET_KEY: replicasetkey123
+      #
+      MONGODB_REPLICA_SET_NAME: configsvr
+      MONGODB_REPLICA_SET_MODE: primary
+    volumes:
+      - mongodb-configsvr-primary-data:/bitnami
+
+  mongodb-mongos:
+    image: docker.io/bitnami/mongodb-sharded:7.0
+    container_name: mongodb-mongos
+    environment:
+      #
+      MONGODB_SHARDING_MODE: mongos
+      MONGODB_ADVERTISED_HOSTNAME: mongodb-mongos
+      MONGODB_ROOT_PASSWORD: root
+      MONGODB_REPLICA_SET_KEY: replicasetkey123
+      # 连接 configsvr
+      MONGODB_CFG_REPLICA_SET_NAME: configsvr
+      MONGODB_CFG_PRIMARY_HOST: mongodb-configsvr-primary
+    ports:
+      - 27017:27017
+
+  mongodb-shard0-primary:
+    image: docker.io/bitnami/mongodb-sharded:7.0
+    container_name: mongodb-shardsvr-shard0-primary
+    environment:
+      #
+      MONGODB_SHARDING_MODE: shardsvr
+      MONGODB_ADVERTISED_HOSTNAME: mongodb-shard0-primary
+      MONGODB_ROOT_PASSWORD: root
+      MONGODB_REPLICA_SET_KEY: replicasetkey123
+      #
+      MONGODB_REPLICA_SET_NAME: shard0
+      MONGODB_REPLICA_SET_MODE: primary
+      # 连接 mongos
+      MONGODB_MONGOS_HOST: mongodb-mongos
+    volumes:
+      - mongodb-shard0-primary-data:/bitnami
+
+volumes:
+  mongodb-configsvr-primary-data:
+  mongodb-shard0-primary-data:
+
+networks:
+  default:
+    name: compose
+    external: true
