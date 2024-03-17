@@ -34,7 +34,7 @@ function config_fnm() {
 }
 
 function config_cargo() {
-    if [[ ! -f "${CARGO_HOME}/config.toml" ]]; then
+    if [[ -d ${CARGO_HOME} && ! -f "${CARGO_HOME}/config.toml" ]]; then
         cat <<- 'EOF' | tee "${CARGO_HOME}/config.toml" > /dev/null
 [source.tuna]
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
