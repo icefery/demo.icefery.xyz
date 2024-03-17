@@ -26,8 +26,9 @@ EOF
     if [[ ! -f "/etc/profile.d/k3s.sh" ]]; then
         tee /etc/profile.d/k3s.sh > /dev/null <<- 'EOF'
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-eval "$(k3s completion bash)"
-eval "$(kubectl completion bash)"
+[[ -x /usr/local/bin/k3s ]]     && eval "$(k3s     completion bash)"
+[[ -x /usr/local/bin/kubectl ]] && eval "$(kubectl completion bash)"
+[[ -x /usr/local/bin/helm ]]    && eval "$(helm    completion bash)"
 EOF
 
     fi
