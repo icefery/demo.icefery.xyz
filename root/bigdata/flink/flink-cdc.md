@@ -123,6 +123,9 @@ grant select on table public.t_product to cdc_readonly;
 ### 2.3 `flink-sql-connector-postgres-cdc`
 
 ```sql
+set execution.checkpointing.interval = 3s;
+set sql-client.execution.result-mode = tableau;
+
 create table t_product_source (
     database_name  string           metadata from 'database_name' virtual,
     schema_name    string           metadata from 'schema_name'   virtual,
@@ -147,8 +150,6 @@ create table t_product_source (
     'scan.incremental.snapshot.enabled' = 'true',
     'scan.startup.mode' = 'initial'
 );
-
-set 'sql-client.execution.result-mode' = 'tableau';
 
 select * from t_product_source;
 ```
@@ -202,12 +203,7 @@ exec sys.sp_cdc_enable_db;
 select is_cdc_enabled from sys.databases where name = 'demo';
 
 -- 3. 启用表级别 CDC
-exec sys.sp_cdc_enable_table
-    @source_schema        = 'dbo',
-    @source_name          = 't_product',
-    @role_name            = null,
-    @capture_instance     = default,
-    @supports_net_changes = 1;
+exec sys.sp_cdc_enable_table @source_schema = 'dbo', @source_name = 't_product', @role_name = null,;
 select is_tracked_by_cdc from sys.tables where name = 't_product';
 
 -- 4. 验证用户是否有权访问 CDC 表
@@ -217,6 +213,9 @@ exec sys.sp_cdc_help_change_data_capture;
 ### 3.3 `flink-sql-connector-sqlserver-cdc`
 
 ```sql
+set execution.checkpointing.interval = 3s;
+set sql-client.execution.result-mode = tableau;
+
 create table t_product_source (
     database_name  string           metadata from 'database_name' virtual,
     schema_name    string           metadata from 'schema_name'   virtual,
@@ -239,7 +238,7 @@ create table t_product_source (
     'scan.startup.mode' = 'initial'
 );
 
-set 'sql-client.execution.result-mode' = 'tableau';
+
 
 select * from t_product_source;
 ```
@@ -255,6 +254,9 @@ select * from t_product_source;
 ### 4.3 `flink-sql-connector-oracle-cdc`
 
 ```sql
+set execution.checkpointing.interval = 3s;
+set sql-client.execution.result-mode = tableau;
+
 create table t_product_source (
     database_name string           metadata from 'database_name' virtual,
     schema_name   string           metadata from 'schema_name'   virtual,
@@ -276,8 +278,6 @@ create table t_product_source (
     'table-name'    = '',
     'scan.startup.mode' = 'initial'
 );
-
-set 'sql-client.execution.result-mode' = 'tableau';
 
 select * from t_product_source;
 ```
@@ -323,6 +323,9 @@ db.createUser({
 ### 5.3 `flink-sql-connector-mongodb-cdc`
 
 ```sql
+set execution.checkpointing.interval = 3s;
+set sql-client.execution.result-mode = tableau;
+
 create table t_product_source (
     database_name   string           metadata from 'database_name'   virtual,
     collection_name string           metadata from 'collection_name' virtual,
@@ -341,8 +344,6 @@ create table t_product_source (
   'collection' = 't_product',
   'scan.startup.mode' = 'initial'
 );
-
-set 'sql-client.execution.result-mode' = 'tableau';
 
 select * from t_product_source;
 ```
