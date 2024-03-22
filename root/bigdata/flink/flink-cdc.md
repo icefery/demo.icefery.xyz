@@ -238,8 +238,6 @@ create table t_product_source (
     'scan.startup.mode' = 'initial'
 );
 
-
-
 select * from t_product_source;
 ```
 
@@ -248,6 +246,21 @@ select * from t_product_source;
 ## 四、Oracle CDC
 
 ### 4.1 建库建表
+
+```sql
+create table T_PRODUCT (
+    ID NUMBER(19,0),
+    DT DATE,
+    NAME VARCHAR2(64),
+    PRICE NUMBER(38,2),
+    PRIMARY KEY(ID)
+);
+
+INSERT ALL
+INTO T_PRODUCT VALUES(1, SYSDATE, 'A', 99.99)
+INTO T_PRODUCT VALUES(2, SYSDATE, 'B', 88.88)
+SELECT * FROM DUAL;
+```
 
 ### 4.2 启用 CDC
 
@@ -275,7 +288,7 @@ create table t_product_source (
     'password'      = 'cdc_readonly',
     'database-name' = '',
     'schema-name'   = '',
-    'table-name'    = '',
+    'table-name'    = 'T_PRODUCT',
     'scan.startup.mode' = 'initial'
 );
 
