@@ -18,65 +18,65 @@ chmod +x -R /opt/env/mycat/bin
 
 1. 修改 `prototype` 数据源连接信息
 
-   ```bash
-   vim conf/datasources/prototypeDs.datasource.json
-   ```
+    ```bash
+    vim conf/datasources/prototypeDs.datasource.json
+    ```
 
 2. 启动
 
-   ```bash
-   cd /opt/env/mycat
+    ```bash
+    cd /opt/env/mycat
 
-   bin/mycat start
-   ```
+    bin/mycat start
+    ```
 
 3. 连接
 
-   ```bash
-   mysql -h192.192.192.101 -P8066 -uroot -p123456
-   ```
+    ```bash
+    mysql -h192.192.192.101 -P8066 -uroot -p123456
+    ```
 
 4. 重置配置
 
-   > 直接在 MyCAT 的客户端执行。
+    > 直接在 MyCAT 的客户端执行。
 
-   ```sql
-   /*+ mycat:resetConfig{} */;
-   ```
+    ```sql
+    /*+ mycat:resetConfig{} */;
+    ```
 
 ## 读写分离配置
 
 1. 添加数据源
 
-   ```sql
-   /*+ mycat:createDataSource{ "name":"ds0", "url":"jdbc:mysql://192.192.192.101:3306/demo", "user":"root", "password":"root" } */;
-   /*+ mycat:createDataSource{ "name":"ds1", "url":"jdbc:mysql://192.192.192.101:3307/demo", "user":"root", "password":"root" } */;
-   /*+ mycat:createDataSource{ "name":"ds2", "url":"jdbc:mysql://192.192.192.101:3308/demo", "user":"root", "password":"root" } */;
-   /*+ mycat:showDataSources{} */;
-   ```
+    ```sql
+    /*+ mycat:createDataSource{ "name":"ds0", "url":"jdbc:mysql://192.192.192.101:3306/demo", "user":"root", "password":"root" } */;
+    /*+ mycat:createDataSource{ "name":"ds1", "url":"jdbc:mysql://192.192.192.101:3307/demo", "user":"root", "password":"root" } */;
+    /*+ mycat:createDataSource{ "name":"ds2", "url":"jdbc:mysql://192.192.192.101:3308/demo", "user":"root", "password":"root" } */;
+    /*+ mycat:showDataSources{} */;
+    ```
 
 2. 添加集群
 
-   ```sql
-   /*! mycat:createCluster{"name":"prototype","masters":["ds0"],"replicas":["ds1", "ds2"]} */;
-   /*+ mycat:showClusters{} */;
-   ```
+    ```sql
+    /*! mycat:createCluster{"name":"prototype","masters":["ds0"],"replicas":["ds1", "ds2"]} */;
+    /*+ mycat:showClusters{} */;
+    ```
 
 3. 创建虚拟库和虚拟表
 
-   > MyCAT 建表时使用 `auto_increment` 默认使用 MyCAT 的雪花算法生成全局序列号。
+    > MyCAT 建表时使用 `auto_increment` 默认使用 MyCAT 的雪花算法生成全局序列号。
 
-   ```sql
-   create database demo;
+    ```sql
+    create database demo;
 
-   use demo;
+    use demo;
 
-   create table t_user (
-     id       bigint      not null auto_increment,
-     username varchar(64) not null,
-     primary key(id)
-   );
-   ```
+    create table t_user (
+      id       bigint      not null auto_increment,
+      username varchar(64) not null,
+      primary key(id)
+    );
+    ```
 
 ## 分库分表配置
 
@@ -140,16 +140,16 @@ tbpartition by mod_hash(id)         tbpartitions 3;
 
 > 如果分片值是字符串则先对字符串进行 hash 转换为数值类型。
 
-- 分库键和分表键是同键
+-   分库键和分表键是同键
 
-  ```java
-  分表下标 = 分片值 % (分库数量 * 分表数量)
-  分库下标 = 分表下标 / 分表数量
-  ```
+    ```java
+    分表下标 = 分片值 % (分库数量 * 分表数量)
+    分库下标 = 分表下标 / 分表数量
+    ```
 
-- 分库键和分表键是不同键
+-   分库键和分表键是不同键
 
-  ```java
-  分表下标 = 分片值 % 分表数量
-  分库下标 = 分片值 % 分库数量
-  ```
+    ```java
+    分表下标 = 分片值 % 分表数量
+    分库下标 = 分片值 % 分库数量
+    ```

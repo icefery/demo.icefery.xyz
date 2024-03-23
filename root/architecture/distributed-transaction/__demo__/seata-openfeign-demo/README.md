@@ -12,21 +12,21 @@
 
 ### 初始化数据库
 
-- `sql/sql.sql`
-- `https://github.com/seata/seata/blob/develop/script/client/at/db/mysql.sql`
+-   `sql/sql.sql`
+-   `https://github.com/seata/seata/blob/develop/script/client/at/db/mysql.sql`
 
 ### 启动服务
 
 ### 测试
 
-- 提交
+-   提交
 
-  ```bash
-  curl http://127.0.0.1:8081/purchase/commit
-  ```
+    ```bash
+    curl http://127.0.0.1:8081/purchase/commit
+    ```
 
-- 回滚
+-   回滚
 
-  ```bash
-  curl http://127.0.0.1:8081/purchase/rollback
-  ```
+    ```bash
+    curl http://127.0.0.1:8081/purchase/rollback
+    ```

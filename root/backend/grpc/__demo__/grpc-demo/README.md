@@ -19,19 +19,19 @@ npm install -D grpc_tools_node_protoc_ts grpc-tools
 
 ### `FunctionService`
 
-- `fetch`
+-   `fetch`
 
-  ```json
-  {}
-  ```
+    ```json
+    {}
+    ```
 
-- `invoke`
+-   `invoke`
 
-  ```json
-  {
-    "invocations": [
-      { "host": "localhost", "port": 8081 },
-      { "host": "127.0.0.1", "port": 8081 }
-    ]
-  }
-  ```
+    ```json
+    {
+      "invocations": [
+        { "host": "localhost", "port": 8081 },
+        { "host": "127.0.0.1", "port": 8081 }
+      ]
+    }
+    ```

@@ -4,7 +4,7 @@ title: '在 Mac 上卸载 Python'
 
 ### 参考文档
 
-- https://docs.python.org/zh-cn/3/using/mac.html
+-   https://docs.python.org/zh-cn/3/using/mac.html
 
 ### 移除应用
 

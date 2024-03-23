@@ -158,8 +158,8 @@ select * from t_product_source;
 
 ## 三、SQLServer CDC
 
-> - https://github.com/apache/flink-cdc/blob/master/docs/content/docs/connectors/cdc-connectors/sqlserver-cdc.md
-> - https://learn.microsoft.com/zh-cn/sql/linux/sql-server-linux-configure-environment-variables
+> -   https://github.com/apache/flink-cdc/blob/master/docs/content/docs/connectors/cdc-connectors/sqlserver-cdc.md
+> -   https://learn.microsoft.com/zh-cn/sql/linux/sql-server-linux-configure-environment-variables
 
 ### 3.1 建库建表
 
@@ -185,12 +185,12 @@ insert into dbo.t_product values
 
 > 启用成功后，会在当前库的 `cdc` 模式下生成如下六张表:
 >
-> - `captured_columns`
-> - `change_tables`
-> - `ddl_history`
-> - `index_columns`
-> - `lsn_time_mapping`
-> - `dbo_t_product_CT`(启动 CDC 的用户表)
+> -   `captured_columns`
+> -   `change_tables`
+> -   `ddl_history`
+> -   `index_columns`
+> -   `lsn_time_mapping`
+> -   `dbo_t_product_CT`(启动 CDC 的用户表)
 
 ```sql
 use demo;

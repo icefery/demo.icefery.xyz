@@ -22,4 +22,4 @@ order by DBS.name, TBLS.tbl_name, COLUMNS_V2.integer_idx
 
 ## 收藏
 
-- [Hive 笔记 6-hive 元数据表结构详解](https://www.jianshu.com/p/3841d7e89c98)
+-   [Hive 笔记 6-hive 元数据表结构详解](https://www.jianshu.com/p/3841d7e89c98)

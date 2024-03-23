@@ -2,8 +2,8 @@
 
 ## 一、安装
 
-> - [私有镜像仓库配置](https://docs.k3s.io/zh/installation/private-registry)
-> - [配置 HTTP 代理](https://docs.k3s.io/zh/advanced?_highlight=no_pro#配置-http-代理)
+> -   [私有镜像仓库配置](https://docs.k3s.io/zh/installation/private-registry)
+> -   [配置 HTTP 代理](https://docs.k3s.io/zh/advanced?_highlight=no_pro#配置-http-代理)
 
 ### 2.1 快速安装
 

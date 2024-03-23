@@ -2,7 +2,7 @@
 
 ### 1.1 在线安装
 
-- https://www.qt.io/download-qt-installer
+
 
 ### 1.2 升级维护
 
@@ -28,46 +28,46 @@ export PATH=$PATH:/opt/qt/6.2.2/macos/bin
 
 1. 手动创建项目目录
 
-   ```bash
-   mkdir -p qt-demo
-   ```
+    ```bash
+    mkdir -p qt-demo
+    ```
 
 2. `main.cpp`
 
-   ![](__image__/f6a1394ed8fc435db24d93e4145b128a.png)
+    ![](__image__/f6a1394ed8fc435db24d93e4145b128a.png)
 
 3. QMake 生成 `.pro` 文件
 
-   ```bash
-   qmake -project
-   ```
+    ```bash
+    qmake -project
+    ```
 
-   ![](__image__/e870a83897e241e4958e54943bf1b452.png)
+    ![](__image__/e870a83897e241e4958e54943bf1b452.png)
 
 4. 手动添加构建选项
 
-   ```bash
-   QT += widgets
-   ```
+    ```bash
+    QT += widgets
+    ```
 
-   ![](__image__/6f3184fbac7d4d1a80057e7e6e43c88c.png)
+    ![](__image__/6f3184fbac7d4d1a80057e7e6e43c88c.png)
 
 5. 生成 `Makefile`
 
-   ```bash
-   qmake
-   ```
+    ```bash
+    qmake
+    ```
 
-   ![](__image__/4b6060f833924736b3f7de5786d2c993.png)
+    ![](__image__/4b6060f833924736b3f7de5786d2c993.png)
 
 6. 编译链接
 
-   ```bash
-   make
-   ```
+    ```bash
+    make
+    ```
 
-   ![](__image__/6cf33130a8a449d1bce8dc1d25bf46b8.png)
+    ![](__image__/6cf33130a8a449d1bce8dc1d25bf46b8.png)
 
 7. 运行
 
-   ![](__image__/c622065f716b4d27945d7c10c4a791ef.png)
+    ![](__image__/c622065f716b4d27945d7c10c4a791ef.png)

@@ -10,20 +10,20 @@ wget https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-h
 
 ### 配置
 
-- `conf/spark-env.sh`
+-   `conf/spark-env.sh`
 
-  ```bash
-  JAVA_HOME=/opt/env/jdk-8
-  SPARK_DIST_CLASSPATH=$(/opt/env/hadoop/bin/hadoop classpath)
-  SPARK_MASTER_HOST=vm101
-  SPARK_MASTER_PORT=7077
-  ```
+    ```bash
+    JAVA_HOME=/opt/env/jdk-8
+    SPARK_DIST_CLASSPATH=$(/opt/env/hadoop/bin/hadoop classpath)
+    SPARK_MASTER_HOST=vm101
+    SPARK_MASTER_PORT=7077
+    ```
 
-- `conf/workers`
+-   `conf/workers`
 
-  ```bash
-  vm101
-  ```
+    ```bash
+    vm101
+    ```
 
 ### 启动
 

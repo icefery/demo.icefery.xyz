@@ -18,29 +18,29 @@
 
 #### 方式一
 
-- `/etc/systemd/system/multi-user.target.wants/docker.service`
+-   `/etc/systemd/system/multi-user.target.wants/docker.service`
 
-  ```toml
-  ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
-  ```
+    ```toml
+    ExecStart=/usr/bin/dockerd -H fd:// -H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375
+    ```
 
 #### 方式二
 
-- `/etc/systemd/system/multi-user.target.wants/docker.service`
+-   `/etc/systemd/system/multi-user.target.wants/docker.service`
 
-  ```toml
-  ExecStart=/usr/bin/dockerd
-  ```
+    ```toml
+    ExecStart=/usr/bin/dockerd
+    ```
 
-- `/etc/docker/daemon.json`
+-   `/etc/docker/daemon.json`
 
-  ```json
-  {
-    "data-root": "/opt/data/docker",
-    "registry-mirrors": ["https://uwk49ut2.mirror.aliyuncs.com"],
-    "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2375"]
-  }
-  ```
+    ```json
+    {
+      "data-root": "/opt/data/docker",
+      "registry-mirrors": ["https://uwk49ut2.mirror.aliyuncs.com"],
+      "hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:2375"]
+    }
+    ```
 
 #### 注意项
 
@@ -62,26 +62,26 @@ sudo netstat -lntp | grep dockerd
 
 ## 常用命令
 
-- 删除已停止的容器
+-   删除已停止的容器
 
-  ```shell
-  docker rm $(docker ps -a | grep Exited | awk '{print $1}')
-  ```
+    ```shell
+    docker rm $(docker ps -a | grep Exited | awk '{print $1}')
+    ```
 
-- 获取最新镜像版本号
+-   获取最新镜像版本号
 
-  ```shell
-  VERSION=$(docker image ls | grep 'nginx' | awk '{print $2}' | sort -r | head -n 1)
-  ```
+    ```shell
+    VERSION=$(docker image ls | grep 'nginx' | awk '{print $2}' | sort -r | head -n 1)
+    ```
 
-- 自动清理空间
+-   自动清理空间
 
-  ```shell
-  docker system prune
-  ```
+    ```shell
+    docker system prune
+    ```
 
-- 查看占用
+-   查看占用
 
-  ```shell
-  docker system df
-  ```
+    ```shell
+    docker system df
+    ```

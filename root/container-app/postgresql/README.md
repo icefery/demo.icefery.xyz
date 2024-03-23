@@ -30,4 +30,4 @@ helm upgrade postgresql bitnami/postgresql --install --namespace postgresql --cr
 
 ## 常见问题
 
-- Desktop Desktop for Windows 不能映射数据卷。
+-   Desktop Desktop for Windows 不能映射数据卷。

@@ -244,51 +244,51 @@ kubectl apply -f charts.yaml
 
 1. 查看服务器 glibc 版本
 
-   ```shell
-   ldd --version
-   ```
+    ```shell
+    ldd --version
+    ```
 
-   | os     | os version | glibc version |
-   | :----- | :--------- | :------------ |
-   | centos | 7.9        | 2.17          |
-   | centos | 8.4        | 2.28          |
-   | ubuntu | 18.04      | 2.27          |
-   | ubuntu | 20.04      | 2.31          |
-   | ubuntu | 22.04      | 2.35          |
+    | os     | os version | glibc version |
+    | :----- | :--------- | :------------ |
+    | centos | 7.9        | 2.17          |
+    | centos | 8.4        | 2.28          |
+    | ubuntu | 18.04      | 2.27          |
+    | ubuntu | 20.04      | 2.31          |
+    | ubuntu | 22.04      | 2.35          |
 
 2. 创建对应 glibc 版本的容器
 
-   ```shell
-   # centos 7
-   kubectl run centos --image=centos:7.9.2009 --command -- /bin/sleep infinity
-   kubectl exec -it pod/centos -- /bin/bash
+    ```shell
+    # centos 7
+    kubectl run centos --image=centos:7.9.2009 --command -- /bin/sleep infinity
+    kubectl exec -it pod/centos -- /bin/bash
 
-   # ubuntu 22
-   kubectl run ubuntu --image=ubuntu:22.04 --command -- /bin/sleep infinity
-   kubectl exec -it pod/ubuntu -- /bin/bash
-   ```
+    # ubuntu 22
+    kubectl run ubuntu --image=ubuntu:22.04 --command -- /bin/sleep infinity
+    kubectl exec -it pod/ubuntu -- /bin/bash
+    ```
 
 3. 下载依赖
 
-   ```shell
-   # yum
-   yum install iscsi-initiator-utils nfs-utils --downloadonly --downloaddir=rpm -y
-   tar -czvf ./rpm.tar.gz ./rpm
+    ```shell
+    # yum
+    yum install iscsi-initiator-utils nfs-utils --downloadonly --downloaddir=rpm -y
+    tar -czvf ./rpm.tar.gz ./rpm
 
-   # apt
-   apt update && apt install open-iscsi nfs-common --download-only -y && mkdir -p deb && cp /var/cache/apt/archives/*.deb deb
-   tar -czvf ./deb.tar.gz ./deb
-   ```
+    # apt
+    apt update && apt install open-iscsi nfs-common --download-only -y && mkdir -p deb && cp /var/cache/apt/archives/*.deb deb
+    tar -czvf ./deb.tar.gz ./deb
+    ```
 
 4. 复制出依赖
 
-   ```shell
-   # yum
-   kubectl cp centos:/rpm.tar.gz ./rpm.tar.gz
+    ```shell
+    # yum
+    kubectl cp centos:/rpm.tar.gz ./rpm.tar.gz
 
-   # apt
-   kubectl cp ubuntu:/deb.tar.gz ./deb.tar.gz
-   ```
+    # apt
+    kubectl cp ubuntu:/deb.tar.gz ./deb.tar.gz
+    ```
 
 ### 3.2 下载 K3S 资源
 

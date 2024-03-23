@@ -2,7 +2,7 @@
 
 ## 申请证书
 
-- [Let's Encrypt 网页版本,获取 SSL 网站证书](https://letsencrypt.osfipin.com/)
+-   [Let's Encrypt 网页版本,获取 SSL 网站证书](https://letsencrypt.osfipin.com/)
 
 ## 使用证书
 

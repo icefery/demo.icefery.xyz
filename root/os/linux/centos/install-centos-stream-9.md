@@ -1,6 +1,6 @@
 ## 静态 IP
 
-- [CentOS Stream 9 设置静态 IP](https://blog.csdn.net/zhongxj183/article/details/122811236)
+-   [CentOS Stream 9 设置静态 IP](https://blog.csdn.net/zhongxj183/article/details/122811236)
 
 ```shell
 ls -l /etc/NetworkManager/system-connections/

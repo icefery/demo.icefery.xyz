@@ -4,26 +4,26 @@
 
 #### 开启查询缓存
 
-- `my.cnf` 加入以下配置，重启 MySQL 开启查询缓存
-  ```bash
-  query_cache_type=1
-  query_cache_size=3145728
-  ```
-- MySQL 执行以下命令也可以开启查询缓存
+-   `my.cnf` 加入以下配置，重启 MySQL 开启查询缓存
+    ```bash
+    query_cache_type=1
+    query_cache_size=3145728
+    ```
+-   MySQL 执行以下命令也可以开启查询缓存
 
-  ```sql
-  SET GLOBAL query_cache_type=1;
-  SET GLOBAL query_cache_size=3145728;
-  ```
+    ```sql
+    SET GLOBAL query_cache_type=1;
+    SET GLOBAL query_cache_size=3145728;
+    ```
 
-- 控制某个查询语句是否需要查询缓存
+-   控制某个查询语句是否需要查询缓存
 
-  ```sql
-  SELECT sql_no_cache COUNT(*) FROM table_name;
-  ```
+    ```sql
+    SELECT sql_no_cache COUNT(*) FROM table_name;
+    ```
 
 #### 查询缓存不命中的情况
 
-- 任何两个查询在任何字符上的不同都会导致缓存不命中
-- 如果查询中包含任何用户自定义函数、存储过程、用户变量、临时表，其查询结果也不会被缓存
-- 缓存建立之后，MySQL 的查询缓存系统会跟踪查询中涉及的每张表，如果这些表发生变化，那么这张表的所有缓存数据都将失效
+-   任何两个查询在任何字符上的不同都会导致缓存不命中
+-   如果查询中包含任何用户自定义函数、存储过程、用户变量、临时表，其查询结果也不会被缓存
+-   缓存建立之后，MySQL 的查询缓存系统会跟踪查询中涉及的每张表，如果这些表发生变化，那么这张表的所有缓存数据都将失效

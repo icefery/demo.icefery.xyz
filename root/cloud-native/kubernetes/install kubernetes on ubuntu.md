@@ -46,9 +46,9 @@ systemctl restart containerd
 
 ### 说明
 
-- `kubeadm`：用来初始化集群的指令。
-- `kubelet`：在集群中的每个节点上用来启动 Pod 和容器等。
-- `kubectl`：用来与集群通信的命令行工具。
+-   `kubeadm`：用来初始化集群的指令。
+-   `kubelet`：在集群中的每个节点上用来启动 Pod 和容器等。
+-   `kubectl`：用来与集群通信的命令行工具。
 
 ### 设置代理
 
@@ -131,11 +131,11 @@ EOF
 
 ### 加入集群
 
-- 创建 Token
+-   创建 Token
 
-  ```bash
-  kubeadm token create --print-join-command
-  ```
+    ```bash
+    kubeadm token create --print-join-command
+    ```
 
 ## 设置主节点可调度
 

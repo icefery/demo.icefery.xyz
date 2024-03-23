@@ -14,70 +14,70 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
 
 #### 配置 Containerd 镜像仓库
 
-> - https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
-> - https://github.com/containerd/containerd/blob/main/docs/hosts.md
+> -   https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
+> -   https://github.com/containerd/containerd/blob/main/docs/hosts.md
 
-- `/etc/containerd/certs.d/docker.io/hosts.toml`
+-   `/etc/containerd/certs.d/docker.io/hosts.toml`
 
-  ```toml
-  server = "https://registry-1.docker.io"
-  [host."https://uwk49ut2.mirror.aliyuncs.com"]
-    capabilities = ["pull"]
-  ```
+    ```toml
+    server = "https://registry-1.docker.io"
+    [host."https://uwk49ut2.mirror.aliyuncs.com"]
+      capabilities = ["pull"]
+    ```
 
-- `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml`
+-   `/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml`
 
-  ```toml
-  server = "http://core.harbor.dev.icefery.xyz"
-  [host."http://core.harbor.dev.icefery.xyz"]
-    skip_verify = true
-  ```
+    ```toml
+    server = "http://core.harbor.dev.icefery.xyz"
+    [host."http://core.harbor.dev.icefery.xyz"]
+      skip_verify = true
+    ```
 
-- `/etc/containerd/config.toml`
+-   `/etc/containerd/config.toml`
 
-  > Although we have deprecated the old CRI config pattern for specifying registry.mirrors and registry.configs you can
-  > still specify your credentials
-  > via [CRI config](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md#configure-registry-credentials)
-  > .
+    > Although we have deprecated the old CRI config pattern for specifying registry.mirrors and registry.configs you can
+    > still specify your credentials
+    > via [CRI config](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md#configure-registry-credentials)
+    > .
 
-  ```toml
-  version = 2
+    ```toml
+    version = 2
 
-  [plugins."io.containerd.grpc.v1.cri".registry]
-    config_path = "/etc/containerd/certs.d"
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-    endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
-  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."core.harbor.dev.icefery.xyz"]
-    endpoint = ["http://core.harbor.dev.icefery.xyz"]
-  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".tls]
-    insecure_skip_verify = true
-  [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".auth]
-    username = "admin"
-    password = "admin"
-  ```
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = "/etc/containerd/certs.d"
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+      endpoint = ["https://uwk49ut2.mirror.aliyuncs.com"]
+    [plugins."io.containerd.grpc.v1.cri".registry.mirrors."core.harbor.dev.icefery.xyz"]
+      endpoint = ["http://core.harbor.dev.icefery.xyz"]
+    [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".tls]
+      insecure_skip_verify = true
+    [plugins."io.containerd.grpc.v1.cri".registry.configs."core.harbor.dev.icefery.xyz".auth]
+      username = "admin"
+      password = "admin"
+    ```
 
 #### 配置 K3S 内置 Containerd 镜像仓库
 
 > https://docs.rancher.cn/docs/k3s/installation/private-registry/_index
 
-- `/etc/rancher/k3s/registries.yaml`
-  ```yaml
-  mirrors:
-    docker.io:
-      endpoint:
-        - 'https://uwk49ut2.mirror.aliyuncs.com'
-    'core.harbor.dev.icefery.xyz':
-      endpoint:
-        - 'http://core.harbor.dev.icefery.xyz'
-  configs:
-    'core.harbor.dev.icefery.xyz':
-      tls:
-        insecure_skip_verify: true
-      auth:
-        username: admin
-        password: admin
-  ```
+-   `/etc/rancher/k3s/registries.yaml`
+    ```yaml
+    mirrors:
+      docker.io:
+        endpoint:
+          - 'https://uwk49ut2.mirror.aliyuncs.com'
+      'core.harbor.dev.icefery.xyz':
+        endpoint:
+          - 'http://core.harbor.dev.icefery.xyz'
+    configs:
+      'core.harbor.dev.icefery.xyz':
+        tls:
+          insecure_skip_verify: true
+        auth:
+          username: admin
+          password: admin
+    ```
 
 #### 推送镜像
 

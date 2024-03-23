@@ -2,9 +2,9 @@
 
 ### 基础组件
 
-- K8S 单节点集群（`v1.24.4+k3s1`）、Ingress Controller、Storage Class
-- Containerd（`v1.6.6`）、BuildKit
-- `kubectl`、`helm`、`nerdctl`
+-   K8S 单节点集群（`v1.24.4+k3s1`）、Ingress Controller、Storage Class
+-   Containerd（`v1.6.6`）、BuildKit
+-   `kubectl`、`helm`、`nerdctl`
 
 <br/>
 
@@ -16,12 +16,12 @@
 
 最终的配置文件如下，并且禁用了一些非必要的组件：
 
-- HTTPS
-- Cert Manager
-- Nginx Ingress Controller（使用自定义的 Ingress Controller）
-- Prometheus
-- Docker Registry（使用 Harbor）
-- GitLab Agent Server
+-   HTTPS
+-   Cert Manager
+-   Nginx Ingress Controller（使用自定义的 Ingress Controller）
+-   Prometheus
+-   Docker Registry（使用 Harbor）
+-   GitLab Agent Server
 
 需要注意的配置是 `global.ingress.class` 需要设置为 `none`才会让 GitLab 使用默认的 Ingress Controller。
 
@@ -137,43 +137,43 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
 
 相比于 Docker 换源，Containerd 的换源过程可能会麻烦一些，具体可以参考官方文档 [registry.md](https://github.com/containerd/containerd/blob/main/docs/cri/registry.md)：
 
-- 更改 Containerd 配置文件
+-   更改 Containerd 配置文件
 
-  ```bash
-  mkdir -p /etc/containerd/
+    ```bash
+    mkdir -p /etc/containerd/
 
-  cat > /etc/containerd/config.toml <<- "EOF"
-  version = 2
-  [plugins."io.containerd.grpc.v1.cri".registry]
-    config_path = "/etc/containerd/certs.d"
-  EOF
-  ```
+    cat > /etc/containerd/config.toml <<- "EOF"
+    version = 2
+    [plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = "/etc/containerd/certs.d"
+    EOF
+    ```
 
-- 添加镜像注册表配置
+-   添加镜像注册表配置
 
-  > 如果 Ingress Controller 暴露的端口不是 80 则不能省略 Harbor 地址中的端口，例如 `core.harbor.dev.icefery.xyz:30080`。
+    > 如果 Ingress Controller 暴露的端口不是 80 则不能省略 Harbor 地址中的端口，例如 `core.harbor.dev.icefery.xyz:30080`。
 
-  ```bash
-  mkdir -p /etc/containerd/certs.d/core.harbor.dev.icefery.xyz/
+    ```bash
+    mkdir -p /etc/containerd/certs.d/core.harbor.dev.icefery.xyz/
 
-  cat > /etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml <<- "EOF"
-  server = "http://core.harbor.dev.icefery.xyz"
-  [host."http://core.harbor.dev.icefery.xyz"]
-    skip_verify = true
-  EOF
-  ```
+    cat > /etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml <<- "EOF"
+    server = "http://core.harbor.dev.icefery.xyz"
+    [host."http://core.harbor.dev.icefery.xyz"]
+      skip_verify = true
+    EOF
+    ```
 
-- 对 `docker.io` 进行换源
+-   对 `docker.io` 进行换源
 
-  ```bash
-  mkdir -p /etc/containerd/certs.d/docker.io/
+    ```bash
+    mkdir -p /etc/containerd/certs.d/docker.io/
 
-  cat > /etc/containerd/certs.d/docker.io/hosts.toml <<- "EOF"
-  server = "https://registry-1.docker.io"
-  [host."https://uwk49ut2.mirror.aliyuncs.com"]
-    capabilities = ["pull"]
-  EOF
-  ```
+    cat > /etc/containerd/certs.d/docker.io/hosts.toml <<- "EOF"
+    server = "https://registry-1.docker.io"
+    [host."https://uwk49ut2.mirror.aliyuncs.com"]
+      capabilities = ["pull"]
+    EOF
+    ```
 
 以上的配置方式来源于 1.6.6 版本的 Containerd 文档，是一种较新的配置方式，但是这种方式下并不能指定 Harbor 的密码。如果在 Harbor 创建的是私有项目，那么就需要使用原先的配置方式：
 
@@ -264,9 +264,9 @@ kubectl exec -n nexus pods/<POD> -- cat /nexus-data/admin.password
 
 Nexus 有三种类型的仓库：
 
-- `proxy` 代理仓库，只读
-- `hosted` 宿主仓库，存储自定义 JAR 包，可写
-- `group` 组仓库，聚合代理仓库和宿主仓库，为其提供统一的服务地址，可写
+-   `proxy` 代理仓库，只读
+-   `hosted` 宿主仓库，存储自定义 JAR 包，可写
+-   `group` 组仓库，聚合代理仓库和宿主仓库，为其提供统一的服务地址，可写
 
 参考以下的配置，通过代理阿里云云效 Maven 和默认的 `repo.maven.apache.org` 基本可以缓存大部分仓库的访问。
 
@@ -322,33 +322,33 @@ gitlab-runner install --user=root --working-directory=/home/gitlab-runner
 
 针对 Shell 执行器，直接使用 `root` 用户启动 GitLab Runner 后续的配置相对会少很多也最为简单：
 
-- 使用 `gitlab-runner` 用户执行需要配置免密`sudo`。
+-   使用 `gitlab-runner` 用户执行需要配置免密`sudo`。
 
-  ```bash
-  echo "gitlab-runner ALL=(ALL:ALL)  NOPASSWD:ALL" > /etc/sudoers.d/gitlab-runner
+    ```bash
+    echo "gitlab-runner ALL=(ALL:ALL)  NOPASSWD:ALL" > /etc/sudoers.d/gitlab-runner
 
-  # 在 Ubuntu 环境下需要先清空 `gitlab-runner` 用户主目录下的一些配置文件才能正常执行作业
-  cd /home/gitlab-runner
+    # 在 Ubuntu 环境下需要先清空 `gitlab-runner` 用户主目录下的一些配置文件才能正常执行作业
+    cd /home/gitlab-runner
 
-  rm -rf .bash_history  .bash_logout  .bashrc  .profile  .sudo_as_admin_successful
-  ```
+    rm -rf .bash_history  .bash_logout  .bashrc  .profile  .sudo_as_admin_successful
+    ```
 
-  > 但是即遍已经配置免密`sudo` 和 `KUBECONFIG`，通过 `sudo` 命令运行 `helm` 命令时还是报 `Error: Kubernetes cluster unreachable: Get "http://localhost:8080/version": dial tcp 127.0.0.1:8080: connect: connection refused` 的问题，目前暂未解决。
+    > 但是即遍已经配置免密`sudo` 和 `KUBECONFIG`，通过 `sudo` 命令运行 `helm` 命令时还是报 `Error: Kubernetes cluster unreachable: Get "http://localhost:8080/version": dial tcp 127.0.0.1:8080: connect: connection refused` 的问题，目前暂未解决。
 
-- 注册为 SSH 执行器也仍然需要连接的机器安装（不需启动） GitLab Runner 才能在任务间传递 Artifacts，并且针对只能使用 PublicKey 登录的情况还需为 GitLab Runner 挂载 SSH Key。
+-   注册为 SSH 执行器也仍然需要连接的机器安装（不需启动） GitLab Runner 才能在任务间传递 Artifacts，并且针对只能使用 PublicKey 登录的情况还需为 GitLab Runner 挂载 SSH Key。
 
-  ```yaml
-  services:
-    gitlab-runner-ssh:
-      image: gitlab/gitlab-runner:ubuntu-v15.3.0
-      container_name: gitlab-runner-ssh
-      volumes:
-        - /root/.ssh/gitlab-runner:/root/.ssh/gitlab-runner
-  networks:
-    default:
-      external: true
-      name: compose
-  ```
+    ```yaml
+    services:
+      gitlab-runner-ssh:
+        image: gitlab/gitlab-runner:ubuntu-v15.3.0
+        container_name: gitlab-runner-ssh
+        volumes:
+          - /root/.ssh/gitlab-runner:/root/.ssh/gitlab-runner
+    networks:
+      default:
+        external: true
+        name: compose
+    ```
 
 注册完 GitLab Runner 后如果没有填写 Tag 还可以在 GitLab 进行修改：
 
@@ -361,21 +361,21 @@ gitlab-runner install --user=root --working-directory=/home/gitlab-runner
 
 我们可以创建一个简单的 Spring Boot 项目：
 
-- `pom.xml`
+-   `pom.xml`
 
-  ![](__image__/0708c9e31aee4129a458c5eadaadbe62.png)
+    ![](__image__/0708c9e31aee4129a458c5eadaadbe62.png)
 
-- `App.java`
+-   `App.java`
 
-  ![](__image__/c951ae2b72de4f2a95a83c8cb3ff7bfc.png)
+    ![](__image__/c951ae2b72de4f2a95a83c8cb3ff7bfc.png)
 
-- `Dockerfile`
+-   `Dockerfile`
 
-  ![](__image__/05637f5a6d3c4aa58ff21bb11bd50d36.png)
+    ![](__image__/05637f5a6d3c4aa58ff21bb11bd50d36.png)
 
-- `kubectl.yaml`
+-   `kubectl.yaml`
 
-  ![](__image__/13e25ad49fa844138f091fa670952193.png)
+    ![](__image__/13e25ad49fa844138f091fa670952193.png)
 
 #### GitLab CI 流水线
 
@@ -458,17 +458,17 @@ deploy-to-kubernetes:
 
 #### 创建项目
 
-- `index.js`
+-   `index.js`
 
-  ![](__image__/6c9e65fdd1dd4f788c57c008b34a5be3.png)
+    ![](__image__/6c9e65fdd1dd4f788c57c008b34a5be3.png)
 
-- `Dockerfile`
+-   `Dockerfile`
 
-  ![](__image__/1c100f745caf4c989ddf1a05e724dac0.png)
+    ![](__image__/1c100f745caf4c989ddf1a05e724dac0.png)
 
-- `chart/templates/my-app-npm.yaml`
+-   `chart/templates/my-app-npm.yaml`
 
-  ![](__image__/beeacc8dab354a70a73cc9f01f89e4c9.png)
+    ![](__image__/beeacc8dab354a70a73cc9f01f89e4c9.png)
 
 #### GitLab CI 流水线
 

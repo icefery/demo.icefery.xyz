@@ -6,9 +6,9 @@
 
 `QWidgets` 及其子类的对象都可以作为其它控件的父窗口，常见的父窗口类有如下三个：
 
-- `QWidgets`
-- `QMainWindow`：`QWidgets` 的直接子类
-- `QDialog`：`QWidgets` 的直接子类
+-   `QWidgets`
+-   `QMainWindow`：`QWidgets` 的直接子类
+-   `QDialog`：`QWidgets` 的直接子类
 
 ### 1.2 析构函数
 
@@ -25,10 +25,10 @@ void resize(int w, int h);
 
 ### 2.1 介绍
 
-- 信号和槽是 QT 自行定义的一种通信机制，实现对象之间的数据交互。
-- 当用户或系统触发了一个动作，导致某个控件的状态发送了改变，该控件就会发射一个信号，即调用其类中一个特定的成员函数（信号），同时还可能携带有必要的参数。
-- 槽和普通的成员函数几乎没有太多区别，可以是公有的、保护的或私有的，可以被重载，也可以被覆盖，其参数可以是任意类型，并可以像普通成员函数一样调用。
-- 槽函数与普通成员函数的差别不在于其语法特性，而在于其功能。槽函数更多体现为对某种特定信号的处理，可以将槽和其它对象信号建立连接，这样当发射信号时，槽函数将被触发和执行，进而来完成具体功能。
+-   信号和槽是 QT 自行定义的一种通信机制，实现对象之间的数据交互。
+-   当用户或系统触发了一个动作，导致某个控件的状态发送了改变，该控件就会发射一个信号，即调用其类中一个特定的成员函数（信号），同时还可能携带有必要的参数。
+-   槽和普通的成员函数几乎没有太多区别，可以是公有的、保护的或私有的，可以被重载，也可以被覆盖，其参数可以是任意类型，并可以像普通成员函数一样调用。
+-   槽函数与普通成员函数的差别不在于其语法特性，而在于其功能。槽函数更多体现为对某种特定信号的处理，可以将槽和其它对象信号建立连接，这样当发射信号时，槽函数将被触发和执行，进而来完成具体功能。
 
 ### 2.2 信号和槽的连接
 
@@ -43,16 +43,16 @@ QObject:connect(
 );
 ```
 
-- `sender`：信号发送对象指针
-- `signal`：要发送的信号函数，可以使用 `SIGNAL()` 宏进行类型转换
-- `receiver`：信号的接收对象指针
-- `method`：接收信号后要执行的槽函数，可以使用 `SLOT()` 宏进行类型转换
+-   `sender`：信号发送对象指针
+-   `signal`：要发送的信号函数，可以使用 `SIGNAL()` 宏进行类型转换
+-   `receiver`：信号的接收对象指针
+-   `method`：接收信号后要执行的槽函数，可以使用 `SLOT()` 宏进行类型转换
 
 #### 应用
 
-- 一个信号可以被连接到多个槽（一对多）
-- 多个信号也可以连接同一个槽（多对一）
-- 两个信号可以直接连接（信号级联）
+-   一个信号可以被连接到多个槽（一对多）
+-   多个信号也可以连接同一个槽（多对一）
+-   两个信号可以直接连接（信号级联）
 
 ### 2.3 案例
 
@@ -146,34 +146,34 @@ int main(int argc, char ** argv) {
 
 ### 2.4 信号和槽连接的语法要求
 
-- 信号和槽参数要一致
+-   信号和槽参数要一致
 
-  ```cpp
-  QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int))); // OK
+    ```cpp
+    QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int))); // OK
 
-  QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int, int))); // ERROR
-  ```
+    QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int, int))); // ERROR
+    ```
 
-- 可以带有缺省参数
+-   可以带有缺省参数
 
-  ```cpp
-  QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int, int=0))); // OK
-  ```
+    ```cpp
+    QObject::connect(A, SIGNAL(sigfun(int)), B, SLOT(slotfun(int, int=0))); // OK
+    ```
 
-- 信号函数的参数可以多于槽函数，多于参数将被忽略
+-   信号函数的参数可以多于槽函数，多于参数将被忽略
 
-  ```cpp
-  QObject::connect(A, SIGNAL(sigfun(int, int)), B, SLOT(slotfun(int))); // OK
-  ```
+    ```cpp
+    QObject::connect(A, SIGNAL(sigfun(int, int)), B, SLOT(slotfun(int))); // OK
+    ```
 
 ## 三、面向对象 QT 编程
 
 ### 3.1 介绍
 
-- 完全不使用任何面向对象技术，而只是利用 QT 所提供的类创建对象，并调用对象的接口以满足用户的需要是可能，但这样构建的应用程序其功能必然是十分有限的。
-- 首先，Qt 类保护成员中的诸多实现无法在类的外部被复用，Qt 试图通多态实现的很多机制，如事件处理，完全无法使用。
-- 再次，Qt 提供的信号和槽不可能满足用户所有的需求，自定义信号和槽需要面向对象技术。
-- 最后，Qt 设计师、Qt 创建器等工具链都以面向对象的方式使用 Qt，反其道而行之不会有好结果。
+-   完全不使用任何面向对象技术，而只是利用 QT 所提供的类创建对象，并调用对象的接口以满足用户的需要是可能，但这样构建的应用程序其功能必然是十分有限的。
+-   首先，Qt 类保护成员中的诸多实现无法在类的外部被复用，Qt 试图通多态实现的很多机制，如事件处理，完全无法使用。
+-   再次，Qt 提供的信号和槽不可能满足用户所有的需求，自定义信号和槽需要面向对象技术。
+-   最后，Qt 设计师、Qt 创建器等工具链都以面向对象的方式使用 Qt，反其道而行之不会有好结果。
 
 ### 3.2 案例
 
@@ -181,103 +181,103 @@ int main(int argc, char ** argv) {
 
 ##### `CalculatorDialog`
 
-- `calculator_dialog.h`
+-   `calculator_dialog.h`
 
-  ```cpp
-  #ifndef CALCULATOR_DIALOG_H
+    ```cpp
+    #ifndef CALCULATOR_DIALOG_H
 
-  #include<QDialog>
-  #include<QLabel>
-  #include<QPushButton>
-  #include<QLineEdit>        // 行编辑控件
-  #include<QHBoxLayout>      // 水平布局器
-  #include<QDoubleValidator> // 验证器
+    #include<QDialog>
+    #include<QLabel>
+    #include<QPushButton>
+    #include<QLineEdit>        // 行编辑控件
+    #include<QHBoxLayout>      // 水平布局器
+    #include<QDoubleValidator> // 验证器
 
-  class CalculatorDialog : public QDialog {
-  Q_OBJECT // moc
+    class CalculatorDialog : public QDialog {
+    Q_OBJECT // moc
 
-  public:
-      // 构造函数
-      CalculatorDialog();
+    public:
+        // 构造函数
+        CalculatorDialog();
 
-  public slots:
-      // 启用等号按钮
-      void enableButton();
-      // 计算和显示结果
-      void calc();
+    public slots:
+        // 启用等号按钮
+        void enableButton();
+        // 计算和显示结果
+        void calc();
 
-  private:
-      QLineEdit* m_editX;    // 左操作数
-      QLineEdit* m_editY;    // 右操作数
-      QLineEdit* m_editZ;    // 显示结果
-      QLabel* m_label;       // "+"
-      QPushButton* m_button; // "="
-  };
+    private:
+        QLineEdit* m_editX;    // 左操作数
+        QLineEdit* m_editY;    // 右操作数
+        QLineEdit* m_editZ;    // 显示结果
+        QLabel* m_label;       // "+"
+        QPushButton* m_button; // "="
+    };
 
-  #endif // CALCULATOR_DIALOG_H
-  ```
+    #endif // CALCULATOR_DIALOG_H
+    ```
 
-- `calculator_dialog.cpp`
+-   `calculator_dialog.cpp`
 
-  ```cpp
-  #include "calculator_dialog.h"
+    ```cpp
+    #include "calculator_dialog.h"
 
-  // 构造函数
-  CalculatorDialog::CalculatorDialog() {
-      // 1. 界面初始化
-      setWindowTitle("计算器");
-      // 左操作数
-      m_editX = new QLineEdit(this);
-      m_editX->setAlignment(Qt::AlignRight);               // 设置文本对齐
-      m_editX->setValidator(new QDoubleValidator(this)); // 设置数字验证器
-      // 右操作数
-      m_editY = new QLineEdit(this);
-      m_editY->setAlignment(Qt::AlignRight);
-      m_editY->setValidator(new QDoubleValidator(this));
-      // 显示结果
-      m_editZ = new QLineEdit(this);
-      m_editZ->setAlignment(Qt::AlignRight);
-      m_editZ->setReadOnly(true); // 设置只读
-      // "+"
-      m_label = new QLabel("+", this);
-      // "="
-      m_button = new QPushButton("=", this);
-      m_button->setEnabled(false); // 设置禁用
-      // 创建布局器(自动调整每个控件的大小和位置)(按水平方向以此将控件添加到布局容器中)
-      QHBoxLayout* layout = new QHBoxLayout(this);
-      layout->addWidget(m_editX);
-      layout->addWidget(m_label);
-      layout->addWidget(m_editY);
-      layout->addWidget(m_button);
-      layout->addWidget(m_editZ);
-      setLayout(layout);
+    // 构造函数
+    CalculatorDialog::CalculatorDialog() {
+        // 1. 界面初始化
+        setWindowTitle("计算器");
+        // 左操作数
+        m_editX = new QLineEdit(this);
+        m_editX->setAlignment(Qt::AlignRight);               // 设置文本对齐
+        m_editX->setValidator(new QDoubleValidator(this)); // 设置数字验证器
+        // 右操作数
+        m_editY = new QLineEdit(this);
+        m_editY->setAlignment(Qt::AlignRight);
+        m_editY->setValidator(new QDoubleValidator(this));
+        // 显示结果
+        m_editZ = new QLineEdit(this);
+        m_editZ->setAlignment(Qt::AlignRight);
+        m_editZ->setReadOnly(true); // 设置只读
+        // "+"
+        m_label = new QLabel("+", this);
+        // "="
+        m_button = new QPushButton("=", this);
+        m_button->setEnabled(false); // 设置禁用
+        // 创建布局器(自动调整每个控件的大小和位置)(按水平方向以此将控件添加到布局容器中)
+        QHBoxLayout* layout = new QHBoxLayout(this);
+        layout->addWidget(m_editX);
+        layout->addWidget(m_label);
+        layout->addWidget(m_editY);
+        layout->addWidget(m_button);
+        layout->addWidget(m_editZ);
+        setLayout(layout);
 
-      // 2. 信号和槽函数连接
-      // 左右操作数文本改变时发送信号 textChanged()
-      connect(m_editX, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
-      connect(m_editY, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
-      // 点击按钮发送信号 clicked()
-      connect(m_button, SIGNAL(clicked()), this, SLOT(calc()));
-  }
+        // 2. 信号和槽函数连接
+        // 左右操作数文本改变时发送信号 textChanged()
+        connect(m_editX, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
+        connect(m_editY, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
+        // 点击按钮发送信号 clicked()
+        connect(m_button, SIGNAL(clicked()), this, SLOT(calc()));
+    }
 
-  // 启用等号按钮
-  void CalculatorDialog::enableButton() {
-      bool xOk;
-      bool yOk;
-      m_editX->text().toDouble(&xOk);
-      m_editY->text().toDouble(&yOk);
-      // 当左右操作数都输入了有效数据，则使能等号按钮
-      m_button->setEnabled(xOk && yOk);
-  }
+    // 启用等号按钮
+    void CalculatorDialog::enableButton() {
+        bool xOk;
+        bool yOk;
+        m_editX->text().toDouble(&xOk);
+        m_editY->text().toDouble(&yOk);
+        // 当左右操作数都输入了有效数据，则使能等号按钮
+        m_button->setEnabled(xOk && yOk);
+    }
 
-  // 计算和显示结果
-  void CalculatorDialog::calc() {
-      double result = m_editX->text().toDouble() + m_editY->text().toDouble();
-      // 显示字符串形式结果
-      QString str = QString::number(result);
-      m_editZ->setText(str);
-  }
-  ```
+    // 计算和显示结果
+    void CalculatorDialog::calc() {
+        double result = m_editX->text().toDouble() + m_editY->text().toDouble();
+        // 显示字符串形式结果
+        QString str = QString::number(result);
+        m_editZ->setText(str);
+    }
+    ```
 
 ##### `main.cpp`
 
@@ -305,81 +305,81 @@ int main(int argc, char** argv) {
 
 ##### `TimeDialog`
 
-- `time_dialog.h`
+-   `time_dialog.h`
 
-  ```cpp
-  #ifndef TIME_DIALOG_H
-  #define TIME_DIALOG_H
+    ```cpp
+    #ifndef TIME_DIALOG_H
+    #define TIME_DIALOG_H
 
-  #include <QDialog>
-  #include <QLabel>
-  #include <QPushButton>
-  #include <QVBoxLayout> // 垂直布局器
-  #include <QTime>       // 时间
+    #include <QDialog>
+    #include <QLabel>
+    #include <QPushButton>
+    #include <QVBoxLayout> // 垂直布局器
+    #include <QTime>       // 时间
 
-  class TimeDialog : public QDialog {
-  Q_OBJECT // moc
+    class TimeDialog : public QDialog {
+    Q_OBJECT // moc
 
-  public:
-      TimeDialog();
+    public:
+        TimeDialog();
 
-  public slots:
-      void getTime();
+    public slots:
+        void getTime();
 
-  signals:
-      // 自定义信号(只需申明不能定义)
-      void mySignal(const QString&);
-  private:
-      QLabel* m_label;
-      QPushButton* m_button;
-  };
+    signals:
+        // 自定义信号(只需申明不能定义)
+        void mySignal(const QString&);
+    private:
+        QLabel* m_label;
+        QPushButton* m_button;
+    };
 
-  #endif // TIME_DIALOG_H
-  ```
+    #endif // TIME_DIALOG_H
+    ```
 
-- `time_dialog.cpp`
+-   `time_dialog.cpp`
 
-  ```cpp
-  #include <QFont>
+    ```cpp
+    #include <QFont>
 
-  #include "time_dialog.h"
+    #include "time_dialog.h"
 
-  TimeDialog::TimeDialog() {
-      // 1. 初始化界面
-      // 字体
-      QFont font;
-      font.setPointSize(20);
-      // 标签
-      m_label = new QLabel(this);
-      m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);     // 设置边框
-      m_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); // 设置文本对齐
-      m_label->setFont(font);                                     // 设置字体
-      // 按钮
-      m_button = new QPushButton("获取系统当前时间", this);
-      m_button->setFont(font);
-      // 垂直布局器
-      QVBoxLayout* layout = new QVBoxLayout(this);
-      layout->addWidget(m_label);
-      layout->addWidget(m_button);
-      setLayout(layout);
+    TimeDialog::TimeDialog() {
+        // 1. 初始化界面
+        // 字体
+        QFont font;
+        font.setPointSize(20);
+        // 标签
+        m_label = new QLabel(this);
+        m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);     // 设置边框
+        m_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); // 设置文本对齐
+        m_label->setFont(font);                                     // 设置字体
+        // 按钮
+        m_button = new QPushButton("获取系统当前时间", this);
+        m_button->setFont(font);
+        // 垂直布局器
+        QVBoxLayout* layout = new QVBoxLayout(this);
+        layout->addWidget(m_label);
+        layout->addWidget(m_button);
+        setLayout(layout);
 
-      // 2. 信号和槽函数
-      connect(m_button, SIGNAL(clicked()), this, SLOT(getTime()));
-      // 通过自定义信号触发 Label 的 setText() 槽函数执行
-      connect(this, SIGNAL(mySignal(const QString &)), m_label, SLOT(setText(QString)));
-  }
+        // 2. 信号和槽函数
+        connect(m_button, SIGNAL(clicked()), this, SLOT(getTime()));
+        // 通过自定义信号触发 Label 的 setText() 槽函数执行
+        connect(this, SIGNAL(mySignal(const QString &)), m_label, SLOT(setText(QString)));
+    }
 
-  void TimeDialog::getTime() {
-      qDebug("getTime()");
-      qDebug() << "getTime()";
-      // 获取当前系统时间
-      QTime time = QTime::currentTime();
-      // 将时间对象转换为字符串
-      QString str = time.toString("hh:mm:ss");
-      // 发射信号(emit 是 Qt 关键字，标记当前是发射信号)
-      emit mySignal(str);
-  }
-  ```
+    void TimeDialog::getTime() {
+        qDebug("getTime()");
+        qDebug() << "getTime()";
+        // 获取当前系统时间
+        QTime time = QTime::currentTime();
+        // 将时间对象转换为字符串
+        QString str = time.toString("hh:mm:ss");
+        // 发射信号(emit 是 Qt 关键字，标记当前是发射信号)
+        emit mySignal(str);
+    }
+    ```
 
 ##### `main.cpp`
 

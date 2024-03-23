@@ -56,35 +56,35 @@ airflow version
 
 ### 1.4 配置 Airflow
 
-- 安装依赖
+-   安装依赖
 
-  ```bash
-  apt install libmysqlclient-dev -y
-  pip install mysqlclient
-  ```
+    ```bash
+    apt install libmysqlclient-dev -y
+    pip install mysqlclient
+    ```
 
-- 修改配置文件 `airflow.cfg`
+-   修改配置文件 `airflow.cfg`
 
-  ```properties
-  executor = LocalExecutor
-  load_examples = False
-  sql_alchemy_conn = mysql+mysqldb://root:root@192.192.192.6:3306/airflow
-  ```
+    ```properties
+    executor = LocalExecutor
+    load_examples = False
+    sql_alchemy_conn = mysql+mysqldb://root:root@192.192.192.6:3306/airflow
+    ```
 
-- 数据库初始化
+-   数据库初始化
 
-  ```bash
-  # 初始化
-  airflow db init
-  # 创建账号
-  airflow users create \
-    --username admin \
-    --password admin \
-    --firstname admin \
-    --lastname admin \
-    --role Admin \
-    --email icefery@163.com
-  ```
+    ```bash
+    # 初始化
+    airflow db init
+    # 创建账号
+    airflow users create \
+      --username admin \
+      --password admin \
+      --firstname admin \
+      --lastname admin \
+      --role Admin \
+      --email icefery@163.com
+    ```
 
 ### 1.5 Airflow 启停脚本
 
@@ -113,51 +113,51 @@ esac
 
 #### 创建任务
 
-- 创建默认 DAG 目录
+-   创建默认 DAG 目录
 
-  ```bash
-  mkdir -p "${AIRFLOW_HOME}/{dags}"
-  ```
+    ```bash
+    mkdir -p "${AIRFLOW_HOME}/{dags}"
+    ```
 
-- 新建任务 `dags/demo.py`
+-   新建任务 `dags/demo.py`
 
-  ```python
-  from datetime import datetime, timedelta
-  from airflow import DAG
-  from airflow.operators.bash import BashOperator
+    ```python
+    from datetime import datetime, timedelta
+    from airflow import DAG
+    from airflow.operators.bash import BashOperator
 
-  dag = DAG(
-    dag_id="demo",
-    start_date=datetime(year=2023, month=3, day=1),
-    schedule=timedelta(minutes=1),
-  )
-  t1 = BashOperator(
-    dag=dag,
-    task_id="t1",
-    bash_command="""
-    echo 't1' >> ${AIRFLOW_HOME}/demo.txt
-    """,
-  )
-  t2 = BashOperator(
-    dag=dag,
-    task_id="t2",
-    bash_command="""
-    echo 't2' >> ${AIRFLOW_HOME}/demo.txt
-    """,
-  )
-  t3 = BashOperator(
-    dag=dag,
-    task_id="t3",
-    bash_command="""
-    echo 't3' >> ${AIRFLOW_HOME}/demo.txt
-    """,
-  )
-  t4 = BashOperator(
-    dag=dag,
-    task_id="t4",
-    bash_command="""
-    echo 't4' >> ${AIRFLOW_HOME}/demo.txt
-    """,
-  )
-  [t1, t2] >> t3 >> t4
-  ```
+    dag = DAG(
+      dag_id="demo",
+      start_date=datetime(year=2023, month=3, day=1),
+      schedule=timedelta(minutes=1),
+    )
+    t1 = BashOperator(
+      dag=dag,
+      task_id="t1",
+      bash_command="""
+      echo 't1' >> ${AIRFLOW_HOME}/demo.txt
+      """,
+    )
+    t2 = BashOperator(
+      dag=dag,
+      task_id="t2",
+      bash_command="""
+      echo 't2' >> ${AIRFLOW_HOME}/demo.txt
+      """,
+    )
+    t3 = BashOperator(
+      dag=dag,
+      task_id="t3",
+      bash_command="""
+      echo 't3' >> ${AIRFLOW_HOME}/demo.txt
+      """,
+    )
+    t4 = BashOperator(
+      dag=dag,
+      task_id="t4",
+      bash_command="""
+      echo 't4' >> ${AIRFLOW_HOME}/demo.txt
+      """,
+    )
+    [t1, t2] >> t3 >> t4
+    ```

@@ -32,8 +32,8 @@ create database demo encoding = 'UTF8' dbcompatibility = 'PG';
 
 ### 压缩
 
-> - https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/SQLReference/CREATE-TABLE.html
-> - https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/SQLReference/列存表支持的数据类型.html
+> -   https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/SQLReference/CREATE-TABLE.html
+> -   https://docs-opengauss.osinfra.cn/zh/docs/5.0.0/docs/SQLReference/列存表支持的数据类型.html
 
 ```sql
 create table ods.ods_dwd_urs_claim (
@@ -49,5 +49,5 @@ with (
 
 > https://blog.csdn.net/weixin_48456383/article/details/124019202
 
-- `5.x` 版本：使用 [`org.postgresql:postgresql:42.7.1`](https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.1/postgresql-42.7.1.jar) 驱动会报错 `Invalid or unsupported by client SCRAM mechanisms` ；使用 [`org.opengauss:opengauss-jdbc:5.1.0`](https://repo1.maven.org/maven2/org/opengauss/opengauss-jdbc/5.1.0/opengauss-jdbc-5.1.0.jar) 正常。
-- `3.x` 版本：使用两种驱动都能正常连接。
+-   `5.x` 版本：使用 [`org.postgresql:postgresql:42.7.1`](https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.1/postgresql-42.7.1.jar) 驱动会报错 `Invalid or unsupported by client SCRAM mechanisms` ；使用 [`org.opengauss:opengauss-jdbc:5.1.0`](https://repo1.maven.org/maven2/org/opengauss/opengauss-jdbc/5.1.0/opengauss-jdbc-5.1.0.jar) 正常。
+-   `3.x` 版本：使用两种驱动都能正常连接。

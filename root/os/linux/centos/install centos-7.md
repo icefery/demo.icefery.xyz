@@ -1,44 +1,44 @@
 ### 网络配置
 
-- 查看网卡 UUID
+-   查看网卡 UUID
 
-  ```bash
-  # 查看网卡 UUID
-  nmcli con
-  ```
+    ```bash
+    # 查看网卡 UUID
+    nmcli con
+    ```
 
-- `/etc/sysconfig/network-scripts/ifcfg-ens33`
+-   `/etc/sysconfig/network-scripts/ifcfg-ens33`
 
-  > VMWare 中默认网卡名称为 `ens-33`。
+    > VMWare 中默认网卡名称为 `ens-33`。
 
-  ```bash
-  TYPE=Ethernet
-  PROXY_METHOD=none
-  BROWSER_ONLY=no
-  BOOTPROTO=none
-  DEFROUTE=yes
-  IPV4_FAILURE_FATAL=no
-  IPV6INIT=yes
-  IPV6_AUTOCONF=yes
-  IPV6_DEFROUTE=yes
-  IPV6_FAILURE_FATAL=no
-  IPV6_ADDR_GEN_MODE=stable-privacy
-  NAME=ens33
-  UUID=21f9e3ea-3aab-4de3-90e5-dfa584e84033
-  DEVICE=ens33
-  ONBOOT=yes
-  IPADDR=192.168.137.7
-  PREFIX=24
-  GATEWAY=192.168.137.1
-  DNS1=192.168.137.1
-  IPV6_PRIVACY=no
-  ```
+    ```bash
+    TYPE=Ethernet
+    PROXY_METHOD=none
+    BROWSER_ONLY=no
+    BOOTPROTO=none
+    DEFROUTE=yes
+    IPV4_FAILURE_FATAL=no
+    IPV6INIT=yes
+    IPV6_AUTOCONF=yes
+    IPV6_DEFROUTE=yes
+    IPV6_FAILURE_FATAL=no
+    IPV6_ADDR_GEN_MODE=stable-privacy
+    NAME=ens33
+    UUID=21f9e3ea-3aab-4de3-90e5-dfa584e84033
+    DEVICE=ens33
+    ONBOOT=yes
+    IPADDR=192.168.137.7
+    PREFIX=24
+    GATEWAY=192.168.137.1
+    DNS1=192.168.137.1
+    IPV6_PRIVACY=no
+    ```
 
-- 重启网络
+-   重启网络
 
-  ```bash
-  systemctl restart network
-  ```
+    ```bash
+    systemctl restart network
+    ```
 
 ### 换源
 

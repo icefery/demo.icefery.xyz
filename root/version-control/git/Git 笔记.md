@@ -8,47 +8,47 @@ git config --global user.email "icefery@163.com"
 
 ### 常用命令
 
-- 新建空白分支
+-   新建空白分支
 
-  ```bash
-  git checkout --orphan <branch>
-  ```
+    ```bash
+    git checkout --orphan <branch>
+    ```
 
-- 远程
+-   远程
 
-  ```bash
-  # 添加远程仓库
-  git remote add origin <url>
+    ```bash
+    # 添加远程仓库
+    git remote add origin <url>
 
-  # 修改远程仓库的地址
-  git remote set-url origin <url>
+    # 修改远程仓库的地址
+    git remote set-url origin <url>
 
-  # 修改远程分支的名称
-  git remote rename <old_name> <new_name>
+    # 修改远程分支的名称
+    git remote rename <old_name> <new_name>
 
-  # 移除远程仓库
-  git remote remove origin
+    # 移除远程仓库
+    git remote remove origin
 
-  # 查看远程分支
-  git remote -v
+    # 查看远程分支
+    git remote -v
 
-  # 关联远程分支
-  git branch --set-upstream-to=origin/<remote-branch> <local_branch>
-  ```
+    # 关联远程分支
+    git branch --set-upstream-to=origin/<remote-branch> <local_branch>
+    ```
 
-- 合并到上一次提交
+-   合并到上一次提交
 
-  ```bash
-  git commit --amend
-  ```
+    ```bash
+    git commit --amend
+    ```
 
-- 撤销所有暂存和修改
+-   撤销所有暂存和修改
 
-  ```bash
-  git fetch --all
+    ```bash
+    git fetch --all
 
-  git reset HEAD -a
-  ```
+    git reset HEAD -a
+    ```
 
 ### `.gitignore`
 

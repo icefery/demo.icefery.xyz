@@ -40,8 +40,8 @@ source /etc/profile
 
 ### 设置镜像源
 
-> - https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
-> - https://github.com/containerd/containerd/blob/main/docs/hosts.md
+> -   https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
+> -   https://github.com/containerd/containerd/blob/main/docs/hosts.md
 
 ```bash
 mkdir -p /etc/containerd/certs.d/docker.io
@@ -82,8 +82,8 @@ systemctl restart containerd
 
 ## 构建多平台镜像
 
-> - https://docs.docker.com/build/buildx/multiplatform-images/
-> - https://docs.docker.com/engine/reference/commandline/manifest/
+> -   https://docs.docker.com/build/buildx/multiplatform-images/
+> -   https://docs.docker.com/engine/reference/commandline/manifest/
 
 #### 配置 QEMU 多平台支持
 
@@ -128,8 +128,8 @@ nerdctl push --all-platforms icefery/my-app:0.0.1
 
 #### `FATA[0000] failed to create shim task: OCI runtime create failed: runc create failed: mountpoint for devices not found: unknown`
 
-- [docker 启动问题 mountpoint for devices not found](https://blog.csdn.net/weixin_47023868/article/details/116025586)
-- [https://github.com/tianon/cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
+-   [docker 启动问题 mountpoint for devices not found](https://blog.csdn.net/weixin_47023868/article/details/116025586)
+-   [https://github.com/tianon/cgroupfs-mount](https://github.com/tianon/cgroupfs-mount)
 
 #### `ctr` 拉取 HTTP 镜像
 

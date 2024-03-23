@@ -2,12 +2,12 @@
 
 ### 3.1 依赖
 
-- Servlet API（`javax.servlet-api`）
-- MySQL 驱动（`mysql-connector-java`）
-- Druid 数据源（`druid`）
-- Spring （`spring-beans`、`spring-core`、`spring-context`、`spring-expression`、`spring-web`、`spring-orm`）
-- Hibernate（`hibernate-core`）
-- Struts2（`struts2-core`、`struts2-convention-plugin`、`struts2-spring-plugin`）
+-   Servlet API（`javax.servlet-api`）
+-   MySQL 驱动（`mysql-connector-java`）
+-   Druid 数据源（`druid`）
+-   Spring （`spring-beans`、`spring-core`、`spring-context`、`spring-expression`、`spring-web`、`spring-orm`）
+-   Hibernate（`hibernate-core`）
+-   Struts2（`struts2-core`、`struts2-convention-plugin`、`struts2-spring-plugin`）
 
 ### 3.1 实体——表关系配置
 

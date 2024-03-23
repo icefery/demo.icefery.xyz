@@ -38,16 +38,16 @@ kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
 
 ## TODO
 
-- 直接使用 HelmChart 部署自定义 DNS 服务
+-   直接使用 HelmChart 部署自定义 DNS 服务
 
 ## 常见问题
 
-- `systemd-resolved` 占用 53 端口
+-   `systemd-resolved` 占用 53 端口
 
-  ```bash
-  sed -i -e '/#DNSStubListener=/c DNSStubListener=no' -e '/#DNS=/c DNS=114.114.114.114' /etc/systemd/resolved.conf
+    ```bash
+    sed -i -e '/#DNSStubListener=/c DNSStubListener=no' -e '/#DNS=/c DNS=114.114.114.114' /etc/systemd/resolved.conf
 
-  ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+    ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
-  systemctl restart systemd-resolved
-  ```
+    systemctl restart systemd-resolved
+    ```

@@ -4,9 +4,9 @@
 
 环境：
 
-- ES 7.8.0
-- JDK11
-- SpringBoot 2.3.0（ES 7.6.2）
+-   ES 7.8.0
+-   JDK11
+-   SpringBoot 2.3.0（ES 7.6.2）
 
 <br/><br/>
 

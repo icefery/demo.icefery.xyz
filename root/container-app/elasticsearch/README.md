@@ -10,7 +10,7 @@ bin/elasticsearch-setup-passwords interactive
 
 ## 收藏
 
-- [ES8 unable to authenticate user [kibana_system] for REST request#10076](https://github.com/bitnami/charts/issues/10076)
+-   [ES8 unable to authenticate user [kibana_system] for REST request#10076](https://github.com/bitnami/charts/issues/10076)
 
 ```yaml
 kibana:

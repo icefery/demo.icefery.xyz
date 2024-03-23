@@ -6,20 +6,20 @@
 
 数据类型：
 
-- `BIGINT`
-- `BLOB`
-- `CHARACTER`
-- `CLOB`
-- `DATE`
-- `DB2SECURITYLABEL`
-- `DECIMAL`
-- `DOUBLE`
-- `INTEGER`
-- `REAL`
-- `SMALLINT`
-- `TIMESTAMP`
-- `VARCHAR`
-- `XML`
+-   `BIGINT`
+-   `BLOB`
+-   `CHARACTER`
+-   `CLOB`
+-   `DATE`
+-   `DB2SECURITYLABEL`
+-   `DECIMAL`
+-   `DOUBLE`
+-   `INTEGER`
+-   `REAL`
+-   `SMALLINT`
+-   `TIMESTAMP`
+-   `VARCHAR`
+-   `XML`
 
 ```sql
 select "table_schema", "table_name", "table_type", "table_comment", "column_name", "column_type", "column_order", "column_default", "column_nullable"

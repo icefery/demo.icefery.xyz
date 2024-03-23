@@ -34,27 +34,27 @@ select c_custkey, count(*) from customer where c_custkey < 100 group by c_custke
 
 ### `IN` 子查询重写优化
 
-- 子查询重写为 `EXISTS`
+-   子查询重写为 `EXISTS`
 
-  ```sql
-  -- 获取最近一年有订单的用户信息
-  select * from customer where c_custkey in (select o_custkey from orders where o_orderdate >= current_date - interval 1 year)
-  ```
+    ```sql
+    -- 获取最近一年有订单的用户信息
+    select * from customer where c_custkey in (select o_custkey from orders where o_orderdate >= current_date - interval 1 year)
+    ```
 
-  ```sql
-  -- 获取最近一年有订单的用户信息
-  select * from customer where exists (select * from orders where c_custkey = o_custkey and o_orderdate >= current_date - interval 1 year)
-  ```
+    ```sql
+    -- 获取最近一年有订单的用户信息
+    select * from customer where exists (select * from orders where c_custkey = o_custkey and o_orderdate >= current_date - interval 1 year)
+    ```
 
-- 子查询重写为内关联
+-   子查询重写为内关联
 
-  ```sql
-  select * from orders where o_custkey in (select c_custkey from customer where c_phone like '139%')
-  ```
+    ```sql
+    select * from orders where o_custkey in (select c_custkey from customer where c_phone like '139%')
+    ```
 
-  ```sql
-  select orders.* from orders, customer where o_custkey = c_custkey and c_phone like '139%'
-  ```
+    ```sql
+    select orders.* from orders, customer where o_custkey = c_custkey and c_phone like '139%'
+    ```
 
 ### `MAX`/`MIN` 子查询重写优化
 

@@ -8,27 +8,27 @@
 
 ## 收藏
 
-- 将相对路径存入变量
+-   将相对路径存入变量
 
-  ```bash
-  export SAME_IMAGE=$(cd ../../same-image && pwd)
-  ```
+    ```bash
+    export SAME_IMAGE=$(cd ../../same-image && pwd)
+    ```
 
-- 查看端口占用及进程
+-   查看端口占用及进程
 
-  ```shell
-  netstat -tulnep
-  ```
+    ```shell
+    netstat -tulnep
+    ```
 
-- 创建交换分区
+-   创建交换分区
 
-  ```shell
-  sudo fallocate --length 8G /swapfile
-  sudo chmod 600 /swapfile
-  sudo mkswap /swapfile
-  sudo swapon /swapfile
-  echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
-  ```
+    ```shell
+    sudo fallocate --length 8G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
+    ```
 
 ### [systemV 和 systemd 的理解](https://blog.csdn.net/chengziwang/article/details/112434240)
 

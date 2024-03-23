@@ -4,102 +4,102 @@
 
 ### Python2 转 Python3
 
-- Ubuntu
+-   Ubuntu
 
-  ```bash
-  apt install 2to3
+    ```bash
+    apt install 2to3
 
-  2to3 -w /opt/module/datax/bin
-  ```
+    2to3 -w /opt/module/datax/bin
+    ```
 
-- Windows
+-   Windows
 
-  ```bash
-  python /d/env/python-3.10.2/Tools/scripts/2to3.py -w /d/env/datax/bin
-  ```
+    ```bash
+    python /d/env/python-3.10.2/Tools/scripts/2to3.py -w /d/env/datax/bin
+    ```
 
 ### 执行任务
 
-- `PostgreSQLReader.json`
+-   `PostgreSQLReader.json`
 
-  ```json
-  {
-    "job": {
-      "setting": {
-        "speed": {
-          "byte": 1048576
-        }
-      },
-      "content": [
-        {
-          "reader": {
-            "name": "postgresqlreader",
-            "parameter": {
-              "connection": [
-                {
-                  "jdbcUrl": ["jdbc:postgresql://192.192.192.101:17700/demo"],
-                  "table": ["t_user"]
-                }
-              ],
-              "username": "demo",
-              "password": "demo",
-              "column": ["id", "username", "age"]
-            }
-          },
-          "writer": {
-            "name": "streamwriter",
-            "parameter": {
-              "print": true
+    ```json
+    {
+      "job": {
+        "setting": {
+          "speed": {
+            "byte": 1048576
+          }
+        },
+        "content": [
+          {
+            "reader": {
+              "name": "postgresqlreader",
+              "parameter": {
+                "connection": [
+                  {
+                    "jdbcUrl": ["jdbc:postgresql://192.192.192.101:17700/demo"],
+                    "table": ["t_user"]
+                  }
+                ],
+                "username": "demo",
+                "password": "demo",
+                "column": ["id", "username", "age"]
+              }
+            },
+            "writer": {
+              "name": "streamwriter",
+              "parameter": {
+                "print": true
+              }
             }
           }
-        }
-      ]
+        ]
+      }
     }
-  }
-  ```
+    ```
 
-- `PostgreSQLWriter.json`
+-   `PostgreSQLWriter.json`
 
-  ```json
-  {
-    "job": {
-      "setting": {
-        "speed": {
-          "channel": 1
-        }
-      },
-      "content": [
-        {
-          "reader": {
-            "name": "streamreader",
-            "parameter": {
-              "column": [
-                { "type": "Long", "value": 2 },
-                { "type": "String", "value": "mm" },
-                { "type": "Long", "value": 23 }
-              ],
-              "sliceRecordCount": 1
-            }
-          },
-          "writer": {
-            "name": "postgresqlwriter",
-            "parameter": {
-              "connection": [
-                {
-                  "jdbcUrl": "jdbc:postgresql://192.192.192.101:17700/demo",
-                  "table": ["t_user"]
-                }
-              ],
-              "username": "demo",
-              "password": "demo",
-              "column": ["id", "username", "age"]
+    ```json
+    {
+      "job": {
+        "setting": {
+          "speed": {
+            "channel": 1
+          }
+        },
+        "content": [
+          {
+            "reader": {
+              "name": "streamreader",
+              "parameter": {
+                "column": [
+                  { "type": "Long", "value": 2 },
+                  { "type": "String", "value": "mm" },
+                  { "type": "Long", "value": 23 }
+                ],
+                "sliceRecordCount": 1
+              }
+            },
+            "writer": {
+              "name": "postgresqlwriter",
+              "parameter": {
+                "connection": [
+                  {
+                    "jdbcUrl": "jdbc:postgresql://192.192.192.101:17700/demo",
+                    "table": ["t_user"]
+                  }
+                ],
+                "username": "demo",
+                "password": "demo",
+                "column": ["id", "username", "age"]
+              }
             }
           }
-        }
-      ]
+        ]
+      }
     }
-  }
-  ```
+    ```
 
 ```bash
 python /opt/module/datax/bin/datax.py ~/PostgreSQLReader.json
@@ -109,14 +109,14 @@ python /opt/module/datax/bin/datax.py ~/PostgreSQLReader.json
 
 ### 打包
 
-- 打包
+-   打包
 
-  ```bash
-  mvn clean package -DskipTests assembly:assembly
-  ```
+    ```bash
+    mvn clean package -DskipTests assembly:assembly
+    ```
 
-- 只打包指定插件
+-   只打包指定插件
 
-  ```bash
-  mvn clean package assembly:assembly -U -T 1C -Dmaven.test.skip=true -Dmaven.compile.fork=true -pl postgresqlwriter -am
-  ```
+    ```bash
+    mvn clean package assembly:assembly -U -T 1C -Dmaven.test.skip=true -Dmaven.compile.fork=true -pl postgresqlwriter -am
+    ```

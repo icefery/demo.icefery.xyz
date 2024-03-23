@@ -22,18 +22,18 @@
 
 ### 主从复制优点
 
-- 支持主从复制，主机会自动将数据同步到从机，可以进行读写分离；
-- 为了分载 Master 的读操作压力，Slave 服务器可以为客户端提供只读操作的服务，写服务仍然必须由 Master 来完成;
-- Slave 同样可以接收其它 Slave 的连接和同步请求，这样可以有效的分载 Master 的同步压力；
-- Master 是以非阻塞的方式为 Slave 提供服务。所以在 Master-Slave 同步期间，客户端仍然可以提交查询或修改请求；
-- Slave 同样是以非阻塞的方式完成数据同步。在同步期间，如果有客户端提交查询请求，Redis 则返回之前的数据；
+-   支持主从复制，主机会自动将数据同步到从机，可以进行读写分离；
+-   为了分载 Master 的读操作压力，Slave 服务器可以为客户端提供只读操作的服务，写服务仍然必须由 Master 来完成;
+-   Slave 同样可以接收其它 Slave 的连接和同步请求，这样可以有效的分载 Master 的同步压力；
+-   Master 是以非阻塞的方式为 Slave 提供服务。所以在 Master-Slave 同步期间，客户端仍然可以提交查询或修改请求；
+-   Slave 同样是以非阻塞的方式完成数据同步。在同步期间，如果有客户端提交查询请求，Redis 则返回之前的数据；
 
 ### 主从复制缺点
 
-- Redis 不具备自动容错和恢复功能，主机从机的宕机都会导致部分读写请求失败，需要等待机器重启或者手动切 IP 才能恢复（也就是要人工介入）；
-- 主机宕机，宕机前有部分数据未能及时同步到从机，切换 IP 后还会引入数据不一致的问题，降低了系统的可用性；
-- 如果多个 Slave 断线了，需要重启的时候，尽量不要再同一时间段进行重启。因为只要 Slave 启动，就会发送 sync 请求和主机全量同步，当多个 Slave 重启的时候，可能会导致 Master IO 剧增从而宕机；
-- Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂；
+-   Redis 不具备自动容错和恢复功能，主机从机的宕机都会导致部分读写请求失败，需要等待机器重启或者手动切 IP 才能恢复（也就是要人工介入）；
+-   主机宕机，宕机前有部分数据未能及时同步到从机，切换 IP 后还会引入数据不一致的问题，降低了系统的可用性；
+-   如果多个 Slave 断线了，需要重启的时候，尽量不要再同一时间段进行重启。因为只要 Slave 启动，就会发送 sync 请求和主机全量同步，当多个 Slave 重启的时候，可能会导致 Master IO 剧增从而宕机；
+-   Redis 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂；
 
 <br/><br/>
 
@@ -43,8 +43,8 @@
 
 ### 哨兵模式作用
 
-- 通过发送命令，让 Redis 服务器返回监控其运行状态，包括主服务器和从服务器；
-- 当哨兵监测到 Master 宕机，会自动将 Slave 切换成 Master，然后通过发布订阅模式通知其它的从服务器，修改配置文件，让它们切换主机；
+-   通过发送命令，让 Redis 服务器返回监控其运行状态，包括主服务器和从服务器；
+-   当哨兵监测到 Master 宕机，会自动将 Slave 切换成 Master，然后通过发布订阅模式通知其它的从服务器，修改配置文件，让它们切换主机；
 
 ### 哨兵模式故障切换的过程
 
@@ -54,50 +54,50 @@
 
 #### 配置文件
 
-- Master(`redis_6379.conf`)
+-   Master(`redis_6379.conf`)
 
-  ```properties
-  bind 0.0.0.0
-  port 6379
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis_6379.pid
-  dbfilename dump_6379.rdb
-  logfile redis_6379.log
-  ```
+    ```properties
+    bind 0.0.0.0
+    port 6379
+    requirepass 1234
+    protected-mode no
+    daemonize yes
+    pidfile /var/run/redis_6379.pid
+    dbfilename dump_6379.rdb
+    logfile redis_6379.log
+    ```
 
-- Slave(`redis_6380.conf`)
+-   Slave(`redis_6380.conf`)
 
-  > 对应修改其它从节点配置文件的端口。
+    > 对应修改其它从节点配置文件的端口。
 
-  ```properties
-  bind 0.0.0.0
-  port 6380
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis_6380.pid
-  dbfilename dump_6380.rdb
-  logfile redis_6380.log
+    ```properties
+    bind 0.0.0.0
+    port 6380
+    requirepass 1234
+    protected-mode no
+    daemonize yes
+    pidfile /var/run/redis_6380.pid
+    dbfilename dump_6380.rdb
+    logfile redis_6380.log
 
-  replicaof 127.0.0.1 6379
-  masterauth 1234
-  ```
+    replicaof 127.0.0.1 6379
+    masterauth 1234
+    ```
 
-- Sentinel(`sentinel_26379.conf`)
-  > 对应修改其它哨兵节点配置文件的端口，并且需要指定主节点服务器的 IP，否则 Java 客户端连接不成功。
-  ```properties
-  port 26379
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis-sentinel_26379.pid
-  logfile redis-sentinel_26379.log
-  # sentinel monitor <master-group-name> <ip> <port> <quorum>
-  sentinel monitor master 192.192.192.101 6379 2
-  sentinel auth-pass master 1234
-  ```
+-   Sentinel(`sentinel_26379.conf`)
+    > 对应修改其它哨兵节点配置文件的端口，并且需要指定主节点服务器的 IP，否则 Java 客户端连接不成功。
+    ```properties
+    port 26379
+    requirepass 1234
+    protected-mode no
+    daemonize yes
+    pidfile /var/run/redis-sentinel_26379.pid
+    logfile redis-sentinel_26379.log
+    # sentinel monitor <master-group-name> <ip> <port> <quorum>
+    sentinel monitor master 192.192.192.101 6379 2
+    sentinel auth-pass master 1234
+    ```
 
 #### 启动集群
 
@@ -148,33 +148,33 @@ spring:
 
 ### 集群模式特点
 
-- 集群完全去中心化，采用多主多从；所有的 Redis 节点彼此互联，内部使用二进制协议优化传输速度和带宽。
-- 客户端与 Redis 节点直连，不需要中间代理层。客户端不需要连接集群所有节点，连接集群中任何一个可用节点即可。
-- 每一个分区都是由一个主机和多个从机组成，分片和分片之间是相互平行的。
-- 每一个 Master 节点负责维护一部分槽，以及槽所映射的键值数据；集群中每个节点都有全量的槽信息，通过槽每个节点都知道具体数据存储在哪个节点上。
+-   集群完全去中心化，采用多主多从；所有的 Redis 节点彼此互联，内部使用二进制协议优化传输速度和带宽。
+-   客户端与 Redis 节点直连，不需要中间代理层。客户端不需要连接集群所有节点，连接集群中任何一个可用节点即可。
+-   每一个分区都是由一个主机和多个从机组成，分片和分片之间是相互平行的。
+-   每一个 Master 节点负责维护一部分槽，以及槽所映射的键值数据；集群中每个节点都有全量的槽信息，通过槽每个节点都知道具体数据存储在哪个节点上。
 
 ### 集群模式搭建(相同主机不同端口)
 
 #### 集群配置文件
 
-- Master(`redis_6379.conf`)
-  > 对应修改其它主节点的端口号。
-- `redis_6379.conf`
+-   Master(`redis_6379.conf`)
+    > 对应修改其它主节点的端口号。
+-   `redis_6379.conf`
 
-  ```properties
-  bind 0.0.0.0
-  port 6379
-  requirepass 1234
-  protected-mode no
-  daemonize yes
-  pidfile /var/run/redis_6379.pid
-  dbfilename dump_6379.rdb
-  logfile redis_6379.log
+    ```properties
+    bind 0.0.0.0
+    port 6379
+    requirepass 1234
+    protected-mode no
+    daemonize yes
+    pidfile /var/run/redis_6379.pid
+    dbfilename dump_6379.rdb
+    logfile redis_6379.log
 
-  cluster-enabled yes
-  cluster-config-file nodes_6379.conf
-  masterauth 1234
-  ```
+    cluster-enabled yes
+    cluster-config-file nodes_6379.conf
+    masterauth 1234
+    ```
 
 #### 启动集群
 

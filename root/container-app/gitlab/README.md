@@ -49,33 +49,33 @@ gitlab-runner start
 
 #### SSH 执行器
 
-- 生成 SSH 秘钥
+-   生成 SSH 秘钥
 
-  ```bash
-  ssh-keygen -t rsa -q -N "" -f ~/.ssh/gitlab-runner
+    ```bash
+    ssh-keygen -t rsa -q -N "" -f ~/.ssh/gitlab-runner
 
-  cat ~/.ssh/gitlab-runner.pub >> ~/.ssh/authorized_keys
-  ```
+    cat ~/.ssh/gitlab-runner.pub >> ~/.ssh/authorized_keys
+    ```
 
-- 启动容器
+-   启动容器
 
-  ```bash
-  nerdctl compose -f gitlab-runner-ssh.compose.yaml up -d
-  ```
+    ```bash
+    nerdctl compose -f gitlab-runner-ssh.compose.yaml up -d
+    ```
 
-- 注册
+-   注册
 
-  ```bash
-  gitlab-runner register --url http://gitlab.dev.icefery.xyz/ --registration-token <TOKEN>
-  ```
+    ```bash
+    gitlab-runner register --url http://gitlab.dev.icefery.xyz/ --registration-token <TOKEN>
+    ```
 
-- 解决 `error: ssh: handshake failed: knownhosts: key is unknown`
+-   解决 `error: ssh: handshake failed: knownhosts: key is unknown`
 
-  ```bash
-  echo "    disable_strict_host_key_checking = true" >> /etc/gitlab-runner/config.toml
+    ```bash
+    echo "    disable_strict_host_key_checking = true" >> /etc/gitlab-runner/config.toml
 
-  gitlab-runner restart
-  ```
+    gitlab-runner restart
+    ```
 
 #### Kubernetes 执行器
 

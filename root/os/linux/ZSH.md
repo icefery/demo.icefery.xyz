@@ -30,29 +30,29 @@ sh $ZSH/tools/uninstall.sh
 
 ### 插件
 
-- `zsh-syntax-highlighting`
+-   `zsh-syntax-highlighting`
 
-  ```bash
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-  ```
+    ```bash
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+    ```
 
-- `~/.zshrc`
+-   `~/.zshrc`
 
-  ```bash
-  # ...
-  plugins=(git zsh-syntax-highlighting)
-  ```
+    ```bash
+    # ...
+    plugins=(git zsh-syntax-highlighting)
+    ```
 
 ### 环境变量配置
 
 1. `~/.profile`
 
-   ```sh
-   export JAVA_HOME=/opt/jdk-11
-   ```
+    ```sh
+    export JAVA_HOME=/opt/jdk-11
+    ```
 
 2. `~/.zprofile`
 
-   ```sh
-   [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
-   ```
+    ```sh
+    [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
+    ```

@@ -35,51 +35,51 @@ group by name;
 上面的方案得出的 `array` 或者字符串是乱序的，如果想要进行排序，可以使用 `sort_array` 只能按字段类型的升序排序（数值字段自然序，字符串字段字典序）；
 如果想要自己指定排序规则，或者排序的不是单列里的这个字段（比如班级考试成绩表，所有分数字段里需要根据学科进行排序，而不是分数高低），则需要使用 `collect_list` 加上 `over` 子句来实现。
 
-- 成绩不排序
-  ```sql
-  with score_vertical as (
-      select 'A' as name, '语文' as subject, '70' as score union all
-      select 'A' as name, '数学' as subject, '90' as score union all
-      select 'A' as name, '英语' as subject, '80' as score union all
-      select 'B' as name, '语文' as subject, '75' as score union all
-      select 'B' as name, '数学' as subject, '95' as score union all
-      select 'B' as name, '英语' as subject, '85' as score
-  )
-  select name, concat_ws(',', collect_list(score)) as scores
-  from score_vertical
-  group by name;
-  ```
-- 按分数高低排序
-  ```sql
-  with score_vertical as (
-      select 'A' as name, '语文' as subject, '70' as score union all
-      select 'A' as name, '数学' as subject, '90' as score union all
-      select 'A' as name, '英语' as subject, '80' as score union all
-      select 'B' as name, '语文' as subject, '75' as score union all
-      select 'B' as name, '数学' as subject, '95' as score union all
-      select 'B' as name, '英语' as subject, '85' as score
-  )
-  select name, concat_ws(',', sort_array(collect_list(score))) as scores
-  from score_vertical
-  group by name;
-  ```
-- 按学科进行排序
-  ```sql
-  with score_vertical as (
-      select 'A' as name, '语文' as subject, '70' as score union all
-      select 'A' as name, '数学' as subject, '90' as score union all
-      select 'A' as name, '英语' as subject, '80' as score union all
-      select 'B' as name, '语文' as subject, '75' as score union all
-      select 'B' as name, '数学' as subject, '95' as score union all
-      select 'B' as name, '英语' as subject, '85' as score
-  )
-  select name, concat_ws(',', max(scores)) as scores
-  from (
-  	  select name, collect_list(score) over(partition by name order by subject rows between unbounded preceding and unbounded following) as scores
-  	  from score_vertical
-  ) t
-  group by name;
-  ```
+-   成绩不排序
+    ```sql
+    with score_vertical as (
+        select 'A' as name, '语文' as subject, '70' as score union all
+        select 'A' as name, '数学' as subject, '90' as score union all
+        select 'A' as name, '英语' as subject, '80' as score union all
+        select 'B' as name, '语文' as subject, '75' as score union all
+        select 'B' as name, '数学' as subject, '95' as score union all
+        select 'B' as name, '英语' as subject, '85' as score
+    )
+    select name, concat_ws(',', collect_list(score)) as scores
+    from score_vertical
+    group by name;
+    ```
+-   按分数高低排序
+    ```sql
+    with score_vertical as (
+        select 'A' as name, '语文' as subject, '70' as score union all
+        select 'A' as name, '数学' as subject, '90' as score union all
+        select 'A' as name, '英语' as subject, '80' as score union all
+        select 'B' as name, '语文' as subject, '75' as score union all
+        select 'B' as name, '数学' as subject, '95' as score union all
+        select 'B' as name, '英语' as subject, '85' as score
+    )
+    select name, concat_ws(',', sort_array(collect_list(score))) as scores
+    from score_vertical
+    group by name;
+    ```
+-   按学科进行排序
+    ```sql
+    with score_vertical as (
+        select 'A' as name, '语文' as subject, '70' as score union all
+        select 'A' as name, '数学' as subject, '90' as score union all
+        select 'A' as name, '英语' as subject, '80' as score union all
+        select 'B' as name, '语文' as subject, '75' as score union all
+        select 'B' as name, '数学' as subject, '95' as score union all
+        select 'B' as name, '英语' as subject, '85' as score
+    )
+    select name, concat_ws(',', max(scores)) as scores
+    from (
+    	  select name, collect_list(score) over(partition by name order by subject rows between unbounded preceding and unbounded following) as scores
+    	  from score_vertical
+    ) t
+    group by name;
+    ```
 
 ## 多列转行
 
@@ -103,34 +103,34 @@ lateral view explode(scores) t2 as subject, score;
 
 和多列转行一样，使用 `lateral view` 加 `explode` 来转换。但这种方式转换出来会丢失掉科目信息，则需要按照单列里面的顺序的业务含义，先将单列转成 `map` 类型，将科目加到数据里，然后再使用 `lateral view` 转换。
 
-- 无科目字段
+-   无科目字段
 
-  ```sql
-  with score_horizontal as (
+    ```sql
+    with score_horizontal as (
+        select 'A' as name, '70,90,80' as scores union all
+        select 'B' as name, '75,95,85' as scores
+    )
+    select t1.name, t2.score
+    from (
+        select name, split(scores, ',') as scores
+        from score_horizontal
+    ) t1
+    lateral view explode(scores) t2 as score;
+    ```
+
+-   有科目字段
+    ```sql
+    with score_horizontal as (
       select 'A' as name, '70,90,80' as scores union all
       select 'B' as name, '75,95,85' as scores
-  )
-  select t1.name, t2.score
-  from (
-      select name, split(scores, ',') as scores
-      from score_horizontal
-  ) t1
-  lateral view explode(scores) t2 as score;
-  ```
-
-- 有科目字段
-  ```sql
-  with score_horizontal as (
-    select 'A' as name, '70,90,80' as scores union all
-    select 'B' as name, '75,95,85' as scores
-  )
-  select t2.name, t3.subject, t3.score
-  from (
-  	select name, map('语文', scores[0], '数学', scores[1], '英语', scores[2]) as scores
-  	from (
-  		select name, split(scores, ',') as scores
-  		from score_horizontal
-  	) t1
-  ) t2
-  lateral view explode(scores) t3 as subject, score;
-  ```
+    )
+    select t2.name, t3.subject, t3.score
+    from (
+    	select name, map('语文', scores[0], '数学', scores[1], '英语', scores[2]) as scores
+    	from (
+    		select name, split(scores, ',') as scores
+    		from score_horizontal
+    	) t1
+    ) t2
+    lateral view explode(scores) t3 as subject, score;
+    ```

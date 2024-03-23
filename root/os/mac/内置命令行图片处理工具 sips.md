@@ -18,5 +18,5 @@ sips --resampleWidth 800 *.png --out output
 
 ## 收藏
 
-- [sips 命令进行图片批量处理](https://www.jianshu.com/p/c906978a4d29)
-- [高效便捷！使用 macOS 的神奇命令行工具 sips，轻松批量调整图片大小！](https://zhuanlan.zhihu.com/p/628417653)
+-   [sips 命令进行图片批量处理](https://www.jianshu.com/p/c906978a4d29)
+-   [高效便捷！使用 macOS 的神奇命令行工具 sips，轻松批量调整图片大小！](https://zhuanlan.zhihu.com/p/628417653)

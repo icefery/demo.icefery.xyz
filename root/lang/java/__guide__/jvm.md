@@ -12,8 +12,8 @@
 
 > Java 虚拟机栈会出现两种错误：`StackOverFlowError`、`OutOfMemoryError`。
 >
-> - `StackOverFlowError`：若 Java 虚拟机栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 `OverOverFlowError` 错误。
-> - `OutOfMemoryError`：若 Java 虚拟机堆中没有空闲内存，并且垃圾回收器也无法提供更多内存的话。就会抛出 `OutOfMemoryError`错误。
+> -   `StackOverFlowError`：若 Java 虚拟机栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 `OverOverFlowError` 错误。
+> -   `OutOfMemoryError`：若 Java 虚拟机堆中没有空闲内存，并且垃圾回收器也无法提供更多内存的话。就会抛出 `OutOfMemoryError`错误。
 
 > Java 虚拟机栈也是线程私有的，每个线程都有各自的 Java 虚拟机栈，而且随着线程的创建而创建，随着线程的死亡而死亡。
 
