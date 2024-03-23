@@ -24,9 +24,9 @@
 
 > - [微软应用商店错误代码“0x80131500”怎么修复？](https://blog.csdn.net/q1246192888/article/details/122412728)
 
-![](https://img-blog.csdnimg.cn/img_convert/080a7786019f13e961a5a98ee7d60b98.png)
-![](https://img-blog.csdnimg.cn/ae26681fd8334de5b5e0c5e88e7f0f81.png)
-![](https://img-blog.csdnimg.cn/80f202e542aa4f72b27d001350bb365d.png)
+![](__image__/080a7786019f13e961a5a98ee7d60b98.png)
+![](__image__/ae26681fd8334de5b5e0c5e88e7f0f81.png)
+![](__image__/80f202e542aa4f72b27d001350bb365d.png)
 
 #### 关闭休眠
 

@@ -7,11 +7,11 @@
 
 - `config/kraft/README.md`
 
-  ![](https://img-blog.csdnimg.cn/1ec389e73ffd43679565f4b125160fd2.png)
+  ![](__image__/1ec389e73ffd43679565f4b125160fd2.png)
 
 - `config/kraft/server.properties`
 
-  ![](https://img-blog.csdnimg.cn/0251b1ff07274bb7b0795128977ef0b4.png)
+  ![](__image__/0251b1ff07274bb7b0795128977ef0b4.png)
 
 - 生成集群 ID
 
@@ -19,7 +19,7 @@
   bin/kafka-storage.sh random-uuid > uuid
   ```
 
-  ![](https://img-blog.csdnimg.cn/1e44a45a84134d3a9d4461372c67335e.png)
+  ![](__image__/1e44a45a84134d3a9d4461372c67335e.png)
 
 - 格式化存储目录
 

@@ -298,8 +298,8 @@ int main(int argc, char** argv) {
 
 ##### 效果
 
-![](https://img-blog.csdnimg.cn/55bb17636964474db756a23510d589b7.png)
-![](https://img-blog.csdnimg.cn/22b0f6832dfd42cba423b47ee1177aa6.png)
+![](__image__/55bb17636964474db756a23510d589b7.png)
+![](__image__/22b0f6832dfd42cba423b47ee1177aa6.png)
 
 #### 3.2.2 获取系统当前时间
 
@@ -398,4 +398,4 @@ int main(int argc, char* argv[]) {
 
 ##### 效果
 
-![](https://img-blog.csdnimg.cn/8bfc062cc875405090d271dba10731a8.png)
+![](__image__/8bfc062cc875405090d271dba10731a8.png)

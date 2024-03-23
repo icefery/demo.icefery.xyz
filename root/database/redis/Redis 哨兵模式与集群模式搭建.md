@@ -18,7 +18,7 @@
 
 ### 主从复制原理
 
-![](https://img-blog.csdnimg.cn/7d5fd3163c54497894b376317705fd0e.png)
+![](__image__/7d5fd3163c54497894b376317705fd0e.png)
 
 ### 主从复制优点
 

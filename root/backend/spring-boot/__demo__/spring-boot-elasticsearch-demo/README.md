@@ -16,7 +16,7 @@
 
 ##### 2.1.1 分词器效果：
 
-![](https://img-blog.csdnimg.cn/20200823152326415.png)
+![](doc/__image__/20200823152326415.png)
 
 ##### 2.1.2 GitHub 地址：
 
@@ -37,7 +37,7 @@ elasticsearch/
 
 另外容器卷挂载的方式还有个好处就是可以更加方便的添加用户词典：
 
-![](https://img-blog.csdnimg.cn/20200823152345617.png)
+![](doc/__image__/20200823152345617.png)
 
 ##### 2.1.4 好东西分享出来：
 
@@ -92,7 +92,7 @@ networks:
 bin/elasticsearch-setup-passwords interactive
 ```
 
-![](https://img-blog.csdnimg.cn/20200823152404153.png)
+![](doc/__image__/20200823152404153.png)
 
 注意事项：
 
@@ -333,7 +333,7 @@ GET /hero/_search
 }
 ```
 
-![](https://img-blog.csdnimg.cn/2020082315242967.png)
+![](doc/__image__/20200823152402967.png)
 
 <br/>
 
@@ -516,7 +516,7 @@ public class HeroController {
 
 效果：
 
-![](https://img-blog.csdnimg.cn/20200823152915847.png)
+![](doc/__image__/20200823152915847.png)
 
 ##### 3.7.4 IDEA Thymeleaf 踩坑点
 
