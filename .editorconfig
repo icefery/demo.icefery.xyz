@@ -8,13 +8,13 @@ indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
 
-# maven
-[pom.xml]
+# gradle
+[{build.gradle,settings.gradle,build.gradle.kts,settings.gradle.kts}]
 indent_style = space
 indent_size = 4
 
-# gradle
-[{build.gradle,settings.gradle,build.gradle.kts,settings.gradle.kts}]
+# xml
+[*.xml]
 indent_style = space
 indent_size = 4
 
