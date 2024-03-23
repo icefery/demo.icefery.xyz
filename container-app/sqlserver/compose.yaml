@@ -1,0 +1,31 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    hostname: sqlserver
+    environment:
+      TZ: Asia/Shanghai
+      # 将 ACCEPT_EULA 变量设置为任意值，以确认接受最终用户许可协议
+      ACCEPT_EULA: Y
+      # 配置 SA 用户密码
+      MSSQL_SA_PASSWORD: sa@sqlserver:0000
+      # 设置 SQL Server 版本或产品密钥
+      MSSQL_PID: Developer
+      # 设置用于 SQL Server 的语言 ID
+      MSSQL_LCID: 2052
+      # 设置 SQL Server 的默认排序规则
+      MSSQL_COLLATION: Chinese_PRC_CI_AS
+      # 启用 SQL Server 代理
+      MSSQL_AGENT_ENABLED: true
+    ports:
+      - 1433:1433
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  sqlserver-data:

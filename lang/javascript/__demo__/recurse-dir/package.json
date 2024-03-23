@@ -1,0 +1,22 @@
+{
+  "name": "@icefery/recurse-dir",
+  "version": "0.0.4",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "icefery",
+  "license": " MIT",
+  "dependencies": {
+    "log4js": "^6.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  },
+  "files": [
+    "lib"
+  ]
+}

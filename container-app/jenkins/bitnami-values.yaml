@@ -1,0 +1,10 @@
+jenkinsUser: jenkins
+
+jenkinsPassword: jenkins
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  hostname: jenkins.dev.icefery.xyz

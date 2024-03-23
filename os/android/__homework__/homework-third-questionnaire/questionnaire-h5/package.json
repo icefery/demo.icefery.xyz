@@ -1,0 +1,15 @@
+{
+  "name": "questionnaire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clipboard": "^2.0.6",
+    "uview-ui": "^1.8.3",
+    "vue-clipboard2": "^0.3.1"
+  }
+}

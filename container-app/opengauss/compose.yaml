@@ -1,0 +1,18 @@
+services:
+  opengauss:
+    image: docker.io/opengauss/opengauss:3.1.0
+    container_name: opengauss
+    environment:
+      GS_PASSWORD: openGauss@123
+    ports:
+      - 17700:5432
+    volumes:
+      - opengauss-data:/var/lib/opengauss/data
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  opengauss-data:

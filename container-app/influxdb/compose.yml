@@ -1,0 +1,22 @@
+services:
+  influxdb:
+    image: bitnami/influxdb:2
+    container_name: influxdb
+    environment:
+      INFLUXDB_ADMIN_USER: admin
+      INFLUXDB_ADMIN_USER_PASSWORD: admin123
+      INFLUXDB_ADMIN_USER_TOKEN: admin
+      INFLUXDB_ADMIN_ORG: admin
+      INFLUXDB_ADMIN_BUCKET: admin
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb:/bitnami/influxdb
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  influxdb:

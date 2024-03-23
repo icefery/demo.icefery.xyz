@@ -1,0 +1,22 @@
+services:
+  activemq:
+    image: docker.io/islandora/activemq:3.0.1
+    container_name: activemq
+    environment:
+      ACTIVEMQ_USER: admin
+      ACTIVEMQ_PASSWORD: admin
+      ACTIVEMQ_WEB_ADMIN_NAME: admin
+      ACTIVEMQ_WEB_ADMIN_PASSWORD: admin
+    ports:
+      - 8161:8161
+      - 61616:61616
+    volumes:
+      - activemq-data:/opt/activemq/data
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  activemq-data:

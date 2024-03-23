@@ -1,0 +1,24 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:15.3.0-ce.0
+    container_name: gitlab
+    hostname: gitlab.dev.icefery.xyz
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.dev.icefery.xyz:8929'
+    ports:
+      - 8929:8929
+    volumes:
+      - gitlab-config:/etc/gitlab
+      - gitlab-log:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  gitlab-config:
+  gitlab-log:
+  gitlab-data:

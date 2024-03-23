@@ -1,0 +1,66 @@
+image:
+  registry: ghcr.io/icefery
+  tag: 3.1.9
+postgresql:
+  enabled: false
+mysql:
+  enabled: false
+minio:
+  enabled: false
+externalDatabase:
+  enabled: true
+  type: mysql
+  host: 192.168.31.101
+  port: 3306
+  username: dolphinscheduler
+  password: dolphinscheduler
+  params: ''
+  driverClassName: com.mysql.cj.jdbc.Driver
+conf:
+  common:
+    resource.storage.type: HDFS
+    resource.hdfs.fs.defaultFS: file:///
+common:
+  sharedStoragePersistence:
+    enabled: true
+    storageClassName: null
+    storage: 8Gi
+  fsFileResourcePersistence:
+    enabled: true
+    storageClassName: null
+    storage: 1Gi
+master:
+  replicas: 1
+  persistentVolumeClaim:
+    enabled: true
+    storageClassName: null
+    storage: 1Gi
+  env:
+    MASTER_EXEC_THREADS: 10
+worker:
+  replicas: 3
+  persistentVolumeClaim:
+    enabled: true
+    dataPersistentVolume:
+      enabled: true
+      storageClassName: null
+      storage: 1Gi
+    logsPersistentVolume:
+      enabled: true
+      storageClassName: null
+      storage: 1Gi
+  env:
+    WORKER_EXEC_THREADS: 50
+alert:
+  persistentVolumeClaim:
+    enabled: true
+    storageClassName: null
+    storage: 1Gi
+api:
+  persistentVolumeClaim:
+    enabled: true
+    storageClassName: null
+    storage: 1Gi
+ingress:
+  enabled: true
+  host: dolphinscheduler.example.org

@@ -1,0 +1,19 @@
+services:
+  neo4j:
+    image: docker.io/bitnami/neo4j:4
+    container_name: neo4j
+    environment:
+      NEO4J_PASSWORD: neo4j
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - neo4j:/bitnami/neo4j
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  neo4j:

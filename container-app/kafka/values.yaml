@@ -1,0 +1,23 @@
+deleteTopicEnable: true
+
+autoCreateTopicsEnable: false
+
+externalAccess:
+  enabled: true
+  autoDiscovery:
+    enabled: true
+  service:
+    type: NodePort
+    useHostIPs: true
+
+serviceAccount:
+  create: true
+
+rbac:
+  create: true
+
+kraft:
+  enabled: true
+  clusterId: 'kafka_cluster'
+zookeeper:
+  enabled: false

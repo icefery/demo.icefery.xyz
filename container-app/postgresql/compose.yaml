@@ -1,0 +1,25 @@
+services:
+  postgresql:
+    image: bitnami/postgresql:14.5.0
+    container_name: postgresql
+    user: root
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRESQL_POSTGRES_PASSWORD: postgres
+      POSTGRESQL_DATABASE: demo
+      POSTGRESQL_USERNAME: demo
+      POSTGRESQL_PASSWORD: demo
+      POSTGRESQL_TIMEZONE: Asia/Shanghai
+      POSTGRESQL_LOG_TIMEZONE: Asia/Shanghai
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql-data:/bitnami/postgresql/data
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  postgresql-data:

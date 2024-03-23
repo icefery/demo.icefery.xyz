@@ -1,0 +1,15 @@
+.:53 {
+    hosts {
+        fallthrough
+    }
+    etcd {
+        endpoint http://192.192.192.6:2379
+        fallthrough
+    }
+    template IN A dev.icefery.xyz {
+        match .*
+        answer "{{ .Name }} 60 IN A 192.192.192.6"
+        fallthrough
+    }
+    forward . 114.114.114.114
+}

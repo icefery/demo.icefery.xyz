@@ -1,0 +1,22 @@
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21.3.0
+    container_name: oracle
+    environment:
+      TZ: Asia/Shanghai
+      ORACLE_PASSWORD: oracle
+      ORACLE_DATABASE: demo
+      APP_USER: demo
+      APP_USER_PASSWORD: demo
+    ports:
+      - 1521:1521
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  oracle-data:

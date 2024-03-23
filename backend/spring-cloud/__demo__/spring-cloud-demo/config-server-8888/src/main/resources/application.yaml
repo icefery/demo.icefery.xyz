@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      # Git 分支
+      label: netflix-dynamic
+      server:
+        git:
+          # 仓库地址
+          uri: https://gitee.com/icefery/spring-cloud-demo
+          # 搜索路径
+          search-paths:
+            - /config/
+    bus:
+      trace:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

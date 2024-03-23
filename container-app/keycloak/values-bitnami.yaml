@@ -1,0 +1,10 @@
+auth:
+  adminUser: admin
+  adminPassword: admin
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: true
+  hostname: keycloak.dev.icefery.xyz

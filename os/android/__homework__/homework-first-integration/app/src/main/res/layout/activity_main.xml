@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @formatter:off -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"           android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:orientation="vertical">
+    <Button android:id="@+id/start_switch_fragment_activity_btn"                   android:layout_width="match_parent" android:layout_height="wrap_content" android:text="片段 - Fragment"          android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/start_persistence_by_file_activity_btn"               android:layout_width="match_parent" android:layout_height="wrap_content" android:text="存储 - File"              android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/start_persistence_by_shared_preferences_activity_btn" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="存储 - SharedPreferences" android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/start_persistence_by_sqlite_activity_btn"             android:layout_width="match_parent" android:layout_height="wrap_content" android:text="存储 - SQLite"            android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/start_share_data_by_content_provider_btn"             android:layout_width="match_parent" android:layout_height="wrap_content" android:text="共享 - ContentProvider"   android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/send_custom_broadcast_btn"                            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="广播 - CUSTOM_ACTION"     android:gravity="center_vertical" android:textAllCaps="false" />
+    <Button android:id="@+id/start_log_service_btn"                                android:layout_width="match_parent" android:layout_height="wrap_content" android:text="服务 - LogService"        android:gravity="center_vertical" android:textAllCaps="false" />
+</LinearLayout>
+<!-- @formatter:on -->

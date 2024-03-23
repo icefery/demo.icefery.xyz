@@ -1,0 +1,271 @@
+### coredns
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: coredns
+  namespace: kube-system
+  labels:
+    app: coredns
+spec:
+  repo: https://coredns.github.io/helm
+  chart: coredns
+  version: 1.29.0
+  targetNamespace: kube-system
+  bootstrap: true
+  valuesContent: |-
+    fullnameOverride: coredns
+    serviceType: LoadBalancer
+    prometheus:
+      service:
+        enabled: true
+    service:
+      name: coredns
+      clusterIP: 10.16.0.10
+      loadBalancerIP: 192.168.31.128
+    servers:
+      - zones:
+          - zone: .
+        port: 53
+        plugins:
+          - name: errors
+          - name: health
+            configBlock: |-
+              lameduck 5s
+          - name: ready
+          - name: kubernetes
+            parameters: cluster.local in-addr.arpa ip6.arpa
+            configBlock: |-
+              pods insecure
+              fallthrough in-addr.arpa ip6.arpa
+              ttl 30
+          - name: etcd
+            configBlock: |-
+              path /skydns
+              endpoint http://10.16.23.79:2379
+              fallthrough
+          - name: prometheus
+            parameters: 0.0.0.0:9153
+          - name: forward
+            parameters: . /etc/resolv.conf
+          - name: cache
+            parameters: 30
+          - name: loop
+          - name: reload
+          - name: loadbalance
+
+
+### etcd
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: etcd
+  namespace: kube-system
+  labels:
+    app: etcd
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: etcd
+  version: 9.10.0
+  targetNamespace: kube-system
+  bootstrap: true
+  valuesContent: |-
+    auth:
+      rbac:
+        create: false
+    service:
+      type: ClusterIP
+      clusterIP: 10.16.23.79
+    metrics:
+      enabled: true
+
+
+### external-dns
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: external-dns
+  namespace: kube-system
+  labels:
+    app: external-dns
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: external-dns
+  version: 6.31.0
+  targetNamespace: kube-system
+  bootstrap: true
+  valuesContent: |-
+    provider: coredns
+    coredns:
+      etcdEndpoints: http://etcd.kube-system.svc.cluster.local:2379
+    policy: sync
+
+
+###  metrics-server
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metrics-server
+  namespace: kube-system
+  labels:
+    app: metrics-server
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: metrics-server
+  version: 6.8.0
+  targetNamespace: kube-system
+  bootstrap: true
+  valuesContent: |
+    apiService:
+      create: true
+    extraArgs:
+      - --kubelet-insecure-tls
+      - --kubelet-use-node-status-port
+      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      - --metric-resolution=15s
+
+
+### metallb
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: metallb
+  namespace: metallb-system
+  labels:
+    app: metallb
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: metallb
+  version: 4.10.1
+  targetNamespace: metallb-system
+  bootstrap: true
+  valuesContent: |
+    speaker:
+      enabled: false
+
+
+### traefik
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: traefik-system
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik
+  namespace: traefik-system
+  labels:
+    app: traefik
+spec:
+  repo: https://traefik.github.io/charts
+  chart: traefik
+  version: 26.0.0
+  targetNamespace: traefik-system
+  bootstrap: true
+  valuesContent: |-
+    deployment:
+      kind: Deployment
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowCrossNamespace: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+      kubernetesIngress:
+        enabled: true
+        allowExternalNameServices: true
+        allowEmptyServices: true
+        publishedService:
+          enabled: true
+    ports:
+      traefik:
+        port: 9000
+        protocol: TCP
+        expose: false
+        exposedPort: 9000
+      metrics:
+        port: 9100
+        protocol: TCP
+        expose: false
+        exposedPort: 9100
+      web:
+        port: 80
+        protocol: TCP
+        expose: true
+        exposedPort: 80
+      websecure:
+        port: 443
+        protocol: TCP
+        expose: true
+        exposedPort: 443
+        tls:
+          enabled: true
+    service:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.31.192
+    securityContext:
+      capabilities:
+        drop: []
+        add: [NET_BIND_SERVICE]
+      readOnlyRootFilesystem: false
+      allowPrivilegeEscalation: true
+    podSecurityContext:
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+
+
+### longhorn
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+  labels:
+    app: longhorn
+spec:
+  repo: https://charts.longhorn.io
+  chart: longhorn
+  version: 1.5.3
+  targetNamespace: longhorn-system
+  bootstrap: true
+  valuesContent: |-
+    persistence:
+      defaultClassReplicaCount: 1
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    defaultSettings:
+      defaultDataPath: /data/longhorn
+      defaultReplicaCount: 1
+      deletingConfirmationFlag: true
+    longhornUI:
+      replicas: 1
+    ingress:
+      enabled: true
+      host: longhorn.example.org

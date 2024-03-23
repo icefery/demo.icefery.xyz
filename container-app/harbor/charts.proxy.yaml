@@ -1,0 +1,35 @@
+### harbor
+---
+apiVersion: Namespace
+kind: Namespace
+metadata:
+  name: harbor
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: harbor
+  namespace: harbor
+  labels:
+    app: harbor
+spec:
+  repo: https://charts.bitnami.com/bitnami
+  chart: harbor
+  targetNamespace: harbor
+  valuesContent: |-
+    adminPassword: admin
+    externalURL: http://192.168.8.101:30080
+    ipFamily:
+      ipv6:
+        enabled: false
+      ipv4:
+        enabled: true
+    exposureType: proxy
+    service:
+      type: LoadBalancer
+    nginx:
+      tls:
+        enabled: false
+    metrics:
+      enabled: true

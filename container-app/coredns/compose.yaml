@@ -1,0 +1,14 @@
+services:
+  coredns:
+    image: coredns/coredns:1.9.3
+    container_name: coredns
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    volumes:
+      - /d/mount/coredns/Corefile:/Corefile
+
+networks:
+  default:
+    external: true
+    name: compose

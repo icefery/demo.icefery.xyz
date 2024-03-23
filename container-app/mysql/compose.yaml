@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: bitnami/mysql:8.0.33
+    container_name: mysql
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: demo
+      MYSQL_PASSWORD: demo
+      MYSQL_DATABASE: demo
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+      MYSQL_CHARACTER_SET: utf8mb4
+      MYSQL_COLLATE: utf8mb4_0900_ai_ci
+      MYSQL_EXTRA_FLAGS: '--lower-case-table-names=1 --max-connections=1000'
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/bitnami/mysql/data
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  mysql-data:

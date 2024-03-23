@@ -1,0 +1,21 @@
+services:
+  pgadmin4:
+    image: dpage/pgadmin4:2021-11-15-2
+    container_name: pgadmin4
+    hostname: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=icefery@163.com
+      - PGADMIN_DEFAULT_PASSWORD=icefery@163.com
+    ports:
+      - 5480:80
+    volumes:
+      - /d/share/:/d/share/
+      - pgadmin4-data:/var/lib/pgadmin/
+
+networks:
+  default:
+    external: true
+    name: local
+
+volumes:
+  pgadmin4-data:

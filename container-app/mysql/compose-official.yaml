@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --lower-case-table-names=1
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --max-connections=1000
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  mysql-data:

@@ -1,0 +1,10 @@
+architecture: standalone
+
+auth:
+  password: redis
+
+master:
+  service:
+    type: NodePort
+    nodePorts:
+      redis: 6379

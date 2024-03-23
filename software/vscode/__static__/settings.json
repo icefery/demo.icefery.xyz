@@ -1,0 +1,56 @@
+{
+  // Prettier
+  "prettier.printWidth": 150,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.embeddedLanguageFormatting": "off",
+  "prettier.singleQuote": true,
+  "prettier.bracketSpacing": true,
+  "prettier.proseWrap": "preserve",
+  "prettier.bracketSameLine": false,
+  "prettier.semi": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.quoteProps": "as-needed",
+  "prettier.arrowParens": "avoid",
+  "prettier.trailingComma": "none",
+  "prettier.htmlWhitespaceSensitivity": "css",
+  "prettier.vueIndentScriptAndStyle": false,
+  "prettier.insertPragma": false,
+  "prettier.requirePragma": false,
+  // Lang
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[jsonc]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[markdown]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[html]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[yaml]": { "editor.defaultFormatter": "redhat.vscode-yaml" },
+  "[xml]": { "editor.defaultFormatter": "redhat.vscode-xml" },
+  // Security
+  "security.workspace.trust.enabled": false,
+  // Auto Save
+  "files.autoSave": "afterDelay",
+  "files.autoGuessEncoding": true,
+  // Editor
+  "workbench.tree.indent": 16,
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.fontFamily": "Inconsolata,Consolas,'Courier New',monospace",
+  "editor.accessibilitySupport": "off",
+  // Theme
+  "workbench.colorTheme": "Visual Studio Dark",
+  "workbench.iconTheme": "material-icon-theme",
+  // Terminal
+  "terminal.integrated.tabs.enabled": false,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "code-runner.runInTerminal": true,
+  // Git
+  "git.confirmSync": false,
+  "window.zoomLevel": 1,
+  // Edit csv
+  "csv-edit.initiallyIsInReadonlyMode": true,
+  // shell-format
+  "shellformat.flag": "-s -i 4 -ci -sr"
+}

@@ -1,0 +1,69 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clash
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: clash
+  name: clash
+spec:
+  selector:
+    app: clash
+  type: LoadBalancer
+  ports:
+    - { name: clash, port: 7890 }
+    - { name: controller, port: 9090 }
+    - { name: subconverter, port: 25500 }
+    - { name: yacd, port: 80 }
+
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: clash
+  name: clash
+spec:
+  selector:
+    matchLabels:
+      app: clash
+  template:
+    metadata:
+      labels:
+        app: clash
+    spec:
+      containers:
+        - name: clash
+          image: ghcr.io/icefery/clash-premium:2023.08.17
+          ports:
+            - { name: clash, containerPort: 7890 }
+            - { name: controller, containerPort: 9090 }
+          volumeMounts:
+            - { name: config, mountPath: /root/.config/clash/config.yaml, subPath: config.yaml }
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+        - name: subconverter
+          image: docker.io/tindy2013/subconverter:0.8.1
+          ports:
+            - { name: subconverter, containerPort: 25500 }
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+        - name: yacd
+          image: ghcr.io/haishanh/yacd:v0.3.8
+          ports:
+            - { name: yacd, containerPort: 80 }
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+      volumes:
+        - name: config
+          configMap:
+            name: clash

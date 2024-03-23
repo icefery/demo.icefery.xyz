@@ -1,0 +1,18 @@
+shards: 1
+
+replicaCount: 1
+
+auth:
+  username: clickhouse
+  password: clickhouse
+
+service:
+  type: LoadBalancer
+
+persistence:
+  enabled: true
+  size: 16Gi
+
+zookeeper:
+  enabled: true
+  replicaCount: 1
