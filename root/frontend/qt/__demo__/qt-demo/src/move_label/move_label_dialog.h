@@ -1,16 +1,14 @@
-#ifndef DIALOG_H
-#define DIALOG_H
+#ifndef MOVE_LABEL_DIALOG_H
+#define MOVE_LABEL_DIALOG_H
 
 #include <QDialog>
 #include <QMouseEvent>
 #include <ui_move_label_dialog.h>
 
 QT_BEGIN_NAMESPACE
-
 namespace Ui {
-    class Dialog;
+    class MoveLabelDialog;
 }
-
 QT_END_NAMESPACE
 
 class MoveLabelDialog : public QDialog {
@@ -18,12 +16,8 @@ class MoveLabelDialog : public QDialog {
 
 public:
     MoveLabelDialog() {
-        this->ui = new Ui::Dialog();
+        this->ui = new Ui::MoveLabelDialog();
         this->ui->setupUi(this);
-    }
-
-    ~MoveLabelDialog() {
-        delete this->ui;
     }
 
 protected:
@@ -84,9 +78,9 @@ protected:
     }
 
 private:
-    Ui::Dialog* ui{};
+    Ui::MoveLabelDialog* ui{};
     bool draggable{};
     QPoint point{};
 };
 
-#endif // DIALOG_H
+#endif // MOVE_LABEL_DIALOG_H
