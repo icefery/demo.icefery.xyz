@@ -1,0 +1,5 @@
+/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/ftp-client-5_15/cmake-build-release/CMakeFiles/ftp-client-5_15.dir
+/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/ftp-client-5_15/cmake-build-release/CMakeFiles/edit_cache.dir
+/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/ftp-client-5_15/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/ftp-client-5_15/cmake-build-release/CMakeFiles/ftp-client-5_15_autogen_timestamp_deps.dir
+/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/ftp-client-5_15/cmake-build-release/CMakeFiles/ftp-client-5_15_autogen.dir

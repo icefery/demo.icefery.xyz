@@ -1,25 +1,34 @@
 cmake_minimum_required(VERSION 3.5)
+project(ftp-client-5_15)
 
-project(ftp-client-5_15 VERSION 0.1 LANGUAGES CXX)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-set(CMAKE_AUTOUIC ON)
+set(CMAKE_PREFIX_PATH "${QTDIR};${CMAKE_PREFIX_PATH}")
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
-
-set(
-    PROJECT_SOURCES
-    main.cpp
-    dialog.h
-    dialog.ui
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(PROJECT_SOURCES
+    src/main.cpp
+    src/dialog.h
+    src/dialog.ui
 )
 
-add_executable(ftp-client-5_15 ${PROJECT_SOURCES})
+add_executable(
+    "${PROJECT_NAME}"
+    "${PROJECT_SOURCES}"
+)
 
-target_link_libraries(ftp-client-5_15 PRIVATE Qt5::Widgets Qt5::Network)
+find_package(
+    Qt5 COMPONENTS
+    Widgets
+    Network
+    REQUIRED
+)
+
+target_link_libraries(
+    "${PROJECT_NAME}"
+    Qt::Core
+    Qt::Gui
+    Qt::Network
+    Qt::Widgets
+)

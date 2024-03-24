@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/花木兰/0.jpg</file>
+        <file>image/花木兰/1.jpg</file>
+        <file>image/花木兰/2.jpg</file>
+        <file>image/花木兰/3.jpg</file>
+        <file>image/娜可露露/0.jpg</file>
+    </qresource>
+</RCC>

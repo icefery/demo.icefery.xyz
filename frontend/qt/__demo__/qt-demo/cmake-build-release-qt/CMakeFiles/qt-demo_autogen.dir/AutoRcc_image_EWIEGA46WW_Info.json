@@ -1,0 +1,26 @@
+{
+	"BUILD_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/qt-demo_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo",
+	"CMAKE_SOURCE_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo",
+	"INCLUDE_DIR" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/qt-demo_autogen/include",
+	"INPUTS" : 
+	[
+		"/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image/\u5a1c\u53ef\u9732\u9732/0.jpg",
+		"/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image/\u82b1\u6728\u5170/0.jpg",
+		"/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image/\u82b1\u6728\u5170/3.jpg",
+		"/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image/\u82b1\u6728\u5170/2.jpg",
+		"/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image/\u82b1\u6728\u5170/1.jpg"
+	],
+	"LOCK_FILE" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/qt-demo_autogen.dir/AutoRcc_image_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "-name", "image" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_image.cpp",
+	"RCC_EXECUTABLE" : "/opt/env/qt/6.6.2/macos/./libexec/rcc",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/qt-demo_autogen.dir/AutoRcc_image_EWIEGA46WW_Used.txt",
+	"SOURCE" : "/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/image.qrc",
+	"VERBOSITY" : 0
+}

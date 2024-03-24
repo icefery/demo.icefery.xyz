@@ -1,0 +1,4 @@
+"/Users/icefery/Applications/CLion Nova.app/Contents/bin/cmake/mac/aarch64/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/icefery/Applications/CLion Nova.app/Contents/bin/ninja/mac/aarch64/ninja" -G Ninja -S /Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management -B /Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug
