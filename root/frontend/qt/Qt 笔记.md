@@ -86,6 +86,12 @@
 
     ![](__image__/c622065f716b4d27945d7c10c4a791ef.png)
 
+8.  打包
+
+    ```shell
+    macdeployqt qt-demo.app -dmg
+    ```
+
 ## 二、窗口
 
 ### 2.1 介绍
@@ -147,10 +153,10 @@ QObject:connect(
 #### 3.3.1 点击按钮关闭标签、退出程序
 
 ```cpp
-#include<QApplication>
-#include<QDialog>
-#include<QLabel>
-#include<QPushButton>
+#include <QApplication>
+#include <QDialog>
+#include <QLabel>
+#include <QPushButton>
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
@@ -182,19 +188,20 @@ int main(int argc, char* argv[]) {
         &app,
         SLOT(quit())
     );
-    return app.exec();
+
+    return QApplication::exec();
 }
 ```
 
 #### 3.3.2 滑块联动选值框
 
 ```cpp
-#include<QApplication>
-#include<QDialog>
-#include<QSlider>
-#include<QSpinBox>
+#include <QApplication>
+#include <QDialog>
+#include <QSlider>
+#include <QSpinBox>
 
-int main(int argc, char ** argv) {
+int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
     QDialog parent;
@@ -202,33 +209,23 @@ int main(int argc, char ** argv) {
 
     // 创建水平滑块
     QSlider slider(Qt::Horizontal, &parent);
-    slider.move(20,100);
-    slider.setRange(0,200);
+    slider.move(20, 100);
+    slider.setRange(0, 200);
 
     // 创建选值框
     QSpinBox spinBox(&parent);
-    spinBox.move(220,100);
-    spinBox.setRange(0,200);
+    spinBox.move(220, 100);
+    spinBox.setRange(0, 200);
 
     // 滑块滑动让选值随值改变
-    QObject::connect(
-        &slider,
-        SIGNAL(valueChanged(int)),
-        &spinBox,
-        SLOT(setValue(int))
-    );
+    QObject::connect(&slider, SIGNAL(valueChanged(int)), &spinBox, SLOT(setValue(int)));
 
     // 选值框数值改变让滑块随之滑动
-    QObject::connect(
-        &spinBox,
-        SIGNAL(valueChanged(int)),
-        &slider,
-        SLOT(setValue(int))
-    );
+    QObject::connect(&spinBox, SIGNAL(valueChanged(int)), &slider, SLOT(setValue(int)));
 
     parent.show();
 
-    return app.exec();
+    return QApplication::exec();
 }
 ```
 
@@ -271,106 +268,94 @@ int main(int argc, char ** argv) {
 
     ```cpp
     #ifndef CALCULATOR_DIALOG_H
+    #define CALCULATOR_DIALOG_H
 
-    #include<QDialog>
-    #include<QLabel>
-    #include<QPushButton>
-    #include<QLineEdit>        // 行编辑控件
-    #include<QHBoxLayout>      // 水平布局器
-    #include<QDoubleValidator> // 验证器
+    #include <QDialog>
+    #include <QDoubleValidator>
+    #include <QHBoxLayout>
+    #include <QLabel>
+    #include <QLineEdit>
+    #include <QPushButton>
 
     class CalculatorDialog : public QDialog {
-    Q_OBJECT // moc
+        Q_OBJECT
 
     public:
         // 构造函数
-        CalculatorDialog();
+        CalculatorDialog() {
+            // 1. 界面初始化
+            this->setFixedSize(320, 240);
+            this->setWindowTitle("计算器");
+            // 左操作数
+            this->editX = new QLineEdit(this);
+            this->editX->setAlignment(Qt::AlignRight);             // 设置文本对齐
+            this->editX->setValidator(new QDoubleValidator(this)); // 设置数字验证器
+            // 右操作数
+            this->editY = new QLineEdit(this);
+            this->editY->setAlignment(Qt::AlignRight);
+            this->editY->setValidator(new QDoubleValidator(this));
+            // 显示结果
+            this->editZ = new QLineEdit(this);
+            this->editZ->setAlignment(Qt::AlignRight);
+            this->editZ->setReadOnly(true); // 设置只读
+            // "+"
+            this->plusButton = new QLabel("+", this);
+            // "="
+            this->equalButton = new QPushButton("=", this);
+            this->equalButton->setEnabled(false); // 设置禁用
+            // 布局器(自动调整每个控件的大小和位置)(按水平方向以此将控件添加到布局容器中)
+            this->layout = new QHBoxLayout(this);
+            this->layout->addWidget(editX);
+            this->layout->addWidget(plusButton);
+            this->layout->addWidget(editY);
+            this->layout->addWidget(equalButton);
+            this->layout->addWidget(editZ);
+            this->setLayout(this->layout);
 
-    public slots:
+            // 2. 信号和槽函数连接
+            // 左右操作数文本改变时发送信号 textChanged()
+            connect(editX, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
+            connect(editY, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
+            // 点击按钮发送信号 clicked()
+            connect(equalButton, SIGNAL(clicked()), this, SLOT(calc()));
+        }
+
+    private slots:
         // 启用等号按钮
-        void enableButton();
+        void enableButton() {
+            bool xOk;
+            bool yOk;
+            editX->text().toDouble(&xOk);
+            editY->text().toDouble(&yOk);
+            // 当左右操作数都输入了有效数据，则使能等号按钮
+            equalButton->setEnabled(xOk && yOk);
+        }
+
         // 计算和显示结果
-        void calc();
+        void calc() {
+            double result = editX->text().toDouble() + editY->text().toDouble();
+            // 显示字符串形式结果
+            QString str = QString::number(result);
+            editZ->setText(str);
+        }
 
     private:
-        QLineEdit* m_editX;    // 左操作数
-        QLineEdit* m_editY;    // 右操作数
-        QLineEdit* m_editZ;    // 显示结果
-        QLabel* m_label;       // "+"
-        QPushButton* m_button; // "="
+        QHBoxLayout* layout;      // 水平布局
+        QLineEdit* editX;         // 左操作数
+        QLineEdit* editY;         // 右操作数
+        QLineEdit* editZ;         // 显示结果
+        QLabel* plusButton;       // "+"
+        QPushButton* equalButton; // "="
     };
 
     #endif // CALCULATOR_DIALOG_H
     ```
 
--   `calculator_dialog.cpp`
-
-    ```cpp
-    #include "calculator_dialog.h"
-
-    // 构造函数
-    CalculatorDialog::CalculatorDialog() {
-        // 1. 界面初始化
-        setWindowTitle("计算器");
-        // 左操作数
-        m_editX = new QLineEdit(this);
-        m_editX->setAlignment(Qt::AlignRight);               // 设置文本对齐
-        m_editX->setValidator(new QDoubleValidator(this)); // 设置数字验证器
-        // 右操作数
-        m_editY = new QLineEdit(this);
-        m_editY->setAlignment(Qt::AlignRight);
-        m_editY->setValidator(new QDoubleValidator(this));
-        // 显示结果
-        m_editZ = new QLineEdit(this);
-        m_editZ->setAlignment(Qt::AlignRight);
-        m_editZ->setReadOnly(true); // 设置只读
-        // "+"
-        m_label = new QLabel("+", this);
-        // "="
-        m_button = new QPushButton("=", this);
-        m_button->setEnabled(false); // 设置禁用
-        // 创建布局器(自动调整每个控件的大小和位置)(按水平方向以此将控件添加到布局容器中)
-        QHBoxLayout* layout = new QHBoxLayout(this);
-        layout->addWidget(m_editX);
-        layout->addWidget(m_label);
-        layout->addWidget(m_editY);
-        layout->addWidget(m_button);
-        layout->addWidget(m_editZ);
-        setLayout(layout);
-
-        // 2. 信号和槽函数连接
-        // 左右操作数文本改变时发送信号 textChanged()
-        connect(m_editX, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
-        connect(m_editY, SIGNAL(textChanged(QString)), this, SLOT(enableButton()));
-        // 点击按钮发送信号 clicked()
-        connect(m_button, SIGNAL(clicked()), this, SLOT(calc()));
-    }
-
-    // 启用等号按钮
-    void CalculatorDialog::enableButton() {
-        bool xOk;
-        bool yOk;
-        m_editX->text().toDouble(&xOk);
-        m_editY->text().toDouble(&yOk);
-        // 当左右操作数都输入了有效数据，则使能等号按钮
-        m_button->setEnabled(xOk && yOk);
-    }
-
-    // 计算和显示结果
-    void CalculatorDialog::calc() {
-        double result = m_editX->text().toDouble() + m_editY->text().toDouble();
-        // 显示字符串形式结果
-        QString str = QString::number(result);
-        m_editZ->setText(str);
-    }
-    ```
-
 -   `main.cpp`
 
     ```cpp
-    #include<QApplication>
-
     #include "calculator_dialog.h"
+    #include <QApplication>
 
     int main(int argc, char** argv) {
         QApplication app(argc, argv);
@@ -396,86 +381,77 @@ int main(int argc, char ** argv) {
     #define TIME_DIALOG_H
 
     #include <QDialog>
+    #include <QFont>
     #include <QLabel>
     #include <QPushButton>
-    #include <QVBoxLayout> // 垂直布局器
     #include <QTime>       // 时间
+    #include <QVBoxLayout> // 垂直布局器
 
     class TimeDialog : public QDialog {
-    Q_OBJECT // moc
+        Q_OBJECT
 
     public:
-        TimeDialog();
+        TimeDialog() {
+            // 1. 初始化界面
+            // 字体
+            QFont font;
+            font.setPointSize(20);
+            // 标签
+            this->label = new QLabel(this);
+            this->label->setFrameStyle(QFrame::Panel | QFrame::Sunken);     // 设置边框
+            this->label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); // 设置文本对齐
+            this->label->setFont(font);                                     // 设置字体
+            // 按钮
+            this->button = new QPushButton("获取系统当前时间", this);
+            this->button->setFont(font);
+            // 垂直布局器
+            this->layout = new QVBoxLayout(this);
+            this->layout->addWidget(label);
+            this->layout->addWidget(button);
+            setLayout(layout);
 
-    public slots:
-        void getTime();
+            // 2. 信号和槽函数
+            connect(button, SIGNAL(clicked()), this, SLOT(getTime()));
+            // 通过自定义信号触发 Label 的 setText() 槽函数执行
+            connect(this, SIGNAL(mySignal(QString)), label, SLOT(setText(QString)));
+        }
 
-    signals:
-        // 自定义信号(只需申明不能定义)
-        void mySignal(const QString&);
+    private slots:
+        void getTime() {
+            qDebug("getTime()");
+            qDebug() << "getTime()";
+            // 获取当前系统时间
+            QTime time = QTime::currentTime();
+            // 将时间对象转换为字符串
+            QString str = time.toString("hh:mm:ss");
+            // 发射信号(emit 是 Qt 关键字，标记当前是发射信号)
+            emit mySignal(str);
+        }
+
+        signals:
+            // 自定义信号(只需申明不能定义)
+            void mySignal(const QString&);
     private:
-        QLabel* m_label;
-        QPushButton* m_button;
+        QVBoxLayout* layout;
+        QLabel* label;
+        QPushButton* button;
     };
 
     #endif // TIME_DIALOG_H
     ```
 
--   `time_dialog.cpp`
-
-    ```cpp
-    #include <QFont>
-
-    #include "time_dialog.h"
-
-    TimeDialog::TimeDialog() {
-        // 1. 初始化界面
-        // 字体
-        QFont font;
-        font.setPointSize(20);
-        // 标签
-        m_label = new QLabel(this);
-        m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);     // 设置边框
-        m_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); // 设置文本对齐
-        m_label->setFont(font);                                     // 设置字体
-        // 按钮
-        m_button = new QPushButton("获取系统当前时间", this);
-        m_button->setFont(font);
-        // 垂直布局器
-        QVBoxLayout* layout = new QVBoxLayout(this);
-        layout->addWidget(m_label);
-        layout->addWidget(m_button);
-        setLayout(layout);
-
-        // 2. 信号和槽函数
-        connect(m_button, SIGNAL(clicked()), this, SLOT(getTime()));
-        // 通过自定义信号触发 Label 的 setText() 槽函数执行
-        connect(this, SIGNAL(mySignal(const QString &)), m_label, SLOT(setText(QString)));
-    }
-
-    void TimeDialog::getTime() {
-        qDebug("getTime()");
-        qDebug() << "getTime()";
-        // 获取当前系统时间
-        QTime time = QTime::currentTime();
-        // 将时间对象转换为字符串
-        QString str = time.toString("hh:mm:ss");
-        // 发射信号(emit 是 Qt 关键字，标记当前是发射信号)
-        emit mySignal(str);
-    }
-    ```
-
 -   `main.cpp`
 
     ```cpp
+    #include "time_dialog.h"
     #include <QApplication>
 
-    #include "time_dialog.h"
-
-    int main(int argc, char* argv[]) {
+    int main(int argc, char** argv) {
         QApplication app(argc, argv);
-        TimeDialog time;
-        time.show();
+
+        TimeDialog timeDialog;
+        timeDialog.show();
+
         return QApplication::exec();
     }
     ```
@@ -495,7 +471,7 @@ int main(int argc, char ** argv) {
 -   `chat-room-server.pro`
 
     ```makefile
-    QT       += core gui network
+    QT += core gui network
 
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -515,103 +491,103 @@ int main(int argc, char ** argv) {
 -   `dialog.ui`
 
     ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8" ?>
     <ui version="4.0">
-      <class>Dialog</class>
-      <widget class="QDialog" name="Dialog">
-        <property name="geometry">
-          <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>526</width>
-            <height>372</height>
-          </rect>
-        </property>
-        <property name="font">
-          <font>
-            <family>Inconsolata</family>
-            <pointsize>16</pointsize>
-          </font>
-        </property>
-        <property name="windowTitle">
-          <string>聊天室服务端</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-                <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                    <size>
-                      <width>40</width>
-                      <height>20</height>
-                    </size>
-                  </property>
-                </spacer>
-              </item>
-              <item>
-                <widget class="QListWidget" name="listWidget">
-                  <property name="minimumSize">
-                    <size>
-                      <width>480</width>
-                      <height>270</height>
-                    </size>
-                  </property>
-                  <property name="maximumSize">
-                    <size>
-                      <width>480</width>
-                      <height>270</height>
-                    </size>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                    <size>
-                      <width>40</width>
-                      <height>20</height>
-                    </size>
-                  </property>
-                </spacer>
-              </item>
+        <class>Dialog</class>
+        <widget class="QDialog" name="Dialog">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>526</width>
+                    <height>372</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Inconsolata</family>
+                    <pointsize>16</pointsize>
+                </font>
+            </property>
+            <property name="windowTitle">
+                <string>聊天室服务端</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout">
+                        <item>
+                            <spacer name="horizontalSpacer">
+                                <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </item>
+                        <item>
+                            <widget class="QListWidget" name="listWidget">
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>480</width>
+                                        <height>270</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>480</width>
+                                        <height>270</height>
+                                    </size>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <spacer name="horizontalSpacer_2">
+                                <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <layout class="QGridLayout" name="gridLayout">
+                        <item row="0" column="0">
+                            <widget class="QLabel" name="portLabel">
+                                <property name="text">
+                                    <string> 服务器端口：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="0" column="1">
+                            <widget class="QLineEdit" name="portEdit">
+                                <property name="text">
+                                    <string>8080</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <widget class="QPushButton" name="createButton">
+                        <property name="text">
+                            <string>创建服务器</string>
+                        </property>
+                    </widget>
+                </item>
             </layout>
-          </item>
-          <item>
-            <layout class="QGridLayout" name="gridLayout">
-              <item row="0" column="0">
-                <widget class="QLabel" name="portLabel">
-                  <property name="text">
-                    <string> 服务器端口：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="0" column="1">
-                <widget class="QLineEdit" name="portEdit">
-                  <property name="text">
-                    <string>8080</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-          <item>
-            <widget class="QPushButton" name="createButton">
-              <property name="text">
-                <string>创建服务器</string>
-              </property>
-            </widget>
-          </item>
-        </layout>
-      </widget>
-      <resources/>
-      <connections/>
+        </widget>
+        <resources />
+        <connections />
     </ui>
     ```
 
@@ -623,32 +599,90 @@ int main(int argc, char ** argv) {
     #ifndef DIALOG_H
     #define DIALOG_H
 
+    #include "ui_dialog.h"
     #include <QDialog>
     #include <QTcpServer>
     #include <QTcpSocket>
     #include <QTimer>
 
     QT_BEGIN_NAMESPACE
-    namespace Ui { class Dialog; }
+    namespace Ui {
+        class Dialog;
+    }
     QT_END_NAMESPACE
 
     class Dialog : public QDialog {
-    Q_OBJECT
+        Q_OBJECT
+
     public:
-        Dialog(QWidget* parent = nullptr);
-        ~Dialog();
+        Dialog() {
+            this->ui = new Ui::Dialog();
+            this->ui->setupUi(this);
+            connect(&tcpServer, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
+            connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
+        }
+
     private slots:
         // 创建服务器按钮点击槽函数
-        void on_createButton_clicked();
+        void on_createButton_clicked() {
+            port = ui->portEdit->text().toShort();
+            if (tcpServer.listen(QHostAddress::Any, port)) {
+                qDebug() << "创建服务器成功";
+                ui->createButton->setEnabled(false);
+                ui->portEdit->setEnabled(false);
+                // 开启定时器
+                timer.start(3000);
+            } else {
+                qDebug() << "创建服务器失败";
+            }
+        }
+
         // 响应客户端连接请求槽函数
-        void onNewConnection();
-        // 接收欧客户端消息槽函数
-        void onReadyRead();
+        void onNewConnection() {
+            // 后去和客户端通信的套接字
+            QTcpSocket* tcpSocket = tcpServer.nextPendingConnection();
+            // 保存套接字到容器
+            tcpClientList.append(tcpSocket);
+            // 当客户端向服务器发送消息时通信套接字发送 readyRead() 信号
+            connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+        }
+
+        // 接收客户端消息槽函数
+        void onReadyRead() {
+            // 遍历容器获取哪个客户端给服务器发送了消息
+            for (int i = 0; i < tcpClientList.size(); i++) {
+                // 返回 0 表示没有消息
+                if (tcpClientList.at(i)->bytesAvailable() != 0) {
+                    // 读取消息
+                    QByteArray buf = tcpClientList.at(i)->readAll();
+                    // 显示消息
+                    ui->listWidget->addItem(buf);
+                    ui->listWidget->scrollToBottom();
+                    // 转发消息给所有在线客户端
+                    sendMessage(buf);
+                }
+            }
+        }
+
         // 通信断开检查槽函数
-        void onTimeout();
+        void onTimeout() {
+            // 遍历检查容器中保存的通信套接字是否已经断开连接，如果是则删除
+            for (int i = 0; i < tcpClientList.size(); i++) {
+                if (tcpClientList.at(i)->state() == QAbstractSocket::UnconnectedState) {
+                    tcpClientList.removeAt(i);
+                    i--;
+                }
+            }
+        }
+
     private:
         // 转发聊天消息到其它客户端
-        void sendMessage(const QByteArray& buf);
+        void sendMessage(const QByteArray& buf) {
+            for (int i = 0; i < tcpClientList.size(); i++) {
+                tcpClientList.at(i)->write(buf);
+            }
+        }
+
     private:
         Ui::Dialog* ui;
         QTcpServer tcpServer;
@@ -660,89 +694,12 @@ int main(int argc, char ** argv) {
     #endif // DIALOG_H
     ```
 
--   `dialog.cpp`
-
-    ```cpp
-    #include "dialog.h"
-    #include "ui_dialog.h"
-
-    Dialog::Dialog(QWidget* parent) : QDialog(parent), ui(new Ui::Dialog) {
-        ui->setupUi(this);
-        connect(&tcpServer, SIGNAL(newConnection()), this, SLOT(onNewConnection()));
-        connect(&timer, SIGNAL(timeout()), SLOT(onTimeout()));
-    }
-
-    Dialog::~Dialog() {
-        delete ui;
-    }
-
-    // 创建服务器按钮点击槽函数
-    void Dialog::on_createButton_clicked() {
-        port = ui->portEdit->text().toShort();
-        if (tcpServer.listen(QHostAddress::Any, port)) {
-            qDebug() << "创建服务器成功";
-            ui->createButton->setEnabled(false);
-            ui->portEdit->setEnabled(false);
-            // 开启定时器
-            timer.start(3000);
-        } else {
-            qDebug() << "创建服务器失败";
-        }
-    }
-
-    // 响应客户端连接请求槽函数
-    void Dialog::onNewConnection() {
-        // 后去和客户端通信的套接字
-        QTcpSocket* tcpSocket = tcpServer.nextPendingConnection();
-        // 保存套接字到容器
-        tcpClientList.append(tcpSocket);
-        // 当客户端向服务器发送消息时通信套接字发送 readyRead() 信号
-        connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-
-    }
-
-    // 接收欧客户端消息槽函数
-    void Dialog::onReadyRead() {
-        // 遍历容器获取哪个客户端给服务器发送了消息
-        for (int i = 0; i < tcpClientList.size(); i++) {
-            // 返回 0 表示没有消息
-            if (tcpClientList.at(i)->bytesAvailable() != 0) {
-                // 读取消息
-                QByteArray buf = tcpClientList.at(i)->readAll();
-                // 显示消息
-                ui->listWidget->addItem(buf);
-                ui->listWidget->scrollToBottom();
-                // 转发消息给所有在线客户端
-                sendMessage(buf);
-            }
-        }
-    }
-
-    // 通信断开检查槽函数
-    void Dialog::onTimeout() {
-        // 遍历检查容器中保存的通信套接字是否已经断开连接，如果是则删除
-        for (int i = 0; i < tcpClientList.size(); i++) {
-            if (tcpClientList.at(i)->state() == QAbstractSocket::UnconnectedState) {
-                tcpClientList.removeAt(i);
-                i--;
-            }
-        }
-    }
-
-    // 转发聊天消息到其它客户端
-    void Dialog::sendMessage(const QByteArray& buf) {
-        for (int i = 0; i < tcpClientList.size(); i++) {
-            tcpClientList.at(i)->write(buf);
-        }
-    }
-    ```
-
 ##### 5.1.1.2 客户端
 
 -   `chat-room-client.pro`
 
     ```makefile
-    QT       += core gui network
+    QT += core gui network
 
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -762,148 +719,148 @@ int main(int argc, char ** argv) {
 -   `dialog.ui`
 
     ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8" ?>
     <ui version="4.0">
-      <class>Dialog</class>
-      <widget class="QDialog" name="Dialog">
-        <property name="geometry">
-          <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>526</width>
-            <height>491</height>
-          </rect>
-        </property>
-        <property name="font">
-          <font>
-            <family>Inconsolata</family>
-            <pointsize>16</pointsize>
-          </font>
-        </property>
-        <property name="windowTitle">
-          <string>聊天室客户端</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-                <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                    <size>
-                      <width>40</width>
-                      <height>20</height>
-                    </size>
-                  </property>
-                </spacer>
-              </item>
-              <item>
-                <widget class="QListWidget" name="listWidget">
-                  <property name="minimumSize">
-                    <size>
-                      <width>480</width>
-                      <height>270</height>
-                    </size>
-                  </property>
-                  <property name="maximumSize">
-                    <size>
-                      <width>480</width>
-                      <height>270</height>
-                    </size>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                    <size>
-                      <width>40</width>
-                      <height>20</height>
-                    </size>
-                  </property>
-                </spacer>
-              </item>
+        <class>Dialog</class>
+        <widget class="QDialog" name="Dialog">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>526</width>
+                    <height>491</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Inconsolata</family>
+                    <pointsize>16</pointsize>
+                </font>
+            </property>
+            <property name="windowTitle">
+                <string>聊天室客户端</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout">
+                        <item>
+                            <spacer name="horizontalSpacer">
+                                <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </item>
+                        <item>
+                            <widget class="QListWidget" name="listWidget">
+                                <property name="minimumSize">
+                                    <size>
+                                        <width>480</width>
+                                        <height>270</height>
+                                    </size>
+                                </property>
+                                <property name="maximumSize">
+                                    <size>
+                                        <width>480</width>
+                                        <height>270</height>
+                                    </size>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <spacer name="horizontalSpacer_2">
+                                <property name="orientation">
+                                    <enum>Qt::Horizontal</enum>
+                                </property>
+                                <property name="sizeHint" stdset="0">
+                                    <size>
+                                        <width>40</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <layout class="QGridLayout" name="gridLayout">
+                        <item row="0" column="1">
+                            <widget class="QLineEdit" name="hostEdit">
+                                <property name="text">
+                                    <string>127.0.0.1</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="2" column="1">
+                            <widget class="QLineEdit" name="nicknameEdit">
+                                <property name="text">
+                                    <string />
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="2" column="0">
+                            <widget class="QLabel" name="nicknameLabel">
+                                <property name="text">
+                                    <string>聊天室昵称：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="0" column="0">
+                            <widget class="QLabel" name="hostLabel">
+                                <property name="text">
+                                    <string>服务器地址：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="1" column="0">
+                            <widget class="QLabel" name="portLabel">
+                                <property name="text">
+                                    <string>服务器端口：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="1" column="1">
+                            <widget class="QLineEdit" name="portEdit">
+                                <property name="text">
+                                    <string>8080</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <widget class="QPushButton" name="connectButton">
+                        <property name="text">
+                            <string>连接服务器</string>
+                        </property>
+                    </widget>
+                </item>
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_2">
+                        <item>
+                            <widget class="QLineEdit" name="messageEdit" />
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="sendButton">
+                                <property name="enabled">
+                                    <bool>false</bool>
+                                </property>
+                                <property name="text">
+                                    <string>发送</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
             </layout>
-          </item>
-          <item>
-            <layout class="QGridLayout" name="gridLayout">
-              <item row="0" column="1">
-                <widget class="QLineEdit" name="hostEdit">
-                  <property name="text">
-                    <string>127.0.0.1</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="2" column="1">
-                <widget class="QLineEdit" name="nicknameEdit">
-                  <property name="text">
-                    <string/>
-                  </property>
-                </widget>
-              </item>
-              <item row="2" column="0">
-                <widget class="QLabel" name="nicknameLabel">
-                  <property name="text">
-                    <string>聊天室昵称：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="0" column="0">
-                <widget class="QLabel" name="hostLabel">
-                  <property name="text">
-                    <string>服务器地址：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="1" column="0">
-                <widget class="QLabel" name="portLabel">
-                  <property name="text">
-                    <string>服务器端口：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="1" column="1">
-                <widget class="QLineEdit" name="portEdit">
-                  <property name="text">
-                    <string>8080</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-          <item>
-            <widget class="QPushButton" name="connectButton">
-              <property name="text">
-                <string>连接服务器</string>
-              </property>
-            </widget>
-          </item>
-          <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-                <widget class="QLineEdit" name="messageEdit"/>
-              </item>
-              <item>
-                <widget class="QPushButton" name="sendButton">
-                  <property name="enabled">
-                    <bool>false</bool>
-                  </property>
-                  <property name="text">
-                    <string>发送</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-        </layout>
-      </widget>
-      <resources/>
-      <connections/>
+        </widget>
+        <resources />
+        <connections />
     </ui>
     ```
 
@@ -915,28 +872,90 @@ int main(int argc, char ** argv) {
     #ifndef DIALOG_H
     #define DIALOG_H
 
+    #include "ui_dialog.h"
     #include <QDialog>
-    #include <QTcpSocket>
-    #include <QHostAddress>
     #include <QMessageBox>
+    #include <QTcpSocket>
 
     QT_BEGIN_NAMESPACE
-    namespace Ui { class Dialog; }
+    namespace Ui {
+        class Dialog;
+    }
     QT_END_NAMESPACE
 
     class Dialog : public QDialog {
-    Q_OBJECT
+        Q_OBJECT
+
     public:
-        Dialog(QWidget* parent = nullptr);
-        ~Dialog();
+        Dialog() {
+            this->ui = new Ui::Dialog();
+            this->ui->setupUi(this);
+            this->alive = false;
+            connect(&tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
+            connect(&tcpSocket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+            connect(&tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+            connect(&tcpSocket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(onErrorOccurred(QAbstractSocket::SocketError)));
+        }
+
     private slots:
-        void on_connectButton_clicked();
-        void on_sendButton_clicked();
-        void onConnected();
-        void onDisconnected();
-        void onReadyRead();
+        void on_connectButton_clicked() {
+            // 如果当前是离线状态，则建立和服务器的连接，否则端口和服务器的连接
+            if (!alive) {
+                host.setAddress(ui->hostEdit->text());
+                port = ui->portEdit->text().toShort();
+                nickname = ui->nicknameEdit->text();
+                tcpSocket.connectToHost(host, port);
+            } else {
+                QString message = "系统: " + nickname + "离开了聊天室";
+                tcpSocket.write(message.toUtf8());
+                tcpSocket.disconnectFromHost();
+            }
+        }
+
+        void on_sendButton_clicked() {
+            QString message = ui->messageEdit->text();
+            if (message == "") {
+                return;
+            }
+            message = nickname + ": " + message;
+            tcpSocket.write(message.toUtf8());
+            ui->messageEdit->clear();
+        }
+
+        void onConnected() {
+            alive = true;
+            ui->sendButton->setEnabled(true);
+            ui->hostEdit->setEnabled(false);
+            ui->portEdit->setEnabled(false);
+            ui->nicknameEdit->setEnabled(false);
+            ui->connectButton->setText("离开聊天室");
+            // 发送系统提示消息
+            QString message = "系统: " + nickname + "进入了聊天室";
+            tcpSocket.write(message.toUtf8());
+        }
+
+        void onDisconnected() {
+            alive = false;
+            ui->sendButton->setEnabled(false);
+            ui->hostEdit->setEnabled(true);
+            ui->portEdit->setEnabled(true);
+            ui->nicknameEdit->setEnabled(true);
+            ui->connectButton->setText("连接服务器");
+        }
+
+        void onReadyRead() {
+            if (tcpSocket.bytesAvailable() != 0) {
+                QByteArray buf = tcpSocket.readAll();
+                ui->listWidget->addItem(buf);
+                ui->listWidget->scrollToBottom();
+            }
+        }
+
         // 网络异常槽函数
-        void onErrorOccurred(QAbstractSocket::SocketError);
+        void onErrorOccurred(QAbstractSocket::SocketError) {
+            QMessageBox::critical(this, "Error", tcpSocket.errorString());
+        }
+
     private:
         Ui::Dialog* ui;
         bool alive;
@@ -947,84 +966,6 @@ int main(int argc, char ** argv) {
     };
 
     #endif // DIALOG_H
-    ```
-
--   `dialog.cpp`
-
-    ```cpp
-    #include "dialog.h"
-    #include "ui_dialog.h"
-
-    Dialog::Dialog(QWidget* parent) : QDialog(parent), ui(new Ui::Dialog) {
-        ui->setupUi(this);
-        alive = false;
-        connect(&tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
-        connect(&tcpSocket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-        connect(&tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-        connect(&tcpSocket, SIGNAL(errorOccurred(QAbstractSocket::SocketError)), this, SLOT(onErrorOccurred(QAbstractSocket::SocketError)));
-    }
-
-    Dialog::~Dialog() {
-        delete ui;
-    }
-
-    void Dialog::on_connectButton_clicked() {
-        // 如果当前是离线状态，则建立和服务器的连接，否则端口和服务器的连接
-        if (!alive) {
-            host.setAddress(ui->hostEdit->text());
-            port = ui->portEdit->text().toShort();
-            nickname = ui->nicknameEdit->text();
-            tcpSocket.connectToHost(host, port);
-        } else {
-            QString message = "系统: " + nickname + "离开了聊天室";
-            tcpSocket.write(message.toUtf8());
-            tcpSocket.disconnectFromHost();
-        }
-    }
-
-    void Dialog::on_sendButton_clicked() {
-        QString message = ui->messageEdit->text();
-        if (message == "") {
-            return;
-        }
-        message = nickname + ": " + message;
-        tcpSocket.write(message.toUtf8());
-        ui->messageEdit->clear();
-    }
-
-    void Dialog::onConnected() {
-        alive = true;
-        ui->sendButton->setEnabled(true);
-        ui->hostEdit->setEnabled(false);
-        ui->portEdit->setEnabled(false);
-        ui->nicknameEdit->setEnabled(false);
-        ui->connectButton->setText("离开聊天室");
-        // 发送系统提示消息
-        QString message = "系统: " + nickname + "进入了聊天室";
-        tcpSocket.write(message.toUtf8());
-    }
-
-    void Dialog::onDisconnected() {
-        alive = false;
-        ui->sendButton->setEnabled(false);
-        ui->hostEdit->setEnabled(true);
-        ui->portEdit->setEnabled(true);
-        ui->nicknameEdit->setEnabled(true);
-        ui->connectButton->setText("连接服务器");
-    }
-
-    void Dialog::onReadyRead() {
-        if (tcpSocket.bytesAvailable() != 0) {
-            QByteArray buf = tcpSocket.readAll();
-            ui->listWidget->addItem(buf);
-            ui->listWidget->scrollToBottom();
-        }
-    }
-
-    // 网络异常槽函数
-    void Dialog::onErrorOccurred(QAbstractSocket::SocketError) {
-        QMessageBox::critical(this, "Error", tcpSocket.errorString());
-    }
     ```
 
 ##### 5.1.1.3 效果
@@ -1040,7 +981,7 @@ int main(int argc, char ** argv) {
 -   `student-management.pro`
 
     ```bash
-    QT       += core gui sql
+    QT += core gui sql
 
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -1060,139 +1001,139 @@ int main(int argc, char ** argv) {
 -   `dialog.ui`
 
     ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
+    <?xml version="1.0" encoding="UTF-8" ?>
     <ui version="4.0">
-      <class>Dialog</class>
-      <widget class="QDialog" name="Dialog">
-        <property name="geometry">
-          <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>600</width>
-            <height>400</height>
-          </rect>
-        </property>
-        <property name="font">
-          <font>
-            <family>Inconsolata</family>
-            <pointsize>16</pointsize>
-          </font>
-        </property>
-        <property name="windowTitle">
-          <string>学生成绩管理系统</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-                <widget class="QComboBox" name="sortColumnComboBox">
-                  <item>
-                    <property name="text">
-                      <string>id</string>
-                    </property>
-                  </item>
-                  <item>
-                    <property name="text">
-                      <string>score</string>
-                    </property>
-                  </item>
-                </widget>
-              </item>
-              <item>
-                <widget class="QComboBox" name="sortTypeComboBox">
-                  <item>
-                    <property name="text">
-                      <string>ASC</string>
-                    </property>
-                  </item>
-                  <item>
-                    <property name="text">
-                      <string>DESC</string>
-                    </property>
-                  </item>
-                </widget>
-              </item>
-              <item>
-                <widget class="QPushButton" name="sortButton">
-                  <property name="text">
-                    <string>排序</string>
-                  </property>
-                </widget>
-              </item>
+        <class>Dialog</class>
+        <widget class="QDialog" name="Dialog">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>600</width>
+                    <height>400</height>
+                </rect>
+            </property>
+            <property name="font">
+                <font>
+                    <family>Inconsolata</family>
+                    <pointsize>16</pointsize>
+                </font>
+            </property>
+            <property name="windowTitle">
+                <string>学生成绩管理系统</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout">
+                        <item>
+                            <widget class="QComboBox" name="sortColumnComboBox">
+                                <item>
+                                    <property name="text">
+                                        <string>id</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>score</string>
+                                    </property>
+                                </item>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QComboBox" name="sortTypeComboBox">
+                                <item>
+                                    <property name="text">
+                                        <string>ASC</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property name="text">
+                                        <string>DESC</string>
+                                    </property>
+                                </item>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="sortButton">
+                                <property name="text">
+                                    <string>排序</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <widget class="QTableView" name="tableView" />
+                </item>
+                <item>
+                    <layout class="QGridLayout" name="gridLayout">
+                        <item row="0" column="0">
+                            <widget class="QLabel" name="idLabel">
+                                <property name="text">
+                                    <string>学生学号：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="0" column="1">
+                            <widget class="QLineEdit" name="idEdit" />
+                        </item>
+                        <item row="1" column="0">
+                            <widget class="QLabel" name="nameLabel">
+                                <property name="text">
+                                    <string>学生姓名：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="1" column="1">
+                            <widget class="QLineEdit" name="nameEdit" />
+                        </item>
+                        <item row="2" column="0">
+                            <widget class="QLabel" name="scoreLabel">
+                                <property name="text">
+                                    <string>学生成绩：</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="2" column="1">
+                            <widget class="QLineEdit" name="scoreEdit" />
+                        </item>
+                    </layout>
+                </item>
+                <item>
+                    <layout class="QHBoxLayout" name="horizontalLayout_2">
+                        <item>
+                            <widget class="QPushButton" name="insertButton">
+                                <property name="text">
+                                    <string>插入</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="deleteButton">
+                                <property name="text">
+                                    <string>删除</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item>
+                            <widget class="QPushButton" name="updateButton">
+                                <property name="font">
+                                    <font>
+                                        <family>Inconsolata</family>
+                                        <pointsize>16</pointsize>
+                                    </font>
+                                </property>
+                                <property name="text">
+                                    <string>更新</string>
+                                </property>
+                            </widget>
+                        </item>
+                    </layout>
+                </item>
             </layout>
-          </item>
-          <item>
-            <widget class="QTableView" name="tableView"/>
-          </item>
-          <item>
-            <layout class="QGridLayout" name="gridLayout">
-              <item row="0" column="0">
-                <widget class="QLabel" name="idLabel">
-                  <property name="text">
-                    <string>学生学号：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="0" column="1">
-                <widget class="QLineEdit" name="idEdit"/>
-              </item>
-              <item row="1" column="0">
-                <widget class="QLabel" name="nameLabel">
-                  <property name="text">
-                    <string>学生姓名：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="1" column="1">
-                <widget class="QLineEdit" name="nameEdit"/>
-              </item>
-              <item row="2" column="0">
-                <widget class="QLabel" name="scoreLabel">
-                  <property name="text">
-                    <string>学生成绩：</string>
-                  </property>
-                </widget>
-              </item>
-              <item row="2" column="1">
-                <widget class="QLineEdit" name="scoreEdit"/>
-              </item>
-            </layout>
-          </item>
-          <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-                <widget class="QPushButton" name="insertButton">
-                  <property name="text">
-                    <string>插入</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <widget class="QPushButton" name="deleteButton">
-                  <property name="text">
-                    <string>删除</string>
-                  </property>
-                </widget>
-              </item>
-              <item>
-                <widget class="QPushButton" name="updateButton">
-                  <property name="font">
-                    <font>
-                      <family>Inconsolata</family>
-                      <pointsize>16</pointsize>
-                    </font>
-                  </property>
-                  <property name="text">
-                    <string>更新</string>
-                  </property>
-                </widget>
-              </item>
-            </layout>
-          </item>
-        </layout>
-      </widget>
-      <resources/>
-      <connections/>
+        </widget>
+        <resources />
+        <connections />
     </ui>
     ```
 
@@ -1203,163 +1144,146 @@ int main(int argc, char ** argv) {
     #define DIALOG_H
 
     #include <QDialog>
-    #include <QSqlDatabase>
+    #include <QMessageBox>
+    #include <QSqlError>
     #include <QSqlQuery>
     #include <QSqlQueryModel>
-    #include <QSqlError>
-    #include <QMessageBox>
+    #include <ui_dialog.h>
 
     QT_BEGIN_NAMESPACE
-    namespace Ui { class Dialog; }
+    namespace Ui {
+        class Dialog;
+    }
     QT_END_NAMESPACE
 
     class Dialog : public QDialog {
-    Q_OBJECT
+        Q_OBJECT
+
     public:
-        Dialog(QWidget* parent = nullptr);
-        ~Dialog();
+        Dialog() {
+            this->setFixedSize(600, 400);
+            this->ui = new Ui::Dialog();
+            this->ui->setupUi(this);
+            createDB();
+            createTable();
+            queryTable();
+        }
+
     private slots:
-        void on_insertButton_clicked();
-        void on_deleteButton_clicked();
-        void on_updateButton_clicked();
-        void on_sortButton_clicked();
+        void on_insertButton_clicked() {
+            int id = ui->idEdit->text().toInt();
+            if (id == 0) {
+                QMessageBox::critical(this, "Error", "学号输入错误");
+                return;
+            }
+            QString name = ui->nameEdit->text();
+            if (name == "") {
+                QMessageBox::critical(this, "Error", "姓名输入错误");
+                return;
+            }
+            double score = ui->scoreEdit->text().toDouble();
+            if (score < 0 || score > 100) {
+                QMessageBox::critical(this, "Error", "成绩输入错误");
+                return;
+            }
+            QString sql = QString("INSERT INTO student(id, name, score) VALUES(%1, '%2', %3)").arg(id).arg(name).arg(score);
+            QSqlQuery query(db);
+            if (!query.exec(sql)) {
+                qDebug() << sql << query.lastError();
+            } else {
+                qDebug() << "插入数据成功";
+                queryTable();
+            }
+        }
+
+        void on_deleteButton_clicked() {
+            int id = ui->idEdit->text().toInt();
+            QString sql = "DELETE FROM student WHERE id = :id";
+            QSqlQuery query(db);
+            query.prepare(sql);
+            query.bindValue(":id", id);
+            if (!query.exec()) {
+                qDebug() << sql << query.lastError();
+            } else {
+                qDebug() << "删除数据成功";
+                queryTable();
+            }
+        }
+
+        void on_updateButton_clicked() {
+            int id = ui->idEdit->text().toInt();
+            if (id == 0) {
+                QMessageBox::critical(this, "Error", "学号输入错误");
+                return;
+            }
+            double score = ui->scoreEdit->text().toDouble();
+            if (score < 0 || score > 100) {
+                QMessageBox::critical(this, "Error", "成绩输入错误");
+                return;
+            }
+            QString sql = "UPDATE student SET score = :score WHERE id = :id";
+            QSqlQuery query(db);
+            query.prepare(sql);
+            query.bindValue(":id", id);
+            query.bindValue(":score", score);
+            if (!query.exec()) {
+                qDebug() << sql << query.lastError();
+            } else {
+                qDebug() << "更新数据成功";
+                queryTable();
+            }
+        }
+
+        void on_sortButton_clicked() {
+            QString sortColumn = ui->sortColumnComboBox->currentText();
+            QString sortType = ui->sortTypeComboBox->currentText();
+            QString sql = QString("SELECT * FROM student ORDER BY %1 %2").arg(sortColumn).arg(sortType);
+            QSqlQueryModel* model = new QSqlQueryModel();
+            model->setQuery(sql, db);
+            ui->tableView->setModel(model);
+        }
+
     private:
-        void createDB();
-        void createTable();
-        void queryTable();
+        void createDB() {
+            // 添加数据库驱动
+            db = QSqlDatabase::addDatabase("QSQLITE");
+            // 设置库名(文件名)
+            db.setDatabaseName("student.db");
+            // 打开数据库
+            if (!db.open()) {
+                qDebug() << "创建/打开数据库失败";
+            } else {
+                qDebug() << "创建/打开数据库成功";
+            }
+        }
+
+        void createTable() {
+            QString sql = QString("CREATE TABLE student ("
+                                  "id    INT  NOT NULL PRIMARY KEY,"
+                                  "name  TEXT NOT NULL,"
+                                  "score REAL NOT NULL"
+                                  ")");
+            QSqlQuery query(db);
+            if (!query.exec(sql)) {
+                qDebug() << sql << query.lastError();
+            } else {
+                qDebug() << "建表成功";
+            }
+        }
+
+        void queryTable() {
+            QString sql = "SELECT * FROM student";
+            QSqlQueryModel* model = new QSqlQueryModel();
+            model->setQuery(sql, db);
+            ui->tableView->setModel(model);
+        }
+
     private:
         Ui::Dialog* ui;
         QSqlDatabase db;
     };
 
     #endif // DIALOG_H
-    ```
-
--   `dialog.cpp`
-
-    ```cpp
-    #include "dialog.h"
-    #include "ui_dialog.h"
-
-    Dialog::Dialog(QWidget* parent) : QDialog(parent), ui(new Ui::Dialog) {
-        ui->setupUi(this);
-        createDB();
-        createTable();
-        queryTable();
-    }
-
-    Dialog::~Dialog() {
-        delete ui;
-    }
-
-    void Dialog::on_insertButton_clicked() {
-        int id = ui->idEdit->text().toInt();
-        if (id == 0) {
-            QMessageBox::critical(this, "Error", "学号输入错误");
-            return;
-        }
-        QString name = ui->nameEdit->text();
-        if (name == "") {
-            QMessageBox::critical(this, "Error", "姓名输入错误");
-            return;
-        }
-        double score = ui->scoreEdit->text().toDouble();
-        if (score < 0 || score > 100) {
-            QMessageBox::critical(this, "Error", "成绩输入错误");
-            return;
-        }
-        QString sql = QString("INSERT INTO student(id, name, score) VALUES(%1, '%2', %3)").arg(id).arg(name).arg(score);
-        QSqlQuery query(db);
-        if (!query.exec(sql)) {
-            qDebug() << sql << query.lastError();
-        } else {
-            qDebug() << "插入数据成功";
-            queryTable();
-        }
-    }
-
-    void Dialog::on_deleteButton_clicked() {
-        int id = ui->idEdit->text().toInt();
-        QString sql = "DELETE FROM student WHERE id = :id";
-        QSqlQuery query(db);
-        query.prepare(sql);
-        query.bindValue(":id", id);
-        if (!query.exec()) {
-            qDebug() << sql << query.lastError();
-        } else {
-            qDebug() << "删除数据成功";
-            queryTable();
-        }
-    }
-
-    void Dialog::on_updateButton_clicked() {
-        int id = ui->idEdit->text().toInt();
-        if (id == 0) {
-            QMessageBox::critical(this, "Error", "学号输入错误");
-            return;
-        }
-        double score = ui->scoreEdit->text().toDouble();
-        if (score < 0 || score > 100) {
-            QMessageBox::critical(this, "Error", "成绩输入错误");
-            return;
-        }
-        QString sql = "UPDATE student SET score = :score WHERE id = :id";
-        QSqlQuery query(db);
-        query.prepare(sql);
-        query.bindValue(":id", id);
-        query.bindValue(":score", score);
-        if (!query.exec()) {
-            qDebug() << sql << query.lastError();
-        } else {
-            qDebug() << "更新数据成功";
-            queryTable();
-        }
-    }
-
-    void Dialog::on_sortButton_clicked() {
-        QString sortColumn = ui->sortColumnComboBox->currentText();
-        QString sortType = ui->sortTypeComboBox->currentText();
-        QString sql = QString("SELECT * FROM student ORDER BY %1 %2").arg(sortColumn).arg(sortType);
-        QSqlQueryModel* model = new QSqlQueryModel();
-        model->setQuery(sql, db);
-        ui->tableView->setModel(model);
-    }
-
-    void Dialog::createDB() {
-        // 添加数据库驱动
-        db = QSqlDatabase::addDatabase("QSQLITE");
-        // 设置库名(文件名)
-        db.setDatabaseName("student.db");
-        // 打开数据库
-        if (!db.open()) {
-            qDebug() << "创建/打开数据库失败";
-        } else {
-            qDebug() << "创建/打开数据库成功";
-        }
-    }
-
-    void Dialog::createTable() {
-        QString sql = QString(
-            "CREATE TABLE student ("
-            "id    INT NOT NULL PRIMARY KEY,"
-            "name  TEXT NOT NULL,"
-            "score REAL NOT NULL"
-            ")"
-        );
-        QSqlQuery query(db);
-        if (!query.exec(sql)) {
-            qDebug() << sql << query.lastError();
-        } else {
-            qDebug() << "建表成功";
-        }
-    }
-
-    void Dialog::queryTable() {
-        QString sql = "SELECT * FROM student";
-        QSqlQueryModel* model = new QSqlQueryModel();
-        model->setQuery(sql, db);
-        ui->tableView->setModel(model);
-    }
     ```
 
 -   ![](__image__/10970ae803bc4c069e5b1f4c738345e0.png)
