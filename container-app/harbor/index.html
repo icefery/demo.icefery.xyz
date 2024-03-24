@@ -12143,7 +12143,7 @@
 
 <h1 id="harbor">Harbor<a class="headerlink" href="#harbor" title="Permanent link">&para;</a></h1>
 <h2 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>bitnami<span class="w"> </span>https://charts.bitnami.com/bitnami
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>bitnami<span class="w"> </span>https://charts.bitnami.com/bitnami
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -12223,32 +12223,32 @@ via <a href="https://github.com/containerd/containerd/blob/main/docs/cri/registr
 <blockquote>
 <p>nerdctl 并不走 CRI 的 <code>tls.insecure_skip_verify</code>，需要添加 <code>--insecure-registry</code> 选项。</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>login<span class="w"> </span>http://core.harbor.dev.icefery.xyz<span class="w"> </span>--username<span class="o">=</span>admin<span class="w"> </span>--password<span class="o">=</span>admin
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>login<span class="w"> </span>http://core.harbor.dev.icefery.xyz<span class="w"> </span>--username<span class="o">=</span>admin<span class="w"> </span>--password<span class="o">=</span>admin
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># nerdctl login http://core.harbor.dev.icefery.xyz --username=admin --password=admin --insecure-registry</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>push<span class="w"> </span>core.harbor.dev.icefery.xyz/library/my-app:0.0.1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>push<span class="w"> </span>core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># nerdctl push core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>core.harbor.dev.icefery.xyz/library/my-app:0.0.1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># nerdctl pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry</span>
 </span></code></pre></div>
 <h2 id="chart">Chart 仓库<a class="headerlink" href="#chart" title="Permanent link">&para;</a></h2>
 <h4 id="_4">拉取<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 添加 Harbor 作为统一的单一索引入口点</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 添加 Harbor 作为统一的单一索引入口点</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># helm repo add chartmuseum-global http://core.harbor.dev.icefery.xyz/chartrepo --username=admin --password=admin</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 将 Harbor 项目添加为单独的索引入口点</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>chartmuseum-library<span class="w"> </span>http://core.harbor.dev.icefery.xyz/chartrepo/library<span class="w"> </span>--username<span class="o">=</span>admin<span class="w"> </span>--password<span class="o">=</span>admin
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>my-app
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>my-app
 </span></code></pre></div>
 <h4 id="_5">推送<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/chartmuseum/helm-push
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/chartmuseum/helm-push
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># helm cm-push chart/ http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># helm cm-push chart/ http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>helm<span class="w"> </span>cm-push<span class="w"> </span>chart/<span class="w"> </span>chartmuseum-library
 </span></code></pre></div>

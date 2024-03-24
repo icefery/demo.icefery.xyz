@@ -12016,18 +12016,18 @@
 </ul>
 <h2 id="_2">常见问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h4 id="detected-dubious-ownership-in-repository-at-xxx-to-add-an-exception-for-this-directory">detected dubious ownership in repository at xxx To add an exception for this directory<a class="headerlink" href="#detected-dubious-ownership-in-repository-at-xxx-to-add-an-exception-for-this-directory" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>safe.directory<span class="w"> </span>xxx
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--add<span class="w"> </span>safe.directory<span class="w"> </span>xxx
 </span></code></pre></div>
 <p>或者</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GIT_TEST_DEBUG_UNSAFE_DIRECTORIES</span><span class="o">=</span><span class="nb">true</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GIT_TEST_DEBUG_UNSAFE_DIRECTORIES</span><span class="o">=</span><span class="nb">true</span>
 </span></code></pre></div>
 <h4 id="windows-git">Windows 上 Git 保留可执行文件权限<a class="headerlink" href="#windows-git" title="Permanent link">&para;</a></h4>
 <blockquote>
 <p><a href="https://www.cnblogs.com/LoveBB/p/16076897.html">https://www.cnblogs.com/LoveBB/p/16076897.html</a></p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>update-index<span class="w"> </span>--chmod<span class="o">=</span>+x<span class="w"> </span>a.sh
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>git<span class="w"> </span>update-index<span class="w"> </span>--chmod<span class="o">=</span>+x<span class="w"> </span>a.sh
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>ls-tree<span class="w"> </span>HEAD
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>ls-tree<span class="w"> </span>HEAD
 </span></code></pre></div>
 <h4 id="_3">配置默认编辑器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span>vim

@@ -12105,7 +12105,7 @@
 <h1 id="coredns">CoreDNS<a class="headerlink" href="#coredns" title="Permanent link">&para;</a></h1>
 <h2 id="dns">自定义 DNS 服务<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h2>
 <h4 id="docker-coredns">Docker 安装 CoreDNS<a class="headerlink" href="#docker-coredns" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/d/mount/coredns/
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/d/mount/coredns/
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>cp<span class="w"> </span>-f<span class="w"> </span>Corefile<span class="w"> </span>/d/mount/coredns/
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -12114,17 +12114,17 @@
 </span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>nerdctl<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </span></code></pre></div>
 <h3 id="helm-coredns">Helm 安装 CoreDNS<a class="headerlink" href="#helm-coredns" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>coredns<span class="w"> </span>https://coredns.github.io/helm
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>coredns<span class="w"> </span>https://coredns.github.io/helm
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>coredns<span class="w"> </span>coredns/coredns<span class="w"> </span>--install<span class="w"> </span>--namespace<span class="w"> </span>coredns<span class="w"> </span>--create-namespace<span class="w"> </span>--values<span class="w"> </span>values.yaml<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.19.4
 </span></code></pre></div>
 <h2 id="k8s-dns">在 K8S 集群内引入自定义 DNS 服务<a class="headerlink" href="#k8s-dns" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>cm.yaml
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>cm.yaml
 </span></code></pre></div>
 <h2 id="_1">测试<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--image<span class="o">=</span>infoblox/dnstools:latest<span class="w"> </span>dnstools
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>--image<span class="o">=</span>infoblox/dnstools:latest<span class="w"> </span>dnstools
 </span></code></pre></div>
 <h2 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h2>
 <ul>
@@ -12134,7 +12134,7 @@
 <ul>
 <li>
 <p><code>systemd-resolved</code> 占用 53 端口</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/#DNSStubListener=/c DNSStubListener=no&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/#DNS=/c DNS=114.114.114.114&#39;</span><span class="w"> </span>/etc/systemd/resolved.conf
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/#DNSStubListener=/c DNSStubListener=no&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/#DNS=/c DNS=114.114.114.114&#39;</span><span class="w"> </span>/etc/systemd/resolved.conf
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>ln<span class="w"> </span>-sf<span class="w"> </span>/run/systemd/resolve/resolv.conf<span class="w"> </span>/etc/resolv.conf
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>

@@ -15229,10 +15229,10 @@
 <h2 id="_2">二、安装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 通过包管理器安装<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>通过 <code>--fix-missing</code> 选项自动解决需要的依赖（如 <code>erlang</code> 和 <code>socat</code> 等）。最新版本安装参考：<a href="https://www.rabbitmq.com/install-debian.html">https://www.rabbitmq.com/install-debian.html</a>。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>rabbitmq-server<span class="w"> </span>-y<span class="w"> </span>--fix-missing
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>rabbitmq-server<span class="w"> </span>-y<span class="w"> </span>--fix-missing
 </span></code></pre></div>
 <h3 id="22-web">2.2 开启 Web 管理插件<a class="headerlink" href="#22-web" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management
 </span></code></pre></div>
 <h3 id="23">2.3 用户和授权<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <h4 id="_3">默认用户<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
@@ -15253,7 +15253,7 @@
 </ul>
 <p>另一种方式是创建新的管理用户。</p>
 <h4 id="_4">创建管理用户<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rabbitmqctl<span class="w"> </span>add_user<span class="w"> </span>admin<span class="w"> </span>admin
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rabbitmqctl<span class="w"> </span>add_user<span class="w"> </span>admin<span class="w"> </span>admin
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>rabbitmqctl<span class="w"> </span>set_user_tags<span class="w"> </span>admin<span class="w"> </span>administrator
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -16664,7 +16664,7 @@
 <li><a href="https://www.rabbitmq.com/community-plugins.html">https://www.rabbitmq.com/community-plugins.html</a></li>
 <li><a href="https://github.com/rabbitmq/rabbitmq-delayed-message-exchange">https://github.com/rabbitmq/rabbitmq-delayed-message-exchange</a></li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="c1"># 查看插件目录</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="c1"># 查看插件目录</span>
 </span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>rabbitmq-plugins<span class="w"> </span>directories
 </span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>
 </span><span id="__span-55-4"><a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="c1"># 下载插件</span>
@@ -16772,9 +16772,9 @@
 </span><span id="__span-60-3"><a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="na">192.192.192.103</span><span class="w"> </span><span class="s">ubuntu103</span>
 </span></code></pre></div>
 <h4 id="_72">各节点正常安装<a class="headerlink" href="#_72" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>apt<span class="w"> </span>install<span class="w"> </span>rabbitmq-server<span class="w"> </span>-y<span class="w"> </span>--fix-missing
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-61-1"><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>apt<span class="w"> </span>install<span class="w"> </span>rabbitmq-server<span class="w"> </span>-y<span class="w"> </span>--fix-missing
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-62-1"><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management
 </span><span id="__span-62-2"><a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>
 </span><span id="__span-62-3"><a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>rabbitmqctl<span class="w"> </span>add_user<span class="w"> </span>admin<span class="w"> </span>admin
 </span><span id="__span-62-4"><a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a>
@@ -16784,18 +16784,18 @@
 </span></code></pre></div>
 <h4 id="erlangcookie">确保各几点的<code>.erlang.cookie</code> 相同<a class="headerlink" href="#erlangcookie" title="Permanent link">&para;</a></h4>
 <p>清除各节点用户级的 <code>.erlang.cookie</code>：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.erlang.cookie
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-63-1"><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>~/.erlang.cookie
 </span></code></pre></div>
 <p>同步各几点 RabbitMQ 的 <code>.erlang.cookie</code>：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>scp<span class="w"> </span>/var/lib/rabbitmq/.erlang.cookie<span class="w"> </span>root@ubuntu102:/var/lib/rabbitmq/.erlang.cookie
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-64-1"><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>scp<span class="w"> </span>/var/lib/rabbitmq/.erlang.cookie<span class="w"> </span>root@ubuntu102:/var/lib/rabbitmq/.erlang.cookie
 </span><span id="__span-64-2"><a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>
 </span><span id="__span-64-3"><a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>scp<span class="w"> </span>/var/lib/rabbitmq/.erlang.cookie<span class="w"> </span>root@ubuntu103:/var/lib/rabbitmq/.erlang.cookie
 </span></code></pre></div>
 <p>重启服务：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>rabbitmq-server
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-65-1"><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>rabbitmq-server
 </span></code></pre></div>
 <h4 id="ubuntu102ubuntu103">加入集群（<code>ubuntu102</code>、<code>ubuntu103</code>）<a class="headerlink" href="#ubuntu102ubuntu103" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>rabbitmqctl<span class="w"> </span>stop_app
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-66-1"><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>rabbitmqctl<span class="w"> </span>stop_app
 </span><span id="__span-66-2"><a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a>
 </span><span id="__span-66-3"><a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a>rabbitmqctl<span class="w"> </span>reset
 </span><span id="__span-66-4"><a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a>

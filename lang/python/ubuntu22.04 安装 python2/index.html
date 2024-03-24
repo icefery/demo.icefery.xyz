@@ -12074,10 +12074,10 @@
 <blockquote>
 <p>ubuntu22.04 默认已经不带 Python2 了。</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>python2
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>python2
 </span></code></pre></div>
 <h4 id="python2-pip">安装 Python2 版本的 Pip<a class="headerlink" href="#python2-pip" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>https://bootstrap.pypa.io/2.7/get-pip.py<span class="w"> </span>-o<span class="w"> </span>get-pip.py
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>https://bootstrap.pypa.io/2.7/get-pip.py<span class="w"> </span>-o<span class="w"> </span>get-pip.py
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python2<span class="w"> </span>get-pip.py
 </span></code></pre></div>
@@ -12085,7 +12085,7 @@
 <blockquote>
 <p>使用 pip install pandas 默认安装的是最新版的 pandas，因为 pandas 版本 0.24.0 以后的版本不再支持 python2.7，因此指定 pandas0.23.0 及以前的版本即可</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pandas</span><span class="o">==</span><span class="m">0</span>.23.0
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pandas</span><span class="o">==</span><span class="m">0</span>.23.0
 </span></code></pre></div>
 
 

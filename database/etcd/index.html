@@ -12040,28 +12040,28 @@
 <h1 id="etcd">ETCD<a class="headerlink" href="#etcd" title="Permanent link">&para;</a></h1>
 <h2 id="_1">基本操作<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="put">增(<code>put</code>)<a class="headerlink" href="#put" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>etcdctl<span class="w"> </span>put<span class="w"> </span>a<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>etcdctl<span class="w"> </span>put<span class="w"> </span>a<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
 </span></code></pre></div>
 <h3 id="get">查(<code>get</code>)<a class="headerlink" href="#get" title="Permanent link">&para;</a></h3>
 <ul>
 <li>单个查找
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>etcdctl<span class="w"> </span>get<span class="w"> </span>a
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>etcdctl<span class="w"> </span>get<span class="w"> </span>a
 </span></code></pre></div></li>
 <li>
 <p>范围查找</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 查找范围为 [a1, a3)</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 查找范围为 [a1, a3)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>etcdctl<span class="w"> </span>get<span class="w"> </span>a1<span class="w"> </span>a3
 </span></code></pre></div>
 </li>
 <li>
 <p>前缀查找</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 查找所有以 /a/b 开头的 key</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 查找所有以 /a/b 开头的 key</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>etcdctl<span class="w"> </span>get<span class="w"> </span>/a/b/<span class="w"> </span>--prefix
 </span></code></pre></div>
 </li>
 <li>
 <p>限制数量</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 最多显示两个</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 最多显示两个</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>etcdctl<span class="w"> </span>get<span class="w"> </span>/a/b/<span class="w"> </span>--prefix<span class="w"> </span>--limit<span class="w"> </span><span class="m">2</span>
 </span></code></pre></div>
 </li>
@@ -12069,12 +12069,12 @@
 <h3 id="del">删(<code>del</code>)<a class="headerlink" href="#del" title="Permanent link">&para;</a></h3>
 <ul>
 <li>范围删除
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 删除范围为 [a1, a3)</span>
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 删除范围为 [a1, a3)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>etcdctl<span class="w"> </span>del<span class="w"> </span>a1<span class="w"> </span>a3
 </span></code></pre></div></li>
 </ul>
 <h3 id="watch">历史变动(<code>watch</code>)<a class="headerlink" href="#watch" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>etcdctl<span class="w"> </span>watch<span class="w"> </span>a
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>etcdctl<span class="w"> </span>watch<span class="w"> </span>a
 </span></code></pre></div>
 <h3 id="lease">租约(<code>lease</code>)<a class="headerlink" href="#lease" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -12083,18 +12083,18 @@
 <ul>
 <li>
 <p>授予租约</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>etcdctl<span class="w"> </span>lease<span class="w"> </span>grant<span class="w"> </span><span class="m">100</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>etcdctl<span class="w"> </span>lease<span class="w"> </span>grant<span class="w"> </span><span class="m">100</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># lease 694d84b3b6d6c614 granted with TTL(100s)</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>将租约添加到 key4 上</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>etcdctl<span class="w"> </span>put<span class="w"> </span>key4<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>--lease<span class="o">=</span>694d84b3b6d6c614
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>etcdctl<span class="w"> </span>put<span class="w"> </span>key4<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>--lease<span class="o">=</span>694d84b3b6d6c614
 </span></code></pre></div>
 </li>
 <li>
 <p>查看租约剩余时间</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>etcdctl<span class="w"> </span>lease<span class="w"> </span>timetolive<span class="w"> </span>694d84b3b6d6c614
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>etcdctl<span class="w"> </span>lease<span class="w"> </span>timetolive<span class="w"> </span>694d84b3b6d6c614
 </span></code></pre></div>
 </li>
 </ul>

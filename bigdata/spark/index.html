@@ -12064,13 +12064,13 @@
 <h1 id="spark">Spark<a class="headerlink" href="#spark" title="Permanent link">&para;</a></h1>
 <h2 id="_1">快速开始<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="_2">安装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget<span class="w"> </span>https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-hadoop.tgz
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget<span class="w"> </span>https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-hadoop.tgz
 </span></code></pre></div>
 <h3 id="_3">配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><code>conf/spark-env.sh</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/env/jdk-8
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/env/jdk-8
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">SPARK_DIST_CLASSPATH</span><span class="o">=</span><span class="k">$(</span>/opt/env/hadoop/bin/hadoop<span class="w"> </span>classpath<span class="k">)</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">SPARK_MASTER_HOST</span><span class="o">=</span>vm101
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">SPARK_MASTER_PORT</span><span class="o">=</span><span class="m">7077</span>
@@ -12078,12 +12078,12 @@
 </li>
 <li>
 <p><code>conf/workers</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vm101
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>vm101
 </span></code></pre></div>
 </li>
 </ul>
 <h3 id="_4">启动<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sbin/start-all.sh
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sbin/start-all.sh
 </span></code></pre></div>
 <h2 id="_5">收藏<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h4 id="spark_1"><a href="https://blog.csdn.net/ran_hao/article/details/125569872">Spark 任务提交流程说明</a><a class="headerlink" href="#spark_1" title="Permanent link">&para;</a></h4>

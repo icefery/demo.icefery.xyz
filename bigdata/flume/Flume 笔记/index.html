@@ -13580,37 +13580,37 @@
 <ul>
 <li>
 <p>下载解压</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>apache-flume-1.9.0-bin.tar.gz<span class="w"> </span>-C<span class="w"> </span>/opt
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>apache-flume-1.9.0-bin.tar.gz<span class="w"> </span>-C<span class="w"> </span>/opt
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>mv<span class="w"> </span>/opt/apache-flume-1.9.0-bin.tar.gz<span class="w"> </span>/opt/flume
 </span></code></pre></div>
 </li>
 <li>
 <p>配置环境变量</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export FLUME_HOME=/opt/flume&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/bash.profile
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export FLUME_HOME=/opt/flume&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/bash.profile
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>/etc/profile
 </span></code></pre></div>
 </li>
 <li>
 <p>兼容 Guava 依赖</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm<span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$FLUME_HOME</span>/lib<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;guava-*&#39;</span><span class="k">)</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>rm<span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$FLUME_HOME</span>/lib<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;guava-*&#39;</span><span class="k">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cp<span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$HADOOP_HOME</span>/share/hadoop/common/lib<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;guava-*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="k">)</span><span class="w"> </span><span class="nv">$FLUME_HOME</span>/lib
 </span></code></pre></div>
 </li>
 <li>
 <p>兼容 SLF4J 依赖</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rm<span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$FLUME_HOME</span>/lib<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;slf4j-*&#39;</span><span class="k">)</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rm<span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$FLUME_HOME</span>/lib<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;slf4j-*&#39;</span><span class="k">)</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>调整内存</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$FLUME_HOME</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$FLUME_HOME</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>cp<span class="w"> </span>conf/flume-env.sh.template<span class="w"> </span>conf/flume-env.sh
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>vim<span class="w"> </span>conf/flume-env.sh
 </span></code></pre></div>
 <p>修改相应注释行为：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_OPTS</span><span class="o">=</span><span class="s2">&quot;-Xms1024m -Xmx1024m -Dcom.sun.management.jmxremote&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_OPTS</span><span class="o">=</span><span class="s2">&quot;-Xms1024m -Xmx1024m -Dcom.sun.management.jmxremote&quot;</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -13623,12 +13623,12 @@
 <ul>
 <li>
 <p>检查 44444 端口是否被占用</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>netstat<span class="w"> </span>-nlp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">44444</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>netstat<span class="w"> </span>-nlp<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">44444</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>创建 Flume 配置文件 <code>jobs/flume-netcat-logger.conf</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$FLUME_HOME</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$FLUME_HOME</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="nb">jobs</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
@@ -13655,7 +13655,7 @@
 </li>
 <li>
 <p>启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w">                          </span><span class="se">\</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w">                          </span><span class="se">\</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span>--conf<span class="w"> </span>conf/<span class="w">                              </span><span class="se">\</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span>--conf-file<span class="w"> </span>jobs/flume-netcat-logger.conf<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span>--name<span class="w"> </span>a1<span class="w">                                 </span><span class="se">\</span>
@@ -13664,7 +13664,7 @@
 </li>
 <li>
 <p>向本机 44444 端口发送数据</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">44444</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">44444</span>
 </span></code></pre></div>
 </li>
 </ul>
@@ -13700,12 +13700,12 @@
 </li>
 <li>
 <p>启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-file-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-file-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
 </span></code></pre></div>
 </li>
 <li>
 <p>追加文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/flume/input
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/flume/input
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
 </span></code></pre></div>
 </li>
@@ -13741,18 +13741,18 @@
 </li>
 <li>
 <p>启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-dir-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-dir-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
 </span></code></pre></div>
 </li>
 <li>
 <p>新建文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>touch<span class="w"> </span>/opt/flume/input/1.txt
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>touch<span class="w"> </span>/opt/flume/input/1.txt
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>touch<span class="w"> </span>/opt/flume/input/2.txt
 </span></code></pre></div>
 </li>
 <li>
 <p>查看目录变化</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>watch<span class="w"> </span>ls<span class="w"> </span>/opt/flume/input
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>watch<span class="w"> </span>ls<span class="w"> </span>/opt/flume/input
 </span></code></pre></div>
 </li>
 </ul>
@@ -13802,12 +13802,12 @@
 </li>
 <li>
 <p>启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-taildir-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume-taildir-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
 </span></code></pre></div>
 </li>
 <li>
 <p>追加文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/b.txt
 </span></code></pre></div>
 </li>
@@ -13942,12 +13942,12 @@
 </span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="na">a1.sinks.k1.sink.directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/opt/flume/output</span>
 </span></code></pre></div>
 <p>注意：输出的目录必须数已经存在的目录，如果该目录不存在，并不会自动创建目录。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/flume/output
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/flume/output
 </span></code></pre></div>
 </li>
 <li>
 <p>按顺序启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume3-flume-dir.conf<span class="w"> </span>-n<span class="w"> </span>a1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume3-flume-dir.conf<span class="w"> </span>-n<span class="w"> </span>a1
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume2-flume-hdfs.conf<span class="w"> </span>-n<span class="w"> </span>a1
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
@@ -13956,12 +13956,12 @@
 </li>
 <li>
 <p>写入文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
 </span></code></pre></div>
 </li>
 <li>
 <p>查看 HDFS 和本地目录</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>watch<span class="w"> </span>ls<span class="w"> </span>/opt/flume/output
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>watch<span class="w"> </span>ls<span class="w"> </span>/opt/flume/output
 </span></code></pre></div>
 </li>
 </ul>
@@ -14048,7 +14048,7 @@
 </li>
 <li>
 <p>顺序启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume2-flume-console.conf<span class="w"> </span>-n<span class="w"> </span>a1<span class="w"> </span>-Dflume.root.logger<span class="o">=</span>INFO,console
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume2-flume-console.conf<span class="w"> </span>-n<span class="w"> </span>a1<span class="w"> </span>-Dflume.root.logger<span class="o">=</span>INFO,console
 </span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
 </span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume3-flume-console.conf<span class="w"> </span>-n<span class="w"> </span>a1<span class="w"> </span>-Dflume.root.logger<span class="o">=</span>INFO,console
 </span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
@@ -14057,7 +14057,7 @@
 </li>
 <li>
 <p>向本机端口发送数据</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nc<span class="w"> </span>loclahost<span class="w"> </span><span class="m">44444</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nc<span class="w"> </span>loclahost<span class="w"> </span><span class="m">44444</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -14078,7 +14078,7 @@
 <ul>
 <li>
 <p>监控文件的 Flume1 配置文件 <code>jobs/flume1-file-flume.conf</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># Agent</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># Agent</span>
 </span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>a1.sources<span class="w"> </span><span class="o">=</span><span class="w"> </span>r1
 </span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>a1.sinks<span class="w"> </span><span class="o">=</span><span class="w"> </span>k1
 </span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>a1.channels<span class="w"> </span><span class="o">=</span><span class="w"> </span>c1
@@ -14101,7 +14101,7 @@
 </li>
 <li>
 <p>Hadoop102 上监控端口数据的 Flume2 配置文件 <code>jobs/flume2-netcat-flume.conf</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="c1"># Agent</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="c1"># Agent</span>
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>a1.sources<span class="w"> </span><span class="o">=</span><span class="w"> </span>r1
 </span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>a1.sinks<span class="w"> </span><span class="o">=</span><span class="w"> </span>k1
 </span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>a1.channels<span class="w"> </span><span class="o">=</span><span class="w"> </span>c1
@@ -14145,7 +14145,7 @@
 </li>
 <li>
 <p>启动任务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># Flume3</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># Flume3</span>
 </span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>bin/flume-ng<span class="w"> </span>agent<span class="w"> </span>-c<span class="w"> </span>conf/<span class="w"> </span>-f<span class="w"> </span>jobs/flume3-flume-logger.conf<span class="w"> </span>-n<span class="w"> </span>a1<span class="w"> </span>-Dflume.root.logger<span class="o">=</span>INFO,console
 </span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
 </span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="c1"># Flume2</span>
@@ -14157,7 +14157,7 @@
 </li>
 <li>
 <p>追加文件并向端口发送数据</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># Flume1</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># Flume1</span>
 </span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$RANDOM</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/opt/flume/input/a.txt
 </span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
 </span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="c1"># Flume1</span>
@@ -14326,7 +14326,7 @@
 </li>
 <li>
 <p>向端口发送数据</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">44444</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>nc<span class="w"> </span>localhost<span class="w"> </span><span class="m">44444</span>
 </span></code></pre></div>
 </li>
 </ul>

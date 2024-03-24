@@ -14647,7 +14647,7 @@
 <h2 id="controller">三、Controller 控制器<a class="headerlink" href="#controller" title="Permanent link">&para;</a></h2>
 <h3 id="1-replication-controller">1 Replication Controller<a class="headerlink" href="#1-replication-controller" title="Permanent link">&para;</a></h3>
 <p>Replication Controller（RC）是 Kubernetes 系统中核心概念之一，当我们定义了一个 RC 并提交到 Kubernetes 集群中以后，Master 节点上的 Controller Manager 组件就得到通知，定期检查系统中存活的 Pod，并确定目标 Pod 实例的数量刚好等于 RC 的预期值，如果有过多或过少的 Pod 运行，系统就会停掉或创建一些 Pod。此外我们也可以通过修改 RC 的副本数量，来实现 Pod 的动态缩放功能。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>rc<span class="w"> </span>nginx<span class="w"> </span>--replicas<span class="o">=</span><span class="m">5</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>scale<span class="w"> </span>rc<span class="w"> </span>nginx<span class="w"> </span>--replicas<span class="o">=</span><span class="m">5</span>
 </span></code></pre></div>
 <p>由于 Replication Controller 与 Kubernetes 代码中的模块 Replication Controller 同名，所以在 Kubernetes v1.2 时，它就升级成了另外一个新的概念 Replica Set，官方解释为下一代的 RC，它与 RC 的区别是：Replica Set 是基于集合的 Label Selector，而 RC 只支持基于等式的 Label Selector。我们很少单独使用 Replica Set，它主要被 Deployment 这个更高层面的资源对象所使用，从而形成一整套 Pod 创建、删除、更新的编排机制。最好不好越过 RC 直接创建 Pod，因为 Replication Controller 会通过 RC 管理 Pod 副本，实现自动创建、补足、替换、删除 Pod 副本，这样就能提高应用的容灾能力，减少由于节点崩溃等意外状况造成的损失。即使应用程序只有一个 Pod 副本，也强烈建议使用 RC 来定义 Pod。</p>
 <h3 id="2-replica-set">2 Replica Set<a class="headerlink" href="#2-replica-set" title="Permanent link">&para;</a></h3>
@@ -14749,7 +14749,7 @@
 <p>Service Account 用来访问 Kunernetes API，由 Kunernetes 自动创建，并且会自动挂载到 Pod 的 <code>/run/secrets/kubernetes.io/serviceaccount</code> 目录中。</p>
 <h3 id="4-opaque-secret">4 Opaque Secret<a class="headerlink" href="#4-opaque-secret" title="Permanent link">&para;</a></h3>
 <h4 id="41-secret">4.1 创建 Secret<a class="headerlink" href="#41-secret" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;admin123456&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
@@ -14803,14 +14803,14 @@
 <h3 id="2-configmap">2 ConfigMap 创建<a class="headerlink" href="#2-configmap" title="Permanent link">&para;</a></h3>
 <h4 id="21_1">2.1 使用目录创建<a class="headerlink" href="#21_1" title="Permanent link">&para;</a></h4>
 <p><code>--from-file</code> 指定在目录下的所有文件都会被用在 ConfigMap 里面创建一个键值对，键的名字就是文件名，值就是文件的内容。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>game-config<span class="w"> </span>--from-file<span class="o">=</span>docs/user-guide/configmap
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>game-config<span class="w"> </span>--from-file<span class="o">=</span>docs/user-guide/configmap
 </span></code></pre></div>
 <h4 id="22_1">2.2 使用文件创建<a class="headerlink" href="#22_1" title="Permanent link">&para;</a></h4>
 <p><code>--from-file</code> 这个参数可以使用多次，效果跟指定整个目录是一样的。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>game-config<span class="w"> </span>--from-file<span class="o">=</span>docs/user-guide/configmap/game.properteis
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>game-config<span class="w"> </span>--from-file<span class="o">=</span>docs/user-guide/configmap/game.properteis
 </span></code></pre></div>
 <h4 id="23_1">2.3 使用字面量创建<a class="headerlink" href="#23_1" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>special-config<span class="w"> </span><span class="se">\</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>create<span class="w"> </span>configmap<span class="w"> </span>special-config<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span>--from-literal<span class="o">=</span>special.how<span class="o">=</span>very<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span>--from-literal<span class="o">=</span>special.type<span class="o">=</span>charm
 </span></code></pre></div>
@@ -15077,7 +15077,7 @@
 <h3 id="5-pod_1">5 Pod 资源调度调度亲和性<a class="headerlink" href="#5-pod_1" title="Permanent link">&para;</a></h3>
 <h4 id="51-pod_1">5.1 Pod 硬亲和调度<a class="headerlink" href="#51-pod_1" title="Permanent link">&para;</a></h4>
 <p>Pod 硬亲和性描述一个 Pod 与具有某个特征的现存 Pod 运行位置的依赖关系，即需啊哟事先存在被依赖的 Pod 对象。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>tomcat<span class="w"> </span>--labels<span class="o">=</span><span class="s2">&quot;app=tomcat&quot;</span><span class="w"> </span>--image<span class="o">=</span>tomcat:latest
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>tomcat<span class="w"> </span>--labels<span class="o">=</span><span class="s2">&quot;app=tomcat&quot;</span><span class="w"> </span>--image<span class="o">=</span>tomcat:latest
 </span></code></pre></div>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
@@ -15151,17 +15151,17 @@
 <ul>
 <li>
 <p>给节点添加污点</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>taint<span class="w"> </span>node<span class="w"> </span>node2<span class="w"> </span>node-type<span class="o">=</span>production:NoSchedule
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>taint<span class="w"> </span>node<span class="w"> </span>node2<span class="w"> </span>node-type<span class="o">=</span>production:NoSchedule
 </span></code></pre></div>
 </li>
 <li>
 <p>查看节点污点</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>&lt;node-name&gt;<span class="w"> </span>-o<span class="w"> </span>go-template<span class="o">={{</span>.spec.taints<span class="o">}}</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>&lt;node-name&gt;<span class="w"> </span>-o<span class="w"> </span>go-template<span class="o">={{</span>.spec.taints<span class="o">}}</span>
 </span></code></pre></div>
 </li>
 <li>
 <p>删除节点污点</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>kubectl<span class="w"> </span>taint<span class="w"> </span>node<span class="w"> </span>node1<span class="w"> </span>node-type<span class="o">=</span>production:NoSchedule
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>kubectl<span class="w"> </span>taint<span class="w"> </span>node<span class="w"> </span>node1<span class="w"> </span>node-type<span class="o">=</span>production:NoSchedule
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1"># 删除所有污点</span>
 </span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>kubectl<span class="w"> </span>patch<span class="w"> </span>nodes<span class="w"> </span>node1<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;{&quot;spec&quot;: {&quot;taints&quot;: []}}&#39;</span>
@@ -15529,23 +15529,23 @@
 </li>
 </ul>
 <h5 id="411">4.1.1 添加存储库<a class="headerlink" href="#411" title="Permanent link">&para;</a></h5>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>stable<span class="w"> </span>https://mirror.azure.cn/kubernetes/charts
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>stable<span class="w"> </span>https://mirror.azure.cn/kubernetes/charts
 </span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>
 </span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>aliyun<span class="w"> </span>https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 </span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>
 </span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
 </span></code></pre></div>
 <h5 id="412">4.1.2 查看配置的存储库<a class="headerlink" href="#412" title="Permanent link">&para;</a></h5>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>list
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>list
 </span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 </span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>stable
 </span></code></pre></div>
 <h5 id="413">4.1.3 删除存储库<a class="headerlink" href="#413" title="Permanent link">&para;</a></h5>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>remove<span class="w"> </span>aliyun
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>remove<span class="w"> </span>aliyun
 </span></code></pre></div>
 <h3 id="5-helm">5 Helm 基本使用<a class="headerlink" href="#5-helm" title="Permanent link">&para;</a></h3>
 <h4 id="51-helm">5.1 使用 Helm 部署一个应用<a class="headerlink" href="#51-helm" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>mysql
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>helm<span class="w"> </span>search<span class="w"> </span>repo<span class="w"> </span>mysql
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>
 </span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>helm<span class="w"> </span>show<span class="w"> </span>chart<span class="w"> </span>stable/mysql
 </span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>

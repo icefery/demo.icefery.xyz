@@ -12051,7 +12051,7 @@
 <h1 id="debian">Debian<a class="headerlink" href="#debian" title="Permanent link">&para;</a></h1>
 <h2 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="ip">静态 IP<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/network/interfaces<span class="w"> </span><span class="s">&lt;&lt;- EOF</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/network/interfaces<span class="w"> </span><span class="s">&lt;&lt;- EOF</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="s">auto lo</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="s">iface lo inet loopback</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -12066,7 +12066,7 @@
 </span></code></pre></div>
 <h2 id="_2">基础服务<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="dnsmasq">DNSmasq<a class="headerlink" href="#dnsmasq" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dnsmasq
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dnsmasq
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># 配置泛解析</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;address=/dev.icefery.xyz/192.192.192.6&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/dnsmasq.conf
@@ -12076,7 +12076,7 @@
 <blockquote>
 <p><a href="https://zhuanlan.zhihu.com/p/222506941">https://zhuanlan.zhihu.com/p/222506941</a></p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/sysctl.conf<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/sysctl.conf<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>fs.inotify.max_user_instances<span class="o">=</span><span class="m">512</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>fs.inotify.max_user_watches<span class="o">=</span><span class="m">262144</span>
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>EOF
@@ -12087,7 +12087,7 @@
 <blockquote>
 <p><a href="https://blog.csdn.net/qq_40088463/article/details/110863372">解决 FATA[0000] Get http:///var/run... sudo apt-get install apparmor 好神奇</a></p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apt<span class="w"> </span>install<span class="w"> </span>apparmor
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apt<span class="w"> </span>install<span class="w"> </span>apparmor
 </span></code></pre></div>
 
 

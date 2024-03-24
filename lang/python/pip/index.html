@@ -12094,20 +12094,20 @@
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>python<span class="w"> </span>get-pip.py
 </span></code></pre></div>
 <h3 id="pippipconf">换源 <code>~/.pip/pip.conf</code><a class="headerlink" href="#pippipconf" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>global<span class="o">]</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">[</span>global<span class="o">]</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>index-url<span class="w"> </span><span class="o">=</span><span class="w"> </span>https://mirrors.aliyun.com/pypi/simple/
 </span></code></pre></div>
 <h3 id="_2">批量安装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </span></code></pre></div>
 <blockquote>
 <p>其中 <code>requirements.txt</code>文件中预先写好需要安装的库名（每行一个库）</p>
 </blockquote>
 <h3 id="_3">查看配置<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip3<span class="w"> </span>config<span class="w"> </span>list<span class="w"> </span>-v
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip3<span class="w"> </span>config<span class="w"> </span>list<span class="w"> </span>-v
 </span></code></pre></div>
 <blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span>For<span class="w"> </span>variant<span class="w"> </span><span class="s1">&#39;global&#39;</span>,<span class="w"> </span>will<span class="w"> </span>try<span class="w"> </span>loading<span class="w"> </span><span class="s1">&#39;/Library/Application Support/pip/pip.conf&#39;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="w">  </span>For<span class="w"> </span>variant<span class="w"> </span><span class="s1">&#39;global&#39;</span>,<span class="w"> </span>will<span class="w"> </span>try<span class="w"> </span>loading<span class="w"> </span><span class="s1">&#39;/Library/Application Support/pip/pip.conf&#39;</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>For<span class="w"> </span>variant<span class="w"> </span><span class="s1">&#39;user&#39;</span>,<span class="w"> </span>will<span class="w"> </span>try<span class="w"> </span>loading<span class="w"> </span><span class="s1">&#39;/Users/icefery/.pip/pip.conf&#39;</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>For<span class="w"> </span>variant<span class="w"> </span><span class="s1">&#39;user&#39;</span>,<span class="w"> </span>will<span class="w"> </span>try<span class="w"> </span>loading<span class="w"> </span><span class="s1">&#39;/Users/icefery/.config/pip/pip.conf&#39;</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span>For<span class="w"> </span>variant<span class="w"> </span><span class="s1">&#39;site&#39;</span>,<span class="w"> </span>will<span class="w"> </span>try<span class="w"> </span>loading<span class="w"> </span><span class="s1">&#39;/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.8/pip.conf&#39;</span>

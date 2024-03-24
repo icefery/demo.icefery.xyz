@@ -12696,7 +12696,7 @@
 </span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="w">    </span><span class="nt">maxReplicas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 </span></code></pre></div>
 <p>图表采用了 <code>gitlab-jh/gitlab</code>，因为极狐 GitLab 与原生 GitLab 使用相同的配置文件，并且默认情况下系统界面是中文的不需要再频繁做调整，所以只需要修改 Chart 仓库即可。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># helm repo add gitlab http://charts.gitlab.io/</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># helm repo add gitlab http://charts.gitlab.io/</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>gitlab-jh<span class="w"> </span>https://charts.gitlab.cn
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
@@ -12728,7 +12728,7 @@
 </span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">      </span><span class="nt">ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;false&#39;</span>
 </span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">      </span><span class="nt">nginx.ingress.kubernetes.io/ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;false&#39;</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>harbor<span class="w"> </span>bitnami/harbor<span class="w"> </span>--install<span class="w"> </span>--namespace<span class="w"> </span>harbor<span class="w"> </span>--create-namespace<span class="w"> </span>--values<span class="w"> </span>values.yaml
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>harbor<span class="w"> </span>bitnami/harbor<span class="w"> </span>--install<span class="w"> </span>--namespace<span class="w"> </span>harbor<span class="w"> </span>--create-namespace<span class="w"> </span>--values<span class="w"> </span>values.yaml
 </span></code></pre></div>
 <h4 id="_5">镜像注册表配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>安装完 Harbor 后，可以将 Harbor 添加到 Containerd 以及 K3S 内置的 Containerd 中。</p>
@@ -12736,7 +12736,7 @@
 <ul>
 <li>
 <p>更改 Containerd 配置文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
@@ -12750,7 +12750,7 @@
 <blockquote>
 <p>如果 Ingress Controller 暴露的端口不是 80 则不能省略 Harbor 地址中的端口，例如 <code>core.harbor.dev.icefery.xyz:30080</code>。</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/containerd/certs.d/core.harbor.dev.icefery.xyz/hosts.toml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nv">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://core.harbor.dev.icefery.xyz&quot;</span>
@@ -12761,7 +12761,7 @@
 </li>
 <li>
 <p>对 <code>docker.io</code> 进行换源</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/docker.io/
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/containerd/certs.d/docker.io/
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/containerd/certs.d/docker.io/hosts.toml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://registry-1.docker.io&quot;</span>
@@ -12772,7 +12772,7 @@
 </li>
 </ul>
 <p>以上的配置方式来源于 1.6.6 版本的 Containerd 文档，是一种较新的配置方式，但是这种方式下并不能指定 Harbor 的密码。如果在 Harbor 创建的是私有项目，那么就需要使用原先的配置方式：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/containerd/config.toml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">[</span>plugins.<span class="s2">&quot;io.containerd.grpc.v1.cri&quot;</span>.registry<span class="o">]</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/etc/containerd/certs.d&quot;</span>
@@ -12789,7 +12789,7 @@
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>EOF
 </span></code></pre></div>
 <p>K3S 提供了一个更简单的方法去配置内置 Containerd 的镜像注册表，虽然最终也会同步到<code>/var/lib/rancher/k3s/agent/etc/containerd/config.toml</code>中：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/rancher/k3s/registries.yaml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>/etc/rancher/k3s/registries.yaml<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>mirrors:
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>docker.io:
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span>endpoint:
@@ -12808,13 +12808,13 @@
 </span></code></pre></div>
 <h4 id="_6">多平台镜像构建配置<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>默认从 GitHub 的 <code>containerd/nerdctl</code> 安装完成后并没有启动 BuildKit，为了启用 BuildKit 以及支持多平台镜像构建，还需要执行如下命令：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>buildkit
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>buildkit
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>nerdctl<span class="w"> </span>run<span class="w"> </span>--privileged<span class="w"> </span>--rm<span class="w"> </span>tonistiigi/binfmt<span class="w"> </span>--install<span class="w"> </span>all
 </span></code></pre></div>
 <h4 id="_7">图表仓库配置<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <p>为了能够推送到 Harbor 内置的 ChartMuseum 仓库，还需为 Helm 安装 <code>helm-push</code> 差距：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/chartmuseum/helm-push
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>helm<span class="w"> </span>plugin<span class="w"> </span>install<span class="w"> </span>https://github.com/chartmuseum/helm-push
 </span></code></pre></div>
 <p><br/></p>
 <h3 id="nexus">Nexus 安装<a class="headerlink" href="#nexus" title="Permanent link">&para;</a></h3>
@@ -12824,7 +12824,7 @@
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">hostRepo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nexus.dev.icefery.xyz</span>
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>sonatype<span class="w"> </span>https://sonatype.github.io/helm3-charts/
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>helm<span class="w"> </span>repo<span class="w"> </span>add<span class="w"> </span>sonatype<span class="w"> </span>https://sonatype.github.io/helm3-charts/
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
@@ -12947,7 +12947,7 @@
 <h4 id="shell">Shell 执行器<a class="headerlink" href="#shell" title="Permanent link">&para;</a></h4>
 <p><img alt="" src="../__image__/20eba10d72ab43679fea1c9d5634f373.png" /></p>
 <p>其中将 GitLab Runner 安装为服务的命令需要调整一下：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 直接使用 root 用户运行 runner 但是工作目录依然在原先的用户主目录下</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 直接使用 root 用户运行 runner 但是工作目录依然在原先的用户主目录下</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/gitlab-runner
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>gitlab-runner<span class="w"> </span>install<span class="w"> </span>--user<span class="o">=</span>root<span class="w"> </span>--working-directory<span class="o">=</span>/home/gitlab-runner
@@ -12956,7 +12956,7 @@
 <ul>
 <li>
 <p>使用 <code>gitlab-runner</code> 用户执行需要配置免密<code>sudo</code>。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;gitlab-runner ALL=(ALL:ALL)  NOPASSWD:ALL&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/sudoers.d/gitlab-runner
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;gitlab-runner ALL=(ALL:ALL)  NOPASSWD:ALL&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/sudoers.d/gitlab-runner
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># 在 Ubuntu 环境下需要先清空 `gitlab-runner` 用户主目录下的一些配置文件才能正常执行作业</span>
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="nb">cd</span><span class="w"> </span>/home/gitlab-runner
@@ -13175,7 +13175,7 @@
 <p>因此在通过 Maven 构建 Jar 包时可以直接复用缓存（从 MinIO 下载）：</p>
 <p><img alt="" src="../__image__/37421fc4fce74a3596794562192553ce.png" /></p>
 <p>要查看 GitLab 图表中自带的 MinIO 或者需要为其它 GitLab Runner 配置分布式缓存，需要先拿到其 AccessKey 和 Secret Key：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>secrets<span class="w"> </span>gitlab-minio-secret<span class="w"> </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.data.accesskey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>--decode
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>secrets<span class="w"> </span>gitlab-minio-secret<span class="w"> </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.data.accesskey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>--decode
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>-n<span class="w"> </span>gitlab<span class="w"> </span>secrets<span class="w"> </span>gitlab-minio-secret<span class="w"> </span>-ojsonpath<span class="o">=</span><span class="s1">&#39;{.data.secretkey}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>--decode
 </span></code></pre></div>
@@ -13184,7 +13184,7 @@
 <h3 id="dns">内网 DNS<a class="headerlink" href="#dns" title="Permanent link">&para;</a></h3>
 <p>Nexus 和 Harbor 都是需要暴露出来供客户端使用的服务，并且 CI 作业同样需要频繁的访问 Nexus 和 Harbor 等服务，那么如果非要通过 Ingress 访问服务不可，在不考虑 Ingress Controller 的分流方案的情况下，还可以通过两个 DNS 服务来分别解析 Ingress 的"虚拟主机" 来达到宿主机内和宿主机外的分流效果。</p>
 <p>之前，我们使用 ExternalDNS + ETCD + CoreDNS 实现了局域网的 DNS 自动注册，除此之外，还有个更轻量级的 DNS 服务————DNSmasq。相比 CoreDNS 使用 DNSmasq 可以更方便的配置泛解析：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dnsmasq
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>dnsmasq
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;address=/dev.icefery.xyz/192.192.192.6&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/dnsmasq.conf
 </span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>

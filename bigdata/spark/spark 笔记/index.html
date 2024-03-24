@@ -15855,7 +15855,7 @@
 <h3 id="52-dataframe">5.2 DataFrame<a class="headerlink" href="#52-dataframe" title="Permanent link">&para;</a></h3>
 <p>Spark SQL 的 DataFrame API 允许我们使用 DataFrame 而不用必须去注册临时表或者生成 SQL 表达式。DataFrame API 既有 Transformation 操作也有 Action 操作。</p>
 <h4 id="521-dataframe">5.2.1 创建 DataFrame<a class="headerlink" href="#521-dataframe" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;icefery&quot;, &quot;age&quot;:24}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>input/user.json
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-70-1"><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;icefery&quot;, &quot;age&quot;:24}&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>input/user.json
 </span></code></pre></div>
 <div class="language-scala highlight"><pre><span></span><code><span id="__span-71-1"><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="kd">val</span><span class="w"> </span><span class="n">spark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">().</span><span class="n">appName</span><span class="p">(</span><span class="s">&quot;App&quot;</span><span class="p">).</span><span class="n">master</span><span class="p">(</span><span class="s">&quot;local[*]&quot;</span><span class="p">).</span><span class="n">getOrCreate</span><span class="p">()</span>
 </span><span id="__span-71-2"><a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>
@@ -15984,7 +15984,7 @@
 <ul>
 <li>
 <p>准备数据</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-81-1"><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>tee<span class="w"> </span>input/employee.json<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-81-1"><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>tee<span class="w"> </span>input/employee.json<span class="w"> </span>&lt;&lt;-<span class="w"> </span><span class="s2">&quot;EOF&quot;</span>
 </span><span id="__span-81-2"><a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;Michael&quot;</span>,<span class="w"> </span><span class="s2">&quot;salary&quot;</span>:<span class="w"> </span><span class="m">3000</span><span class="o">}</span>
 </span><span id="__span-81-3"><a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;Andy&quot;</span>,<span class="w">    </span><span class="s2">&quot;salary&quot;</span>:<span class="w"> </span><span class="m">4500</span><span class="o">}</span>
 </span><span id="__span-81-4"><a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;Justin&quot;</span>,<span class="w">  </span><span class="s2">&quot;salary&quot;</span>:<span class="w"> </span><span class="m">3500</span><span class="o">}</span>
@@ -16067,7 +16067,7 @@
 </ol>
 <h5 id="5732-spark-beeline">5.7.3.2 运行 Spark beeline<a class="headerlink" href="#5732-spark-beeline" title="Permanent link">&para;</a></h5>
 <p>Spark Thrift Server 是 Spark 社区基于 HiveServer2 实现的一个 Thrift 服务，旨在无缝兼容 HiveServer2。因为 Spark Thrift Server 的接口和协议都和 HiveServer2 完全一致，因此我们部署好 Spark Thrift Server 后，可以直接使用 Hive 的 <code>beeline</code> 访问 Spark Thrift Server 执行相关语句。Spark Thrift Server 的目的也只是取代 HiveServer2，因此它依旧可以和 Hive Metastore 进行交互，获取到 Hive 的元数据。</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-85-1"><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>sbin/start-thriftserver.sh
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-85-1"><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>sbin/start-thriftserver.sh
 </span><span id="__span-85-2"><a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>
 </span><span id="__span-85-3"><a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a>bin/beeline<span class="w"> </span>-u<span class="w"> </span>jdbc:hive2://vm101:10000<span class="w"> </span>-n<span class="w"> </span>root
 </span></code></pre></div>
@@ -16325,7 +16325,7 @@
 <ul>
 <li>
 <p>NetCat</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-94-1"><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>nc<span class="w"> </span>-lk<span class="w"> </span><span class="m">9999</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-94-1"><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>nc<span class="w"> </span>-lk<span class="w"> </span><span class="m">9999</span>
 </span></code></pre></div>
 </li>
 <li>
@@ -17072,7 +17072,7 @@
 </li>
 <li>
 <p>启动 Web 服务</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-115-1"><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>python<span class="w"> </span>-m<span class="w"> </span>http.server
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-115-1"><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>python<span class="w"> </span>-m<span class="w"> </span>http.server
 </span></code></pre></div>
 </li>
 </ul>

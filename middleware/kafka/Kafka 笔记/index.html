@@ -13625,22 +13625,22 @@
 <h3 id="kafka_4">启动 Kafka 服务器<a class="headerlink" href="#kafka_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>启动 Zookeeper
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/zookeeper
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/zookeeper
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>bin/zkServer.sh<span class="w"> </span>start
 </span></code></pre></div></li>
 <li>启动 Kafka
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/kafka
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/kafka
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>bin/kafka-server-start.sh<span class="w"> </span>-daemon<span class="w"> </span>config/server.properties
 </span></code></pre></div></li>
 <li>验证是否启动成功（进入 ZK 查看指定 ID 的 Broker 是否存在）
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/zookeeper
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/zookeeper
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>bin/zkCli.sh
 </span></code></pre></div>
-    <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls<span class="w"> </span>/brokers/ids
+    <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls<span class="w"> </span>/brokers/ids
 </span></code></pre></div></li>
 </ul>
 <h3 id="_4">创建主题、发送消息、消费消息<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 创建主题</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># 创建主题</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># 查看 Kafka 有哪些 Topic</span>
@@ -13671,19 +13671,19 @@
 <blockquote>
 <p>换言之，同一个消费组中只能有一个消费者收到一个 Topic 中的消息。</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--consumer-property<span class="w"> </span>group.id<span class="o">=</span>test-group
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--consumer-property<span class="w"> </span>group.id<span class="o">=</span>test-group
 </span></code></pre></div>
 <h3 id="_8">多播消息<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>不同的消费组订阅同一个 Topic，那么不同的消费组中只有一个消费者能收到消息。</p>
 <blockquote>
 <p>实际上也是多个消费组中的多个消费者收到了同一个消息。</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--consumer-property<span class="w"> </span>group.id<span class="o">=</span>test-group-1
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--consumer-property<span class="w"> </span>group.id<span class="o">=</span>test-group-1
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--consumer-property<span class="w"> </span>group.id<span class="o">=</span>test-group-2
 </span></code></pre></div>
 <h3 id="_9">查看消费组的详细信息<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>bin/kafka-consumer-groups.sh<span class="w"> </span>--describe<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--group<span class="w"> </span>test-group
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>bin/kafka-consumer-groups.sh<span class="w"> </span>--describe<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--group<span class="w"> </span>test-group
 </span></code></pre></div>
 <p><img alt="" src="../__image__/420ec442ebd54c4784c9fe11a82a1573.png" /></p>
 <p>重点关注以下几个信息：</p>
@@ -13754,7 +13754,7 @@
 <h3 id="_12">副本的概念<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>副本是为了主题中的分区创建多个备份，在 Kafka 集群的多个 Broker 中，会有一个副本作为 Leader，其它是 Follower。</p>
 <p>查看 Topic 情况：</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>bin/kafka-topics.sh<span class="w"> </span>--describe<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-replicated-topic
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>bin/kafka-topics.sh<span class="w"> </span>--describe<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>my-replicated-topic
 </span></code></pre></div>
 <table>
 <thead>

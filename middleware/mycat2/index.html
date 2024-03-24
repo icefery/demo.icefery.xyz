@@ -12066,7 +12066,7 @@
 
 <h1 id="mycat2">MyCAT2<a class="headerlink" href="#mycat2" title="Permanent link">&para;</a></h1>
 <h2 id="_1">安装<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget<span class="w"> </span>http://dl.mycat.org.cn/2.0/install-template/mycat2-install-template-1.21.zip
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>wget<span class="w"> </span>http://dl.mycat.org.cn/2.0/install-template/mycat2-install-template-1.21.zip
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>wget<span class="w"> </span>http://dl.mycat.org.cn/2.0/1.22-release/mycat2-1.22-release-jar-with-dependencies-2022-10-13.jar
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>wget<span class="w"> </span>http://dl.mycat.org.cn/2.0/install-template/wrapper-linux-aarch64-64
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -12080,19 +12080,19 @@
 <ol>
 <li>
 <p>修改 <code>prototype</code> 数据源连接信息</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vim<span class="w"> </span>conf/datasources/prototypeDs.datasource.json
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vim<span class="w"> </span>conf/datasources/prototypeDs.datasource.json
 </span></code></pre></div>
 </li>
 <li>
 <p>启动</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/env/mycat
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt/env/mycat
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>bin/mycat<span class="w"> </span>start
 </span></code></pre></div>
 </li>
 <li>
 <p>连接</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mysql<span class="w"> </span>-h192.192.192.101<span class="w"> </span>-P8066<span class="w"> </span>-uroot<span class="w"> </span>-p123456
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mysql<span class="w"> </span>-h192.192.192.101<span class="w"> </span>-P8066<span class="w"> </span>-uroot<span class="w"> </span>-p123456
 </span></code></pre></div>
 </li>
 <li>

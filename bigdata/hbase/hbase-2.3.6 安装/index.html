@@ -12250,7 +12250,7 @@
 <ul>
 <li>
 <p><code>$HBASE_HOME/conf/hbase-env.sh</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk-8
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk-8
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HBASE_MANAGES_ZK</span><span class="o">=</span><span class="nb">false</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HBASE_DISABLE_HADOOP_CLASSPATH_LOOKUP</span><span class="o">=</span><span class="nb">true</span>
 </span></code></pre></div>
@@ -12278,7 +12278,7 @@
 <ul>
 <li>
 <p>拷贝 HDFS 配置文件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$HADOOP_HOME</span>/etc/hadoop/core-site.xml<span class="w"> </span><span class="nv">$HBASE_HOME</span>/conf/core-site.xml
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$HADOOP_HOME</span>/etc/hadoop/core-site.xml<span class="w"> </span><span class="nv">$HBASE_HOME</span>/conf/core-site.xml
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$HADOOP_HOME</span>/etc/hadoop/hdfs-ste.xml<span class="w"> </span><span class="nv">$HBASE_HOME</span>/conf/hdfs-site.xml
 </span></code></pre></div>
 </li>
@@ -12292,19 +12292,19 @@
 </li>
 <li>
 <p><code>$HBASE_HOME/conf/regionservers</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>node101
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>node101
 </span></code></pre></div>
 </li>
 </ul>
 <h4 id="_3">启动<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HBASE_HOME</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HBASE_HOME</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>bin/start-hbase.sh
 </span></code></pre></div>
 <blockquote>
 <p>WEB 界面 <a href="http://node101:16010">http://node101:16010</a>、<a href="http://node101:16010">http://node101:16030</a></p>
 </blockquote>
 <h4 id="_4">连接<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HBASE_HOME</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HBASE_HOME</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>bin/hbase<span class="w"> </span>shell
 </span></code></pre></div>
 <h3 id="fully-distributed">Fully-Distributed 模式<a class="headerlink" href="#fully-distributed" title="Permanent link">&para;</a></h3>
@@ -12312,7 +12312,7 @@
 <ul>
 <li>
 <p><code>$HBASE_HOME/conf/regionservers</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>node101
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>node101
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>node102
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>node103
 </span></code></pre></div>
@@ -12323,7 +12323,7 @@
 <ul>
 <li>
 <p><code>$HBASE_HOME/conf/backup-masters</code></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>node102
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>node102
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>node103
 </span></code></pre></div>
 </li>

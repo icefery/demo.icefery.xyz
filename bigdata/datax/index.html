@@ -12058,14 +12058,14 @@
 <ul>
 <li>
 <p>Ubuntu</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>2to3
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>apt<span class="w"> </span>install<span class="w"> </span>2to3
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>2to3<span class="w"> </span>-w<span class="w"> </span>/opt/module/datax/bin
 </span></code></pre></div>
 </li>
 <li>
 <p>Windows</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>/d/env/python-3.10.2/Tools/scripts/2to3.py<span class="w"> </span>-w<span class="w"> </span>/d/env/datax/bin
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python<span class="w"> </span>/d/env/python-3.10.2/Tools/scripts/2to3.py<span class="w"> </span>-w<span class="w"> </span>/d/env/datax/bin
 </span></code></pre></div>
 </li>
 </ul>
@@ -12151,19 +12151,19 @@
 </span></code></pre></div>
 </li>
 </ul>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>/opt/module/datax/bin/datax.py<span class="w"> </span>~/PostgreSQLReader.json
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>/opt/module/datax/bin/datax.py<span class="w"> </span>~/PostgreSQLReader.json
 </span></code></pre></div>
 <h2 id="_3">插件开发<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="_4">打包<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p>打包</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="w"> </span>assembly:assembly
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>-DskipTests<span class="w"> </span>assembly:assembly
 </span></code></pre></div>
 </li>
 <li>
 <p>只打包指定插件</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>assembly:assembly<span class="w"> </span>-U<span class="w"> </span>-T<span class="w"> </span>1C<span class="w"> </span>-Dmaven.test.skip<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dmaven.compile.fork<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-pl<span class="w"> </span>postgresqlwriter<span class="w"> </span>-am
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>mvn<span class="w"> </span>clean<span class="w"> </span>package<span class="w"> </span>assembly:assembly<span class="w"> </span>-U<span class="w"> </span>-T<span class="w"> </span>1C<span class="w"> </span>-Dmaven.test.skip<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-Dmaven.compile.fork<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-pl<span class="w"> </span>postgresqlwriter<span class="w"> </span>-am
 </span></code></pre></div>
 </li>
 </ul>

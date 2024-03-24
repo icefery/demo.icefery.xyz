@@ -12069,13 +12069,13 @@
 </li>
 <li>
 <p>生成集群 ID</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bin/kafka-storage.sh<span class="w"> </span>random-uuid<span class="w"> </span>&gt;<span class="w"> </span>uuid
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bin/kafka-storage.sh<span class="w"> </span>random-uuid<span class="w"> </span>&gt;<span class="w"> </span>uuid
 </span></code></pre></div>
 <p><img alt="" src="../__image__/1e44a45a84134d3a9d4461372c67335e.png" /></p>
 </li>
 <li>
 <p>格式化存储目录</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bin/kafka-storage.sh<span class="w"> </span>format<span class="w"> </span>-t<span class="w"> </span><span class="sb">`</span>cat<span class="w"> </span>uuid<span class="sb">`</span><span class="w"> </span>-c<span class="w"> </span>config/kraft/server.properties
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bin/kafka-storage.sh<span class="w"> </span>format<span class="w"> </span>-t<span class="w"> </span><span class="sb">`</span>cat<span class="w"> </span>uuid<span class="sb">`</span><span class="w"> </span>-c<span class="w"> </span>config/kraft/server.properties
 </span></code></pre></div>
 </li>
 </ul>
@@ -12083,12 +12083,12 @@
 <ul>
 <li>
 <p>启动</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bin/kafka-server-start.sh<span class="w"> </span>-daemon<span class="w"> </span>config/kraft/server.properties
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bin/kafka-server-start.sh<span class="w"> </span>-daemon<span class="w"> </span>config/kraft/server.properties
 </span></code></pre></div>
 </li>
 <li>
 <p>创建主题</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--topic<span class="w"> </span>foo<span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--topic<span class="w"> </span>foo<span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092
 </span></code></pre></div>
 </li>
 </ul>
