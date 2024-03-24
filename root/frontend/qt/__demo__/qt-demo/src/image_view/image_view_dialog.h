@@ -13,12 +13,14 @@ QT_END_NAMESPACE
 
 class ImageViewDialog : public QDialog {
     Q_OBJECT
+
 public:
     ImageViewDialog() {
         this->ui = new Ui::ImageViewDialog();
         this->ui->setupUi(this);
         this->index = 0;
     }
+
 private slots:
     // 上一张按钮点击槽函数
     void on_prevButton_clicked() {

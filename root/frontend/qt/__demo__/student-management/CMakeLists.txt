@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ftp-client-5_15)
+project(student-management)
 
 set(CMAKE_PREFIX_PATH "${QTDIR};${CMAKE_PREFIX_PATH}")
 set(CMAKE_CXX_STANDARD 17)
@@ -14,14 +14,16 @@ set(PROJECT_SOURCES
 )
 
 add_executable(
-    "${PROJECT_NAME}"
+    "${PROJECT_NAME}" MACOSX_BUNDLE
     "${PROJECT_SOURCES}"
 )
 
 find_package(
-    Qt5 COMPONENTS
+    Qt6 COMPONENTS
+    Core
+    Gui
+    Sql
     Widgets
-    Network
     REQUIRED
 )
 
@@ -29,6 +31,7 @@ target_link_libraries(
     "${PROJECT_NAME}"
     Qt::Core
     Qt::Gui
-    Qt::Network
+    Qt::Sql
     Qt::Widgets
 )
+

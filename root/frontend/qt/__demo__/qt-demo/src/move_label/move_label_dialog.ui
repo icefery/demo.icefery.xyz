@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ui version="4.0">
     <class>MoveLabelDialog</class>
     <widget class="QDialog" name="Dialog">
@@ -26,10 +26,10 @@
                 <string notr="true">background-color:blue;</string>
             </property>
             <property name="text">
-                <string/>
+                <string />
             </property>
         </widget>
     </widget>
-    <resources/>
-    <connections/>
+    <resources />
+    <connections />
 </ui>

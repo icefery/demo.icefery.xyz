@@ -1,17 +1,18 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
-#include "./ui_dialog.h"
-#include <QDialog>
+#include "ui_dialog.h"
 #include <QDebug>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QUrl>
+#include <QDialog>
 #include <QFile>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QUrl>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Dialog; }
+namespace Ui {
+    class Dialog;
+}
 QT_END_NAMESPACE
 
 class Dialog : public QDialog {
@@ -25,22 +26,18 @@ private:
     QString downloadLocalPath;
 
 public:
-    Dialog(QWidget* parent = nullptr) : QDialog(parent), ui(new Ui::Dialog()) {
-        ui->setupUi(this);
-        manager = new QNetworkAccessManager(this);
+    Dialog() {
+        this->ui = new Ui::Dialog();
+        this->ui->setupUi(this);
+        this->manager = new QNetworkAccessManager(this);
         // 默认值
-        ui->hostEdit->setText("192.192.192.6");
-        ui->portEdit->setText("21");
-        ui->usernameEdit->setText("icefery");
-        ui->passwordEdit->setText("icefery");
-        ui->remotePathEdit->setText("/home/icefery/a.txt");
-        ui->localPathEdit->setText("D:\\a.txt");
-        ui->progressBar->setValue(0);
-    }
-
-    ~Dialog() {
-        delete ui;
-        delete manager;
+        this->ui->hostEdit->setText("192.192.192.6");
+        this->ui->portEdit->setText("21");
+        this->ui->usernameEdit->setText("icefery");
+        this->ui->passwordEdit->setText("icefery");
+        this->ui->remotePathEdit->setText("/home/icefery/a.txt");
+        this->ui->localPathEdit->setText("D:\\a.txt");
+        this->ui->progressBar->setValue(0);
     }
 
 private slots:

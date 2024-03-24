@@ -2,10 +2,10 @@
 #define CALCULATOR_DIALOG_H
 
 #include <QDialog>
-#include <QDoubleValidator> // 验证器
-#include <QHBoxLayout>      // 水平布局器
+#include <QDoubleValidator>
+#include <QHBoxLayout>
 #include <QLabel>
-#include <QLineEdit> // 行编辑控件
+#include <QLineEdit>
 #include <QPushButton>
 
 class CalculatorDialog : public QDialog {
@@ -51,7 +51,7 @@ public:
         connect(equalButton, SIGNAL(clicked()), this, SLOT(calc()));
     }
 
-public slots:
+private slots:
     // 启用等号按钮
     void enableButton() {
         bool xOk;
