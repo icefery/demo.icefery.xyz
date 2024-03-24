@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://mysql.demo.svc.cluster.local:3306}
-    username: ${SPRING_DATASOURCE_USERNAME:root}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}

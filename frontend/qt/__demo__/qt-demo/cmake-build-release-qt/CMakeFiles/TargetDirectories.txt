@@ -1,5 +1,0 @@
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/qt-demo.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/edit_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/rebuild_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/qt-demo_autogen_timestamp_deps.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/qt-demo/cmake-build-release-qt/CMakeFiles/qt-demo_autogen.dir

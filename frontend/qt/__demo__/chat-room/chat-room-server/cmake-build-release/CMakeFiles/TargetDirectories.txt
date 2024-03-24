@@ -1,5 +1,0 @@
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/chat-room/chat-room-server/cmake-build-release/CMakeFiles/chat-room-server.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/chat-room/chat-room-server/cmake-build-release/CMakeFiles/edit_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/chat-room/chat-room-server/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/chat-room/chat-room-server/cmake-build-release/CMakeFiles/chat-room-server_autogen_timestamp_deps.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/chat-room/chat-room-server/cmake-build-release/CMakeFiles/chat-room-server_autogen.dir

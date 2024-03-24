@@ -1,5 +1,0 @@
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug/CMakeFiles/student-management.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug/CMakeFiles/student-management_autogen_timestamp_deps.dir
-/Users/icefery/d/code/demo.icefery.xyz/root/frontend/qt/__demo__/student-management/cmake-build-debug/CMakeFiles/student-management_autogen.dir

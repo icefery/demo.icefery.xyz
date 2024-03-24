@@ -1,6 +1,0 @@
-spring:
-  rabbitmq:
-    addresses: 192.192.192.6:5672
-    password: admin
-    username: admin
-    virtual-host: /

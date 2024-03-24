@@ -26,17 +26,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/architecture/distributed-lock/__demo__/distributed-lock-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/architecture/distributed-transaction/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/architecture/distributed-transaction/__demo__/seata-openfeign-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -61,17 +51,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/backend/express/__demo__/multilevel-routing/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/backend/grpc/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/grpc/__demo__/grpc-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -91,22 +71,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/backend/netty/__demo__/netty-rpc-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/backend/spring/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring/__demo__/spring-spring-mvc-mybatis/ssm-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring/__demo__/spring-struts-hibernate/web-ssh-test6/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -121,27 +86,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/backend/spring-boot/__demo__/spring-boot-elasticsearch-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring-boot/__demo__/spring-boot-mybatis-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring-boot/__demo__/spring-boot-webservice-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/backend/spring-cloud/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring-cloud/__demo__/spring-cloud-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -152,16 +97,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/backend/spring-security/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring-security/__demo__/dynamic-url-authorization/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/backend/spring-security/__demo__/oauth-sso-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -226,22 +161,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/bigdata/flink/__demo__/flink-word-count/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/bigdata/flume/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://demo.icefery.xyz/bigdata/flume/Flume%20%E7%AC%94%E8%AE%B0/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/flume/__demo__/flume-demo-custom/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -257,21 +182,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/bigdata/hadoop/hadoop-3.3.1%20%E5%AE%89%E8%A3%85/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/hadoop/__demo__/hdfs-client/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/hadoop/__demo__/word-count/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/hadoop/__static__/config/fully/%E9%9B%86%E7%BE%A4%E8%A7%84%E5%88%92/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -297,11 +207,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/bigdata/hbase/hbase-2.3.6%20%E5%AE%89%E8%A3%85/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/hbase/__homework__/homework-06/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -341,11 +246,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/bigdata/hive/__demo__/hive-udf-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/bigdata/phoenix/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
@@ -362,11 +262,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/bigdata/spark/spark%20%E7%AC%94%E8%AE%B0/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/bigdata/spark/__demo__/spark-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -751,11 +646,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/database/redis/__demo__/bloom-filter-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/database/sqlserver/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
@@ -777,11 +667,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/frontend/qt/Qt%20%E7%AC%94%E8%AE%B0/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/frontend/qt/__demo__/ftp-client-5_15/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -846,11 +731,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/lang/java/__demo__/native-sql-builder/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/lang/java/__guide__/Java%20IO/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
@@ -881,22 +761,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/lang/java/jna/__demo__/everything-dll-jna/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/lang/java/servlet/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/lang/java/servlet/__demo__/mvc-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/lang/java/servlet/__demo__/servlet-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -942,21 +807,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/lang/javascript/%E9%80%92%E5%BD%92%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/lang/javascript/__demo__/ftp-promise-wrapper/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/lang/javascript/__demo__/recurse-dir/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/lang/javascript/__demo__/xfyun-tts-iat-demo/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1076,22 +926,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://demo.icefery.xyz/middleware/rabbitmq/__demo__/rabbitmq-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/middleware/rabbitmq/__demo__/spring-boot-rabbitmq-demo/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://demo.icefery.xyz/middleware/shardingsphere/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/middleware/shardingsphere/__demo__/shardingsphere-demo/shardingshpere-jdbc-demo-01/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1122,11 +957,6 @@
     </url>
     <url>
          <loc>https://demo.icefery.xyz/os/android/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
-         <lastmod>2024-03-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://demo.icefery.xyz/os/android/__homework__/homework-third-questionnaire/questionnaire/</loc>
          <lastmod>2024-03-24</lastmod>
          <changefreq>daily</changefreq>
     </url>

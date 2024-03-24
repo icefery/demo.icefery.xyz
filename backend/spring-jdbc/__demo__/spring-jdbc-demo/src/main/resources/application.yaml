@@ -1,6 +1,0 @@
-spring:
-  datasource:
-    driver-class-name: org.opengauss.Driver
-    url: jdbc:opengauss://192.192.192.101:17700/demo?currentSchema=public
-    username: demo
-    password: demo@1234
