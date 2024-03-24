@@ -32,7 +32,7 @@
 
 1.  创建项目目录
 
-    ```bash
+    ```shell
     mkdir -p qt-demo
 
     cd qt-demo
@@ -68,7 +68,7 @@
 
 5.  生成 `Makefile`
 
-    ```bash
+    ```shell
     qmake
     ```
 
@@ -76,7 +76,7 @@
 
 6.  编译链接
 
-    ```bash
+    ```shell
     make
     ```
 
@@ -980,7 +980,7 @@ int main(int argc, char** argv) {
 
 -   `student-management.pro`
 
-    ```bash
+    ```shell
     QT += core gui sql
 
     greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

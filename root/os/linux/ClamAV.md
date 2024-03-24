@@ -1,12 +1,12 @@
 ### 安装
 
-```bash
+```shell
 apt-get install clamav clamav-daemon
 ```
 
 ### 升级病毒库
 
-```bash
+```shell
 systemctl stop clamav-freshclam
 
 freshclam
@@ -16,6 +16,6 @@ systemctl start clamav-freshclam
 
 ### 扫描
 
-```bash
+```shell
 clamscan --infected  –-recursive --remove /
 ```

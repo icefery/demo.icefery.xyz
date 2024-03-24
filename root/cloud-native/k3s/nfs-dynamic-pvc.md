@@ -10,19 +10,19 @@ title: 'NFS 动态 PVC 的 StorageClass 和 StatefulSet'
 
 1. 安装
 
-    ```bash
+    ```shell
     apt install -y nfs-kernel-server
     ```
 
 2. 创建共享目录
 
-    ```bash
+    ```shell
     mkdir -p /d/nfs
     ```
 
 3. 导出
 
-    ```bash
+    ```shell
     echo '/d/nfs *(rw,sync,no_root_squash)' >> /etc/exports
 
     exportfs -r
@@ -32,13 +32,13 @@ title: 'NFS 动态 PVC 的 StorageClass 和 StatefulSet'
 
 1. 克隆 NFS Provisioner 项目
 
-    ```bash
+    ```shell
     git clone https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner.git
     ```
 
 2. 下载资源文件
 
-    ```bash
+    ```shell
     wget -O nfs-client-provisioner-rbac.yaml   https://raw.githubusercontent.com/kubernetes-sigs/nfs-subdir-external-provisioner/master/deploy/rbac.yaml
 
     wget -O nfs-client-provisioner-deploy.yaml https://raw.githubusercontent.com/kubernetes-sigs/nfs-subdir-external-provisioner/master/deploy/deployment.yaml
@@ -48,7 +48,7 @@ title: 'NFS 动态 PVC 的 StorageClass 和 StatefulSet'
 
 3. 批量替换 Namespace
 
-    ```bash
+    ```shell
     NAMESPACE=local
 
     sed -i'' "s/namespace:.*/namespace: $NAMESPACE/g" nfs-client-provisioner-deploy.yaml nfs-client-provisioner-rbac.yaml
@@ -62,7 +62,7 @@ title: 'NFS 动态 PVC 的 StorageClass 和 StatefulSet'
 
 5. 创建资源
 
-    ```bash
+    ```shell
     kubectl create -f nfs-client-provisioner-rbac.yaml
 
     kubectl create -f nfs-client-provisioner-deploy.yaml
@@ -141,7 +141,7 @@ title: 'NFS 动态 PVC 的 StorageClass 和 StatefulSet'
 
 ## 检查
 
-```bash
+```shell
 kubectl get all -n local -o wide
 
 kubectl get pvc -n local -o wide

@@ -2,7 +2,7 @@
 
 #### [Homebrew：Mac os 使用 brew 工具时报错 No remote 'origin'](https://blog.csdn.net/Jo_Francis/article/details/124746363)
 
-```bash
+```shell
 brew update
 
 brew doctor

@@ -106,7 +106,7 @@ networks:
 
 -   mysql101 配置。
 
-    ```bash
+    ```shell
     mkdir -p mysql101/etc/mysql/conf.d
 
     cat <<-EOF >mysql101/etc/mysql/conf.d/my.cnf
@@ -137,7 +137,7 @@ networks:
 
 #### 1.4 启动
 
-```bash
+```shell
 docker network create local
 
 docker-compose up -d
@@ -150,7 +150,7 @@ docker logs -f mysql101
 
 #### 2.1 主节点
 
-```bash
+```shell
 SET GLOBAL group_replication_bootstrap_group=ON;
 START GROUP_REPLICATION;
 SET GLOBAL group_replication_bootstrap_group=OFF;
@@ -158,14 +158,14 @@ SET GLOBAL group_replication_bootstrap_group=OFF;
 
 #### 2.2 从节点
 
-```bash
+```shell
 RESET MASTER;
 START GROUP_REPLICATION;
 ```
 
 #### 2.3 验证
 
-```bash
+```shell
 SELECT * FROM performance_schema.replication_group_members;
 ```
 
@@ -183,7 +183,7 @@ SELECT * FROM performance_schema.replication_group_members;
 
 #### 3.3 整体集群恢复
 
-```bash
+```shell
 START GROUP_REPLICATION;
 ```
 

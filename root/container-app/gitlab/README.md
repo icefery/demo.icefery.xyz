@@ -4,7 +4,7 @@
 
 #### Docker 安装 GitLab
 
-```bash
+```shell
 nerdctl create network compose
 
 nerdctl compose up -d
@@ -14,7 +14,7 @@ nerdctl exec -it gitlab cat /etc/gitlab/initial_root_password
 
 #### Helm 安装 GitLab
 
-```bash
+```shell
 # helm repo add gitlab http://charts.gitlab.io/
 helm repo add gitlab-jh https://charts.gitlab.cn
 
@@ -34,7 +34,7 @@ kubectl get secret -n gitlab gitlab-gitlab-initial-root-password -ojsonpath='{.d
 
 #### Shell 执行器
 
-```bash
+```shell
 curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
 
 chmod +x /usr/local/bin/gitlab-runner
@@ -51,7 +51,7 @@ gitlab-runner start
 
 -   生成 SSH 秘钥
 
-    ```bash
+    ```shell
     ssh-keygen -t rsa -q -N "" -f ~/.ssh/gitlab-runner
 
     cat ~/.ssh/gitlab-runner.pub >> ~/.ssh/authorized_keys
@@ -59,19 +59,19 @@ gitlab-runner start
 
 -   启动容器
 
-    ```bash
+    ```shell
     nerdctl compose -f gitlab-runner-ssh.compose.yaml up -d
     ```
 
 -   注册
 
-    ```bash
+    ```shell
     gitlab-runner register --url http://gitlab.dev.icefery.xyz/ --registration-token <TOKEN>
     ```
 
 -   解决 `error: ssh: handshake failed: knownhosts: key is unknown`
 
-    ```bash
+    ```shell
     echo "    disable_strict_host_key_checking = true" >> /etc/gitlab-runner/config.toml
 
     gitlab-runner restart
@@ -79,7 +79,7 @@ gitlab-runner start
 
 #### Kubernetes 执行器
 
-```bash
+```shell
 helm repo add gitlab http://charts.gitlab.io/
 
 helm repo update
@@ -91,7 +91,7 @@ helm upgrade gitlab-runner gitlab/gitlab-runner --install --namespace gitlab --c
 
 #### Helm 安装 GitLab Agent
 
-```bash
+```shell
 helm repo add gitlab https://charts.gitlab.io
 
 helm repo update
@@ -109,7 +109,7 @@ helm upgrade gitlab-agent gitlab/gitlab-agent \
 
 #### 查看 Access Key 和 Secrey Key
 
-```bash
+```shell
 kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.accesskey}' | base64 --decode
 
 kubectl get -n gitlab secrets gitlab-minio-secret -ojsonpath='{.data.secretkey}' | base64 --decode

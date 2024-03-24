@@ -4,7 +4,7 @@
 
 #### 创建用户和数据库
 
-```bash
+```shell
 psql -U postgres
 ```
 
@@ -14,13 +14,13 @@ CREATE ROLE demo WITH LOGIN PASSWORD 'demo';
 CREATE DATABASE demo OWNER demo;
 ```
 
-```bash
+```shell
 sed -i 's/host all all all md5/host all demo all md5/' /var/lib/postgresql/data/pg_hba.conf
 ```
 
 ## Helm 安装 PostgreSQL
 
-```bash
+```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo update

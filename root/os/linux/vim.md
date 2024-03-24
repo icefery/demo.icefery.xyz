@@ -1,5 +1,5 @@
 #### 取消自动换行
 
-```bash
+```shell
 :set nowrap
 ```

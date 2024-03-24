@@ -6,7 +6,7 @@
 
 > [Miniconda](https://docs.conda.io/en/latest/miniconda.html#linux-installers)
 
-```bash
+```shell
 # 下载 sh 脚本
 wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.1.0-1-Linux-aarch64.sh
 # 安装 minconda
@@ -17,7 +17,7 @@ source ~/.bashrc
 conda config --set auto_activate_base false
 ```
 
-```bash
+```shell
 # 创建环境
 conda create -n <NAME>
 # 查看所有环境
@@ -32,7 +32,7 @@ conda deactivate <NAME>
 
 ### 1.2 pip 换源
 
-```bash
+```shell
 mkdir -p ~/.pip
 tee ~/.pip/pip.conf <<- 'EOF'
 [global]
@@ -44,7 +44,7 @@ EOF
 
 ### 1.3 安装 Airflow
 
-```bash
+```shell
 conda create --name airflow python=3.10
 conda activate airflow
 # 安装 airflow
@@ -58,7 +58,7 @@ airflow version
 
 -   安装依赖
 
-    ```bash
+    ```shell
     apt install libmysqlclient-dev -y
     pip install mysqlclient
     ```
@@ -73,7 +73,7 @@ airflow version
 
 -   数据库初始化
 
-    ```bash
+    ```shell
     # 初始化
     airflow db init
     # 创建账号
@@ -88,7 +88,7 @@ airflow version
 
 ### 1.5 Airflow 启停脚本
 
-```bash
+```shell
 case "$1" in
 'start')
     conda activate airflow
@@ -115,7 +115,7 @@ esac
 
 -   创建默认 DAG 目录
 
-    ```bash
+    ```shell
     mkdir -p "${AIRFLOW_HOME}/{dags}"
     ```
 

@@ -28,7 +28,7 @@
 
 #### 解决 JAR 包冲突
 
-```bash
+```shell
 rm $HIVE_HOME/lib/guava-19.0.jar
 
 cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
@@ -73,13 +73,13 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
 
 -   下载驱动
 
-    ```bash
+    ```shell
     wget https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.18/mysql-connector-java-8.0.18.jar -P $HIVE_HOME/lib
     ```
 
 -   初始化
 
-    ```bash
+    ```shell
     cd $HIVE_HOME
     bin/schematool -initSchema -dbType mysql
     ```
@@ -88,19 +88,19 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
 
 -   启动 MetaStore
 
-    ```bash
+    ```shell
     nohup bin/hive --service metastore 1>/dev/null 2>&1 &
     ```
 
 -   启动 HiveServer2
 
-    ```bash
+    ```shell
     nohup bin/hive --service hiveserver2 1>/dev/null 2>&1 &
     ```
 
 -   便捷脚本 `run.sh`
 
-    ```bash
+    ```shell
     #!/bin/bash
     case $1 in
     start)
@@ -116,7 +116,7 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
     esac
     ```
 
-    ```bash
+    ```shell
     chmod +x run.sh
     ./run.sh start
     ```
@@ -127,12 +127,12 @@ cp $HADOOP_HOME/share/hadoop/common/lib/guava-27.0-jre.jar $HIVE_HOME/lib
 
 -   CLI 方式
 
-    ```bash
+    ```shell
     bin/hive
     ```
 
 -   JDBC 方式
 
-    ```bash
+    ```shell
     bin/beeline -u jdbc:hive2://node101:10000 -n roo
     ```

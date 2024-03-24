@@ -4,7 +4,7 @@
 
 ### 静态 IP
 
-```bash
+```shell
 cat > /etc/network/interfaces <<- EOF
 auto lo
 iface lo inet loopback
@@ -23,7 +23,7 @@ systemctl restart networking
 
 ### DNSmasq
 
-```bash
+```shell
 apt install -y dnsmasq
 
 # 配置泛解析
@@ -36,7 +36,7 @@ echo "address=/dev.icefery.xyz/192.192.192.6" > /etc/dnsmasq.conf
 
 > https://zhuanlan.zhihu.com/p/222506941
 
-```bash
+```shell
 cat >> /etc/sysctl.conf <<- "EOF"
 fs.inotify.max_user_instances=512
 fs.inotify.max_user_watches=262144
@@ -49,6 +49,6 @@ sysctl -p
 
 > [解决 FATA[0000] Get http:///var/run... sudo apt-get install apparmor 好神奇](https://blog.csdn.net/qq_40088463/article/details/110863372)
 
-```bash
+```shell
 apt install apparmor
 ```

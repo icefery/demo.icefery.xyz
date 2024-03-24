@@ -5,7 +5,7 @@
 1. 提交时转换为 LF，检出时不转换
 2. 拒绝提交包含混合换行符的文件
 
-```bash
+```shell
 git config --global core.autocrlf input
 git config --global core.safecrlf true
 ```
@@ -14,7 +14,7 @@ git config --global core.safecrlf true
 
 ### `autocrlf`
 
-```bash
+```shell
 # 提交时转换为 LF 检出时转换为 CRLF
 git config --global core.autocrlf true
 
@@ -27,7 +27,7 @@ git config --global core.autocrlf false
 
 ### `safecrlf`
 
-```bash
+```shell
 # 拒绝提交包含混合换行符的文件
 git config --global core.safecrlf true
 
@@ -42,6 +42,6 @@ git config --global core.safecrlf warn
 
 如果在 Windows 下不慎将部分文本的换行符写为 CRLF，可以使用 `dos2unix` 工具修复回 LF。
 
-```bash
+```shell
 find . -type f | xargs dos2unix
 ```

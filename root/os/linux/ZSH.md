@@ -1,6 +1,6 @@
 ### 安装
 
-```bash
+```shell
 apt install -y zsh fonts-powerline
 
 curl -O https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh
@@ -16,7 +16,7 @@ export ZSH=/etc/oh-my-zsh
 ./install.sh
 ```
 
-```bash
+```shell
 cat /etc/shells
 
 chsh -s $(which zsh) root
@@ -24,7 +24,7 @@ chsh -s $(which zsh) root
 
 ### 卸载
 
-```bash
+```shell
 sh $ZSH/tools/uninstall.sh
 ```
 
@@ -32,13 +32,13 @@ sh $ZSH/tools/uninstall.sh
 
 -   `zsh-syntax-highlighting`
 
-    ```bash
+    ```shell
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
     ```
 
 -   `~/.zshrc`
 
-    ```bash
+    ```shell
     # ...
     plugins=(git zsh-syntax-highlighting)
     ```

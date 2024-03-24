@@ -4,7 +4,7 @@
 
 #### Docker 安装 CoreDNS
 
-```bash
+```shell
 mkdir -p /d/mount/coredns/
 
 cp -f Corefile /d/mount/coredns/
@@ -16,7 +16,7 @@ nerdctl compose up -d
 
 ### Helm 安装 CoreDNS
 
-```bash
+```shell
 helm repo add coredns https://coredns.github.io/helm
 
 helm repo update
@@ -26,13 +26,13 @@ helm upgrade coredns coredns/coredns --install --namespace coredns --create-name
 
 ## 在 K8S 集群内引入自定义 DNS 服务
 
-```bash
+```shell
 kubectl apply -f cm.yaml
 ```
 
 ## 测试
 
-```bash
+```shell
 kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
 ```
 
@@ -44,7 +44,7 @@ kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
 
 -   `systemd-resolved` 占用 53 端口
 
-    ```bash
+    ```shell
     sed -i -e '/#DNSStubListener=/c DNSStubListener=no' -e '/#DNS=/c DNS=114.114.114.114' /etc/systemd/resolved.conf
 
     ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf

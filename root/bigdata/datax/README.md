@@ -6,7 +6,7 @@
 
 -   Ubuntu
 
-    ```bash
+    ```shell
     apt install 2to3
 
     2to3 -w /opt/module/datax/bin
@@ -14,7 +14,7 @@
 
 -   Windows
 
-    ```bash
+    ```shell
     python /d/env/python-3.10.2/Tools/scripts/2to3.py -w /d/env/datax/bin
     ```
 
@@ -101,7 +101,7 @@
     }
     ```
 
-```bash
+```shell
 python /opt/module/datax/bin/datax.py ~/PostgreSQLReader.json
 ```
 
@@ -111,12 +111,12 @@ python /opt/module/datax/bin/datax.py ~/PostgreSQLReader.json
 
 -   打包
 
-    ```bash
+    ```shell
     mvn clean package -DskipTests assembly:assembly
     ```
 
 -   只打包指定插件
 
-    ```bash
+    ```shell
     mvn clean package assembly:assembly -U -T 1C -Dmaven.test.skip=true -Dmaven.compile.fork=true -pl postgresqlwriter -am
     ```

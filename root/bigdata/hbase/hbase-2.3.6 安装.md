@@ -15,7 +15,7 @@
 
 -   `$HBASE_HOME/conf/hbase-env.sh`
 
-    ```bash
+    ```shell
     export JAVA_HOME=/opt/jdk-8
     export HBASE_MANAGES_ZK=false
     export HBASE_DISABLE_HADOOP_CLASSPATH_LOOKUP=true
@@ -45,7 +45,7 @@
     >
     > -   拷贝 HDFS 配置文件
     >
-    >     ```bash
+    >     ```shell
     >     ln -s $HADOOP_HOME/etc/hadoop/core-site.xml $HBASE_HOME/conf/core-site.xml
     >     ln -s $HADOOP_HOME/etc/hadoop/hdfs-ste.xml $HBASE_HOME/conf/hdfs-site.xml
     >     ```
@@ -58,13 +58,13 @@
 
 -   `$HBASE_HOME/conf/regionservers`
 
-    ```bash
+    ```shell
     node101
     ```
 
 #### 启动
 
-```bash
+```shell
 cd $HBASE_HOME
 bin/start-hbase.sh
 ```
@@ -73,7 +73,7 @@ bin/start-hbase.sh
 
 #### 连接
 
-```bash
+```shell
 cd $HBASE_HOME
 bin/hbase shell
 ```
@@ -84,7 +84,7 @@ bin/hbase shell
 
 -   `$HBASE_HOME/conf/regionservers`
 
-    ```bash
+    ```shell
     node101
     node102
     node103
@@ -96,7 +96,7 @@ bin/hbase shell
 
 -   `$HBASE_HOME/conf/backup-masters`
 
-    ```bash
+    ```shell
     node102
     node103
     ```

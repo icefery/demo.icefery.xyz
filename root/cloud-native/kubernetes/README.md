@@ -4,7 +4,7 @@
 
 #### 0/1 nodes are available: 1 node(s) had taint {node-role.kubernetes.io/master: }, that the pod didn't tolerate.
 
-```bash
+```shell
 kubectl taint nodes --all node-role.kubernetes.io/master-
 ```
 
@@ -12,7 +12,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 #### 清理 `Completed` 状态的 Pod
 
-```bash
+```shell
 kubectl get pod --field-selector=status.phase==Succeeded
 
 
@@ -21,7 +21,7 @@ kubectl delete pod --field-selector=status.phase==Succeeded
 
 #### 删除不用的 ReplicaSet
 
-```bash
+```shell
 NAMESPACE=test
 kubectl get replicaset.apps -A | grep "0         0         0" | awk '{print $2}' | xargs kubectl delete replicaset.apps -n ${NAMESPACE}
 ```

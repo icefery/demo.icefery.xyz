@@ -2,20 +2,20 @@
 
 ## HBase Shell
 
-```bash
+```shell
 cd $HBASE_HOME
 bin/hbase shell
 ```
 
 ### 建表
 
-```bash
+```shell
 create 'student', 'base', 'score'
 ```
 
 ### 插入数据
 
-```bash
+```shell
 put 'student', '001', 'base:number',   '001'
 put 'student', '001', 'base:name',     'Tim'
 put 'student', '001', 'base:sex',      'm'
@@ -55,13 +55,13 @@ put 'student', '004', 'score:market',  '68'
 
 ### 查找 `rowKey=001` 的 `score:math`
 
-```bash
+```shell
 get 'student', '001', 'score:math'
 ```
 
 ### 根据 `rowKey` 删除
 
-```bash
+```shell
 deleteall 'student', '001'
 
 scan 'student'
@@ -71,7 +71,7 @@ scan 'student'
 
 > 左闭右开区间 `[STARTROW, ENDROW)`
 
-```bash
+```shell
 count 'student'
 
 scan 'student', {COLUMN => 'base', STARTROWN => '001', ENDROW => '004'}
@@ -79,6 +79,6 @@ scan 'student', {COLUMN => 'base', STARTROWN => '001', ENDROW => '004'}
 
 ### 条件查询
 
-```bash
+```shell
 scan 'student', {FILTER => "SingleColumnFilter('base','prof','=','binary:bigdata')"}
 ```

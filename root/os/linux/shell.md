@@ -9,7 +9,7 @@
 
 -   interactive shell
 
-    ```bash
+    ```shell
     echo $PS1
     # ${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 
@@ -17,7 +17,7 @@
     # himBHs
     ```
 
-    ```bash
+    ```shell
     bash -i -c 'echo $PS1'
     # ${debian_chroot:+($debian_chroot)}\u@\h:\w\$
 
@@ -27,7 +27,7 @@
 
 -   non-interactive shell
 
-    ```bash
+    ```shell
     bash -c 'echo $PS1'
     #
 
@@ -46,7 +46,7 @@
 
 -   login shell
 
-    ```bash
+    ```shell
     bash --login
     exit
     # logout
@@ -54,7 +54,7 @@
 
 -   non-login shell
 
-    ```bash
+    ```shell
     bash
     exit
     #

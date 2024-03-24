@@ -5,7 +5,7 @@
 #### 开启查询缓存
 
 -   `my.cnf` 加入以下配置，重启 MySQL 开启查询缓存
-    ```bash
+    ```shell
     query_cache_type=1
     query_cache_size=3145728
     ```

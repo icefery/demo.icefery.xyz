@@ -1,6 +1,6 @@
 ### 安装
 
-```bash
+```shell
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.3/apache-zookeeper-3.6.3-bin.tar.gz
 tar -zxvf apache-zookeeper-3.6.3-bin.tar.gz -C /opt
 cd /opt
@@ -9,14 +9,14 @@ mv apache-zookeeper-3.6.3-bin zookeeper-3.6.3
 
 ### 配置
 
-```bash
+```shell
 cd conf
 mv zoo_sample.cfg zoo.cfg
 ```
 
 -   `zoo.cfg`
 
-    ```bash
+    ```shell
     # The number of milliseconds of each tick
     tickTime=2000
     # The number of ticks that the initial

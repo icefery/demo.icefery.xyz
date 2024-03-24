@@ -4,7 +4,7 @@
 
 ### Build image
 
-```bash
+```shell
 git clone https://github.com/oracle/docker-images.git --depth=1
 
 cd docker-images/OracleDatabase/SingleInstance/dockerfiles

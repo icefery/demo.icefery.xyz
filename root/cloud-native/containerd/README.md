@@ -2,7 +2,7 @@
 
 ## 安装
 
-```bash
+```shell
 REPO="containerd/nerdctl"
 TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r ".tag_name")
 ASSET="nerdctl-full-${TAG//v/}-linux-$(dpkg --print-architecture).tar.gz"
@@ -26,13 +26,13 @@ nerdctl run --privileged --rm tonistiigi/binfmt --install all
 
 ### 查看默认配置
 
-```bash
+```shell
 containerd config default
 ```
 
 ### 命令补全
 
-```bash
+```shell
 nerdctl completion bash > /etc/bash_completion.d/nerdctl
 
 source /etc/profile
@@ -43,7 +43,7 @@ source /etc/profile
 > -   https://github.com/containerd/containerd/blob/main/docs/cri/registry.md
 > -   https://github.com/containerd/containerd/blob/main/docs/hosts.md
 
-```bash
+```shell
 mkdir -p /etc/containerd/certs.d/docker.io
 
 cat > /etc/containerd/certs.d/docker.io/hosts.toml <<- "EOF"
@@ -53,7 +53,7 @@ server = "https://registry-1.docker.io"
 EOF
 ```
 
-```bash
+```shell
 mkdir -p /etc/containerd
 
 cat > /etc/containerd/config.toml <<- "EOF"
@@ -66,7 +66,7 @@ EOF
 
 ## 设置守护进程代理
 
-```bash
+```shell
 mkdir -p /etc/systemd/system/containerd.service.d
 
 cat > /etc/systemd/system/containerd.service.d/proxy.conf <<- "EOF"
@@ -87,7 +87,7 @@ systemctl restart containerd
 
 #### 配置 QEMU 多平台支持
 
-```bash
+```shell
 # docker run --privileged --rm tonistiigi/binfmt --install all
 
 nerdctl run --privileged --rm tonistiigi/binfmt --install all
@@ -97,7 +97,7 @@ ls -1 /proc/sys/fs/binfmt_misc/qemu*
 
 #### 通过 `docker` 构建
 
-```bash
+```shell
 # 创建 Builder
 docker buildx create --use
 docker buildx ls
@@ -114,7 +114,7 @@ docker buildx build --tag icefery/my-app:0.0.1 --platform linux/arm64 --load .
 
 #### 通过 `nerdctl` 构建
 
-```bash
+```shell
 nerdctl build -t icefery/my-app:0.0.1 --platform linux/arm64,linux/amd64 .
 
 nerdctl image ls

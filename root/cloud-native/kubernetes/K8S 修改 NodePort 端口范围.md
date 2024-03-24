@@ -1,9 +1,9 @@
 > 默认端口范围是 `30000-32767`
 
-```bash
+```shell
 vim /etc/kubernetes/manifests/kube-apiserver.yaml
 ```
 
-```bash
+```shell
 --service-node-port-range=1-65535
 ```

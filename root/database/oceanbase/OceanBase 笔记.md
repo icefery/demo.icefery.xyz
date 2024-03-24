@@ -76,7 +76,7 @@
 
 -   连接
 
-    ```bash
+    ```shell
     # 连接 sys 租户
     ob-mysql sys
 

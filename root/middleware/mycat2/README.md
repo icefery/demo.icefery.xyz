@@ -2,7 +2,7 @@
 
 ## 安装
 
-```bash
+```shell
 wget http://dl.mycat.org.cn/2.0/install-template/mycat2-install-template-1.21.zip
 wget http://dl.mycat.org.cn/2.0/1.22-release/mycat2-1.22-release-jar-with-dependencies-2022-10-13.jar
 wget http://dl.mycat.org.cn/2.0/install-template/wrapper-linux-aarch64-64
@@ -18,13 +18,13 @@ chmod +x -R /opt/env/mycat/bin
 
 1. 修改 `prototype` 数据源连接信息
 
-    ```bash
+    ```shell
     vim conf/datasources/prototypeDs.datasource.json
     ```
 
 2. 启动
 
-    ```bash
+    ```shell
     cd /opt/env/mycat
 
     bin/mycat start
@@ -32,7 +32,7 @@ chmod +x -R /opt/env/mycat/bin
 
 3. 连接
 
-    ```bash
+    ```shell
     mysql -h192.192.192.101 -P8066 -uroot -p123456
     ```
 

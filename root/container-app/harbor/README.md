@@ -2,7 +2,7 @@
 
 ## 安装
 
-```bash
+```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo update
@@ -83,19 +83,19 @@ helm upgrade harbor bitnami/harbor --install --namespace harbor --create-namespa
 
 > nerdctl 并不走 CRI 的 `tls.insecure_skip_verify`，需要添加 `--insecure-registry` 选项。
 
-```bash
+```shell
 docker login http://core.harbor.dev.icefery.xyz --username=admin --password=admin
 
 # nerdctl login http://core.harbor.dev.icefery.xyz --username=admin --password=admin --insecure-registry
 ```
 
-```bash
+```shell
 docker push core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
 # nerdctl push core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
 ```
 
-```bash
+```shell
 docker pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
 # nerdctl pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1 --insecure-registry
@@ -105,7 +105,7 @@ docker pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 
 #### 拉取
 
-```bash
+```shell
 # 添加 Harbor 作为统一的单一索引入口点
 # helm repo add chartmuseum-global http://core.harbor.dev.icefery.xyz/chartrepo --username=admin --password=admin
 
@@ -113,17 +113,17 @@ docker pull core.harbor.dev.icefery.xyz/library/my-app:0.0.1
 helm repo add chartmuseum-library http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin
 ```
 
-```bash
+```shell
 helm search repo my-app
 ```
 
 #### 推送
 
-```bash
+```shell
 helm plugin install https://github.com/chartmuseum/helm-push
 ```
 
-```bash
+```shell
 # helm cm-push chart/ http://core.harbor.dev.icefery.xyz/chartrepo/library --username=admin --password=admin
 
 helm cm-push chart/ chartmuseum-library

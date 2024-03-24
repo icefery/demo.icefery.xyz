@@ -4,7 +4,7 @@
 
 #### 交互式设置 X-Pack 密码认证
 
-```bash
+```shell
 bin/elasticsearch-setup-passwords interactive
 ```
 

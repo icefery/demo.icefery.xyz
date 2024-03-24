@@ -2,7 +2,7 @@
 
 ## Helm 安装 Nexus
 
-```bash
+```shell
 helm repo add sonatype https://sonatype.github.io/helm3-charts/
 
 helm repo update

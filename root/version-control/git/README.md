@@ -12,13 +12,13 @@
 
 #### detected dubious ownership in repository at xxx To add an exception for this directory
 
-```bash
+```shell
 git config --global --add safe.directory xxx
 ```
 
 或者
 
-```bash
+```shell
 export GIT_TEST_DEBUG_UNSAFE_DIRECTORIES=true
 ```
 
@@ -26,11 +26,11 @@ export GIT_TEST_DEBUG_UNSAFE_DIRECTORIES=true
 
 > https://www.cnblogs.com/LoveBB/p/16076897.html
 
-```bash
+```shell
 git update-index --chmod=+x a.sh
 ```
 
-```bash
+```shell
 git ls-tree HEAD
 ```
 

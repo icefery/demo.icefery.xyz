@@ -122,27 +122,27 @@ Kafka 是一个分布式的，分区的消息服务（官方称之为 Commit Log
 ### 启动 Kafka 服务器
 
 -   启动 Zookeeper
-    ```bash
+    ```shell
     cd /opt/zookeeper
     bin/zkServer.sh start
     ```
 -   启动 Kafka
-    ```bash
+    ```shell
     cd /opt/kafka
     bin/kafka-server-start.sh -daemon config/server.properties
     ```
 -   验证是否启动成功（进入 ZK 查看指定 ID 的 Broker 是否存在）
-    ```bash
+    ```shell
     cd /opt/zookeeper
     bin/zkCli.sh
     ```
-    ```bash
+    ```shell
     ls /brokers/ids
     ```
 
 ### 创建主题、发送消息、消费消息
 
-```bash
+```shell
 # 创建主题
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
 
@@ -180,7 +180,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --f
 
 > 换言之，同一个消费组中只能有一个消费者收到一个 Topic 中的消息。
 
-```bash
+```shell
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --consumer-property group.id=test-group
 ```
 
@@ -190,7 +190,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --c
 
 > 实际上也是多个消费组中的多个消费者收到了同一个消息。
 
-```bash
+```shell
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --consumer-property group.id=test-group-1
 
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --consumer-property group.id=test-group-2
@@ -198,7 +198,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --c
 
 ### 查看消费组的详细信息
 
-```bash
+```shell
 bin/kafka-consumer-groups.sh --describe --bootstrap-server localhost:9092 --group test-group
 ```
 
@@ -257,7 +257,7 @@ Topic 在 Kafka 中是一个逻辑的概念，Kafka 通过 Topic 将消息进行
 
 查看 Topic 情况：
 
-```bash
+```shell
 bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic my-replicated-topic
 ```
 

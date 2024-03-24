@@ -6,7 +6,7 @@
 
 ### 常用命令
 
-```bash
+```shell
 # 上传
 hadoop fs -put <LOCAL> <HDFS>
 

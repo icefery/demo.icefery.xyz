@@ -1,10 +1,10 @@
 #### 脚本文件
 
-```bash
+```shell
 vim temp.sh
 ```
 
-```bash
+```shell
 echo "A  = ${A}"
 echo "\$0 = $0"
 echo "P1 = $1"
@@ -12,7 +12,7 @@ echo "P2 = $2"
 echo "P3 = $3"
 ```
 
-```bash
+```shell
 nohup python3 -m http.server &> /dev/null &
 ```
 
@@ -25,7 +25,7 @@ nohup python3 -m http.server &> /dev/null &
 | `-S`,`--show-error` | `-S` 参数指定只输出错误信息，通常与 `-s` 一起使用。                                                    |
 | `-L`,`--location`   | `-L` 参数会让 HTTP 请求跟随服务器的重定向。curl 默认不跟随重定向                                       |
 
-```bash
+```shell
 [root@dev:~]# curl -fsSL http://localhost:8000/temp.sh | A=1 bash -s -- -p1 --p2 p3
 A  = 1
 $0 = bash
@@ -36,7 +36,7 @@ P3 = p3
 
 #### 进程替换
 
-```bash
+```shell
 [root@dev:~]# A=1 bash <(curl -fsSL http://localhost:8000/temp.sh) -p1 --p2 p3
 A  = 1
 $0 = /dev/fd/61

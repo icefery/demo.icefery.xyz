@@ -4,7 +4,7 @@
 
 ### 终端设置代理
 
-```bash
+```shell
 tee > /etc/profile.d/custom.sh <<- 'EOF'
 function start-proxy() {
     export http_proxy=http://127.0.0.1:7890
@@ -25,7 +25,7 @@ source /etc/profile
 
 ### Systemd 设置代理
 
-```bash
+```shell
 mkdir -p /etc/systemd/system/docker.service.d
 
 tee /etc/systemd/system/docker.service.d/proxy.conf > /dev/null <<- 'EOF'

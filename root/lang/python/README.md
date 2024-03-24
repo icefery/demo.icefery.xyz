@@ -20,7 +20,7 @@ rm -rf /opt/env/miniconda
 
     -   重装
 
-        ```bash
+        ```shell
         python3 -m pip uninstall pip
 
         python3 -m pip install --upgrade pip
@@ -30,7 +30,7 @@ rm -rf /opt/env/miniconda
 
         > 解决 `which pip` 已正确安装在 `/usr/local/bin` 目录下，但 `pip` 命令依然使用 `/usr/bin` 的问题
 
-        ```bash
+        ```shell
         source /etc/profile
         ```
 

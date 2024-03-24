@@ -28,7 +28,7 @@
 
 -   `$HADOOP_HOME/etc/hadoop/hadoop-env.sh`
 
-    ```bash
+    ```shell
     export JAVA_HOME=/opt/jdk-8
     export HADOOP_HOME=/opt/hadoop-3.3.1
     export HDFS_NAMENODE_USER=root
@@ -40,7 +40,7 @@
 
 -   `$HADOOP_HOME/etc/hadoop/workers`
 
-    ```bash
+    ```shell
     node101
     ```
 
@@ -142,7 +142,7 @@
 
 #### 格式化 NameNode
 
-```bash
+```shell
 cd $HADOOP_HOME
 bin/hdfs namenode -format
 ```
@@ -151,7 +151,7 @@ bin/hdfs namenode -format
 
 #### 启动
 
-```bash
+```shell
 cd $HADOOP_HOME
 sbin/start-dfs.sh
 sbin/start-yarn.sh
@@ -179,7 +179,7 @@ bin/mapred --daemon start historyserver
 
 -   `$HADOOP_HOME/etc/hadoop/workers`
 
-    ```bash
+    ```shell
     node101
     node102
     node103
@@ -274,7 +274,7 @@ bin/mapred --daemon start historyserver
 
 #### 分发配置
 
-```bash
+```shell
 # node101
 rsync -a -r -v $HADOOP_HOME node102:/opt
 rsync -a -r -v $HADOOP_HOME node103:/opt
@@ -282,7 +282,7 @@ rsync -a -r -v $HADOOP_HOME node103:/opt
 
 #### 格式化 NameNode
 
-```bash
+```shell
 # node101
 cd $HADOOP_HOMOE
 bin/hdfs namenode -format
@@ -290,7 +290,7 @@ bin/hdfs namenode -format
 
 #### 启动
 
-```bash
+```shell
 cd $HADOOP_HOME
 # node101
 sbin/start-dfs.sh
@@ -304,7 +304,7 @@ bin/mapred --daemon start historyserver
 
 -   快捷脚本 `$HADOOP_HOME/run.sh`
 
-    ```bash
+    ```shell
     #!/bin/bash
     case $1 in
     start)
@@ -336,7 +336,7 @@ bin/mapred --daemon start historyserver
     esac
     ```
 
-    ```bash
+    ```shell
     chmod +x run.sh
     ./run.sh jps
     ```
@@ -357,7 +357,7 @@ bin/mapred --daemon start historyserver
 
     > HA 模式不需要 SecondaryNameNode
 
-    ```bash
+    ```shell
     export JAVA_HOME=/opt/jdk-8
     export HADOOP_HOME=/opt/hadoop-3.3.1
     export HDFS_NAMENODE_USER=root
@@ -571,7 +571,7 @@ bin/mapred --daemon start historyserver
 
 #### 启动 JournalNode
 
-```bash
+```shell
 cd $HADOOP_HOME
 # node101 | node102 | node103
 bin/hdfs --daemon start journalnode
@@ -579,7 +579,7 @@ bin/hdfs --daemon start journalnode
 
 #### 格式化 NameNode
 
-```bash
+```shell
 # node101
 bin/hdfs namenode -format
 # node102 | node103
@@ -588,14 +588,14 @@ bin/hdfs namenode -bootstrapStandby
 
 #### 格式化 ZK
 
-```bash
+```shell
 # node102
 sbin/hdfs zkfs -formatZK
 ```
 
 #### 启动
 
-```bash
+```shell
 sbin/start-dfs.sh
 sbin/start-yarn.sh
 
@@ -605,7 +605,7 @@ bin/mapred --daemon start historyserver
 
 #### HA 状态
 
-```bash
+```shell
 # 查看
 bin/hdfs haadmin -getAllServiceState
 bin/yarn rmadmin -getAllServiceState
@@ -621,7 +621,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   文本
 
-    ```bash
+    ```shell
     cd $HADOOP_HOME
 
     mkdir -p input
@@ -636,7 +636,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   上传
 
-    ```bash
+    ```shell
     bin/hadoop fs -mkdir /input
 
     bin/hadoop fs -put input/word.txt /input
@@ -644,7 +644,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   执行
 
-    ```bash
+    ```shell
     hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount /input /output
     ```
 
@@ -652,7 +652,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   `winutils`
 
-    ```bash
+    ```shell
     wget https://github.com/kontext-tech/winutils/blob/master/hadoop-3.3.1/bin/winutils.exe
 
     mkdir -p /d/env/hadoop-3.3.1/bin
@@ -674,7 +674,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   在客户端模拟 Hadoop 集群 DataNode 的 `hostname`
 
-    ```bash
+    ```shell
     echo '192.168.137.101 node101' >> /c/Windows/System32/drivers/etc/hosts
     ```
 
@@ -784,7 +784,7 @@ bin/yarn rmadmin -transitionToActive --forceactive
 
 -   执行
 
-    ```bash
+    ```shell
     cd $HADOOP_HOME
 
     bin/hadoop jar word-count-0.0.1-jar-with-dependencies.jar xyz.icefery.demo.WordCount /input /output

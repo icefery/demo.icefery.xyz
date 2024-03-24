@@ -4,7 +4,7 @@
 
 ### 安装
 
-```bash
+```shell
 wget https://github.com/alibaba/canal/releases/download/canal-1.1.6/canal.deployer-1.1.6.tar.gz
 
 mkdir -p /opt/env/canal
@@ -34,7 +34,7 @@ tar -zxvf canal.deployer-1.1.6.tar.gz -C /opt/env/canal
 
 ### 启动
 
-```bash
+```shell
 rm -rf conf/example/h2.mv.db
 
 rm -rf conf/example/meta.dat
@@ -44,7 +44,7 @@ bin/startup.sh
 
 ### 查看日志
 
-```bash
+```shell
 tail logs/canal/canal.log -f -n 1000
 
 tail logs/example/example.log -f -n 1000

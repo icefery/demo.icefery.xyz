@@ -10,12 +10,12 @@ title: '在 Mac 上卸载 Python'
 
 ### 移除框架
 
-```bash
+```shell
 sudo rm -rf /Library/Frameworks/Python.framework
 ```
 
 ### 移除软链接
 
-```bash
+```shell
 ls -l /usr/local/bin | grep 'Python.framework'
 ```

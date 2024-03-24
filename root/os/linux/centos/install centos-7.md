@@ -2,7 +2,7 @@
 
 -   查看网卡 UUID
 
-    ```bash
+    ```shell
     # 查看网卡 UUID
     nmcli con
     ```
@@ -11,7 +11,7 @@
 
     > VMWare 中默认网卡名称为 `ens-33`。
 
-    ```bash
+    ```shell
     TYPE=Ethernet
     PROXY_METHOD=none
     BROWSER_ONLY=no
@@ -36,13 +36,13 @@
 
 -   重启网络
 
-    ```bash
+    ```shell
     systemctl restart network
     ```
 
 ### 换源
 
-```bash
+```shell
 sed -e 's|^mirrorlist=|#mirrorlist=|g' \
     -e 's|^#baseurl=http://mirror.centos.org/centos|baseurl=https://mirrors.ustc.edu.cn/centos|g' \
     -i.bak \
@@ -53,7 +53,7 @@ yum makecache
 
 ### 禁用 SELINUX
 
-```bash
+```shell
 getenforce
 
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
@@ -63,7 +63,7 @@ reboot
 
 ### 禁用防火墙
 
-```bash
+```shell
 systemctl stop firewalld
 
 systemctl disable firewalld
@@ -73,6 +73,6 @@ systemctl status firewalld
 
 ### 卸载 MariaDB
 
-```bash
+```shell
 rpm -e --nodeps $(rpm -qa | grep mariadb)
 ```

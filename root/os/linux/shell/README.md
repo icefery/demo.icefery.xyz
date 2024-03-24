@@ -4,7 +4,7 @@
 
 -   写入权限
 
-    ```bash
+    ```shell
     # error
     sudo echo 3 >/proc/sys/vm/drop_caches
 
@@ -14,7 +14,7 @@
 
 -   进程替换
 
-    ```bash
+    ```shell
     # 先将 ls 的结构输出到一个临时文件然后 echo 这个临时文件
     echo <(ls)
 

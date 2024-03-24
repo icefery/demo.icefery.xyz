@@ -21,12 +21,12 @@
 
 -   提交
 
-    ```bash
+    ```shell
     curl http://127.0.0.1:8081/purchase/commit
     ```
 
 -   回滚
 
-    ```bash
+    ```shell
     curl http://127.0.0.1:8081/purchase/rollback
     ```

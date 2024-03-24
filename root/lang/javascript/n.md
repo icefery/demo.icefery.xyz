@@ -1,6 +1,6 @@
 ## 安装
 
-```bash
+```shell
 curl -L https://bit.ly/n-install | bash
 ```
 
@@ -8,6 +8,6 @@ curl -L https://bit.ly/n-install | bash
 
 -   切换 LTS 版本
 
-    ```bash
+    ```shell
       n lts
     ```

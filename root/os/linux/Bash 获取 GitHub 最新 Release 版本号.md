@@ -1,6 +1,6 @@
 ### 下载最新版 nerdctl
 
-```bash
+```shell
 REPO="containerd/nerdctl"
 TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r ".tag_name")
 ASSET="nerdctl-full-${TAG//v/}-linux-$(dpkg --print-architecture).tar.gz"

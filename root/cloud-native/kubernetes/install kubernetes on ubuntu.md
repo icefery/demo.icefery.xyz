@@ -1,6 +1,6 @@
 ## 前置条件
 
-```bash
+```shell
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -22,7 +22,7 @@ sudo sysctl --system
 
 ### 设置守护进程代理
 
-```bash
+```shell
 mkdir -p /etc/systemd/system/containerd.service.d
 
 cat <<- EOF > /etc/systemd/system/containerd.service.d/proxy.conf
@@ -36,7 +36,7 @@ systemctl daemon-reload && systemctl restart containerd
 
 ### 设置 Cgroup
 
-```bash
+```shell
 sed -i 's#SystemdCgroup = false#SystemdCgroup = true#g' /etc/containerd/config.toml
 
 systemctl restart containerd
@@ -52,7 +52,7 @@ systemctl restart containerd
 
 ### 设置代理
 
-```bash
+```shell
 alias set-proxy='export http_proxy=http://192.192.192.10:7890 https_proxy=http://192.192.192.10:7890'
 alias unset-proxy='unset http_proxy https_proxy'
 
@@ -61,7 +61,7 @@ set-proxy
 
 ### 安装
 
-```bash
+```shell
 apt-get update && apt-get install -y apt-transport-https
 
 curl -o /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -77,23 +77,23 @@ apt-mark hold kubelet kubeadm kubectl
 
 ### `kubectl` 自动补全
 
-```bash
+```shell
 kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
 ```
 
 ## 安装 `flanneld`
 
-```bash
+```shell
 mkdir -p /opt/bin && wget -O /opt/bin/flanneld https://github.com/flannel-io/flannel/releases/download/v0.17.0/flanneld-amd64
 ```
 
 ## 拉取镜像
 
-```bash
+```shell
 crictl config runtime-endpoint unix:///run/containerd/containerd.sock
 ```
 
-```bash
+```shell
 kubeadm config images list
 
 kubeadm config images pull
@@ -105,25 +105,25 @@ kubeadm config images pull
 
 ### 取消代理
 
-```bash
+```shell
 unset http_proxy https_proxy
 ```
 
 ### 重置集群
 
-```bash
+```shell
 kubeadm reset
 ```
 
 ### 初始化集群
 
-```bash
+```shell
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 ```
 
-```bash
+```shell
 cat <<- EOF >> /etc/bash.bashrc
 export KUBECONFIG=/etc/kubernetes/admin.conf
 EOF
@@ -133,13 +133,13 @@ EOF
 
 -   创建 Token
 
-    ```bash
+    ```shell
     kubeadm token create --print-join-command
     ```
 
 ## 设置主节点可调度
 
-```bash
+```shell
 kubectl taint nodes --all node-role.kubernetes.io/control-plane- node-role.kubernetes.io/master-
 ```
 
@@ -147,7 +147,7 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane- node-role.kuber
 
 ### 创建资源
 
-```bash
+```shell
 wget -O kubernetes-dashboard.yaml https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.1/aio/deploy/recommended.yaml
 
 # 将 ClusterIP 修改为 NodePort
@@ -155,7 +155,7 @@ wget -O kubernetes-dashboard.yaml https://raw.githubusercontent.com/kubernetes/d
 kubectl apply -f kubernetes-dashboard.yaml
 ```
 
-```bash
+```shell
 kubectl create serviceaccount admin-user --namespace=kubernetes-dashboard
 
 kubectl create clusterrolebinding admin-user --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:admin-user
@@ -163,7 +163,7 @@ kubectl create clusterrolebinding admin-user --clusterrole=cluster-admin --servi
 
 ### 获取 Token
 
-```bash
+```shell
 kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 ```
 
@@ -171,12 +171,12 @@ kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get
 
 ### 安装
 
-```bash
+```shell
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 ```
 
 ### 自动补全
 
-```bash
+```shell
 helm completion bash > /etc/bash_completion.d/helm
 ```

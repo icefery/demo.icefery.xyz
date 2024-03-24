@@ -101,7 +101,7 @@
 
 #### 启动集群
 
-```bash
+```shell
 redis-server redis_6379.conf
 redis-server redis_6380.conf
 redis-server redis_6381.conf
@@ -112,7 +112,7 @@ redis-sentinel sentinel_26381.conf
 
 #### 查看集群信息
 
-```bash
+```shell
 redis-cli -h 127.0.0.1 -p 6379 -a 1234
 
 127.0.0.1:6379> info replication
@@ -178,7 +178,7 @@ spring:
 
 #### 启动集群
 
-```bash
+```shell
 redis-server redis_6379.conf
 redis-server redis_6380.conf
 redis-server redis_6381.conf
@@ -192,7 +192,7 @@ redis-cli --cluster create 192.192.192.101:6379 192.192.192.101:6380 192.192.192
 
 #### 查看集群信息
 
-```bash
+```shell
 # 集群模式下需要带上参数 -c
 redis-cli -c -h 127.0.0.1 -p 6379 -a 1234
 

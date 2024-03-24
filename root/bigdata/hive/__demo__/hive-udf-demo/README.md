@@ -1,6 +1,6 @@
 ## 注册函数
 
-```bash
+```shell
 bin/hdfs dfs -mkdir -p /hive
 bin/hdfs dfs -put hive-udf-demo-0.0.1-all.jar /hive
 ```

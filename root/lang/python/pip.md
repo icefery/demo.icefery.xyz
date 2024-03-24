@@ -8,14 +8,14 @@ python get-pip.py
 
 ### 换源 `~/.pip/pip.conf`
 
-```bash
+```shell
 [global]
 index-url = https://mirrors.aliyun.com/pypi/simple/
 ```
 
 ### 批量安装
 
-```bash
+```shell
 pip install -r requirements.txt
 ```
 
@@ -23,11 +23,11 @@ pip install -r requirements.txt
 
 ### 查看配置
 
-```bash
+```shell
 pip3 config list -v
 ```
 
-> ```bash
+> ```shell
 >   For variant 'global', will try loading '/Library/Application Support/pip/pip.conf'
 >   For variant 'user', will try loading '/Users/icefery/.pip/pip.conf'
 >   For variant 'user', will try loading '/Users/icefery/.config/pip/pip.conf'

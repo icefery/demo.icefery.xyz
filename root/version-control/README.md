@@ -13,13 +13,13 @@ git branch --show-current
 
 ### 每次操作都需要认证
 
-```bash
+```shell
 git config --global credential.helper store
 ```
 
 ### 使用 `git clone <URL> --depth=<NUMBER>` 后推送新远程仓库
 
-```bash
+```shell
 git remote add old <OLD_URL>
 git fetch --unshallow old
 git push --set-upstream origin

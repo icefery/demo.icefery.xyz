@@ -6,7 +6,7 @@
 
 ### RBAC
 
-```bash
+```shell
 kubectl create namespace spark
 kubectl --namespace spark create serviceaccount spark
 kubectl create clusterrolebinding spark-role --clusterrole=edit --serviceaccount=spark:spark

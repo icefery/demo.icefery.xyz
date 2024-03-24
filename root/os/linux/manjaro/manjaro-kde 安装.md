@@ -6,7 +6,7 @@
 
 ### 换源
 
-```bash
+```shell
 # 排列源
 sudo pacman-mirrors -i -c China -m rank
 
@@ -31,13 +31,13 @@ sudo pacman -Syyu
     -   https://wiki.archlinux.org/title/Fcitx5_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
     -   https://github.com/hosxy/Fcitx5-Material-Color
 
--   ```bash
+-   ```shell
     sudo pacman -S fcitx5-im fcitx5-rime fcitx5-material-color noto-fonts-emoji
     ```
 
 -   `~/.pam_environment`
 
-    ```bash
+    ```shell
     GTK_IM_MODULE DEFAULT=fcitx
     QT_IM_MODULE  DEFAULT=fcitx
     XMODIFIERS    DEFAULT=@im=fcitx
@@ -47,13 +47,13 @@ sudo pacman -Syyu
 
 -   `/etc/vimrc`
 
-    ```bash
+    ```shell
     autocmd InsertLeave * :silent !fcitx5-remote -c " 退出插入模式时禁用输入法
     autocmd BufCreate   * :silent !fcitx5-remote -c " 创建 Buf 时禁用输入法
     autocmd BufEnter    * :silent !fcitx5-remote -c " 进入 Buf 时禁用输入法
     autocmd BufLeave    * :silent !fcitx5-remote -c " 离开 Buf 时禁用输入法
     ```
 
--   ```bash
+-   ```shell
     sudo kill `ps -A | grep fcitx5 | awk '{print $1}'` && fcitx5&
     ```

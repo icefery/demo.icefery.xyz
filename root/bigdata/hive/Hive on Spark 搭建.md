@@ -21,7 +21,7 @@
 
 ### 编译
 
-```bash
+```shell
 mvn clean package -Pdist -DskipTests -Dmaven.javadoc.skip=true -fae
 ```
 
@@ -31,7 +31,7 @@ mvn clean package -Pdist -DskipTests -Dmaven.javadoc.skip=true -fae
 
 -   上传 Spark 的 JAR 包到 HDFS
 
-    ```bash
+    ```shell
     $HADOOP_HOME/bin/hdfs dfs -mkdir /spark-jars
 
     $HADOOP_HOME/bin/hdfs dfs -put $SPARK_HOME/jars/* /spark-jars
@@ -39,7 +39,7 @@ mvn clean package -Pdist -DskipTests -Dmaven.javadoc.skip=true -fae
 
 -   `conf/spark-defaults.conf`
 
-    ```bash
+    ```shell
     cp $SPARK_HOME/conf/spark-defaults.conf.template conf/spark-defaults.conf
     ```
 

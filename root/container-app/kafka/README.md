@@ -4,7 +4,7 @@
 
 ### Docker
 
-```bash
+```shell
 mkdir -p /d/mount/kafka
 
 chmod 777 -R /d/mount/kafka
@@ -12,7 +12,7 @@ chmod 777 -R /d/mount/kafka
 
 ### Helm
 
-```bash
+```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm upgrade kafka bitnami/kafka \

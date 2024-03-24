@@ -15,7 +15,7 @@
 
 -   生成集群 ID
 
-    ```bash
+    ```shell
     bin/kafka-storage.sh random-uuid > uuid
     ```
 
@@ -23,7 +23,7 @@
 
 -   格式化存储目录
 
-    ```bash
+    ```shell
     bin/kafka-storage.sh format -t `cat uuid` -c config/kraft/server.properties
     ```
 
@@ -31,12 +31,12 @@
 
 -   启动
 
-    ```bash
+    ```shell
     bin/kafka-server-start.sh -daemon config/kraft/server.properties
     ```
 
 -   创建主题
 
-    ```bash
+    ```shell
     bin/kafka-topics.sh --create --topic foo --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
     ```

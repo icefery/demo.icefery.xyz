@@ -1,6 +1,6 @@
 ### 换源
 
-```bash
+```shell
 npm config set registry http://registry.npm.taobao.org
 
 npm config get
@@ -10,12 +10,12 @@ npm config get
 
 ### 全局检查更新
 
-```bash
+```shell
 npm outdated -g --depth=0
 ```
 
 ### 查看全局包
 
-```bash
+```shell
 npm list -g --depth 0
 ```

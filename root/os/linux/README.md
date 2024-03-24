@@ -10,7 +10,7 @@
 
 -   将相对路径存入变量
 
-    ```bash
+    ```shell
     export SAME_IMAGE=$(cd ../../same-image && pwd)
     ```
 

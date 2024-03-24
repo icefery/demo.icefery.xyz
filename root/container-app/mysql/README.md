@@ -4,7 +4,7 @@
 
 ### Docker
 
-```bash
+```shell
 mysql -p
 ```
 
@@ -30,7 +30,7 @@ delete from user where user = 'root' and host = '%';
 
 ### Helm
 
-```bash
+```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
 helm repo update

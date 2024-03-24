@@ -1,6 +1,6 @@
 > `$!` 表示最后执行的进程的 PID
 
-```bash
+```shell
 #!/usr/bin/env bash
 case $1 in
 start)

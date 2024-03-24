@@ -1,6 +1,6 @@
 ### 全局配置
 
-```bash
+```shell
 git config --global user.name "icefery"
 
 git config --global user.email "icefery@163.com"
@@ -10,13 +10,13 @@ git config --global user.email "icefery@163.com"
 
 -   新建空白分支
 
-    ```bash
+    ```shell
     git checkout --orphan <branch>
     ```
 
 -   远程
 
-    ```bash
+    ```shell
     # 添加远程仓库
     git remote add origin <url>
 
@@ -38,13 +38,13 @@ git config --global user.email "icefery@163.com"
 
 -   合并到上一次提交
 
-    ```bash
+    ```shell
     git commit --amend
     ```
 
 -   撤销所有暂存和修改
 
-    ```bash
+    ```shell
     git fetch --all
 
     git reset HEAD -a
@@ -52,7 +52,7 @@ git config --global user.email "icefery@163.com"
 
 ### `.gitignore`
 
-```bash
+```shell
 # 忽略所有的 .a 文件
 *.a
 

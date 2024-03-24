@@ -1,8 +1,8 @@
-```bash
+```shell
 mvn clean package
 ```
 
-```bash
+```shell
 cd $HADOOP_HOME
 
 bin/hadoop jar word-count-0.0.1-jar-with-dependencies.jar xyz.icefery.demo.WordCount /input /output

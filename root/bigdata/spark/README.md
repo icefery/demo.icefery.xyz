@@ -4,7 +4,7 @@
 
 ### 安装
 
-```bash
+```shell
 wget https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-hadoop.tgz
 ```
 
@@ -12,7 +12,7 @@ wget https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-h
 
 -   `conf/spark-env.sh`
 
-    ```bash
+    ```shell
     JAVA_HOME=/opt/env/jdk-8
     SPARK_DIST_CLASSPATH=$(/opt/env/hadoop/bin/hadoop classpath)
     SPARK_MASTER_HOST=vm101
@@ -21,13 +21,13 @@ wget https://archive.apache.org/dist/spark/spark-3.1.3/spark-3.1.3-bin-without-h
 
 -   `conf/workers`
 
-    ```bash
+    ```shell
     vm101
     ```
 
 ### 启动
 
-```bash
+```shell
 sbin/start-all.sh
 ```
 
