@@ -25,10 +25,7 @@ impl Worker {
                 }
             }
         });
-        Worker {
-            id,
-            thread: Some(thread),
-        }
+        return Worker { id, thread: Some(thread) };
     }
 }
 
@@ -49,10 +46,7 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-        ThreadPool {
-            workers,
-            sender: Some(sender),
-        }
+        return ThreadPool { workers, sender: Some(sender) };
     }
 
     pub fn execute<F: FnOnce() + Send + 'static>(&self, f: F) {
