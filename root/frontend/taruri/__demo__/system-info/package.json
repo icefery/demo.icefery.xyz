@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "clean": "cd src-tauri && cargo clean",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "build:universal-apple-darwin": "tauri build --target universal-apple-darwin"
+  }
+}
