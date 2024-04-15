@@ -41,3 +41,11 @@ git config --global core.editor vim
 # 测试
 git commit --amend
 ```
+
+#### 从历史版本中彻底删除某个文件或目录
+
+```shell
+brew install git-filter-repo
+
+git filter-repo --invert-paths --path <文件或目录>
+```
