@@ -51,3 +51,17 @@
 ### [Linux 磁盘空间占满，但搜不到大文件](https://blog.csdn.net/weixin_38746118/article/details/131312383)
 
 ### [ssh 批量免密登录](https://blog.csdn.net/m0_57808069/article/details/129725893)
+
+### Linux 清理所有的防火墙规则
+
+```shell
+sudo iptables -F
+sudo iptables -X
+sudo iptables -t nat -F
+sudo iptables -t nat -X
+sudo iptables -t mangle -F
+sudo iptables -t mangle -X
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+```
