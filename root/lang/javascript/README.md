@@ -26,7 +26,7 @@
 export FNM_DIR="/opt/env/fnm"
 export FNM_NODE_DIST_MIRROR="https://mirrors.tuna.tsinghua.edu.cn/nodejs-release"
 export NODE_HOME="${FNM_DIR}/alias/default"
-export PATH="${FNM_DIR}/bin:${NODE_HOME}/bin:$PATH"
+export PATH="${FNM_DIR}/bin:${NODE_HOME}/bin:${PATH}"
 
 curl -L -O "$(curl -fsSL "https://api.github.com/repos/Schniz/fnm/releases/latest" | jq -r '.assets[] | select(.name | test("fnm-linux.zip$")) | .browser_download_url')"
 

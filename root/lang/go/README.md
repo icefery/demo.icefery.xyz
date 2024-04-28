@@ -14,7 +14,7 @@ export GOROOT="/opt/env/g/go"
 export GOPATH="/opt/env/gopath"
 export GOPROXY="https://goproxy.cn,direct"
 export GO111MODULE="on"
-export PATH="${G_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:$PATH"
+export PATH="${G_HOME}/bin:${GOROOT}/bin:${GOPATH}/bin:${PATH}"
 
 mkdir -p "${G_HOME}/bin"
 
