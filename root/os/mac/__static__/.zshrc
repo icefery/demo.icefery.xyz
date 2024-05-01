@@ -9,4 +9,6 @@ plugins=(sudo)
 
 source "${ZSH}/oh-my-zsh.sh"
 
-[[ -f ~/env.sh ]] && source ~/env.sh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+[[ -f /opt/env.sh ]] && source /opt/env.sh

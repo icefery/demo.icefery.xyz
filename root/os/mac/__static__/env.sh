@@ -56,11 +56,17 @@ function stop_proxy() {
 }
 
 function config_alias() {
-    if [[ -n ${BASH_VERSION} ]]; then
+    case "${OSTYPE}" in
+    msys*)
         alias ll="ls -l -h -A -F"
-    elif [[ -n ${ZSH_VERSION} ]]; then
+        ;;
+    linux*)
+        alias ll="ls -l -h -A -F"
+        ;;
+    darwin*)
         alias ll="ls -l -h -A -G -D '%Y-%m-%d %H:%M:%S'"
-    fi
+        ;;
+    esac
 }
 
 function config_homebrew() {
