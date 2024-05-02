@@ -2,6 +2,49 @@ export TZ="Asia/Shanghai"
 export LANG="en_US.UTF-8"
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
 
+# env
+ENV_OS=$(
+    case "$(uname -s)" in
+    Linux)
+        echo "linux"
+        ;;
+    Darwin)
+        echo "darwin"
+        ;;
+    MINGW* | CYGWIN*)
+        echo "windows"
+        ;;
+    *)
+        echo "unknown"
+        exit 1
+        ;;
+    esac
+)
+ENV_ARCH=$(
+    case "$(uname -m)" in
+    amd64 | x86_64)
+        echo "amd64"
+        ;;
+    arm64 | aarch64)
+        echo "arm64"
+        ;;
+    *)
+        echo "unknown"
+        exit 1
+        ;;
+    esac
+)
+ENV_SHELL=$(
+    if [[ -n ${BASH_VERSION} ]]; then
+        echo "bash"
+    elif [[ -n ${ZSH_VERSION} ]]; then
+        echo "zsh"
+    else
+        echo "unknown"
+        exit 1
+    fi
+)
+
 # homebrew
 export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_INSTALL_FROM_API=1
@@ -56,15 +99,16 @@ function stop_proxy() {
 }
 
 function config_alias() {
-    case "${OSTYPE}" in
-    msys*)
+    case "${ENV_OS}" in
+    linux | windows)
         alias ll="ls -l -h -A -F"
         ;;
-    linux*)
-        alias ll="ls -l -h -A -F"
-        ;;
-    darwin*)
+    darwin)
         alias ll="ls -l -h -A -G -D '%Y-%m-%d %H:%M:%S'"
+        ;;
+    *)
+        echo "unkown"
+        exit 1
         ;;
     esac
 }
@@ -72,30 +116,35 @@ function config_alias() {
 function config_homebrew() {
     if [[ $(command -v brew) ]]; then
         eval "$(brew shellenv)"
-        if [[ -n ${BASH_VERSION} ]]; then
-            HOMEBREW_PREFIX="$(brew --prefix)"
+        case "${ENV_SHELL}" in
+        bash)
             if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
                 source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
             else
-                for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-                    [[ -r ${COMPLETION} ]] && source "${COMPLETION}"
+                for completion in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+                    [[ -r ${completion} ]] && source "${completion}"
                 done
             fi
-        elif [[ -n ${ZSH_VERSION} ]]; then
-            FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+            ;;
+        zsh)
+            FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
             autoload -Uz compinit
             compinit
-        fi
+            ;;
+        esac
     fi
 }
 
-function config_miniconda() {
+function config_python() {
     if [[ $(command -v conda) ]]; then
-        if [[ -n ${BASH_VERSION} ]]; then
+        case "${ENV_SHELL}" in
+        bash)
             eval "$(conda shell.bash hook 2> /dev/null)"
-        elif [[ -n ${ZSH_VERSION} ]]; then
+            ;;
+        zsh)
             eval "$(conda shell.zsh hook 2> /dev/null)"
-        fi
+            ;;
+        esac
     fi
     if [[ ! -f ~/.pip/pip.conf ]]; then
         mkdir -p ~/.pip
@@ -106,29 +155,35 @@ EOF
     fi
 }
 
-function config_fnm() {
+function config_node() {
     if [[ $(command -v fnm) ]]; then
         eval "$(fnm env)"
-        if [[ -n ${BASH_VERSION} ]]; then
+        case "${ENV_SHELL}" in
+        bash)
             eval "$(fnm completions --shell bash)"
-        elif [[ -n ${ZSH_VERSION} ]]; then
+            ;;
+        zsh)
             eval "$(fnm completions --shell zsh)"
-        fi
+            ;;
+        esac
     fi
 }
 
-function config_cargo() {
+function config_rust() {
     if [[ $(command -v cargo) ]]; then
-        if [[ -n ${BASH_VERSION} ]]; then
+        case "${ENV_SHELL}" in
+        bash)
             eval "$(rustup completions bash)"
             eval "$(rustup completions bash cargo)"
-        elif [[ -n ${ZSH_VERSION} ]]; then
+            ;;
+        zsh)
             if [[ ! -f ~/.zfunc/_rustup ]]; then
                 mkdir -p ~/.zfunc
                 rustup completions zsh > ~/.zfunc/_rustup
                 rustup completions zsh cargo > ~/.zfunc/_cargo
             fi
-        fi
+            ;;
+        esac
     fi
     if [[ ! -f "${CARGO_HOME}/config.toml" ]]; then
         mkdir -p "${CARGO_HOME}"
@@ -141,8 +196,55 @@ EOF
     fi
 }
 
+function install_python() {
+    local url=""
+    case "${ENV_OS}/${ENV_ARCH}" in
+    linux/amd64)
+        url="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+        ;;
+    linux/arm64)
+        url="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh"
+        ;;
+    darwin/amd64)
+        url="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh"
+        ;;
+    darwin/arm64)
+        url="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh"
+        ;;
+    windows/amd64 | windows/arm64 | *)
+        echo "unknown"
+        exit 1
+        ;;
+    esac
+    wget "${url}" -O /opt/env/install_miniconda.sh
+    mkdir -p "${CONDA_PREFIX}"
+    bash /opt/env/install_miniconda.sh -b -f -p "${CONDA_PREFIX}"
+}
+
+function install_node() {
+    mkdir -p "${FNM_DIR}/bin"
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "${FNM_DIR}/bin" --skip-shell
+    fnm install --lts
+}
+
+function install_go() {
+    local version=$(curl -s https://api.github.com/repos/voidint/g/releases/latest | jq -r '.tag_name' | sed 's/v//')
+    local url="https://github.com/voidint/g/releases/download/v${version}/g${version}.${ENV_OS}-${ENV_ARCH}.tar.gz"
+    wget "${url}" -O /opt/env/g.tar.gz
+    mkdir -p "${G_HOME}/bin"
+    tar -zxvf /opt/env/g.tar.gz -C "${G_HOME}/bin"
+    g install $(g ls-remote | grep -vE 'rc|beta' | tail -n 1)
+}
+
+function install_rust() {
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- \
+        --no-modify-path \
+        --default-toolchain=stable \
+        --profile=complete
+}
+
 config_alias
 config_homebrew
-config_miniconda
-config_fnm
-config_cargo
+config_python
+config_node
+config_rust
