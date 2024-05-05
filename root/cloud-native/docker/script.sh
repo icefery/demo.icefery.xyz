@@ -3,8 +3,8 @@ function install() {
     sudo sed -i 's download.docker.com mirrors.tuna.tsinghua.edu.cn/docker-ce g' /etc/apt/sources.list.d/docker.list
     sudo tee /etc/docker/daemon.json > /dev/null <<- "EOF"
 {
-  "data-root": "/opt/data/docker",
-  "registry-mirrors": ["https://uwk49ut2.mirror.aliyuncs.com"]
+  "data-root": "/data/docker",
+  "registry-mirrors": ["https://docker.mirrors.sjtug.sjtu.edu.cn", "https://docker.nju.edu.cn", "https://uwk49ut2.mirror.aliyuncs.com"]
 }
 EOF
     sudo systemctl daemon-reload

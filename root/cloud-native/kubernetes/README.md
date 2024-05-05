@@ -29,14 +29,10 @@ kubectl get replicaset.apps -A | grep "0         0         0" | awk '{print $2}'
 #### 无法删除命名空间
 
 ```shell
-# 代理接口
-kubectl proxy --port=8081
-
-NS=longhorn-system
-# 导出资源文件
-kubectl get namespaces ${NS} -o json > ${NS}.json
-# 调用接口
-curl -k -H "Content-Type:application/json" -X PUT --data-binary @${NS}.json http://127.0.0.1:8081/api/v1/namespaces/${NS}/finalize
+function delete_k8s_terminating_namespace() {
+    ns=$1
+    kubectl get namespaces "${ns}" -o json | jq ".spec.finalizers = []" | kubectl replace --raw "/api/v1/namespaces/${ns}/finalize" -f - | jq
+}
 ```
 
 #### 查看某个命名空间下的所有镜像

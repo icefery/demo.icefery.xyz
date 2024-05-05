@@ -65,3 +65,9 @@ sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
 ```
+
+### 查看指定网段已占用 IP
+
+```shell
+nmap -sn 192.168.31.0/24
+```
