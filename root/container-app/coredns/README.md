@@ -21,7 +21,7 @@ helm repo add coredns https://coredns.github.io/helm
 
 helm repo update
 
-helm upgrade coredns coredns/coredns --install --namespace coredns --create-namespace --values values.yaml --version 1.19.4
+helm upgrade coredns coredns/coredns --install --namespace kube-system --create-namespace --values values.yaml --version 1.19.4
 ```
 
 ## 在 K8S 集群内引入自定义 DNS 服务
