@@ -1,4 +1,4 @@
-package ratelimiter
+package limit_util
 
 import (
 	"log"
@@ -39,6 +39,11 @@ func (this *RateLimiter[T]) LimitCall(configKey string, targetKey string, fnInpu
 	this.mutex.Lock()
 	defer this.mutex.Unlock()
 
+	if _, ok := this.configs[configKey]; !ok {
+		fn(configKey, targetKey, []T{fnInput})
+		return
+	}
+
 	limiterKey := configKey + ":" + targetKey
 	if _, ok := this.limiters[limiterKey]; !ok {
 		config := this.configs[configKey]
@@ -48,7 +53,7 @@ func (this *RateLimiter[T]) LimitCall(configKey string, targetKey string, fnInpu
 	// 1. 已经被限制调用
 	if until, ok := this.untils[limiterKey]; ok && time.Now().Before(until) {
 		this.buffers[limiterKey] = append(this.buffers[limiterKey], fnInput)
-		log.Printf("[已经被限制调用] limiterKey=%s fnInput=%v until=%v bufferSize=%v \n", limiterKey, fnInput, until.Format(time.DateTime), len(this.buffers[limiterKey]))
+		log.Printf("[已经被限制调用] limiterKey=%v until=%v bufferSize=%v \n", limiterKey, until.Format(time.DateTime), len(this.buffers[limiterKey]))
 		return
 	}
 
@@ -57,14 +62,14 @@ func (this *RateLimiter[T]) LimitCall(configKey string, targetKey string, fnInpu
 	if !limiter.Allow() {
 		this.untils[limiterKey] = time.Now().Add(this.configs[configKey].Duration)
 		this.buffers[limiterKey] = []T{fnInput}
-		log.Printf("[开始被限制调用] limiterKey=%s fnInput=%v duration=%v bufferSize=%v \n", limiterKey, fnInput, this.configs[configKey].Duration, len(this.buffers[limiterKey]))
+		log.Printf("[开始被限制调用] limiterKey=%v duration=%v bufferSize=%v \n", limiterKey, this.configs[configKey].Duration, len(this.buffers[limiterKey]))
 		go func(limiterKey string) {
 			// 3. 结束被限制调用
 			time.Sleep(this.configs[configKey].Duration)
 			this.mutex.Lock()
 			defer this.mutex.Unlock()
 			if len(this.buffers[limiterKey]) > 0 {
-				log.Printf("[结束被限制调用] limiterKey=%s buffer=%v \n", limiterKey, len(this.buffers[limiterKey]))
+				log.Printf("[结束被限制调用] limiterKey=%v buffer=%v \n", limiterKey, len(this.buffers[limiterKey]))
 				fn(configKey, targetKey, this.buffers[limiterKey])
 				delete(this.buffers, limiterKey)
 				delete(this.untils, limiterKey)
@@ -72,6 +77,4 @@ func (this *RateLimiter[T]) LimitCall(configKey string, targetKey string, fnInpu
 		}(limiterKey)
 		return
 	}
-
-	fn(configKey, limiterKey, []T{fnInput})
 }

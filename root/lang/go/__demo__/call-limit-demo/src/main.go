@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"call-limit-demo/src/ratelimiter"
+	"call-limit-demo/src/utils/limit_util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +17,7 @@ func CallThirdParty(configKey string, targetKey string, inputs []int) {
 // for i in {1..15}; do curl "http://127.0.0.1:8080/thirdparty/call?configKey=b&targetKey=$(whoami)&input=${i}"; done
 // for i in {1..15}; do curl "http://127.0.0.1:8080/thirdparty/call-limit?configKey=b&targetKey=$(whoami)&input=${i}"; done
 func main() {
-	rl := ratelimiter.NewRateLimiter[int]([]ratelimiter.Config{
+	rl := limit_util.NewRateLimiter[int]([]limit_util.Config{
 		{Key: "a", Limit: 100, Duration: 5 * time.Minute},
 		{Key: "b", Limit: 10, Duration: 2 * time.Minute},
 		{Key: "c", Limit: 5, Duration: 1 * time.Minute},
