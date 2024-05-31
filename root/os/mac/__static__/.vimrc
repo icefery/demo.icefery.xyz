@@ -1,5 +1,3 @@
-let skip_defaults_vim=1
-
 colorscheme morning
 filetype on
 syntax on
