@@ -27,3 +27,28 @@ order by tables.table_schema, tables.table_name, columns.ordinal_position
 ## 收藏
 
 #### [mysql 设置了 utf8mb4，为什么还有 utf8mb4_general_ci 和 utf8mb4_0900_ai_ci？](https://www.cnblogs.com/seasonhu/p/14994857.html)
+
+#### `RANGE` 分区
+
+```sql
+alter table t_product
+partition by range (year(create_time) * 10000 + month(create_time) * 100 + day(create_time)) (
+    partition pold     values less than (20200101),
+    partition p2020    values less than (20210101),
+    partition p2021    values less than (20220101),
+    partition p2022    values less than (20230101),
+    partition p2023    values less than (20240101),
+    partition p2024_01 values less than (20240201),
+    partition p2024_02 values less than (20240301),
+    partition p2024_03 values less than (20240401),
+    partition p2024_04 values less than (20240501),
+    partition p2024_05 values less than (20240601),
+    partition p2024_06 values less than (20240701),
+    partition p2024_07 values less than (20240801),
+    partition p2024_08 values less than (20240901),
+    partition p2024_09 values less than (20241001),
+    partition p2024_10 values less than (20241101),
+    partition p2024_11 values less than (20250101),
+    partition p2024_12 values less than (20260101)
+);
+```
