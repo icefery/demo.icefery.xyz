@@ -71,3 +71,65 @@ sudo iptables -P OUTPUT ACCEPT
 ```shell
 nmap -sn 192.168.31.0/24
 ```
+
+### GLIBC 和 MUSL
+
+#### 查看 GLIBC 版本
+
+```shell
+ldd --version
+```
+
+```
+ldd (GNU libc) 2.39
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+```
+
+#### 判断 GLIBC 和 MUSL
+
+```shell
+cargo build --release --target=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-musl
+
+ldd target/x86_64-unknown-linux-gnu/release/my-app
+
+ldd target/x86_64-unknown-linux-musl/release/my-app
+```
+
+```
+        linux-vdso.so.1 (0x00007ffe3afc0000)
+        libgcc_s.so.1 => /usr/lib/libgcc_s.so.1 (0x0000701222b6e000)
+        libm.so.6 => /usr/lib/libm.so.6 (0x0000701222a83000)
+        libc.so.6 => /usr/lib/libc.so.6 (0x0000701222414000)
+        /lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x0000701222ba3000)
+```
+
+```shell
+        statically linked
+```
+
+#### 查看可执行文件动态链接的 GLIBC 版本
+
+```shell
+strings /lib64/ld-linux-x86-64.so.2 | grep GLIBC_
+```
+
+```
+GLIBC_2.2.5
+GLIBC_2.3
+GLIBC_2.4
+GLIBC_2.34
+GLIBC_2.35
+GLIBC_PRIVATE
+GLIBC_TUNABLES
+GLIBC_TUNABLES
+GLIBC_PRIVATE
+GLIBC_TUNABLES
+GLIBC_ABI_DT_RELR
+GLIBC_2.2.5
+WARNING: ld.so: invalid GLIBC_TUNABLES value `%.*s' for option `%s': ignored.
+WARNING: ld.so: invalid GLIBC_TUNABLES `%s': ignored.
+DT_RELR without GLIBC_ABI_DT_RELR dependency
+```
