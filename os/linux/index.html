@@ -12164,6 +12164,48 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#glibc-musl" class="md-nav__link">
+    <span class="md-ellipsis">
+      GLIBC 和 MUSL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GLIBC 和 MUSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#glibc" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看 GLIBC 版本
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glibc-musl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      判断 GLIBC 和 MUSL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glibc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      查看可执行文件动态链接的 GLIBC 版本
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -12239,6 +12281,50 @@
 </span></code></pre></div>
 <h3 id="ip">查看指定网段已占用 IP<a class="headerlink" href="#ip" title="Permanent link">&para;</a></h3>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nmap<span class="w"> </span>-sn<span class="w"> </span><span class="m">192</span>.168.31.0/24
+</span></code></pre></div>
+<h3 id="glibc-musl">GLIBC 和 MUSL<a class="headerlink" href="#glibc-musl" title="Permanent link">&para;</a></h3>
+<h4 id="glibc">查看 GLIBC 版本<a class="headerlink" href="#glibc" title="Permanent link">&para;</a></h4>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>ldd<span class="w"> </span>--version
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>ldd (GNU libc) 2.39
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Copyright (C) 2024 Free Software Foundation, Inc.
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>This is free software; see the source for copying conditions.  There is NO
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>Written by Roland McGrath and Ulrich Drepper.
+</span></code></pre></div>
+<h4 id="glibc-musl_1">判断 GLIBC 和 MUSL<a class="headerlink" href="#glibc-musl_1" title="Permanent link">&para;</a></h4>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cargo<span class="w"> </span>build<span class="w"> </span>--release<span class="w"> </span>--target<span class="o">=</span>x86_64-unknown-linux-gnu<span class="w"> </span>--target<span class="o">=</span>x86_64-unknown-linux-musl
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>ldd<span class="w"> </span>target/x86_64-unknown-linux-gnu/release/my-app
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>ldd<span class="w"> </span>target/x86_64-unknown-linux-musl/release/my-app
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        linux-vdso.so.1 (0x00007ffe3afc0000)
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        libgcc_s.so.1 =&gt; /usr/lib/libgcc_s.so.1 (0x0000701222b6e000)
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        libm.so.6 =&gt; /usr/lib/libm.so.6 (0x0000701222a83000)
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        libc.so.6 =&gt; /usr/lib/libc.so.6 (0x0000701222414000)
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        /lib64/ld-linux-x86-64.so.2 =&gt; /usr/lib64/ld-linux-x86-64.so.2 (0x0000701222ba3000)
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">        </span>statically<span class="w"> </span>linked
+</span></code></pre></div>
+<h4 id="glibc_1">查看可执行文件动态链接的 GLIBC 版本<a class="headerlink" href="#glibc_1" title="Permanent link">&para;</a></h4>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>strings<span class="w"> </span>/lib64/ld-linux-x86-64.so.2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>GLIBC_
+</span></code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>GLIBC_2.2.5
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>GLIBC_2.3
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>GLIBC_2.4
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>GLIBC_2.34
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>GLIBC_2.35
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>GLIBC_PRIVATE
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>GLIBC_TUNABLES
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>GLIBC_TUNABLES
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>GLIBC_PRIVATE
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>GLIBC_TUNABLES
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>GLIBC_ABI_DT_RELR
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>GLIBC_2.2.5
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>WARNING: ld.so: invalid GLIBC_TUNABLES value `%.*s&#39; for option `%s&#39;: ignored.
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>WARNING: ld.so: invalid GLIBC_TUNABLES `%s&#39;: ignored.
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>DT_RELR without GLIBC_ABI_DT_RELR dependency
 </span></code></pre></div>
 
 
