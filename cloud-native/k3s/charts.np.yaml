@@ -15,7 +15,7 @@ spec:
   bootstrap: true
   valuesContent: |-
     fullnameOverride: coredns
-    serviceType: ClusterIP
+    serviceType: NodePort
     prometheus:
       service:
         enabled: true
@@ -26,6 +26,7 @@ spec:
       - zones:
           - zone: .
         port: 53
+        nodePort: 53
         plugins:
           - name: errors
           - name: health
@@ -38,6 +39,11 @@ spec:
               pods insecure
               fallthrough in-addr.arpa ip6.arpa
               ttl 30
+          - name: etcd
+            configBlock: |-
+              path /skydns
+              endpoint http://hp-vm-101:2379
+              fallthrough
           - name: prometheus
             parameters: 0.0.0.0:9153
           - name: forward
@@ -169,7 +175,7 @@ metadata:
 spec:
   repo: https://charts.longhorn.io
   chart: longhorn
-  version: 1.5.3
+  version: 1.6.1
   targetNamespace: longhorn-system
   bootstrap: true
   valuesContent: |-

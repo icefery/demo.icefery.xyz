@@ -15,15 +15,6 @@ defaultSettings:
 longhornUI:
   replicas: 1
 
-longhornConversionWebhook:
-  replicas: 1
-
-longhornAdmissionWebhook:
-  replicas: 1
-
-longhornRecoveryBackend:
-  replicas: 1
-
 ingress:
   enabled: true
   host: longhorn.example.org

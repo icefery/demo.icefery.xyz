@@ -9058,6 +9058,8 @@
           
         
       
+        
+      
     
     
       
@@ -9085,6 +9087,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_13_9" id="__nav_13_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_9_label" aria-expanded="false">
@@ -9094,6 +9101,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lang/rust/%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    笔记
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -10574,7 +10602,7 @@
         
   
   <span class="md-ellipsis">
-    Vim
+    VIM
   </span>
   
 
@@ -12156,7 +12184,7 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>helm<span class="w"> </span>repo<span class="w"> </span>update
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>coredns<span class="w"> </span>coredns/coredns<span class="w"> </span>--install<span class="w"> </span>--namespace<span class="w"> </span>coredns<span class="w"> </span>--create-namespace<span class="w"> </span>--values<span class="w"> </span>values.yaml<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.19.4
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>helm<span class="w"> </span>upgrade<span class="w"> </span>coredns<span class="w"> </span>coredns/coredns<span class="w"> </span>--install<span class="w"> </span>--namespace<span class="w"> </span>kube-system<span class="w"> </span>--create-namespace<span class="w"> </span>--values<span class="w"> </span>values.yaml<span class="w"> </span>--version<span class="w"> </span><span class="m">1</span>.19.4
 </span></code></pre></div>
 <h2 id="k8s-dns">在 K8S 集群内引入自定义 DNS 服务<a class="headerlink" href="#k8s-dns" title="Permanent link">&para;</a></h2>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>cm.yaml
