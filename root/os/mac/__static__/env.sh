@@ -3,37 +3,30 @@ export LANG="en_US.UTF-8"
 export TIME_STYLE="+%Y-%m-%d %H:%M:%S"
 
 # env
-ENV_OS=$(
-    case "$(uname -s)" in
-    Linux)
+ENV_OS="$(
+    if [[ "$(uname -s)" == "Linux" ]]; then
         echo "linux"
-        ;;
-    Darwin)
+    elif [[ $(uname -s) == "Darwin" ]]; then
         echo "darwin"
-        ;;
-    MINGW* | CYGWIN*)
+    elif [[ "$(uname -s)" == "MINGW"* || "$(uname -s)" == "CYGWIN"* ]]; then
         echo "windows"
-        ;;
-    *)
+    else
         echo "unknown"
         exit 1
-        ;;
-    esac
-)
-ENV_ARCH=$(
-    case "$(uname -m)" in
-    amd64 | x86_64)
+    fi
+)"
+
+ENV_ARCH="$(
+    if [[ "$(uname -m)" == "amd64" || "$(uname -m)" == "x86_64" ]]; then
         echo "amd64"
-        ;;
-    arm64 | aarch64)
+    elif [[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]]; then
         echo "arm64"
-        ;;
-    *)
+    else
         echo "unknown"
         exit 1
-        ;;
-    esac
-)
+    fi
+)"
+
 ENV_SHELL=$(
     if [[ -n ${BASH_VERSION} ]]; then
         echo "bash"
@@ -46,21 +39,20 @@ ENV_SHELL=$(
 )
 
 # homebrew
-export HOMEBREW_PREFIX="/opt/homebrew"
 export HOMEBREW_INSTALL_FROM_API=1
 export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
 export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
 export HOMEBREW_PIP_INDEX_URL="https://pypi.tuna.tsinghua.edu.cn/simple"
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:${PATH}"
 
-# python | miniconda
+# python | miniconda | poetry
 export CONDA_PREFIX="/opt/env/miniconda"
-export PATH="${CONDA_PREFIX}/bin:${PATH}"
+export POETRY_HOME="/opt/env/poetry"
+export PATH="${CONDA_PREFIX}/bin:${POETRY_HOME}/bin:${PATH}"
 
 # java | maven | gradle
-export JAVA_HOME="/opt/env/jdk-8"
+export JAVA_HOME="/opt/env/jdk-21"
 export M2_HOME="/opt/env/maven"
 export GRADLE_HOME="/opt/env/gradle"
 export PATH="${JAVA_HOME}/bin:${M2_HOME}/bin:${GRADLE_HOME}/bin:${PATH}"
@@ -106,14 +98,21 @@ function config_alias() {
     darwin)
         alias ll="ls -l -h -A -G -D '%Y-%m-%d %H:%M:%S'"
         ;;
-    *)
-        echo "unkown"
-        exit 1
-        ;;
     esac
 }
 
-function config_homebrew() {
+function env_homebrew_install() {
+    git clone --depth=1 "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.git" brew-install
+    /bin/bash brew-install/install.sh
+    rm -rf brew-install
+}
+
+function env_homebrew_config() {
+    if [[ ${ENV_OS} == "linux" && -x "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    elif [[ $ENV_OS == "darwin" && -x "/opt/homebrew/bin/brew" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
     if [[ $(command -v brew) ]]; then
         eval "$(brew shellenv)"
         case "${ENV_SHELL}" in
@@ -128,24 +127,13 @@ function config_homebrew() {
             ;;
         zsh)
             FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
-            autoload -Uz compinit
-            compinit
+            autoload -Uz compinit && compinit
             ;;
         esac
     fi
 }
 
-function config_python() {
-    if [[ $(command -v conda) ]]; then
-        case "${ENV_SHELL}" in
-        bash)
-            eval "$(conda shell.bash hook 2> /dev/null)"
-            ;;
-        zsh)
-            eval "$(conda shell.zsh hook 2> /dev/null)"
-            ;;
-        esac
-    fi
+function env_python_config() {
     if [[ ! -f ~/.pip/pip.conf ]]; then
         mkdir -p ~/.pip
         cat <<- 'EOF' | tee ~/.pip/pip.conf > /dev/null
@@ -155,48 +143,7 @@ EOF
     fi
 }
 
-function config_node() {
-    if [[ $(command -v fnm) ]]; then
-        eval "$(fnm env)"
-        case "${ENV_SHELL}" in
-        bash)
-            eval "$(fnm completions --shell bash)"
-            ;;
-        zsh)
-            eval "$(fnm completions --shell zsh)"
-            ;;
-        esac
-    fi
-}
-
-function config_rust() {
-    if [[ $(command -v cargo) ]]; then
-        case "${ENV_SHELL}" in
-        bash)
-            eval "$(rustup completions bash)"
-            eval "$(rustup completions bash cargo)"
-            ;;
-        zsh)
-            if [[ ! -f ~/.zfunc/_rustup ]]; then
-                mkdir -p ~/.zfunc
-                rustup completions zsh > ~/.zfunc/_rustup
-                rustup completions zsh cargo > ~/.zfunc/_cargo
-            fi
-            ;;
-        esac
-    fi
-    if [[ ! -f "${CARGO_HOME}/config.toml" ]]; then
-        mkdir -p "${CARGO_HOME}"
-        cat <<- 'EOF' | tee "${CARGO_HOME}/config.toml" > /dev/null
-[source.tuna]
-registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
-[source.crates-io]
-replace-with = "tuna"
-EOF
-    fi
-}
-
-function install_python() {
+function env_python_miniconda_install() {
     local url=""
     case "${ENV_OS}/${ENV_ARCH}" in
     linux/amd64)
@@ -211,7 +158,7 @@ function install_python() {
     darwin/arm64)
         url="https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh"
         ;;
-    windows/amd64 | windows/arm64 | *)
+    *)
         echo "unknown"
         exit 1
         ;;
@@ -221,13 +168,88 @@ function install_python() {
     bash /opt/env/install_miniconda.sh -b -f -p "${CONDA_PREFIX}"
 }
 
-function install_node() {
+function env_python_miniconda_config() {
+    if [[ $(command -v conda) ]]; then
+        case "${ENV_SHELL}" in
+        bash)
+            eval "$(conda shell.bash hook 2> /dev/null)"
+            ;;
+        zsh)
+            eval "$(conda shell.zsh hook 2> /dev/null)"
+            ;;
+        esac
+    fi
+}
+
+function env_python_poetry_config() {
+    if [[ $(command -v poetry) ]]; then
+        case "${ENV_SHELL}" in
+        bash)
+            eval "$(poetry completions bash)"
+            ;;
+        zsh)
+            mkdir -p ~/.zfunc
+            poetry completions zsh > ~/.zfunc/_poetry
+            autoload -Uz compinit && compinit
+            ;;
+        esac
+    fi
+}
+
+function env_node_fnm_install() {
     mkdir -p "${FNM_DIR}/bin"
     curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "${FNM_DIR}/bin" --skip-shell
     fnm install --lts
 }
 
-function install_go() {
+function env_node_fnm_config() {
+    if [[ $(command -v fnm) ]]; then
+        eval "$(fnm env)"
+        case "${ENV_SHELL}" in
+        bash)
+            eval "$(fnm completions --shell bash)"
+            ;;
+        zsh)
+            eval "$(fnm completions --shell zsh)"
+            ;;
+        esac
+    fi
+}
+
+function env_rust_install() {
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- \
+        --no-modify-path \
+        --default-toolchain=stable \
+        --profile=complete
+}
+
+function env_rust_config() {
+    if [[ $(command -v cargo) ]]; then
+        case "${ENV_SHELL}" in
+        bash)
+            eval "$(rustup completions bash)"
+            eval "$(rustup completions bash cargo)"
+            ;;
+        zsh)
+            mkdir -p ~/.zfunc
+            rustup completions zsh > ~/.zfunc/_rustup
+            rustup completions zsh cargo > ~/.zfunc/_cargo
+            autoload -Uz compinit && compinit
+            ;;
+        esac
+        if [[ ! -f "${CARGO_HOME}/config.toml" ]]; then
+            mkdir -p "${CARGO_HOME}"
+            cat <<- 'EOF' | tee "${CARGO_HOME}/config.toml" > /dev/null
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+[source.crates-io]
+replace-with = "tuna"
+EOF
+        fi
+    fi
+}
+
+function env_go_g_install() {
     local version=$(curl -s https://api.github.com/repos/voidint/g/releases/latest | jq -r '.tag_name' | sed 's/v//')
     local url="https://github.com/voidint/g/releases/download/v${version}/g${version}.${ENV_OS}-${ENV_ARCH}.tar.gz"
     wget "${url}" -O /opt/env/g.tar.gz
@@ -236,15 +258,10 @@ function install_go() {
     g install $(g ls-remote | grep -vE 'rc|beta' | tail -n 1)
 }
 
-function install_rust() {
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- \
-        --no-modify-path \
-        --default-toolchain=stable \
-        --profile=complete
-}
-
 config_alias
-config_homebrew
-config_python
-config_node
-config_rust
+env_homebrew_config
+env_python_config
+env_python_miniconda_config
+env_python_poetry_config
+env_node_fnm_config
+env_rust_config

@@ -5,6 +5,8 @@ CASE_SENSITIVE=true
 HIST_STAMPS="%Y-%m-%d %H:%M:%S"
 
 fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 plugins=(sudo)
 
 source "${ZSH}/oh-my-zsh.sh"
