@@ -2,7 +2,7 @@ KNATIVE_HOME=/opt/env/knative
 
 function get_latest_release_tag() {
     REPO="$1"
-    TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name')
+    TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | jq -r ".tag_name")
     echo "$TAG"
 }
 

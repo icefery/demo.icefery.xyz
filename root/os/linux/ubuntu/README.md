@@ -17,13 +17,13 @@ sudo passwd root
 
 ```shell
 # 参考 centos7 配置本地 hosts
-sudo tee /etc/hosts > /dev/null <<- 'EOF'
+sudo tee /etc/hosts > /dev/null <<- "EOF"
 127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1       localhost localhost.localdomain localhost6 localhost6.localdomain6
 EOF
 
 # 禁用 ipv6
-sudo tee /etc/sysctl.conf > /dev/null <<- 'EOF'
+sudo tee /etc/sysctl.conf > /dev/null <<- "EOF"
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.default.disable_ipv6=1
 net.ipv6.conf.lo.disable_ipv6=1
@@ -39,7 +39,7 @@ sudo vim /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
 
-```yml
+```yaml
 network:
   ethernets:
     ens33:
@@ -67,7 +67,7 @@ sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 sudo systemctl restart systemd-resolved
 
 # 配置 vim
-sudo tee /etc/vim/vimrc.local > /dev/null <<- 'EOF'
+sudo tee /etc/vim/vimrc.local > /dev/null <<- "EOF"
 set autoread
 set cursorline
 set nopaste

@@ -59,3 +59,28 @@
     exit
     #
     ```
+
+### HeroDoc
+
+```shell
+cat << EOF
+	pwd=${PWD}
+	now=$(date +%Y-%m-%d)
+EOF
+```
+
+```shell
+# 忽略前导制表符
+cat <<- EOF
+	pwd=${PWD}
+	now=$(date +%Y-%m-%d)
+EOF
+```
+
+```shell
+# 忽略前导制表符 + 禁止变量扩展
+cat <<- "EOF"
+	pwd=${PWD}
+	now=$(date +%Y-%m-%d)
+EOF
+```

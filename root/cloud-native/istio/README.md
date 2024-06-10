@@ -11,7 +11,7 @@ mv istio-1.17.1 /opt/env/istio
 cd /opt/env/istio
 
 # 配置环境变量
-tee /etc/profile.d/istio.sh <<- 'EOF'
+tee /etc/profile.d/istio.sh <<- "EOF"
 export ISTIO_HOME=/opt/env/istio
 export PATH=$ISTIO_HOME/bin:$PATH
 EOF

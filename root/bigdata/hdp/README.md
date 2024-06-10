@@ -25,7 +25,7 @@ priority=1
 ```
 
 ```shell
-tee /etc/yum.repos.d/ambari.repo > /dev/null <<- 'EOF'
+tee /etc/yum.repos.d/ambari.repo > /dev/null <<- "EOF"
 [ambari-2.7.5.0]
 name=ambari Version - ambari-2.7.5.0
 baseurl=http://hdp-111/ambari/centos7/2.7.5.0-72
@@ -34,7 +34,7 @@ enabled=1
 priority=1
 EOF
 
-tee /etc/yum.repos.d/hdp.repo > /dev/null <<- 'EOF'
+tee /etc/yum.repos.d/hdp.repo > /dev/null <<- "EOF"
 [HDP-3.1.5.0]
 name=HDP Version - HDP-3.1.5.0
 baseurl=http://hdp-111/HDP/centos7/3.1.5.0-152

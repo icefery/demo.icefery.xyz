@@ -5,7 +5,7 @@
 ### 1.1 网络配置
 
 ```shell
-cat | sudo tee /etc/systemd/network/10-enp0s1.network > /dev/null <<- 'EOF'
+cat | sudo tee /etc/systemd/network/10-enp0s1.network > /dev/null <<- "EOF"
 [Match]
 Name=enp0s1
 

@@ -19,7 +19,7 @@
 -   请求接口
 
     ```shell
-    curl -fsSL "http://127.0.0.1:3000/echo-query?arr[]=1&arr[]=2&arr[]=3" | jq
+    curl -fsSL "http://127.0.0.1:3000/echo-query?arr[]=1&arr[]=2&arr[]=3" | jq -r
     ```
 
 -   输出

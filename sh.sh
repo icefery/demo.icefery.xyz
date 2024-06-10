@@ -27,7 +27,7 @@ function format() {
 }
 
 function pre_commit() {
-    cat <<- 'EOF' | tee .git/hooks/pre-commit > /dev/null
+    cat <<- "EOF" | tee .git/hooks/pre-commit > /dev/null
 #!/usr/bin/env bash
 bash sh.sh format
 EOF

@@ -13,7 +13,7 @@ export PATH=$CARGO_HOME/bin:$PATH
 
 mkdir -pv ${CARGO_HOME}
 
-cat <<- 'EOF' | tee ${CARGO_HOME}/config.toml > /dev/null
+cat <<- "EOF" | tee ${CARGO_HOME}/config.toml > /dev/null
 [source.tuna]
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 

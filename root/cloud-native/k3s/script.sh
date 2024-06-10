@@ -2,7 +2,7 @@ function install() {
     mkdir -p /etc/rancher/k3s
 
     if [[ ! -f "/etc/rancher/k3s/registries.yaml" ]]; then
-        tee /etc/rancher/k3s/registries.yaml > /dev/null <<- 'EOF'
+        tee /etc/rancher/k3s/registries.yaml > /dev/null <<- "EOF"
 mirrors:
   docker.io:
     endpoint:
@@ -19,7 +19,7 @@ EOF
     fi
 
     if [[ ! -f "/etc/profile.d/k3s.sh" ]]; then
-        tee /etc/profile.d/k3s.sh > /dev/null <<- 'EOF'
+        tee /etc/profile.d/k3s.sh > /dev/null <<- "EOF"
 export KUBECONFIG="/etc/rancher/k3s/k3s.yaml"
 [[ -x /usr/local/bin/k3s ]]     && eval "$(k3s     completion bash)"
 [[ -x /usr/local/bin/kubectl ]] && eval "$(kubectl completion bash)"

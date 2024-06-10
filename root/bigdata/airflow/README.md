@@ -34,7 +34,7 @@ conda deactivate <NAME>
 
 ```shell
 mkdir -p ~/.pip
-tee ~/.pip/pip.conf <<- 'EOF'
+tee ~/.pip/pip.conf <<- "EOF"
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]

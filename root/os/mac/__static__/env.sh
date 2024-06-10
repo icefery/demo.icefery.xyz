@@ -136,7 +136,7 @@ function env_homebrew_config() {
 function env_python_config() {
     if [[ ! -f ~/.pip/pip.conf ]]; then
         mkdir -p ~/.pip
-        cat <<- 'EOF' | tee ~/.pip/pip.conf > /dev/null
+        cat <<- "EOF" | tee ~/.pip/pip.conf > /dev/null
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 EOF
@@ -239,7 +239,7 @@ function env_rust_config() {
         esac
         if [[ ! -f "${CARGO_HOME}/config.toml" ]]; then
             mkdir -p "${CARGO_HOME}"
-            cat <<- 'EOF' | tee "${CARGO_HOME}/config.toml" > /dev/null
+            cat <<- "EOF" | tee "${CARGO_HOME}/config.toml" > /dev/null
 [source.tuna]
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 [source.crates-io]
@@ -250,12 +250,12 @@ EOF
 }
 
 function env_go_g_install() {
-    local version=$(curl -s https://api.github.com/repos/voidint/g/releases/latest | jq -r '.tag_name' | sed 's/v//')
+    local version="$(curl -s "https://api.github.com/repos/voidint/g/releases/latest" | jq -r ".tag_name" | sed 's/v//')"
     local url="https://github.com/voidint/g/releases/download/v${version}/g${version}.${ENV_OS}-${ENV_ARCH}.tar.gz"
     wget "${url}" -O /opt/env/g.tar.gz
     mkdir -p "${G_HOME}/bin"
     tar -zxvf /opt/env/g.tar.gz -C "${G_HOME}/bin"
-    g install $(g ls-remote | grep -vE 'rc|beta' | tail -n 1)
+    g install "$(g ls-remote | grep -vE 'rc|beta' | tail -n 1)"
 }
 
 config_alias
