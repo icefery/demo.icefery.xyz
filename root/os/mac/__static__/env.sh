@@ -102,7 +102,7 @@ function config_alias() {
 }
 
 function env_homebrew_install() {
-    git clone --depth=1 "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.git" brew-install
+    git clone --depth=1 "http://mirrors.tuna.tsinghua.edu.cn/git/homebrew/install.git" brew-install
     /bin/bash brew-install/install.sh
     rm -rf brew-install
 }
