@@ -18,6 +18,8 @@
 
     ```shell
     netstat -tulnep
+
+    ss -tu
     ```
 
 -   创建交换分区

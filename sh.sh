@@ -17,7 +17,7 @@ function _sh() {
 
 function format() {
     prettier --write .
-    fd '\.(c|cpp|cxx|h|hpp|hxx)$' . | xargs
+    fd '\.(c|cpp|cxx|h|hpp|hxx)$' . | xargs clang-format --in-place
     shfmt --write --simplify --indent=4 --binary-next-line --space-redirects .
     git ls-files -z '*.sh' | while IFS= read -r -d '' file; do
         chmod +x "$file"
