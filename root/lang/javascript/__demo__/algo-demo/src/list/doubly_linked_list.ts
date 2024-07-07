@@ -135,7 +135,7 @@ export class LinkedList<T> implements IList<T> {
     this.size--
   }
 
-  insert(index: number, data: T): void {
+  add(index: number, data: T): void {
     this.checkIndex(index)
     const newNode = new ListNode<T>(data)
     let curr = this.head
@@ -171,13 +171,13 @@ export class LinkedList<T> implements IList<T> {
   }
 
   toString(): string {
-    const results = []
+    const result = []
     let curr = this.head
     while (curr !== undefined) {
-      results.push(curr.data)
+      result.push(curr.data)
       curr = curr.next
     }
-    return results.join(' -> ')
+    return JSON.stringify(result)
   }
 
   private checkIndex(index: number): void {

@@ -17,7 +17,7 @@ export interface IList<T> {
 
   del(index: number): void
 
-  insert(index: number, data: T): void
+  add(index: number, data: T): void
 
   reverse(): void
 
