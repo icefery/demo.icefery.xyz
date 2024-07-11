@@ -1,0 +1,11 @@
+services:
+  sentinel-dashboard:
+    image: docker.io/bladex/sentinel-dashboard:1.8.7
+    container_name: sentinel-dashboard
+    ports:
+      - 8858:8858
+
+networks:
+  default:
+    name: compose
+    external: true

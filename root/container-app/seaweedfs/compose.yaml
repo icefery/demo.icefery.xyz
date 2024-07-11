@@ -1,0 +1,22 @@
+services:
+  seaweedfs:
+    image: docker.io/bitnami/seaweedfs:3.69.0
+    container_name: seaweedfs
+    command:
+      - server
+      - -dir=/data
+      - -s3
+    ports:
+      - 9333:9333 # master http
+      - 8888:8888 # filer http
+      - 8333:8333 # s3 http
+    volumes:
+      - seaweedfs-data:/data
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  seaweedfs-data:
