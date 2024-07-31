@@ -1,7 +1,6 @@
 <!doctype html>
-<html>
+<html lang="zh">
   <head>
-    <meta charset="UTF-8" />
     <title>下载时重命名</title>
   </head>
   <body>
@@ -13,26 +12,34 @@
         <a href="http://192.168.8.101:9000/bucket-test/test.docx" download="测试.docx" id="ref">测试.docx</a>
       </li>
     </ul>
-    <script>
+    <script type="module">
+      /**
+       * @param {string} url
+       * @param {string} name
+       */
       function download(url, name) {
-        fetch(url, { method: 'get', mode: 'no-cors' })
+        fetch(url, {method: 'get'})
           .then(response => response.blob())
           .then(blob => {
-            const link = document.createElement('a')
-            link.href = URL.createObjectURL(blob)
-            link.download = name
-            link.click()
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a')
+            a.href = url
+            a.download = name
+            a.click()
+            URL.revokeObjectURL(url)
           })
       }
 
-      const ref = document.getElementById('ref')
-
-      ref.onclick = e => {
+      /**
+       * @type {HTMLAnchorElement}
+       */
+      const ref = document.querySelector('#ref')
+      ref.addEventListener('click', e => {
         e.preventDefault()
         const url = ref.getAttribute('href')
         const name = ref.getAttribute('download')
         download(url, name)
-      }
+      })
     </script>
   </body>
 </html>
