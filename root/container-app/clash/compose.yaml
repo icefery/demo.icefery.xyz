@@ -1,0 +1,15 @@
+services:
+  clash:
+    image: ghcr.io/icefery/clash-premium:2023.08.17
+    container_name: clash
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 7890:7890
+    volumes:
+      - /opt/module/clash/config.yaml:/root/.config/clash/config.yaml
+
+networks:
+  default:
+    name: compose
+    external: true
