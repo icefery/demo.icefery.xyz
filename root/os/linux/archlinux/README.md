@@ -50,3 +50,17 @@ packages=(
 )
 sudo pacman -Sy ${packages[@]}
 ```
+
+## pacman
+
+#### 清理包
+
+```shell
+sudo pacman -S pacman-contrib
+
+# 清理缓存
+sudo paccache -r
+
+# 清理不再需要的依赖
+sudo pacman -Rns $(pacman -Qdtq)
+```

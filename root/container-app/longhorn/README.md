@@ -6,6 +6,7 @@
 
 ```shell
 # 环境检查
+sudo pacman -S --noconfirm jq coreutils
 curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.5.3/scripts/environment_check.sh | bash
 
 # 自动安装 open-iscsi 和 nfs-client
@@ -13,6 +14,7 @@ kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.5.3/depl
 kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.5.3/deploy/prerequisite/longhorn-nfs-installation.yaml
 
 # 手动安装
-apt install open-iscsi nfs-common -y
-systemctl enable iscsid --now
+sudo apt install open-iscsi nfs-common -y
+sudo pacman -S --noconfirm open-iscsi nfs-utils
+sudo systemctl enable iscsid --now
 ```

@@ -1,19 +1,16 @@
-NAMESPACE=kube-system
-VERSION=1.22.0
-
-function helm::install() {
+function helm_install() {
     helm repo add coredns https://coredns.github.io/helm
     helm repo update
-    helm install coredns coredns/coredns --namespace ${NAMESPACE} --create-namespace --values values.yaml
+    helm install coredns coredns/coredns --namespace kube-system --create-namespace --values values.yaml
 }
 
-function helm::uninstall() {
-    helm uninstall coredns --namespace ${NAMESPACE}
+function helm_uninstall() {
+    helm uninstall coredns --namespace kube-system
 }
 
 LIST=(
-    helm::install
-    helm::uninstall
+    helm_install
+    helm_uninstall
 )
 
 if [[ -n $1 ]]; then

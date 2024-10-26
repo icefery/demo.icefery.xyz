@@ -11,8 +11,8 @@ metadata:
   namespace: doris
 spec:
   feSpec:
-    replicas: 3
-    image: selectdb/doris.fe-ubuntu:2.0.2
+    replicas: 1
+    image: selectdb/doris.fe-ubuntu:2.1.1
     service:
       type: LoadBalancer
     envVars:
@@ -21,8 +21,8 @@ spec:
     systemInitialization:
       command: ['/sbin/sysctl', '-w', 'vm.max_map_count=2000000']
   beSpec:
-    replicas: 3
-    image: selectdb/doris.be-ubuntu:2.0.2
+    replicas: 1
+    image: selectdb/doris.be-ubuntu:2.1.1
     service:
       type: ClusterIP
     envVars:

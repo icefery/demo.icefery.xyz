@@ -5,7 +5,7 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml
+      - ./prometheus.yaml:/opt/bitnami/prometheus/conf/prometheus.yml
       - prometheus-data:/opt/bitnami/prometheus/data
   pushgateway:
     image: bitnami/pushgateway:1.5.1

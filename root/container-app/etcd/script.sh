@@ -1,16 +1,12 @@
-NAMESPACE=kube-system
-RELEASE=etcd
-VERSION=8.10.1
-
 function helm::install() {
     helm repo add bitnami https://charts.bitnami.com/bitnami
     helm repo update
-    helm upgrade ${RELEASE} bitnami/etcd --install --namespace ${NAMESPACE} --create-namespace --values values.yaml
+    helm upgrade etcd bitnami/etcd --install --namespace kube-system --create-namespace --values values.yaml
 }
 
 function helm::uninstall() {
-    helm uninstall ${RELEASE} --namespace ${NAMESPACE}
-    kubectl delete pvc --all --namespace ${NAMESPACE}
+    helm uninstall etcd --namespace kube-system
+    kubectl delete pvc --all --namespace kube-system
 }
 
 LIST=(

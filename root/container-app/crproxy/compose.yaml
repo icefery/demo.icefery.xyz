@@ -1,8 +1,7 @@
 services:
   crproxy:
-    image: ghcr.io/daocloud/crproxy/crproxy:v0.10.0
+    image: ghcr.io/daocloud/crproxy/crproxy:v0.12.2
     container_name: crproxy
-    restart: unless-stopped
     environment:
       TZ: Asia/Shanghai
       https_proxy: http://192.168.31.101:7890

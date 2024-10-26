@@ -1,6 +1,6 @@
 services:
   postgresql:
-    image: bitnami/postgresql:16.4.0
+    image: docker.io/bitnami/postgresql:16.4.0
     container_name: postgresql
     user: root
     environment:
