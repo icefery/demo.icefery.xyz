@@ -46,3 +46,65 @@ type Sum = (a: number, b: number) => number
 
 type T3 = MyReturnType<Sum> // number
 ```
+
+### 装饰器
+
+```shell
+npm install reflect-metadata
+```
+
+```typescript
+import 'reflect-metadata'
+
+function MyClassDecorator<T extends { new (...args: any[]): {} }>(constructor: T) {
+  console.log('[MyClassDecorator] constructor=', constructor)
+}
+
+function MethodDecorator(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  console.log('[MethodDecorator] target=', target, 'propertyKey=', propertyKey, 'descriptor=', descriptor)
+}
+
+function AccessorDecorator(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+  console.log('[AccessorDecorator] target=', target, 'propertyKey=', propertyKey, 'descriptor=', descriptor)
+}
+
+function PropertyDecorator(target: any, propertyKey: string) {
+  console.log('[PropertyDecorator] target=', target, 'propertyKey=', propertyKey)
+  Reflect.metadata('aaa', '123')
+}
+
+function ParameterDecorator(target: any, propertyKey: string, parameterIndex: number) {
+  console.log('[ParameterDecorator] target=', target, 'propertyKey=', propertyKey, 'parameterIndex=', parameterIndex)
+}
+
+@MyClassDecorator
+class MyClass {
+  @PropertyDecorator
+  width: number
+
+  constructor(
+    width: number,
+    private height: number
+  ) {
+    this.width = width
+  }
+
+  @MethodDecorator
+  greet(@ParameterDecorator name: string) {
+    console.log('hello, ', name)
+  }
+
+  @AccessorDecorator
+  get area(): number {
+    return this.width * this.height
+  }
+}
+
+function main() {
+  const a = new MyClass(3, 4)
+  a.greet('world')
+  console.log(a.area)
+}
+
+main()
+```

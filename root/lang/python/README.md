@@ -19,12 +19,14 @@ python3.12 get-pip.py
 pip3.12 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 方式二
-cat <<- "EOF" | tee ~/.pip/pip.conf > /dev/null
+mkdir -p ~/.config/pip
+tee ~/.config/pip/pip.conf > /dev/null <<- "EOF"
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 EOF
 
 # 查看配置
+pip3.12 config debug
 pip3.12 config list -v
 ```
 
