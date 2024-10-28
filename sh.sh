@@ -15,6 +15,18 @@ function _sh() {
     esac
 }
 
+function prettier_fmt() {
+    prettier --write .
+}
+
+function shfmt_fmt() {
+    shfmt --write --simplify --indent=4 --space-redirects .
+}
+
+function taplo_fmt() {
+    taplo format .
+}
+
 function format() {
     prettier --write .
     fd '\.(c|cpp|cxx|h|hpp|hxx)$' . | xargs clang-format -i
