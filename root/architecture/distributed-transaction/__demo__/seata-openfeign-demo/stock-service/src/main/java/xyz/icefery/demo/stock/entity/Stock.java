@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @TableName(value = "t_stock")
 public class Stock {
+
     @TableId(type = IdType.AUTO)
     private Long id;
 

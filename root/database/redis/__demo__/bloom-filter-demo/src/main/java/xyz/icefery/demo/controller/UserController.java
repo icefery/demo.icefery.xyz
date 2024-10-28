@@ -1,5 +1,7 @@
 package xyz.icefery.demo.controller;
 
+import java.util.Collections;
+import java.util.List;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,11 +15,10 @@ import xyz.icefery.demo.constant.AppConstant;
 import xyz.icefery.demo.entity.User;
 import xyz.icefery.demo.service.UserService;
 import xyz.icefery.demo.util.R;
-import java.util.Collections;
-import java.util.List;
 
 @RestController
 public class UserController {
+
     @Autowired
     private UserService userService;
 

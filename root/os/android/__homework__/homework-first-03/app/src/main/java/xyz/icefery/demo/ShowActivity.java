@@ -6,6 +6,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ShowActivity extends AppCompatActivity {
+
     public static final String INTENT_EXTRA_KEY = "student";
 
     @Override

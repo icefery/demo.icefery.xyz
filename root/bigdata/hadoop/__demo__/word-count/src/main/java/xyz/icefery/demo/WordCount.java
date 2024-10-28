@@ -1,5 +1,6 @@
 package xyz.icefery.demo;
 
+import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -11,9 +12,8 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
-import java.io.IOException;
-
 public class WordCount {
+
     public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
@@ -37,6 +37,7 @@ public class WordCount {
     }
 
     public static class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
         @Override
         protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
@@ -48,6 +49,7 @@ public class WordCount {
     }
 
     public static class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+
         @Override
         protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
             int count = 0;
@@ -58,4 +60,3 @@ public class WordCount {
         }
     }
 }
-

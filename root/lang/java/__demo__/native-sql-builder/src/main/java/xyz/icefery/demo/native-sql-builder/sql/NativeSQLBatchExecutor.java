@@ -1,23 +1,30 @@
 package xyz.icefery.demo.util.sql;
 
 import com.google.common.collect.Lists;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import xyz.icefery.demo.util.function.ThrowableConsumer;
-import xyz.icefery.demo.util.function.ThrowableFunction;
-import xyz.icefery.demo.util.function.ThrowableSupplier;
-import xyz.icefery.demo.util.thread.AsyncAwait;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import xyz.icefery.demo.util.function.ThrowableConsumer;
+import xyz.icefery.demo.util.function.ThrowableFunction;
+import xyz.icefery.demo.util.function.ThrowableSupplier;
+import xyz.icefery.demo.util.thread.AsyncAwait;
 
 public class NativeSQLBatchExecutor {
+
     private static final Logger log = LoggerFactory.getLogger(NativeSQLBatchExecutor.class);
 
-    public static <T> ThrowableConsumer<Boolean, Exception> batchInsert(ThreadPoolExecutor executor, ThrowableSupplier<Connection, Exception> connectionGetter, ThrowableFunction<List<T>, String, Exception> sqlGetter, List<T> data, int batchSize) throws Exception {
+    public static <T> ThrowableConsumer<Boolean, Exception> batchInsert(
+        ThreadPoolExecutor executor,
+        ThrowableSupplier<Connection, Exception> connectionGetter,
+        ThrowableFunction<List<T>, String, Exception> sqlGetter,
+        List<T> data,
+        int batchSize
+    ) throws Exception {
         // 开始时间
         long start = System.currentTimeMillis();
         // 分批
@@ -48,7 +55,16 @@ public class NativeSQLBatchExecutor {
                     batchStatus = "failure";
                 }
                 long batchEnd = System.currentTimeMillis();
-                log.info("total={} batchSize={} batchCount={} batchId={} batchStatus={} batchCost={} batchSQL={}", data.size(), batchSize, batches.size(), batchId, batchStatus, batchEnd - batchStart, batchSQL.replaceAll("\n", " "));
+                log.info(
+                    "total={} batchSize={} batchCount={} batchId={} batchStatus={} batchCost={} batchSQL={}",
+                    data.size(),
+                    batchSize,
+                    batches.size(),
+                    batchId,
+                    batchStatus,
+                    batchEnd - batchStart,
+                    batchSQL.replaceAll("\n", " ")
+                );
             });
         }
         // 执行任务
@@ -56,7 +72,7 @@ public class NativeSQLBatchExecutor {
         // 结束时间
         long end = System.currentTimeMillis();
         // 提交任务
-        return (commitable) -> {
+        return commitable -> {
             String txStatus;
             if (commitable && exceptionCollector.isEmpty()) {
                 connection.commit();

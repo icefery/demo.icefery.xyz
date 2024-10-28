@@ -1,6 +1,9 @@
 package com.example;
 
 import cn.hutool.core.io.IoUtil;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import javax.sql.DataSource;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.codegen.GenerationTool;
@@ -18,13 +21,11 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import javax.sql.DataSource;
-import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
 
 @SpringBootTest
 @TestInstance(value = TestInstance.Lifecycle.PER_CLASS)
 public class AppTest {
+
     private static final String INIT_SQL = IoUtil.read(AppTest.class.getResourceAsStream("/sql/init.sql"), StandardCharsets.UTF_8);
 
     @Autowired
@@ -35,7 +36,6 @@ public class AppTest {
 
     @Autowired
     private DSLContext context;
-
 
     @BeforeAll
     public void beforeAll() throws Exception {
@@ -57,26 +57,16 @@ public class AppTest {
             .withGenerator(
                 new Generator()
                     .withDatabase(
-                        new Database()
-                            .withName("org.jooq.meta.postgres.PostgresDatabase")
-                            .withIncludes(".*")
-                            .withExcludes("")
-                            .withInputSchema("test")
+                        new Database().withName("org.jooq.meta.postgres.PostgresDatabase").withIncludes(".*").withExcludes("").withInputSchema("test")
                     )
-                    .withTarget(
-                        new Target()
-                            .withPackageName("org.jooq.codegen.maven.example")
-                            .withDirectory("src/test/java")
-                    )
+                    .withTarget(new Target().withPackageName("org.jooq.codegen.maven.example").withDirectory("src/test/java"))
             );
         GenerationTool.generate(configuration);
     }
 
     @Test
     public void test1() throws Exception {
-        try (
-            Connection connection = dataSource.getConnection()
-        ) {
+        try (Connection connection = dataSource.getConnection()) {
             DSLContext ctx = DSL.using(connection, SQLDialect.POSTGRES);
             ctx.meta().getCatalogs().forEach(System.out::println);
             ctx.meta().getSchemas().forEach(System.out::println);
@@ -84,22 +74,12 @@ public class AppTest {
         }
     }
 
-
     @Test
     public void test2() {
-        context
-            .select()
-            .from("language")
-            .fetch()
-            .forEach(System.out::println);
+        context.select().from("language").fetch().forEach(System.out::println);
 
         context
-            .select(
-                Tables.AUTHOR.FIRST_NAME,
-                Tables.AUTHOR.LAST_NAME,
-                Book.BOOK.ID,
-                Book.BOOK.TITLE
-            )
+            .select(Tables.AUTHOR.FIRST_NAME, Tables.AUTHOR.LAST_NAME, Book.BOOK.ID, Book.BOOK.TITLE)
             .from(Tables.AUTHOR)
             .join(Tables.BOOK)
             .on(Tables.AUTHOR.ID.eq(Tables.BOOK.AUTHOR_ID))

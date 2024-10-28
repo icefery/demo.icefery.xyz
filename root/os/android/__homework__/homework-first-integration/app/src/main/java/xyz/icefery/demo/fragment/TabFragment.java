@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import xyz.icefery.demo.R;
 
 public class TabFragment extends Fragment {
+
     private final String title;
     private final Integer imgResId;
 

@@ -14,6 +14,7 @@ import xyz.xgh.questionnaire.questionnaire.util.QuestionsDeserializer;
 @Accessors(chain = true)
 @TableName("questionnaire")
 public class Questionnaire {
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;

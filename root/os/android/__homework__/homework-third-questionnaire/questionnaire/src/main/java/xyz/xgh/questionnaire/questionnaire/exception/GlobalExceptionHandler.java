@@ -1,22 +1,19 @@
 package xyz.xgh.questionnaire.questionnaire.exception;
 
+import java.util.stream.Collectors;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.xgh.questionnaire.questionnaire.util.R;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler({
-        ConstraintViolationException.class,
-        MethodArgumentNotValidException.class,
-        BindException.class,
-    })
+
+    @ExceptionHandler({ ConstraintViolationException.class, MethodArgumentNotValidException.class, BindException.class })
     public R<?> validationExceptionHandler(Exception e) {
         String message = "";
         if (e instanceof ConstraintViolationException) {
@@ -24,10 +21,18 @@ public class GlobalExceptionHandler {
             message = ((ConstraintViolationException) e).getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
         } else if (e instanceof MethodArgumentNotValidException) {
             // RequestBody invalid
-            message = ((MethodArgumentNotValidException) e).getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
+            message = ((MethodArgumentNotValidException) e).getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining());
         } else if (e instanceof BindException) {
             // Type invalid
-            message = ((BindException) e).getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
+            message = ((BindException) e).getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining());
         }
         return R.failure(R.Code.ARG_INVALID, message);
     }

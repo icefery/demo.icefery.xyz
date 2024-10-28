@@ -6,7 +6,8 @@ import xyz.icefery.demo.util.MyRabbitMQ;
  * 工作队列模式-生产者
  */
 public class MyProducer {
-    static final String EXCHANGE = "";            // 默认交换机
+
+    static final String EXCHANGE = ""; // 默认交换机
     static final String QUEUE = MyConsumer.QUEUE; // 队列一般在消费者端声明
 
     public static void main(String[] args) {

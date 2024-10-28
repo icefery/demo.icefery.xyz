@@ -8,6 +8,7 @@ import xyz.icefery.demo.ssm.mapper.UserMapper;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserMapper userMapper;
 

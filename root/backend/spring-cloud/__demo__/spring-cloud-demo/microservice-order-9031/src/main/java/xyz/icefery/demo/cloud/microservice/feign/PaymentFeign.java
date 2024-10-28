@@ -14,6 +14,7 @@ public interface PaymentFeign {
 
     @Service
     class Fallback implements PaymentFeign {
+
         @Override
         public R<Object> sleep(Long milliseconds) {
             return R.failure(503, "[MICROSERVICE-PAYMENT] 暂时不可用");

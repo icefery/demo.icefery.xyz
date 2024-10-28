@@ -1,9 +1,9 @@
 package xyz.icefery.demo.security.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.List;
 import xyz.icefery.demo.security.entity.Permission;
 import xyz.icefery.demo.security.entity.Role;
-import java.util.List;
 
 /**
  * <p>

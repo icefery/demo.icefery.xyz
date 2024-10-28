@@ -13,6 +13,7 @@ import xyz.icefery.demo.message.MyMessage;
 
 @Component
 public class MyProducer {
+
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -20,14 +21,8 @@ public class MyProducer {
     private BatchingRabbitTemplate batchingRabbitTemplate;
 
     public void sendRaw(String raw) {
-        MessageProperties properties = MessagePropertiesBuilder
-            .newInstance()
-            .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
-            .build();
-        Message message = MessageBuilder
-            .withBody(raw.getBytes())
-            .andProperties(properties)
-            .build();
+        MessageProperties properties = MessagePropertiesBuilder.newInstance().setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN).build();
+        Message message = MessageBuilder.withBody(raw.getBytes()).andProperties(properties).build();
         rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ROUTING_KEY, message);
     }
 

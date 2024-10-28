@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Client2Controller {
+
     @GetMapping("/user")
     public String user() {
         return "client2-user";

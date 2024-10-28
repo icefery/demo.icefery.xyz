@@ -1,6 +1,7 @@
 package xyz.icefery.demo.service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -11,11 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.icefery.demo.constant.AppConstant;
 import xyz.icefery.demo.dao.UserMapper;
 import xyz.icefery.demo.entity.User;
-import java.util.List;
 
 @Service
 @Slf4j
 public class UserService {
+
     @Autowired
     private UserMapper userMapper;
 
@@ -45,11 +46,13 @@ public class UserService {
         return userMapper.selectList(Wrappers.<User>lambdaQuery().eq(User::getEmail, email));
     }
 
-    @Caching(evict = {
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__ID, key = "#user.id", beforeInvocation = true),
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__USERNAME, allEntries = true, beforeInvocation = true),
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__EMAIL, allEntries = true, beforeInvocation = true)
-    })
+    @Caching(
+        evict = {
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__ID, key = "#user.id", beforeInvocation = true),
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__USERNAME, allEntries = true, beforeInvocation = true),
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__EMAIL, allEntries = true, beforeInvocation = true)
+        }
+    )
     @Transactional
     public User updateUser(User user) {
         boolean exists = userMapper.exists(Wrappers.<User>lambdaQuery().eq(User::getId, user.getId()));
@@ -64,11 +67,13 @@ public class UserService {
         return user;
     }
 
-    @Caching(evict = {
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__ID, key = "#id", beforeInvocation = true),
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__USERNAME, allEntries = true, beforeInvocation = true),
-        @CacheEvict(cacheNames = AppConstant.CACHE__USER__EMAIL, allEntries = true, beforeInvocation = true)
-    })
+    @Caching(
+        evict = {
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__ID, key = "#id", beforeInvocation = true),
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__USERNAME, allEntries = true, beforeInvocation = true),
+            @CacheEvict(cacheNames = AppConstant.CACHE__USER__EMAIL, allEntries = true, beforeInvocation = true)
+        }
+    )
     @Transactional
     public void deleteUser(Long id) {
         boolean exists = userMapper.exists(Wrappers.<User>lambdaQuery().eq(User::getId, id));

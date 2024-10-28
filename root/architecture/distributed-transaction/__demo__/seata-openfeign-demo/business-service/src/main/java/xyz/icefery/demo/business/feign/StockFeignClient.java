@@ -7,8 +7,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "stock-service")
 public interface StockFeignClient {
     @GetMapping("/deduct")
-    void deduct(
-        @RequestParam("commodityId") Long commodityId,
-        @RequestParam("count") Integer count
-    );
+    void deduct(@RequestParam("commodityId") Long commodityId, @RequestParam("count") Integer count);
 }

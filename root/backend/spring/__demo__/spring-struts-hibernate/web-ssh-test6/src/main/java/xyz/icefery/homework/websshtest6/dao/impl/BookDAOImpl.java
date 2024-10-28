@@ -1,17 +1,18 @@
 package xyz.icefery.homework.websshtest6.dao.impl;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import xyz.icefery.homework.websshtest6.dao.BookDAO;
 import xyz.icefery.homework.websshtest6.entity.Book;
-import java.util.List;
 
 /**
  * @author icefery
  */
 @Repository
 public class BookDAOImpl implements BookDAO {
+
     @Autowired
     private HibernateTemplate hibernateTemplate;
 

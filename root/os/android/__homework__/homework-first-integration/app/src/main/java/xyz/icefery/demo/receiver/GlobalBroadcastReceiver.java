@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class GlobalBroadcastReceiver extends BroadcastReceiver {
+
     public static final String CUSTOM_ACTION = "xyz.icefery.demo.action.CUSTOM_ACTION";
 
     @Override

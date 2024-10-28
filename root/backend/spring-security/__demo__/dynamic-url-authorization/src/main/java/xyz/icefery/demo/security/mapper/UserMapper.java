@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.User;
  * @author icefery
  * @since 2020-07-19
  */
-public interface UserMapper extends BaseMapper<User> {
-
-}
+public interface UserMapper extends BaseMapper<User> {}

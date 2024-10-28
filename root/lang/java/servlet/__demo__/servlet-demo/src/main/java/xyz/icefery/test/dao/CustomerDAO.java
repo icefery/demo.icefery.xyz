@@ -1,14 +1,14 @@
 package xyz.icefery.test.dao;
 
-import xyz.icefery.test.entity.Customer;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import xyz.icefery.test.entity.Customer;
 
 public class CustomerDAO {
+
     private static final String URL = "jdbc:mysql://localhost:3306/test";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
@@ -44,10 +44,7 @@ public class CustomerDAO {
     }
 
     public static List<Customer> queryList() {
-        try (
-            Connection c = getConnection();
-            Statement s = c.createStatement()
-        ) {
+        try (Connection c = getConnection(); Statement s = c.createStatement()) {
             ResultSet rs = s.executeQuery("SELECT * FROM customer");
             return rs(rs);
         } catch (SQLException e) {
@@ -56,10 +53,7 @@ public class CustomerDAO {
     }
 
     public static List<Customer> queryListByName(String name) {
-        try (
-            Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE name=?")
-        ) {
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE name=?")) {
             // 允许 null
             ps.setObject(1, name);
             ResultSet rs = ps.executeQuery();
@@ -70,10 +64,7 @@ public class CustomerDAO {
     }
 
     public static List<Customer> queryListByGender(Integer gender) {
-        try (
-            Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE gender=?")
-        ) {
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE gender=?")) {
             // 允许 null
             ps.setObject(1, gender);
             ResultSet rs = ps.executeQuery();
@@ -84,10 +75,7 @@ public class CustomerDAO {
     }
 
     public static List<Customer> queryListByBirthDate(LocalDate birthDate) {
-        try (
-            Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE birth_date=?")
-        ) {
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement("SELECT * FROM customer WHERE birth_date=?")) {
             // 允许 null
             ps.setObject(1, birthDate);
             ResultSet rs = ps.executeQuery();

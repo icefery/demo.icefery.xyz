@@ -7,6 +7,7 @@ import xyz.icefery.demo.util.MyRabbitMQ;
  * 发布订阅模式-消费者-2
  */
 public class MyConsumer2 {
+
     static final String QUEUE = "q.tutorial_three.queue2";
 
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class MyConsumer2 {
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 System.out.printf("Received message='%s'\n", new String(delivery.getBody()));
             };
-            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> {});
         });
     }
 }

@@ -2,14 +2,15 @@ package xyz.icefery.demo.dead_letter;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.DeliverCallback;
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 死信队列-死信消费者
  */
 public class DeadLetterConsumer {
+
     static final String EXCHANGE = "x.dead_letter.direct";
     static final String QUEUE = "q.dead_letter";
     static final String ROUTING_KEY = "";
@@ -29,7 +30,7 @@ public class DeadLetterConsumer {
                 String at = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 System.out.printf("Received message='%s' at='%s'\n", body, at);
             };
-            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> {});
         });
     }
 }

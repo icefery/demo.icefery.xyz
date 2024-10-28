@@ -3,17 +3,18 @@ package xyz.icefery.demo.security.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import java.util.Date;
 
 @Data
 @Component
 @PropertySource("classpath:jwt.properties")
 @ConfigurationProperties(prefix = "jwt")
 public class JwtConfig {
+
     // 密钥
     private String secret;
     // 过期时间
@@ -25,11 +26,11 @@ public class JwtConfig {
     public String createToken(String username) {
         long now = System.currentTimeMillis();
         return Jwts.builder()
-                   .setSubject(username)
-                   .setIssuedAt(new Date(now))
-                   .setExpiration(new Date(now + expiration))
-                   .signWith(SignatureAlgorithm.HS256, secret)
-                   .compact();
+            .setSubject(username)
+            .setIssuedAt(new Date(now))
+            .setExpiration(new Date(now + expiration))
+            .signWith(SignatureAlgorithm.HS256, secret)
+            .compact();
     }
 
     // 校验 Token
@@ -41,10 +42,7 @@ public class JwtConfig {
     }
 
     public Claims extractClaims(String token) {
-        return Jwts.parser()
-                   .setSigningKey(secret)
-                   .parseClaimsJws(token)
-                   .getBody();
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
     // 从 Token 中提取用户名

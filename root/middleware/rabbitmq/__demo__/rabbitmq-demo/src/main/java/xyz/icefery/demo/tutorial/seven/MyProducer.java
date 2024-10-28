@@ -1,15 +1,16 @@
 package xyz.icefery.demo.tutorial.seven;
 
 import com.rabbitmq.client.ConfirmListener;
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 发布确认模式-生产者
  */
 public class MyProducer {
+
     static final String EXCHANGE = "";
 
     static final List<String> MESSAGE_LIST = new ArrayList<>();
@@ -68,8 +69,8 @@ public class MyProducer {
         String mode = "批量同步确认";
         MyRabbitMQ.start(MyProducer.class.getSimpleName(), true, channel -> {
             String queue = channel.queueDeclare().getQueue();
-            channel.confirmSelect();           // 启用发布确认
-            long batchSize = 100L;             // 批次大小
+            channel.confirmSelect(); // 启用发布确认
+            long batchSize = 100L; // 批次大小
             long outstandingMessageCount = 0L; // 未确认的消息数
             long start = System.currentTimeMillis();
             for (String body : MESSAGE_LIST) {
@@ -80,7 +81,7 @@ public class MyProducer {
                     outstandingMessageCount = 0L;
                 }
             }
-            if (outstandingMessageCount > 0) {              // 批量等待确认(消息全部发送后可能仍有未确认的消息)
+            if (outstandingMessageCount > 0) { // 批量等待确认(消息全部发送后可能仍有未确认的消息)
                 channel.waitForConfirmsOrDie(1000L);
                 outstandingMessageCount = 0L;
             }
@@ -88,7 +89,6 @@ public class MyProducer {
             System.out.printf("[%-20s] Sent %d messages for %d ms\n", mode, MESSAGE_LIST.size(), end - start);
         });
     }
-
 
     /**
      * 异步确认
@@ -98,16 +98,17 @@ public class MyProducer {
         MyRabbitMQ.start(MyProducer.class.getSimpleName(), true, channel -> {
             String queue = channel.queueDeclare().getQueue();
             channel.confirmSelect(); // 启用发布确认
-            channel.addConfirmListener(new ConfirmListener() { // 确认回调
-                @Override
-                public void handleAck(long deliveryTag, boolean multiple) throws IOException {
+            channel.addConfirmListener(
+                new ConfirmListener() { // 确认回调
+                    @Override
+                    public void handleAck(long deliveryTag, boolean multiple) throws IOException {}
 
+                    @Override
+                    public void handleNack(long deliveryTag, boolean multiple) throws IOException {
+                        System.out.println("Publishing failed");
+                    }
                 }
-                @Override
-                public void handleNack(long deliveryTag, boolean multiple) throws IOException {
-                    System.out.println("Publishing failed");
-                }
-            });
+            );
             long start = System.currentTimeMillis();
             for (String body : MESSAGE_LIST) {
                 channel.basicPublish(EXCHANGE, queue, null, body.getBytes());

@@ -1,17 +1,17 @@
 package xyz.icefery.demo.mvc.core;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 @Accessors(chain = true)
 @NoArgsConstructor
 public class ModelAndView {
+
     private final Map<String, Object> modelMap = new HashMap<>();
 
     @Getter
@@ -37,6 +37,8 @@ public class ModelAndView {
     }
 
     public static enum ResponseMethod {
-        FORWARD, REDIRECT, PLAIN
+        FORWARD,
+        REDIRECT,
+        PLAIN
     }
 }

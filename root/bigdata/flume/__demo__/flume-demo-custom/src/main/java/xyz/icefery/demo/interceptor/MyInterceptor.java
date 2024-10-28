@@ -1,13 +1,14 @@
 package xyz.icefery.demo.interceptor;
 
-import org.apache.flume.Context;
-import org.apache.flume.Event;
-import org.apache.flume.interceptor.Interceptor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.apache.flume.interceptor.Interceptor;
 
 public class MyInterceptor implements Interceptor {
+
     private List<Event> eventList;
 
     @Override
@@ -39,15 +40,16 @@ public class MyInterceptor implements Interceptor {
     }
 
     @Override
-    public void close() { }
+    public void close() {}
 
     public static class Builder implements Interceptor.Builder {
+
         @Override
         public Interceptor build() {
             return new MyInterceptor();
         }
 
         @Override
-        public void configure(Context context) { }
+        public void configure(Context context) {}
     }
 }

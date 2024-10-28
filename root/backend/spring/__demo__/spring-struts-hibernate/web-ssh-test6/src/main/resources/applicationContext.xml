@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xmlns="http://www.springframework.org/schema/beans"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
 >
   <!-- 注解扫描 -->
-  <context:component-scan base-package="xyz.icefery.homework.websshtest6" />
+  <context:component-scan base-package="xyz.icefery.homework.websshtest6"/>
 
   <!-- 数据源 -->
-  <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://localhost:3306/homework" />
-    <property name="username" value="root" />
-    <property name="password" value="root" />
+  <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/homework"/>
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
   </bean>
 
   <!-- Hibernate -->
-  <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
+  <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="sessionFactory">
+    <property name="dataSource" ref="dataSource"/>
     <property name="hibernateProperties">
       <props>
         <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
@@ -30,18 +30,18 @@
         <prop key="hibernate.format_sql">true</prop>
       </props>
     </property>
-    <property name="packagesToScan" value="xyz.icefery.homework.websshtest6.entity" />
+    <property name="packagesToScan" value="xyz.icefery.homework.websshtest6.entity"/>
   </bean>
 
   <!-- Hibernate Template -->
-  <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
-    <property name="sessionFactory" ref="sessionFactory" />
+  <bean class="org.springframework.orm.hibernate5.HibernateTemplate" id="hibernateTemplate">
+    <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
 
   <!-- Transaction -->
-  <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory" />
+  <bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
 
-  <tx:annotation-driven transaction-manager="transactionManager" />
+  <tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>

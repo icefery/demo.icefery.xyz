@@ -1,14 +1,13 @@
 package xyz.icefery.demo.jsp.dao;
 
-
-import xyz.icefery.demo.jsp.bean.Student;
-import xyz.icefery.demo.jsp.util.DbUtil;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import xyz.icefery.demo.jsp.bean.Student;
+import xyz.icefery.demo.jsp.util.DbUtil;
 
 public class StudentDao {
+
     public static void insertStudent(Student student) {
         try (Connection c = DbUtil.getConnection()) {
             if (c == null) {
@@ -30,15 +29,16 @@ public class StudentDao {
         try (Connection c = DbUtil.getConnection(); Statement s = c.createStatement()) {
             ResultSet rs = s.executeQuery("SELECT * FROM _stu_info WHERE _stu_id=" + stuId);
             if (rs.next()) {
-                student = new Student().setStuId(stuId)
-                                       .setName(rs.getString("_name"))
-                                       .setPwd(rs.getString("_pwd"))
-                                       .setSex(rs.getInt("_sex"))
-                                       .setDob(rs.getTimestamp("_dob"))
-                                       .setNativePlace(rs.getString("_native_place"))
-                                       .setAddr(rs.getString("_addr"))
-                                       .setEmail(rs.getString("_email"))
-                                       .setEnabled(rs.getInt("_enabled"));
+                student = new Student()
+                    .setStuId(stuId)
+                    .setName(rs.getString("_name"))
+                    .setPwd(rs.getString("_pwd"))
+                    .setSex(rs.getInt("_sex"))
+                    .setDob(rs.getTimestamp("_dob"))
+                    .setNativePlace(rs.getString("_native_place"))
+                    .setAddr(rs.getString("_addr"))
+                    .setEmail(rs.getString("_email"))
+                    .setEnabled(rs.getInt("_enabled"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,15 +51,18 @@ public class StudentDao {
         try (Connection c = DbUtil.getConnection(); Statement s = c.createStatement()) {
             ResultSet rs = s.executeQuery("SELECT  * FROM _stu_info");
             while (rs.next()) {
-                list.add(new Student().setStuId(rs.getString("_stu_id"))
-                                      .setName(rs.getString("_name"))
-                                      .setPwd(rs.getString("_pwd"))
-                                      .setSex(rs.getInt("_sex"))
-                                      .setDob(rs.getTimestamp("_dob"))
-                                      .setNativePlace(rs.getString("_native_place"))
-                                      .setAddr(rs.getString("_addr"))
-                                      .setEmail(rs.getString("_email"))
-                                      .setEnabled(rs.getInt("_enabled")));
+                list.add(
+                    new Student()
+                        .setStuId(rs.getString("_stu_id"))
+                        .setName(rs.getString("_name"))
+                        .setPwd(rs.getString("_pwd"))
+                        .setSex(rs.getInt("_sex"))
+                        .setDob(rs.getTimestamp("_dob"))
+                        .setNativePlace(rs.getString("_native_place"))
+                        .setAddr(rs.getString("_addr"))
+                        .setEmail(rs.getString("_email"))
+                        .setEnabled(rs.getInt("_enabled"))
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +75,9 @@ public class StudentDao {
             if (c == null) {
                 return;
             }
-            PreparedStatement ps = c.prepareStatement("UPDATE _stu_info SET _name=?, _pwd=?, _sex=?, _dob=?, _native_place=?, _addr=?, _email=?, _enabled=? WHERE _stu_id=?");
+            PreparedStatement ps = c.prepareStatement(
+                "UPDATE _stu_info SET _name=?, _pwd=?, _sex=?, _dob=?, _native_place=?, _addr=?, _email=?, _enabled=? WHERE _stu_id=?"
+            );
             ps.setString(1, student.getName());
             ps.setString(2, student.getPwd());
             ps.setInt(3, student.getSex());

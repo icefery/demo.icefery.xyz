@@ -1,17 +1,18 @@
 package xyz.icefery.demo.dead_letter;
 
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 死信队列-生产者
  */
 public class MyProducer {
+
     static final String NORMAL_EXCHANGE = NormalConsumer.EXCHANGE;
     static final String NORMAL_ROUTING_KEY = NormalConsumer.ROUTING_KEY;
 

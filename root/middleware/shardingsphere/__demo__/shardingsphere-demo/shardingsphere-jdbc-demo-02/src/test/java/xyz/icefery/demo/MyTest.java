@@ -1,5 +1,6 @@
 package xyz.icefery.demo;
 
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,10 +10,10 @@ import xyz.icefery.demo.dao.OrderMapper;
 import xyz.icefery.demo.entity.DictEntity;
 import xyz.icefery.demo.entity.OrderEntity;
 import xyz.icefery.demo.entity.OrderItemEntity;
-import java.math.BigDecimal;
 
 @SpringBootTest
 public class MyTest {
+
     @Autowired
     private OrderMapper orderMapper;
 

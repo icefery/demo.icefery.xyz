@@ -1,6 +1,7 @@
 package org.example.module.math;
 
 public class MathService {
+
     public Integer fibonacci(Integer n) {
         if (n == 0) {
             return 0;

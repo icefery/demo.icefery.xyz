@@ -1,6 +1,13 @@
 package xyz.xgh.questionnaire.questionnaire.config;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,34 +40,25 @@ import xyz.xgh.questionnaire.questionnaire.service.TenantService;
 import xyz.xgh.questionnaire.questionnaire.util.HttpServletUtil;
 import xyz.xgh.questionnaire.questionnaire.util.JwtUtil;
 import xyz.xgh.questionnaire.questionnaire.util.R;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private TenantService tenantService;
+
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(
-            "/doc.html",
-            "/swagger-ui.html",
-            "/v2/**",
-            "/swagger-resources/**",
-            "/webjars/**"
-        );
+        web.ignoring().antMatchers("/doc.html", "/swagger-ui.html", "/v2/**", "/swagger-resources/**", "/webjars/**");
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     public AuthenticationSuccessHandler successHandler() {
         return (request, response, authentication) -> {
             String username = request.getParameter("username");
@@ -76,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
+
     // 认证失败
     public AuthenticationFailureHandler failureHandler() {
         return (request, response, exception) -> {
@@ -88,6 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
+
     // 权限不足
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return (request, response, authException) -> {
@@ -95,16 +95,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             HttpServletUtil.responseJson(response, r);
         };
     }
+
     public AccessDeniedHandler accessDeniedHandler() {
         return (request, response, accessDeniedException) -> {
             R<?> r = R.failure(R.Code.PERMISSION_DENIED, accessDeniedException.getMessage());
             HttpServletUtil.responseJson(response, r);
         };
     }
+
     public OncePerRequestFilter jwtTokenFilter() {
         return new OncePerRequestFilter() {
             @Override
-            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+            protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+                throws ServletException, IOException {
                 String jwt = request.getHeader(JwtUtil.HEADER);
                 boolean responsed = false;
                 log.info("[jwtTokenFilter] jwt = " + jwt);
@@ -136,6 +139,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // cors
@@ -143,32 +147,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .cors()
             .and()
             // disable csrf
-            .csrf().disable()
+            .csrf()
+            .disable()
             // disable session
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and();
 
         http = http
             .authorizeRequests()
-            .antMatchers("/tenant/login", "/tenant/register", "/**/questionnaire/find/id/**", "/**/questionnaire-item/create").permitAll()
-            .anyRequest().authenticated()
+            .antMatchers("/tenant/login", "/tenant/register", "/**/questionnaire/find/id/**", "/**/questionnaire-item/create")
+            .permitAll()
+            .anyRequest()
+            .authenticated()
             .and();
 
-        http = http
-            .formLogin()
-            .loginProcessingUrl("/tenant/login").permitAll()
-            .successHandler(successHandler())
-            .failureHandler(failureHandler())
-            .and();
+        http = http.formLogin().loginProcessingUrl("/tenant/login").permitAll().successHandler(successHandler()).failureHandler(failureHandler()).and();
 
-        http = http
-            .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPoint())
-            .accessDeniedHandler(accessDeniedHandler())
-            .and();
+        http = http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint()).accessDeniedHandler(accessDeniedHandler()).and();
 
         http = http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         UserDetailsService userDetailsService = username -> {
@@ -183,6 +183,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         };
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
     @Bean
     @Override
     protected AuthenticationManager authenticationManager() throws Exception {

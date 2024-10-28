@@ -3,14 +3,15 @@ package xyz.icefery.ice.rpc.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import lombok.extern.slf4j.Slf4j;
 import xyz.icefery.ice.rpc.common.RPCRequest;
 import xyz.icefery.ice.rpc.common.RPCResponse;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 @Slf4j
 public class RPCClientHandler extends ChannelInboundHandlerAdapter {
+
     private final ObjectMapper objectMapper;
     private final BlockingQueue<RPCResponse> blockingQueue;
 

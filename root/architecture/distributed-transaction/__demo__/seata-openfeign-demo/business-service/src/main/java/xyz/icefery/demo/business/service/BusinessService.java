@@ -11,6 +11,7 @@ import xyz.icefery.demo.business.feign.StockFeignClient;
 @Slf4j
 @Service
 public class BusinessService {
+
     @Autowired
     private StockFeignClient stockFeignClient;
 

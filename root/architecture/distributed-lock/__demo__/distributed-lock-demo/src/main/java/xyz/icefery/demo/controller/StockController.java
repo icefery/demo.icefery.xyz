@@ -8,6 +8,7 @@ import xyz.icefery.demo.service.StockService;
 @RequiredArgsConstructor
 @RestController
 public class StockController {
+
     private final StockService stockService;
 
     // redisson lock

@@ -10,6 +10,7 @@ import android.net.Uri;
 import xyz.icefery.demo.util.DemoDBHelper;
 
 public class GlobalContentProvider extends ContentProvider {
+
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
@@ -30,7 +31,6 @@ public class GlobalContentProvider extends ContentProvider {
         return null;
     }
 
-
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         switch (URI_MATCHER.match(uri)) {
@@ -40,9 +40,7 @@ public class GlobalContentProvider extends ContentProvider {
             default:
                 return uri;
         }
-
     }
-
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
@@ -72,6 +70,5 @@ public class GlobalContentProvider extends ContentProvider {
             default:
                 return -1;
         }
-
     }
 }

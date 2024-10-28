@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.xgh.questionnaire.questionnaire.entity.QuestionnaireItem;
 
 @Mapper
-public interface QuestionnaireItemMapper extends BaseMapper<QuestionnaireItem> {
-
-}
+public interface QuestionnaireItemMapper extends BaseMapper<QuestionnaireItem> {}

@@ -1,28 +1,28 @@
 package xyz.icefery.demo.mvc.core;
 
-import lombok.extern.slf4j.Slf4j;
-import xyz.icefery.demo.mvc.annatation.Controller;
-import xyz.icefery.demo.mvc.annatation.RequestMapping;
-import xyz.icefery.demo.mvc.util.MvcUtil;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import xyz.icefery.demo.mvc.annatation.Controller;
+import xyz.icefery.demo.mvc.annatation.RequestMapping;
+import xyz.icefery.demo.mvc.util.MvcUtil;
 
 @Slf4j
 public class DispatcherServlet extends HttpServlet {
+
     // 配置信息
-    private final Properties          configuration  = new Properties();
+    private final Properties configuration = new Properties();
     // bean 容器
-    private final Map<String, Object> beanContainer  = new HashMap<>();
+    private final Map<String, Object> beanContainer = new HashMap<>();
     // 请求映射
     private final Map<String, Method> handlerMapping = new HashMap<>();
 
@@ -41,7 +41,6 @@ public class DispatcherServlet extends HttpServlet {
         doDispatch(req, resp);
     }
 
-
     // 加载配置
     private void initConfiguration(ServletConfig config) {
         String location = config.getInitParameter("contextConfiguration");
@@ -51,7 +50,6 @@ public class DispatcherServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
     // 注入 bean
     private void initBean() {
@@ -98,7 +96,6 @@ public class DispatcherServlet extends HttpServlet {
         }
     }
 
-
     // 分发请求
     private void doDispatch(HttpServletRequest req, HttpServletResponse resp) {
         if (handlerMapping.isEmpty()) {
@@ -131,5 +128,4 @@ public class DispatcherServlet extends HttpServlet {
             }
         }
     }
-
 }

@@ -7,6 +7,7 @@ import xyz.icefery.demo.util.MyRabbitMQ;
  * 主题模式-收集订单服务日志消费者
  */
 public class OrderLogConsumer {
+
     static final String QUEUE = "q.tutorial_five.order.log";
 
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class OrderLogConsumer {
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 System.out.printf("Received message='%s'\n", new String(delivery.getBody()));
             };
-            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> {});
         });
     }
 }

@@ -7,6 +7,7 @@ import xyz.icefery.demo.util.MyRabbitMQ;
  * 发布订阅模式-生产者
  */
 public class MyProducer {
+
     static final String EXCHANGE = "x.tutorial_three.fanout";
     static final String QUEUE1 = MyConsumer1.QUEUE;
     static final String QUEUE2 = MyConsumer2.QUEUE;

@@ -1,15 +1,16 @@
 package xyz.icefery.demo.delayed;
 
 import com.rabbitmq.client.DeliverCallback;
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 延迟队列-消费者
  */
 public class MyConsumer {
+
     static final String EXCHANGE = "x.delayed.x-delayed-message";
     static final String QUEUE = "q.delayed";
     static final String ROUTING_KEY = "";
@@ -30,7 +31,7 @@ public class MyConsumer {
                 String at = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                 System.out.printf("Received message='%s' at='%s'\n", body, at);
             };
-            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> { });
+            channel.basicConsume(QUEUE, true, deliverCallback, consumerTag -> {});
         });
     }
 }

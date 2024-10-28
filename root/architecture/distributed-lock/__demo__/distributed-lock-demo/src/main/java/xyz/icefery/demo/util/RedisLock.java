@@ -1,19 +1,20 @@
 package xyz.icefery.demo.util;
 
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RScript;
-import org.redisson.api.RedissonClient;
-import org.redisson.client.codec.StringCodec;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RScript;
+import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.StringCodec;
 
 @Slf4j
 public class RedisLock extends AbstractLock {
+
     private static final ThreadLocal<String> THREAD_LOCAL = new ThreadLocal<>();
 
     // EVAL <lua> 1 <key> <uuid> <expire>
@@ -48,12 +49,10 @@ public class RedisLock extends AbstractLock {
         end
         """;
 
-
     private final RedissonClient redissonClient;
     private final String name;
     private final Long expire;
     private final ScheduledExecutorService scheduledExecutorService;
-
 
     public RedisLock(RedissonClient redissonClient, String name) {
         this.redissonClient = redissonClient;
@@ -67,25 +66,31 @@ public class RedisLock extends AbstractLock {
         }
     }
 
-
     @SneakyThrows
     @Override
     public synchronized void lock() {
         String uuid = THREAD_LOCAL.get();
         // 加锁
-        while (Objects.equals(redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE, LUA_LOCK, RScript.ReturnType.BOOLEAN, List.of(name), uuid, expire), Boolean.FALSE)) {
-            TimeUnit.MILLISECONDS.sleep(expire * 1000 / 1000);
+        while (
+            Objects.equals(
+                redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE, LUA_LOCK, RScript.ReturnType.BOOLEAN, List.of(name), uuid, expire),
+                Boolean.FALSE
+            )
+        ) {
+            TimeUnit.MILLISECONDS.sleep((expire * 1000) / 1000);
         }
         // 自动续期
         scheduledExecutorService.scheduleAtFixedRate(
-            () -> redissonClient.getScript(StringCodec.INSTANCE).eval(RScript.Mode.READ_WRITE, LUA_RENEWAL, RScript.ReturnType.BOOLEAN, List.of(name), uuid, expire),
+            () ->
+                redissonClient
+                    .getScript(StringCodec.INSTANCE)
+                    .eval(RScript.Mode.READ_WRITE, LUA_RENEWAL, RScript.ReturnType.BOOLEAN, List.of(name), uuid, expire),
             0,
-            expire * 1000 / 3,
+            (expire * 1000) / 3,
             TimeUnit.MILLISECONDS
         );
         log.info("[locked] thread={}", uuid);
     }
-
 
     @Override
     public synchronized void unlock() {

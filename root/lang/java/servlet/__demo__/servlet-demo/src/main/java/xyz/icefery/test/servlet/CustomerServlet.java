@@ -1,13 +1,5 @@
 package xyz.icefery.test.servlet;
 
-import xyz.icefery.test.dao.CustomerDAO;
-import xyz.icefery.test.entity.Customer;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -15,8 +7,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import xyz.icefery.test.dao.CustomerDAO;
+import xyz.icefery.test.entity.Customer;
 
 public class CustomerServlet {
+
     private static Boolean validateGender(String gender, Consumer<Integer> onValid) {
         if (Objects.equals(gender, "1") || Objects.equals(gender, "2")) {
             if (onValid != null) {
@@ -37,7 +37,6 @@ public class CustomerServlet {
         } catch (DateTimeParseException e) {
             return false;
         }
-
     }
 
     private static Boolean validatePhone(String phone, Consumer<String> onValid) {
@@ -50,8 +49,9 @@ public class CustomerServlet {
         return false;
     }
 
-    @WebServlet({"/customer/create"})
+    @WebServlet({ "/customer/create" })
     public static class CreateServlet extends HttpServlet {
+
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             // TODO: http method validation
@@ -61,9 +61,23 @@ public class CustomerServlet {
             String phone = request.getParameter("phone");
             String occupation = request.getParameter("occupation");
             String note = request.getParameter("note");
-            
+
             // 记录参数
-            System.out.println("[CreateServlet]" + "name=" + name + "\tgender=" + gender + "\tbirthDate=" + birthDate + "\tphone=" + phone + "\toccupation=" + occupation + "\tnote=" + note);
+            System.out.println(
+                "[CreateServlet]" +
+                "name=" +
+                name +
+                "\tgender=" +
+                gender +
+                "\tbirthDate=" +
+                birthDate +
+                "\tphone=" +
+                phone +
+                "\toccupation=" +
+                occupation +
+                "\tnote=" +
+                note
+            );
 
             Customer customer = new Customer();
 
@@ -112,8 +126,9 @@ public class CustomerServlet {
         }
     }
 
-    @WebServlet({"/", "/customer/query_list"})
+    @WebServlet({ "/", "/customer/query_list" })
     public static class ListServlet extends HttpServlet {
+
         @Override
         protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             // TODO: http method validation
@@ -151,5 +166,4 @@ public class CustomerServlet {
             request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
     }
-
 }

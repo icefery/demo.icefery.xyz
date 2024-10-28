@@ -1,11 +1,12 @@
 package xyz.icefery.demo;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
                 ((EditText) super.findViewById(R.id.mail_input)).getText().toString()
             );
             // Intent
-            Intent intent = new Intent(super.getApplicationContext(),ShowActivity.class);
+            Intent intent = new Intent(super.getApplicationContext(), ShowActivity.class);
             intent.putExtra(ShowActivity.INTENT_EXTRA_KEY, student);
             // Activity
             super.startActivity(intent);

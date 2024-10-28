@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.icefery.demo.ssm.entity.User;
 import xyz.icefery.demo.ssm.service.UserService;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 

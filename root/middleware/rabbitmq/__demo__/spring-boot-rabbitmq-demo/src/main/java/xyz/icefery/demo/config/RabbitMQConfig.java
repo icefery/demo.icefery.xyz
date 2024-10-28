@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Configuration
 public class RabbitMQConfig {
+
     public static final String EXCHANGE = "x.spring_boot.direct";
     public static final String QUEUE = "q.spring_boot";
     public static final String ROUTING_KEY = "";
@@ -42,9 +43,7 @@ public class RabbitMQConfig {
         // boolean autoDelete = false;
         // Map<String, Object> arguments = null;
         // Queue queue = new Queue(QUEUE, durable, exclusive, autoDelete, arguments);
-        return QueueBuilder
-            .nonDurable(QUEUE)
-            .build();
+        return QueueBuilder.nonDurable(QUEUE).build();
     }
 
     @Bean
@@ -53,28 +52,22 @@ public class RabbitMQConfig {
         // boolean autoDelete = false;
         // Map<String, Object> arguments = null;
         // DirectExchange exchange = new DirectExchange(EXCHANGE, durable, autoDelete, arguments);
-        return ExchangeBuilder
-            .directExchange(EXCHANGE)
-            .build();
+        return ExchangeBuilder.directExchange(EXCHANGE).build();
     }
 
     @Bean
     public Binding binding1(@Qualifier("springBootQueue") Queue queue, @Qualifier("springBootExchange") Exchange exchange) {
         // Map<String, Object> arguments = null;
         // Binding binding = new Binding(QUEUE, Binding.DestinationType.QUEUE, EXCHANGE, ROUTING_KEY, arguments);
-        return BindingBuilder
-            .bind(queue)
-            .to(exchange)
-            .with(ROUTING_KEY)
-            .noargs();
+        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY).noargs();
     }
 
     @Bean
     public BatchingRabbitTemplate batchingRabbitTemplate(ConnectionFactory connectionFactory) {
         // 批量策略
-        int batchSize = 100;                // 批量收集最大消息条数
+        int batchSize = 100; // 批量收集最大消息条数
         int bufferLimit = 16 * 1024 * 1024; // 批量发送最大内存
-        long timeout = 60 * 1000L;          // 批量收集最长等待时间
+        long timeout = 60 * 1000L; // 批量收集最长等待时间
         SimpleBatchingStrategy batchingStrategy = new SimpleBatchingStrategy(batchSize, bufferLimit, timeout);
         // 超时发送定时器
         TaskScheduler taskScheduler = new ConcurrentTaskScheduler();
@@ -85,7 +78,10 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public SimpleRabbitListenerContainerFactory batchConsumeContainerFactory(SimpleRabbitListenerContainerFactoryConfigurer configurer, ConnectionFactory connectionFactory) {
+    public SimpleRabbitListenerContainerFactory batchConsumeContainerFactory(
+        SimpleRabbitListenerContainerFactoryConfigurer configurer,
+        ConnectionFactory connectionFactory
+    ) {
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
 

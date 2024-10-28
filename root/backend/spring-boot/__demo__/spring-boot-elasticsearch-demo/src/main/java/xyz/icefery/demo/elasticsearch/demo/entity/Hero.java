@@ -15,6 +15,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @NoArgsConstructor
 @Document(indexName = "hero")
 public class Hero {
+
     @Id
     @Field(type = FieldType.Integer)
     private Integer id;

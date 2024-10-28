@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class HelloController {
+
     @RequestMapping("/hello")
     public String hello(@RequestParam String name) {
         log.trace("TRACE 日志输出 {}", name);

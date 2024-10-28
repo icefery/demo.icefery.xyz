@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -21,18 +22,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-               .withClient("client1")
-               .secret(passwordEncoder.encode("client1"))
-               .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials")
-               .scopes("read", "write")
-               .redirectUris("http://localhost:1100/login")
-               .and()
-               .withClient("client2")
-               .secret(passwordEncoder.encode("client2"))
-               .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials")
-               .scopes("all")
-               .redirectUris("http://localhost:1200/login");
+        clients
+            .inMemory()
+            .withClient("client1")
+            .secret(passwordEncoder.encode("client1"))
+            .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials")
+            .scopes("read", "write")
+            .redirectUris("http://localhost:1100/login")
+            .and()
+            .withClient("client2")
+            .secret(passwordEncoder.encode("client2"))
+            .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials")
+            .scopes("all")
+            .redirectUris("http://localhost:1200/login");
     }
 
     @Override

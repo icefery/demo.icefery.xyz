@@ -1,6 +1,5 @@
 package xyz.icefery.demo.tutorial.one;
 
-
 import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -13,6 +12,7 @@ import java.util.concurrent.TimeoutException;
  * 简单模式-消费者
  */
 public class MyConsumer {
+
     public static void main(String[] args) {
         // 1. 创建连接工厂
         ConnectionFactory factory = new ConnectionFactory();
@@ -35,12 +35,12 @@ public class MyConsumer {
             channel.queueDeclare(queue, false, false, false, null);
 
             // 5. 消费消息
-            boolean autoAck = true;                                        // 是否自动应答（默认为 false）
+            boolean autoAck = true; // 是否自动应答（默认为 false）
             DeliverCallback deliverCallback = (consumerTag, delivery) -> { // 消费回调
                 String body = new String(delivery.getBody());
                 System.out.printf("Received message='%s'\n", body);
             };
-            CancelCallback cancelCallback = consumerTag -> {               // 取消消费回调(如在消费时队列被删除)
+            CancelCallback cancelCallback = consumerTag -> { // 取消消费回调(如在消费时队列被删除)
                 System.err.println("Consuming was interrupted");
             };
             channel.basicConsume(queue, autoAck, deliverCallback, cancelCallback);

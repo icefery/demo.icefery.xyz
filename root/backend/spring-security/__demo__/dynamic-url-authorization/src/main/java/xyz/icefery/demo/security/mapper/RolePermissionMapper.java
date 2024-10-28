@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.RolePermission;
  * @author icefery
  * @since 2020-07-19
  */
-public interface RolePermissionMapper extends BaseMapper<RolePermission> {
-
-}
+public interface RolePermissionMapper extends BaseMapper<RolePermission> {}

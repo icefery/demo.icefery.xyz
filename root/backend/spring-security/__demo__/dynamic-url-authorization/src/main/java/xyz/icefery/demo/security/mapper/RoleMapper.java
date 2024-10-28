@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.Role;
  * @author icefery
  * @since 2020-07-19
  */
-public interface RoleMapper extends BaseMapper<Role> {
-
-}
+public interface RoleMapper extends BaseMapper<Role> {}

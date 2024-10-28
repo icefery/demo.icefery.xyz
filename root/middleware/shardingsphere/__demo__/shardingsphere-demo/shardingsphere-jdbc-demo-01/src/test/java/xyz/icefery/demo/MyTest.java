@@ -1,5 +1,7 @@
 package xyz.icefery.demo;
 
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,11 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.icefery.demo.dao.UserMapper;
 import xyz.icefery.demo.dao.UserRepository;
 import xyz.icefery.demo.entity.User;
-import java.util.List;
-import java.util.UUID;
 
 @SpringBootTest
 public class MyTest {
+
     @Autowired
     private UserRepository userRepository;
 

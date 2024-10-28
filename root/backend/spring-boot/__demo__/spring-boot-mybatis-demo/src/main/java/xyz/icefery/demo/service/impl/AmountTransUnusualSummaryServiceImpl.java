@@ -1,14 +1,15 @@
 package xyz.icefery.demo.service.impl;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.icefery.demo.entity.AmountTransUnusualSummaryDTO;
 import xyz.icefery.demo.mapper.AmountTransUnusualSummaryMapper;
 import xyz.icefery.demo.service.AmountTransUnusualSummaryService;
-import java.util.List;
 
 @Service
 public class AmountTransUnusualSummaryServiceImpl implements AmountTransUnusualSummaryService {
+
     @Autowired
     private AmountTransUnusualSummaryMapper mapper;
 

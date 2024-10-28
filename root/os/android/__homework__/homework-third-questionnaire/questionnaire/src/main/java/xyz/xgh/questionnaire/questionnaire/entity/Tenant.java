@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("tenant")
 public class Tenant {
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;

@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.icefery.demo.entity.OrderItemEntity;
 
 @Mapper
-public interface OrderItemMapper extends BaseMapper<OrderItemEntity> {
-
-}
+public interface OrderItemMapper extends BaseMapper<OrderItemEntity> {}

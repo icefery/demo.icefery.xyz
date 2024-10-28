@@ -1,7 +1,7 @@
 package xyz.icefery.demo.service;
 
-import xyz.icefery.demo.entity.AmountTransUnusualSummaryDTO;
 import java.util.List;
+import xyz.icefery.demo.entity.AmountTransUnusualSummaryDTO;
 
 public interface AmountTransUnusualSummaryService {
     List<AmountTransUnusualSummaryDTO> list(AmountTransUnusualSummaryDTO dto);

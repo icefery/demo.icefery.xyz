@@ -1,5 +1,6 @@
 package xyz.xgh.questionnaire.questionnaire.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,12 @@ import xyz.xgh.questionnaire.questionnaire.context.ContextHolder;
 import xyz.xgh.questionnaire.questionnaire.entity.Questionnaire;
 import xyz.xgh.questionnaire.questionnaire.service.QuestionnaireService;
 import xyz.xgh.questionnaire.questionnaire.util.R;
-import java.util.List;
 
 @Validated
 @RestController
 @RequestMapping("/{tenantId}/questionnaire")
 public class QuestionnaireController extends BaseController {
+
     @Autowired
     private QuestionnaireService questionnaireService;
 

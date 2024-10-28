@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.xgh.questionnaire.questionnaire.entity.Tenant;
 
 @Mapper
-public interface TenantMapper extends BaseMapper<Tenant> {
-
-}
+public interface TenantMapper extends BaseMapper<Tenant> {}

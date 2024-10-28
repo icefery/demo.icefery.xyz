@@ -6,15 +6,16 @@ import io.etcd.jetcd.lease.LeaseKeepAliveResponse;
 import io.etcd.jetcd.options.GetOption;
 import io.etcd.jetcd.options.PutOption;
 import io.grpc.stub.StreamObserver;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import reactor.util.function.Tuple3;
 import reactor.util.function.Tuples;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class EtcdLock extends AbstractLock {
+
     // [leaseId, key, depth]
     private static final ThreadLocal<Tuple3<Long, String, Integer>> THREAD_LOCAL = new ThreadLocal<>();
 
@@ -36,24 +37,40 @@ public class EtcdLock extends AbstractLock {
             tuple = Tuples.of(tuple.getT1(), tuple.getT2(), tuple.getT3() + 1);
         } else {
             long leaseId = client.getLeaseClient().grant(30L).get().getID();
-            client.getLeaseClient().keepAlive(leaseId, new StreamObserver<LeaseKeepAliveResponse>() {
-                @Override public void onNext(LeaseKeepAliveResponse value) {}
-                @Override public void onError(Throwable t) {}
-                @Override public void onCompleted() {}
-            });
+            client
+                .getLeaseClient()
+                .keepAlive(
+                    leaseId,
+                    new StreamObserver<LeaseKeepAliveResponse>() {
+                        @Override
+                        public void onNext(LeaseKeepAliveResponse value) {}
+
+                        @Override
+                        public void onError(Throwable t) {}
+
+                        @Override
+                        public void onCompleted() {}
+                    }
+                );
             String key = baseKey + "/" + leaseId;
-            PutOption putOption = PutOption
-                .newBuilder()
-                .withLeaseId(leaseId)
-                .build();
+            PutOption putOption = PutOption.newBuilder().withLeaseId(leaseId).build();
             client.getKVClient().put(ByteSequence.from(key.getBytes()), ByteSequence.EMPTY, putOption).get();
             String prefix = "/" + name;
-            GetOption getOption = GetOption
-                .newBuilder()
-                .isPrefix(true)
-                .withSortField(GetOption.SortTarget.CREATE)
-                .build();
-            while (!Objects.equals(client.getKVClient().get(ByteSequence.from(prefix.getBytes()), getOption).get().getKvs().stream().map(it -> it.getKey().toString()).toList().get(0), key)) {
+            GetOption getOption = GetOption.newBuilder().isPrefix(true).withSortField(GetOption.SortTarget.CREATE).build();
+            while (
+                !Objects.equals(
+                    client
+                        .getKVClient()
+                        .get(ByteSequence.from(prefix.getBytes()), getOption)
+                        .get()
+                        .getKvs()
+                        .stream()
+                        .map(it -> it.getKey().toString())
+                        .toList()
+                        .get(0),
+                    key
+                )
+            ) {
                 TimeUnit.MILLISECONDS.sleep(100);
             }
             tuple = Tuples.of(leaseId, key, 1);
@@ -61,7 +78,6 @@ public class EtcdLock extends AbstractLock {
         THREAD_LOCAL.set(tuple);
         log.info("[locked] thread={} depth={}", tuple.getT2(), tuple.getT3());
     }
-
 
     @SneakyThrows
     @Override

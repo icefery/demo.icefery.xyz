@@ -1,5 +1,7 @@
 package xyz.icefery.demo.util;
 
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
@@ -8,11 +10,10 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 @Slf4j
 public class ZooKeeperLock extends AbstractLock {
+
     // [path, depth]
     private static final ThreadLocal<Tuple2<String, Integer>> THREAD_LOCAL = new ThreadLocal<>();
 

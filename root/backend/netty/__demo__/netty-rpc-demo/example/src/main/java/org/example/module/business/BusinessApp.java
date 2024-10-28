@@ -7,6 +7,7 @@ import xyz.icefery.ice.rpc.service.discovery.ServiceDiscovery;
 import xyz.icefery.ice.rpc.service.discovery.ZooKeeperServiceDiscovery;
 
 public class BusinessApp {
+
     public static void main(String[] args) {
         ServiceDiscovery serviceDiscovery = new ZooKeeperServiceDiscovery("192.192.192.6:2181");
         LoadBalancer<String> loadBalancer = new RandomLoadBalancer<>();

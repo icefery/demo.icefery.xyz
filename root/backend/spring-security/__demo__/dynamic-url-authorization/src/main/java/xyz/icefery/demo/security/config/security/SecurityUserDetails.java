@@ -1,18 +1,19 @@
 package xyz.icefery.demo.security.config.security;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import xyz.icefery.demo.security.entity.Role;
 import xyz.icefery.demo.security.entity.User;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * UserDetails 实现类
  */
 public class SecurityUserDetails implements UserDetails {
+
     private final String username;
     private final String password;
     private final List<GrantedAuthority> grantedAuthorityList;
@@ -20,10 +21,7 @@ public class SecurityUserDetails implements UserDetails {
     public SecurityUserDetails(User user, List<Role> roleList) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.grantedAuthorityList = roleList
-            .stream()
-            .map(role -> new SimpleGrantedAuthority(role.getName()))
-            .collect(Collectors.toList());
+        this.grantedAuthorityList = roleList.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
     @Override

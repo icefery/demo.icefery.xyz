@@ -1,6 +1,7 @@
 package xyz.xgh.questionnaire.questionnaire.exception;
 
 public class CustomException extends RuntimeException {
+
     private final String message;
 
     public CustomException(String message) {

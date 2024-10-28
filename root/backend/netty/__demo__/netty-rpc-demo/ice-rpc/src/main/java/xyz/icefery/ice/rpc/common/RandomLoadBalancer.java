@@ -1,11 +1,12 @@
 package xyz.icefery.ice.rpc.common;
 
-import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Random;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class RandomLoadBalancer<T> implements LoadBalancer<T> {
+
     @Override
     public T select(List<T> list) {
         if (list.isEmpty()) {

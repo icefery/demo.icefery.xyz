@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.RoleUser;
  * @author icefery
  * @since 2020-07-19
  */
-public interface RoleUserService extends IService<RoleUser> {
-
-}
+public interface RoleUserService extends IService<RoleUser> {}

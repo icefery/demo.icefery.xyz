@@ -1,13 +1,14 @@
 package xyz.icefery.demo.tutorial.four;
 
 import com.rabbitmq.client.BuiltinExchangeType;
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.util.List;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 路由模式-生产者
  */
 public class MyProducer {
+
     static final String EXCHANGE = "x.tutorial_four.log.direct";
     static final String QUEUE_LOG = LogConsumer.QUEUE;
     static final String QUEUE_ERROR_LOG = ErrorLogConsumer.QUEUE;

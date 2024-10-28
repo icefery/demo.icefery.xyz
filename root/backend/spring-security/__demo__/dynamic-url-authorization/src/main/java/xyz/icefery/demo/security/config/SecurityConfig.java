@@ -29,14 +29,19 @@ import xyz.icefery.demo.security.config.security.UrlFilterInvocationSecurityMeta
 @Slf4j
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private JwtConfig jwtConfig;
+
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
+
     @Autowired
     private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
+
     @Autowired
     private UrlAccessDecisionManager urlAccessDecisionManager;
 
@@ -59,20 +64,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 开启跨域
         http.cors();
 
-        http.authorizeRequests()
+        http
+            .authorizeRequests()
             // 使用 URL 权限验证
-            .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                @Override
-                public <O extends FilterSecurityInterceptor> O postProcess(O object) {
-                    object.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);
-                    object.setAccessDecisionManager(urlAccessDecisionManager);
-                    return object;
+            .withObjectPostProcessor(
+                new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O object) {
+                        object.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);
+                        object.setAccessDecisionManager(urlAccessDecisionManager);
+                        return object;
+                    }
                 }
-            })
-            .anyRequest().authenticated();
+            )
+            .anyRequest()
+            .authenticated();
 
         // 表单登录
-        http.formLogin()
+        http
+            .formLogin()
             .loginProcessingUrl("/login")
             // 登录成功
             .successHandler((request, response, authentication) -> {
@@ -104,7 +114,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 response.getWriter().write(reason);
             });
 
-        http.exceptionHandling()
+        http
+            .exceptionHandling()
             // 登录过期 | 未登录
             .authenticationEntryPoint((request, response, authenticationException) -> {
                 response.setCharacterEncoding("UTF-8");

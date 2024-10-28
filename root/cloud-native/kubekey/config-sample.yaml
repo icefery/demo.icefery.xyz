@@ -4,7 +4,7 @@ metadata:
   name: sample
 spec:
   hosts:
-    - { name: 'k8s-101', address: '192.168.8.101', internalAddress: '192.168.8.101', port: 22, arch: 'arm64', user: 'root', password: 'root' }
+    - { name: "k8s-101", address: "192.168.8.101", internalAddress: "192.168.8.101", port: 22, arch: "arm64", user: "root", password: "root" }
   roleGroups:
     etcd:
       - k8s-101
@@ -15,7 +15,7 @@ spec:
   controlPlaneEndpoint:
     # internalLoadbalancer: haproxy
     domain: lb.kubesphere.local
-    address: ''
+    address: ""
     port: 6443
   kubernetes:
     version: v1.24.7
@@ -31,8 +31,8 @@ spec:
     multusCNI:
       enabled: false
   registry:
-    privateRegistry: ''
-    namespaceOverride: ''
-    registryMirrors: ['https://hub-mirror.c.163.com', 'https://uwk49ut2.mirror.aliyuncs.com']
+    privateRegistry: ""
+    namespaceOverride: ""
+    registryMirrors: ["https://hub-mirror.c.163.com", "https://uwk49ut2.mirror.aliyuncs.com"]
     insecureRegistries: []
   addons: []

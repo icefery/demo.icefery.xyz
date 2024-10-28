@@ -1,8 +1,8 @@
 package xyz.icefery.demo.webservice;
 
-import org.springframework.stereotype.Service;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import org.springframework.stereotype.Service;
 
 @Service
 @WebService(
@@ -11,6 +11,7 @@ import javax.jws.WebService;
     endpointInterface = "xyz.icefery.demo.webservice.ProductService"
 )
 public class ProductServiceImpl implements ProductService {
+
     @WebMethod
     @Override
     public String hello(String name) {

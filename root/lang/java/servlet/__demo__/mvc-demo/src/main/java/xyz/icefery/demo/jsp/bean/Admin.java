@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class Admin {
+
     private String adminId;
     private String password;
 }

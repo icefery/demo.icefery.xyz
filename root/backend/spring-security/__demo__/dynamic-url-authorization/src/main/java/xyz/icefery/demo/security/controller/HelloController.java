@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+
     // 在权限表中 | 访问资源需要角色 ROLE_1
     @GetMapping("/hello1")
     public String hello1() {

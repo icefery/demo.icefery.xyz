@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.icefery.demo.entity.DictEntity;
 
 @Mapper
-public interface DictMapper extends BaseMapper<DictEntity> {
-
-}
+public interface DictMapper extends BaseMapper<DictEntity> {}

@@ -8,13 +8,13 @@ services:
     volumes:
       - /opt/module/clash/config.yaml:/root/.config/clash/config.yaml
   yacd:
-    profiles: ['yacd']
+    profiles: ["yacd"]
     image: ghcr.io/haishanh/yacd
     container_name: yacd
     ports:
       - 80
   subconverter:
-    profiles: ['subconverter']
+    profiles: ["subconverter"]
     image: docker.io/tindy2013/subconverter
     container_name: subconverter
     ports:

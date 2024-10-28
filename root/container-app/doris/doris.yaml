@@ -23,7 +23,7 @@ spec:
     envVars:
       - { name: TZ, value: Asia/Shanghai }
     systemInitialization:
-      command: ['/sbin/sysctl', '-w', 'vm.max_map_count=2000000']
+      command: ["/sbin/sysctl", "-w", "vm.max_map_count=2000000"]
   beSpec:
     replicas: 1
     image: selectdb/doris.be-ubuntu:3.0.2
@@ -37,4 +37,4 @@ spec:
     envVars:
       - { name: TZ, value: Asia/Shanghai }
     systemInitialization:
-      command: ['/sbin/sysctl', '-w', 'vm.max_map_count=2000000']
+      command: ["/sbin/sysctl", "-w", "vm.max_map_count=2000000"]

@@ -1,24 +1,21 @@
 package xyz.icefery.ice.rpc.service.discovery;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryNTimes;
 import org.apache.zookeeper.CreateMode;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 public class ZooKeeperServiceDiscovery implements ServiceDiscovery {
+
     private final CuratorFramework zookeeper;
 
     public ZooKeeperServiceDiscovery(String address) {
-        this.zookeeper = CuratorFrameworkFactory
-            .builder()
-            .connectString(address)
-            .retryPolicy(new RetryNTimes(3, 1000))
-            .build();
+        this.zookeeper = CuratorFrameworkFactory.builder().connectString(address).retryPolicy(new RetryNTimes(3, 1000)).build();
         this.zookeeper.start();
         log.info("success to connect to zookeeper {address={}}", address);
     }

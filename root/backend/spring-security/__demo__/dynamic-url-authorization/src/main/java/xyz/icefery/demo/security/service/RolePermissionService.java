@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.RolePermission;
  * @author icefery
  * @since 2020-07-19
  */
-public interface RolePermissionService extends IService<RolePermission> {
-
-}
+public interface RolePermissionService extends IService<RolePermission> {}

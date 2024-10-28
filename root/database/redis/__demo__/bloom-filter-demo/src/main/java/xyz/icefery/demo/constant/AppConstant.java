@@ -1,6 +1,7 @@
 package xyz.icefery.demo.constant;
 
 public class AppConstant {
+
     public static final long CACHE__CONFIG__TTL = 60 * 10L;
     public static final String CACHE__USER__ID = "user:id";
     public static final String CACHE__USER__USERNAME = "user:username";

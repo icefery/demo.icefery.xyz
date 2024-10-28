@@ -1,6 +1,7 @@
 package xyz.xgh.questionnaire.questionnaire.context;
 
 public class ContextHolder {
+
     private static final ThreadLocal<String> CURRENT_TENANT_ID = new ThreadLocal<>();
 
     public static String getCurrentTenantId() {

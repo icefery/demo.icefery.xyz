@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ZuulConfig {
+
     @RefreshScope
     @ConfigurationProperties("zuul")
     public ZuulProperties zuulProperties() {

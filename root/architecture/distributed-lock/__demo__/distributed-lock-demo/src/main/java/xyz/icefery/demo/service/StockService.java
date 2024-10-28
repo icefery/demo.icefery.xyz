@@ -1,6 +1,7 @@
 package xyz.icefery.demo.service;
 
 import io.etcd.jetcd.Client;
+import java.util.concurrent.locks.Lock;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +14,12 @@ import xyz.icefery.demo.util.AbstractLock;
 import xyz.icefery.demo.util.EtcdLock;
 import xyz.icefery.demo.util.RedisLock;
 import xyz.icefery.demo.util.ZooKeeperLock;
-import java.util.concurrent.locks.Lock;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class StockService {
+
     private final StockRepository stockRepository;
     private final RedissonClient redissonClient;
     private final CuratorFramework curatorFramework;
@@ -54,12 +55,15 @@ public class StockService {
     public Long deduct3() {
         Lock lock = new AbstractLock() {
             private final InterProcessMutex mutex = new InterProcessMutex(curatorFramework, "/lock3");
+
             @SneakyThrows
             @Override
             public void lock() {
                 mutex.acquire();
             }
-            @SneakyThrows @Override
+
+            @SneakyThrows
+            @Override
             public void unlock() {
                 mutex.release();
             }

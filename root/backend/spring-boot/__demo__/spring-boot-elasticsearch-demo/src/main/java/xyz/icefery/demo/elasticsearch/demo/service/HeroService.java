@@ -1,5 +1,9 @@
 package xyz.icefery.demo.elasticsearch.demo.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -14,37 +18,23 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 import xyz.icefery.demo.elasticsearch.demo.entity.Hero;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
 public class HeroService {
+
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     public Map<String, Object> hightlightSearch(String keyword) {
         Map<String, Object> map = new HashMap<>();
         Query query = new NativeSearchQueryBuilder()
-            .withQuery(
-                new MultiMatchQueryBuilder(keyword, "name", "title", "short_bio")
-            )
+            .withQuery(new MultiMatchQueryBuilder(keyword, "name", "title", "short_bio"))
             .withHighlightBuilder(
-                new HighlightBuilder()
-                    .preTags("<span style='color:red'>")
-                    .postTags("</span>")
-                    .field("short_bio")
-                    .field("title")
-                    .field("name")
+                new HighlightBuilder().preTags("<span style='color:red'>").postTags("</span>").field("short_bio").field("title").field("name")
             )
-            .withSort(
-                SortBuilders.scoreSort().order(SortOrder.DESC)
-            )
-            .withPageable(
-                PageRequest.of(0, 10)
-            )
+            .withSort(SortBuilders.scoreSort().order(SortOrder.DESC))
+            .withPageable(PageRequest.of(0, 10))
             .build();
         SearchHits<Hero> hits = elasticsearchRestTemplate.search(query, Hero.class);
         // 总命中数

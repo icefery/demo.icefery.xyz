@@ -1,5 +1,6 @@
 package xyz.icefery.demo.security.config.security;
 
+import java.util.Collection;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
@@ -10,13 +11,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import java.util.Collection;
 
 @Slf4j
 @Component
 public class UrlAccessDecisionManager implements AccessDecisionManager {
+
     @Override
-    public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
+    public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection)
+        throws AccessDeniedException, InsufficientAuthenticationException {
         for (ConfigAttribute configAttribute : collection) {
             String needRoleName = configAttribute.getAttribute();
 
@@ -31,7 +33,6 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
             }
 
             for (GrantedAuthority authority : authentication.getAuthorities()) {
-
                 log.info("资源需要角色 [" + needRoleName + "] 用户拥有角色 [" + authority.getAuthority() + "]");
 
                 if (authority.getAuthority().equals(needRoleName)) {

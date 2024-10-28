@@ -1,11 +1,10 @@
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public interface EverythingAPI extends Library {
     static List<Result> query(String str, boolean matchCase, boolean matchWholeWord, boolean enableRegex) {
@@ -42,6 +41,7 @@ public interface EverythingAPI extends Library {
 
     @Setter
     class Options {
+
         private boolean matchCase;
         private boolean matchWholeWorld;
         private boolean enableRegex;
@@ -50,8 +50,9 @@ public interface EverythingAPI extends Library {
     @ToString
     @Getter
     class Result {
-        private String  filename;
-        private String  location;
+
+        private String filename;
+        private String location;
         private boolean isDirectory;
     }
 }

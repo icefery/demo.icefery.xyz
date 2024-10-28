@@ -9,6 +9,7 @@ import xyz.icefery.demo.R;
 import xyz.icefery.demo.fragment.TabFragment;
 
 public class SwitchFragmentActivity extends AppCompatActivity {
+
     private Button tab1Btn;
     private Button tab2Btn;
     private Button tab3Btn;
@@ -43,7 +44,6 @@ public class SwitchFragmentActivity extends AppCompatActivity {
         this.tab2Btn.setOnClickListener(v -> fm.beginTransaction().replace(R.id.fragment_container, this.tab2Fragment).commit());
         this.tab3Btn.setOnClickListener(v -> fm.beginTransaction().replace(R.id.fragment_container, this.tab3Fragment).commit());
     }
-
 
     @Override
     protected void onStart() {

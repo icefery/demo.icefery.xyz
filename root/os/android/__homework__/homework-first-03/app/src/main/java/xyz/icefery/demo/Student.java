@@ -3,6 +3,7 @@ package xyz.icefery.demo;
 import java.io.Serializable;
 
 public class Student implements Serializable {
+
     public String code;
     public String name;
     public String pass;

@@ -11,6 +11,7 @@ import xyz.xgh.questionnaire.questionnaire.mapper.TenantMapper;
 
 @Service
 public class TenantService {
+
     @Autowired
     private TenantMapper tenantMapper;
 

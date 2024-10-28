@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.icefery.demo.account.entity.Account;
 
 @Mapper
-public interface AccountMapper extends BaseMapper<Account> {
-
-}
+public interface AccountMapper extends BaseMapper<Account> {}

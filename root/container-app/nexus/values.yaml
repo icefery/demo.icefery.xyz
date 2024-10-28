@@ -1,4 +1,4 @@
 ingress:
   enabled: true
-  ingressClassName: ''
+  ingressClassName: ""
   hostRepo: nexus.dev.icefery.xyz

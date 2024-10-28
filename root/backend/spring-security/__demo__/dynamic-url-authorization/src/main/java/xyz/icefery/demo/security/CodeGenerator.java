@@ -45,13 +45,7 @@ public class CodeGenerator {
         // 策略配置
         StrategyConfig sg = new StrategyConfig()
             .setTablePrefix("sys_")
-            .setInclude(
-                "sys_user",
-                "sys_role",
-                "sys_permission",
-                "sys_role_user",
-                "sys_role_permission"
-            )
+            .setInclude("sys_user", "sys_role", "sys_permission", "sys_role_user", "sys_role_permission")
             .setNaming(NamingStrategy.underline_to_camel)
             .setColumnNaming(NamingStrategy.underline_to_camel)
             .setRestControllerStyle(true)

@@ -8,8 +8,9 @@ import xyz.icefery.demo.util.MyRabbitMQ;
  * 远程调用模式-服务端
  */
 public class MyServer {
-    static final String REQUEST_EXCHANGE = "";                          // 请求交换机
-    static final String REQUEST_QUEUE = "q.tutorial_six.request";       // 请求队列
+
+    static final String REQUEST_EXCHANGE = ""; // 请求交换机
+    static final String REQUEST_QUEUE = "q.tutorial_six.request"; // 请求队列
     static final String RESPONSE_EXCHANGE = MyClient.RESPONSE_EXCHANGE; // 响应交换机
 
     public static void main(String[] args) {
@@ -29,19 +30,22 @@ public class MyServer {
                 System.out.printf("Received requestId='%s' requestBody='%s' responseRoutingKey='%s'\n", requestId, requestBody, responseRoutingKey);
 
                 // 3. 响应头
-                AMQP.BasicProperties responseHeaders = new AMQP.BasicProperties
-                    .Builder()
-                    .correlationId(requestId)
-                    .build();
+                AMQP.BasicProperties responseHeaders = new AMQP.BasicProperties.Builder().correlationId(requestId).build();
 
                 // 4. 响应体
                 String responseBody = Integer.toString(f(Integer.parseInt(requestBody)));
 
                 channel.basicPublish(RESPONSE_EXCHANGE, responseRoutingKey, responseHeaders, responseBody.getBytes());
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-                System.out.printf("Responded requestId='%s' requestBody='%s' responseRoutingKey='%s' responseBody='%s'\n", requestId, requestBody, responseRoutingKey, responseBody);
+                System.out.printf(
+                    "Responded requestId='%s' requestBody='%s' responseRoutingKey='%s' responseBody='%s'\n",
+                    requestId,
+                    requestBody,
+                    responseRoutingKey,
+                    responseBody
+                );
             };
-            channel.basicConsume(REQUEST_QUEUE, false, handler, consumerTag -> { });
+            channel.basicConsume(REQUEST_QUEUE, false, handler, consumerTag -> {});
         });
     }
 

@@ -15,6 +15,4 @@ import xyz.icefery.demo.security.service.RolePermissionService;
  * @since 2020-07-19
  */
 @Service
-public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements RolePermissionService {
-
-}
+public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements RolePermissionService {}

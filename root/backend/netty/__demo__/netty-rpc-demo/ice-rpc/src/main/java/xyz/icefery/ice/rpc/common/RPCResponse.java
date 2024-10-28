@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class RPCResponse {
+
     private String requestId;
     private Object result;
 }

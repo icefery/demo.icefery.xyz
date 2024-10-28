@@ -18,6 +18,6 @@ rbac:
 
 kraft:
   enabled: true
-  clusterId: 'kafka_cluster'
+  clusterId: "kafka_cluster"
 zookeeper:
   enabled: false

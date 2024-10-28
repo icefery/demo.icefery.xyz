@@ -1,13 +1,14 @@
 package xyz.icefery.demo.tutorial.five;
 
 import com.rabbitmq.client.BuiltinExchangeType;
-import xyz.icefery.demo.util.MyRabbitMQ;
 import java.util.List;
+import xyz.icefery.demo.util.MyRabbitMQ;
 
 /**
  * 主题模式-生产者
  */
 public class MyProducer {
+
     static final String EXCHANGE = "x.tutorial_five.topic";
     static final String QUEUE_ORDER_LOG = OrderLogConsumer.QUEUE;
     static final String QUEUE_STOCK_LOG = StockLogConsumer.QUEUE;
@@ -16,11 +17,11 @@ public class MyProducer {
     static final String TOPIC_STOCK = "stock.#.log.*";
 
     static final List<String> MESSAGE_LIST = List.of(
-        "-rw-r--r-- 1 root root 1M 2022-01-01 00:00 order.info.log.2022-01-01",  // 匹配订单主题
-        "-rw-r--r-- 1 root root 1K 2022-01-01 00:00 order.warn.log.2022-01-01",  // 匹配订单主题
+        "-rw-r--r-- 1 root root 1M 2022-01-01 00:00 order.info.log.2022-01-01", // 匹配订单主题
+        "-rw-r--r-- 1 root root 1K 2022-01-01 00:00 order.warn.log.2022-01-01", // 匹配订单主题
         "-rw-r--r-- 1 root root 10 2022-01-01 00:00 order.error.log.2022-01-01", // 匹配订单主题
         "-rw-r--r-- 1 root root  0 2022-01-01 00:00 stock.log",
-        "-rw-r--r-- 1 root root 1M 2022-01-01 00:00 stock.log.2022-01-01"        // 匹配库存主题
+        "-rw-r--r-- 1 root root 1M 2022-01-01 00:00 stock.log.2022-01-01" // 匹配库存主题
     );
 
     public static void main(String[] args) {

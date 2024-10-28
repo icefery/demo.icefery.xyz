@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 @Repository
 public class StockRepository {
+
     private final RedisTemplate<String, String> redisTemplate;
 
     public Long deduct() {

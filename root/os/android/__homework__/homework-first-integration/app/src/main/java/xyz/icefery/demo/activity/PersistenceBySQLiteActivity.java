@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+import java.util.List;
 import xyz.icefery.demo.R;
 import xyz.icefery.demo.util.DemoDBHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PersistenceBySQLiteActivity extends AppCompatActivity {
+
     private DemoDBHelper demoDbHelper;
 
     private EditText tableInput;
@@ -55,78 +55,78 @@ public class PersistenceBySQLiteActivity extends AppCompatActivity {
 
         // 按钮点击事件 | 插入
         this.insertBtn.setOnClickListener(v -> {
-            // 表单
-            String table = this.tableInput.getText().toString();
-            String name = this.nameInput.getText().toString();
-            String age = this.ageInput.getText().toString();
-            // 插入 | INSERT INTO student(name, age) VALUES(#{name}, #{age})
-            ContentValues valueMap = new ContentValues();
-            valueMap.put("name", name);
-            valueMap.put("age", Integer.parseInt(age));
-            long id = db.insert(table, null, valueMap);
-            Toast.makeText(this, "id=" + id, Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String table = this.tableInput.getText().toString();
+                String name = this.nameInput.getText().toString();
+                String age = this.ageInput.getText().toString();
+                // 插入 | INSERT INTO student(name, age) VALUES(#{name}, #{age})
+                ContentValues valueMap = new ContentValues();
+                valueMap.put("name", name);
+                valueMap.put("age", Integer.parseInt(age));
+                long id = db.insert(table, null, valueMap);
+                Toast.makeText(this, "id=" + id, Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 查询全部
         this.selectListBtn.setOnClickListener(v -> {
-            // 表单
-            String table = this.tableInput.getText().toString();
-            // 查询 | SELECT * FROM student
-            Cursor cursor = db.query(table, null, null, null, null, null, null);
-            // 遍历查询结果
-            List<String> lines = new ArrayList<>();
-            while (cursor.moveToNext()) {
-                int id = cursor.getInt(cursor.getColumnIndex("id"));
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                int age = cursor.getInt(cursor.getColumnIndex("age"));
-                lines.add("id=" + id + "\tname=" + name + "\tage=" + age);
-            }
-            // 关闭 Cursor
-            cursor.close();
-            Toast.makeText(this, String.join("\n", lines), Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String table = this.tableInput.getText().toString();
+                // 查询 | SELECT * FROM student
+                Cursor cursor = db.query(table, null, null, null, null, null, null);
+                // 遍历查询结果
+                List<String> lines = new ArrayList<>();
+                while (cursor.moveToNext()) {
+                    int id = cursor.getInt(cursor.getColumnIndex("id"));
+                    String name = cursor.getString(cursor.getColumnIndex("name"));
+                    int age = cursor.getInt(cursor.getColumnIndex("age"));
+                    lines.add("id=" + id + "\tname=" + name + "\tage=" + age);
+                }
+                // 关闭 Cursor
+                cursor.close();
+                Toast.makeText(this, String.join("\n", lines), Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 查询
         this.selectByIdBtn.setOnClickListener(v -> {
-            // 表单
-            String table = this.tableInput.getText().toString();
-            String id = this.idInput.getText().toString();
-            // 查询 | SELECT * FROM student WHERE id=#{id}
-            Cursor cursor = db.query(table, null, "id=?", new String[]{id}, null, null, null);
-            // 取查询结果
-            String line = "";
-            if (cursor.moveToNext()) {
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                int age = cursor.getInt(cursor.getColumnIndex("age"));
-                line = "id=" + id + "\tname=" + name + "\tage=" + age;
-            }
-            // 关闭 Cursor
-            cursor.close();
-            Toast.makeText(this, line, Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String table = this.tableInput.getText().toString();
+                String id = this.idInput.getText().toString();
+                // 查询 | SELECT * FROM student WHERE id=#{id}
+                Cursor cursor = db.query(table, null, "id=?", new String[] { id }, null, null, null);
+                // 取查询结果
+                String line = "";
+                if (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndex("name"));
+                    int age = cursor.getInt(cursor.getColumnIndex("age"));
+                    line = "id=" + id + "\tname=" + name + "\tage=" + age;
+                }
+                // 关闭 Cursor
+                cursor.close();
+                Toast.makeText(this, line, Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 更新
         this.updateByIdBtn.setOnClickListener(v -> {
-            // 表单
-            String table = this.tableInput.getText().toString();
-            String id = this.idInput.getText().toString();
-            String columnK = this.columnKInput.getText().toString();
-            String columnV = this.columnVInput.getText().toString();
-            // 更新 | UPDATE student SET #{columnK}=#{columnV} WHERE id=#{id}
-            ContentValues valueMap = new ContentValues();
-            valueMap.put(columnK, columnV);
-            boolean success = db.update(table, valueMap, "id=?", new String[]{id}) >= 1;
-            Toast.makeText(this, "修改 " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String table = this.tableInput.getText().toString();
+                String id = this.idInput.getText().toString();
+                String columnK = this.columnKInput.getText().toString();
+                String columnV = this.columnVInput.getText().toString();
+                // 更新 | UPDATE student SET #{columnK}=#{columnV} WHERE id=#{id}
+                ContentValues valueMap = new ContentValues();
+                valueMap.put(columnK, columnV);
+                boolean success = db.update(table, valueMap, "id=?", new String[] { id }) >= 1;
+                Toast.makeText(this, "修改 " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 删除
         this.deleteByIdBtn.setOnClickListener(v -> {
-            // 表单
-            String table = this.tableInput.getText().toString();
-            int id = Integer.parseInt(this.idInput.getText().toString());
-            // 删除 | DELETE FROM student WHERE id=#{id}
-            boolean success = db.delete(table, "id=?", new String[]{String.valueOf(id)}) >= 1;
-            Toast.makeText(this, "删除 " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String table = this.tableInput.getText().toString();
+                int id = Integer.parseInt(this.idInput.getText().toString());
+                // 删除 | DELETE FROM student WHERE id=#{id}
+                boolean success = db.delete(table, "id=?", new String[] { String.valueOf(id) }) >= 1;
+                Toast.makeText(this, "删除 " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+            });
     }
 }

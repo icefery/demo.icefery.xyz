@@ -8,6 +8,7 @@ import xyz.icefery.demo.business.service.BusinessService;
 
 @RestController
 public class BusinessController {
+
     @Autowired
     private BusinessService businessService;
 

@@ -18,27 +18,32 @@ import xyz.xgh.questionnaire.questionnaire.context.ContextHolder;
 @Configuration
 @MapperScan("xyz.xgh.questionnaire.questionnaire.mapper")
 public class MyBatisPlusConfig {
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
-        interceptor.addInnerInterceptor(new TenantLineInnerInterceptor(new TenantLineHandler() {
-            @Override
-            public String getTenantIdColumn() {
-                return "tenant_id";
-            }
+        interceptor.addInnerInterceptor(
+            new TenantLineInnerInterceptor(
+                new TenantLineHandler() {
+                    @Override
+                    public String getTenantIdColumn() {
+                        return "tenant_id";
+                    }
 
-            @Override
-            public Expression getTenantId() {
-                String tenantId = ContextHolder.getCurrentTenantId();
-                return new StringValue(tenantId);
-            }
+                    @Override
+                    public Expression getTenantId() {
+                        String tenantId = ContextHolder.getCurrentTenantId();
+                        return new StringValue(tenantId);
+                    }
 
-            @Override
-            public boolean ignoreTable(String tableName) {
-                return "tenant".equalsIgnoreCase(tableName);
-            }
-        }));
+                    @Override
+                    public boolean ignoreTable(String tableName) {
+                        return "tenant".equalsIgnoreCase(tableName);
+                    }
+                }
+            )
+        );
         return interceptor;
     }
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MvcUtil {
+
     // 小写单词首字母
     public static String lowerFirstCase(String str) {
         char[] chars = str.toCharArray();

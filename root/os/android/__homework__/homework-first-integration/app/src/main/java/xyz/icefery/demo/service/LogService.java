@@ -3,10 +3,10 @@ package xyz.icefery.demo.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
-
 import java.util.concurrent.TimeUnit;
 
 public class LogService extends IntentService {
+
     public LogService() {
         super("LogService");
     }

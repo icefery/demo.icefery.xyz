@@ -8,14 +8,15 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-import lombok.extern.slf4j.Slf4j;
-import xyz.icefery.ice.rpc.service.discovery.ServiceDiscovery;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import xyz.icefery.ice.rpc.service.discovery.ServiceDiscovery;
 
 @Slf4j
 public class RPCServer {
+
     private final String serviceName;
     private final String serviceHost;
     private final Integer servicePort;
@@ -49,18 +50,21 @@ public class RPCServer {
             bootstrap
                 .group(boss, worker)
                 .channel(NioServerSocketChannel.class)
-                .childHandler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
-                        ch
-                            .pipeline()
-                            .addLast(new StringDecoder(CharsetUtil.UTF_8))
-                            .addLast(new StringEncoder(CharsetUtil.UTF_8))
-                            .addLast(new RPCServerHandler(apiMap))
-                        ;
+                .childHandler(
+                    new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        protected void initChannel(SocketChannel ch) throws Exception {
+                            ch
+                                .pipeline()
+                                .addLast(new StringDecoder(CharsetUtil.UTF_8))
+                                .addLast(new StringEncoder(CharsetUtil.UTF_8))
+                                .addLast(new RPCServerHandler(apiMap));
+                        }
                     }
-                })
-                .bind(serviceHost, servicePort).sync().addListener(future -> {
+                )
+                .bind(serviceHost, servicePort)
+                .sync()
+                .addListener(future -> {
                     if (future.isSuccess()) {
                         log.info("success to listening on {}", serviceAddress);
                     }

@@ -2,7 +2,7 @@ services:
   elasticsearch:
     image: docker.io/bitnami/elasticsearch:8.8.0
     container_name: elasticsearch
-    profiles: ['all', 'elasticsearch']
+    profiles: ["all", "elasticsearch"]
     ports:
       - 9200:9200
     volumes:
@@ -13,7 +13,7 @@ services:
   kibana:
     image: docker.io/bitnami/kibana:8.8.0
     container_name: kibana
-    profiles: ['all', 'kibana']
+    profiles: ["all", "kibana"]
     environment:
       KIBANA_ELASTICSEARCH_URL: elasticsearch
       I18N_LOCALE: zh-CN

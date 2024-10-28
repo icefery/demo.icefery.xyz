@@ -14,6 +14,7 @@ import xyz.xgh.questionnaire.questionnaire.util.R;
 @RestController
 @RequestMapping("/tenant")
 public class TenantController {
+
     @Autowired
     private TenantService tenantService;
 

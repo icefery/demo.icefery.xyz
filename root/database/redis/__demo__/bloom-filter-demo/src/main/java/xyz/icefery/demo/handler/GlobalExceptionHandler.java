@@ -6,6 +6,7 @@ import xyz.icefery.demo.util.R;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(value = Throwable.class)
     public R<?> throwable(Throwable e) {
         e.printStackTrace();

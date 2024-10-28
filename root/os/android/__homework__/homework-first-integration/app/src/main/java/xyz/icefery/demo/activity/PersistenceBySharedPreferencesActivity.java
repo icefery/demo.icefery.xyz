@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import xyz.icefery.demo.R;
 
 public class PersistenceBySharedPreferencesActivity extends AppCompatActivity {
+
     private EditText spNameInput;
     private EditText spKInput;
     private EditText spVInput;
@@ -34,48 +35,48 @@ public class PersistenceBySharedPreferencesActivity extends AppCompatActivity {
 
         // 按钮点击事件 | 保存
         this.saveSPKVBtn.setOnClickListener(v -> {
-            // 表单
-            String spName = this.spNameInput.getText().toString();
-            String spK = this.spKInput.getText().toString();
-            String spV = this.spVInput.getText().toString();
-            // 获取 SharedPreferences
-            SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
-            // 保存
-            sp.edit().putString(spK, spV).apply();
-            Toast.makeText(this, "已向 " + spName + " 保存 " + spK + "=" + spV, Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String spName = this.spNameInput.getText().toString();
+                String spK = this.spKInput.getText().toString();
+                String spV = this.spVInput.getText().toString();
+                // 获取 SharedPreferences
+                SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
+                // 保存
+                sp.edit().putString(spK, spV).apply();
+                Toast.makeText(this, "已向 " + spName + " 保存 " + spK + "=" + spV, Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 查询
         this.queryKBtn.setOnClickListener(v -> {
-            // 表单
-            String spName = this.spNameInput.getText().toString();
-            String spK = this.spKInput.getText().toString();
-            // 获取 SharedPreferences
-            SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
-            // 查询
-            String spV = sp.getString(spK, null);
-            Toast.makeText(this, spK + "=" + spV, Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String spName = this.spNameInput.getText().toString();
+                String spK = this.spKInput.getText().toString();
+                // 获取 SharedPreferences
+                SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
+                // 查询
+                String spV = sp.getString(spK, null);
+                Toast.makeText(this, spK + "=" + spV, Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 移除
         this.removeSPKBtn.setOnClickListener(v -> {
-            // 表单
-            String spName = this.spNameInput.getText().toString();
-            String spK = this.spKInput.getText().toString();
-            // 获取 SharedPreferences
-            SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
-            // 移除
-            sp.edit().remove(spK).apply();
-            Toast.makeText(this, "已从 " + spName + " 移除 " + spK, Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String spName = this.spNameInput.getText().toString();
+                String spK = this.spKInput.getText().toString();
+                // 获取 SharedPreferences
+                SharedPreferences sp = super.getSharedPreferences(spName, Context.MODE_PRIVATE);
+                // 移除
+                sp.edit().remove(spK).apply();
+                Toast.makeText(this, "已从 " + spName + " 移除 " + spK, Toast.LENGTH_SHORT).show();
+            });
 
         // 按钮点击事件 | 删除
         this.deleteSPBtn.setOnClickListener(v -> {
-            // 表单
-            String spName = this.spNameInput.getText().toString();
-            // 删除 SharedPreferences
-            boolean success = super.deleteSharedPreferences(spName);
-            Toast.makeText(this, "删除 " + spName + " " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
-        });
+                // 表单
+                String spName = this.spNameInput.getText().toString();
+                // 删除 SharedPreferences
+                boolean success = super.deleteSharedPreferences(spName);
+                Toast.makeText(this, "删除 " + spName + " " + (success ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+            });
     }
 }

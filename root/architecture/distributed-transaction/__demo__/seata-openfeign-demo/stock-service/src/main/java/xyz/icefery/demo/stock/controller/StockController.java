@@ -7,6 +7,7 @@ import xyz.icefery.demo.stock.service.StockService;
 
 @RestController
 public class StockController {
+
     @Autowired
     private StockService stockService;
 

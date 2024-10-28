@@ -14,7 +14,7 @@ externalDatabase:
   port: 3306
   username: dolphinscheduler
   password: dolphinscheduler
-  params: ''
+  params: ""
   driverClassName: com.mysql.cj.jdbc.Driver
 conf:
   common:

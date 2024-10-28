@@ -2,6 +2,9 @@ package xyz.icefery.demo.elasticsearch.demo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -11,17 +14,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import xyz.icefery.demo.elasticsearch.demo.entity.Hero;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @SpringBootTest
 public class ImportDataTest {
+
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
     @Autowired
     private MongoTemplate mongoTemplate;
 
@@ -34,8 +37,7 @@ public class ImportDataTest {
         List<Object> rootList = new ArrayList<>();
         for (int i = start; i <= end; i++) {
             try {
-                Connection.Response response = Jsoup
-                    .connect("https://game.gtimg.cn/images/lol/act/img/js/hero/" + i + ".js")
+                Connection.Response response = Jsoup.connect("https://game.gtimg.cn/images/lol/act/img/js/hero/" + i + ".js")
                     .timeout(30000)
                     // 忽略请求类型, 请求 JSON
                     .ignoreContentType(true)

@@ -11,6 +11,7 @@ import xyz.icefery.demo.receiver.GlobalBroadcastReceiver;
 import xyz.icefery.demo.service.LogService;
 
 public class MainActivity extends AppCompatActivity {
+
     private GlobalBroadcastReceiver globalBroadcastReceiver;
 
     private Button startSwitchFragmentActivityBtn;
@@ -48,21 +49,24 @@ public class MainActivity extends AppCompatActivity {
 
         // 按钮点击事件 | 启动 SwitchFragmentActivity
         this.startSwitchFragmentActivityBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SwitchFragmentActivity.class);
-            super.startActivity(intent);
-        });
+                Intent intent = new Intent(this, SwitchFragmentActivity.class);
+                super.startActivity(intent);
+            });
 
         // 按钮点击事件 | 启动 PersistenceByFileActivity
         this.startPersistenceByFileActivityBtn.setOnClickListener(v -> super.startActivity(new Intent(this, PersistenceByFileActivity.class)));
 
         // 按钮点击事件 | 启动 PersistenceBySPActivity
-        this.startPersistenceBySharedPreferencesActivityBtn.setOnClickListener(v -> super.startActivity(new Intent(this, PersistenceBySharedPreferencesActivity.class)));
+        this.startPersistenceBySharedPreferencesActivityBtn.setOnClickListener(v ->
+                super.startActivity(new Intent(this, PersistenceBySharedPreferencesActivity.class))
+            );
 
         // 按钮点击事件 | 启动 PersistenceBySQLiteActivity
         this.startPersistenceBySQLiteActivityBtn.setOnClickListener(v -> super.startActivity(new Intent(this, PersistenceBySQLiteActivity.class)));
 
         // 按钮点击事件 | 启动 ShareDataByCPActivity
-        this.startShareDataByContentProviderActivityBtn.setOnClickListener(v -> super.startActivity(new Intent(this, ShareDataByContentProviderActivity.class)));
+        this.startShareDataByContentProviderActivityBtn.setOnClickListener(v -> super.startActivity(new Intent(this, ShareDataByContentProviderActivity.class))
+            );
 
         // 按钮点击事件 | 发送自定义广播
         this.sendCustomBroadcastBtn.setOnClickListener(v -> super.sendBroadcast(new Intent(GlobalBroadcastReceiver.CUSTOM_ACTION)));

@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class OSUtil {
+
     public static String hostname() {
         String hostname;
         try {

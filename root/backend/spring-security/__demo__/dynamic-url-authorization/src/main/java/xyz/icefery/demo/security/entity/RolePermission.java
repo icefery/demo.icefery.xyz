@@ -1,10 +1,10 @@
 package xyz.icefery.demo.security.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import java.io.Serializable;
 
 /**
  * <p>
@@ -19,6 +19,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @TableName("sys_role_permission")
 public class RolePermission implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     private Long roleId;

@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class R<T> {
+
     private Integer code;
     private String message;
     private T data;
@@ -23,7 +24,6 @@ public class R<T> {
     public static <T> R<T> failure(Code e, String message) {
         return new R<T>().setCode(e.code).setMessage(message).setData(null);
     }
-
 
     @AllArgsConstructor
     @ToString

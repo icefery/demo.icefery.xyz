@@ -31,7 +31,7 @@ spec:
       containers:
         - name: seaweedfs
           image: docker.io/bitnami/seaweedfs:3.69.0
-          args: ['server', '-dir=/data', '-s3']
+          args: ["server", "-dir=/data", "-s3"]
           ports:
             - { name: master-http, containerPort: 9333 }
             - { name: filer-http, containerPort: 8888 }

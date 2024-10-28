@@ -1,13 +1,13 @@
 package xyz.icefery.demo;
 
+import java.io.IOException;
+import java.net.URI;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
-import java.io.IOException;
-import java.net.URI;
-
 public class Main {
+
     public static final String CLASSPATH = Main.class.getResource("/").toString();
 
     public static void main(String[] args) throws IOException, InterruptedException {

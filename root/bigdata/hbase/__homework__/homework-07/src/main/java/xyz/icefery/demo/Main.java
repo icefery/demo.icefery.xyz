@@ -1,14 +1,14 @@
 package xyz.icefery.demo;
 
+import java.io.IOException;
+import java.util.List;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 
-import java.io.IOException;
-import java.util.List;
-
 public class Main {
+
     public static void main(String[] args) throws IOException {
         Configuration conf = HBaseConfiguration.create();
         Connection connection = ConnectionFactory.createConnection(conf);

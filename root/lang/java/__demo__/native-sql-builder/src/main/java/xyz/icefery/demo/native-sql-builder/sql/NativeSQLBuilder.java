@@ -10,6 +10,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class NativeSQLBuilder {
+
     /**
      * @param <T>     类型
      * @param dialect 方言
@@ -35,23 +36,41 @@ public class NativeSQLBuilder {
      * @return <code>INSERT</code>
      */
     public static String buildInsert(String dialect, String table, List<String> columns, List<List<String>> values) {
-        if (dialect == null || dialect.isBlank() || table == null || table.isBlank() || columns == null || columns.isEmpty() || values == null || values.isEmpty()) {
+        if (
+            dialect == null ||
+            dialect.isBlank() ||
+            table == null ||
+            table.isBlank() ||
+            columns == null ||
+            columns.isEmpty() ||
+            values == null ||
+            values.isEmpty()
+        ) {
             throw new IllegalArgumentException();
         }
         String sql;
         switch (dialect.toLowerCase()) {
             case "oracle":
-                sql = String.join("\n", List.of(
-                    "INSERT ALL",
-                    values.stream().map(it -> String.format("INTO %s ( %s ) VALUES ( %s )", table, String.join(", ", columns), String.join(", ", it))).collect(Collectors.joining("\n")),
-                    "SELECT 1 FROM dual"
-                ));
+                sql = String.join(
+                    "\n",
+                    List.of(
+                        "INSERT ALL",
+                        values
+                            .stream()
+                            .map(it -> String.format("INTO %s ( %s ) VALUES ( %s )", table, String.join(", ", columns), String.join(", ", it)))
+                            .collect(Collectors.joining("\n")),
+                        "SELECT 1 FROM dual"
+                    )
+                );
                 break;
             case "mysql":
-                sql = String.join("\n", List.of(
-                    String.format("INSERT INTO %s ( %s ) VALUES", table, String.join(", ", columns)),
-                    values.stream().map(it -> String.format("( %s )", String.join(", ", it))).collect(Collectors.joining(",\n"))
-                ));
+                sql = String.join(
+                    "\n",
+                    List.of(
+                        String.format("INSERT INTO %s ( %s ) VALUES", table, String.join(", ", columns)),
+                        values.stream().map(it -> String.format("( %s )", String.join(", ", it))).collect(Collectors.joining(",\n"))
+                    )
+                );
                 break;
             default:
                 throw new UnsupportedOperationException();
@@ -66,12 +85,15 @@ public class NativeSQLBuilder {
      * @param valueConverterMap 值转换器
      * @return <code>${table} ()</code>
      */
-    public static <T> List<String> buildColumns(Class<T> cls, Function<Field, String> columnConverter, Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap) {
+    public static <T> List<String> buildColumns(
+        Class<T> cls,
+        Function<Field, String> columnConverter,
+        Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap
+    ) {
         if (cls == null || columnConverter == null || valueConverterMap == null || valueConverterMap.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        return Arrays
-            .stream(cls.getDeclaredFields())
+        return Arrays.stream(cls.getDeclaredFields())
             .filter(field -> valueConverterMap.containsKey(field.getType()))
             .peek(field -> field.setAccessible(true))
             .map(columnConverter)
@@ -86,23 +108,36 @@ public class NativeSQLBuilder {
      * @param data              数据
      * @return <code>VALUES ()</code>
      */
-    public static <T> List<List<String>> buildValues(String dialect, Class<T> cls, Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap, List<T> data) {
+    public static <T> List<List<String>> buildValues(
+        String dialect,
+        Class<T> cls,
+        Map<Class<?>, BiFunction<String, Object, String>> valueConverterMap,
+        List<T> data
+    ) {
         if (dialect == null || dialect.isBlank() || cls == null || valueConverterMap == null || valueConverterMap.isEmpty() || data == null || data.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        return data.stream().map(it -> Arrays.stream(cls.getDeclaredFields()).filter(field -> valueConverterMap.containsKey(field.getType())).map(field -> {
-            try {
-                field.setAccessible(true);
-                Class<?> type = field.getType();
-                Object value = field.get(it);
-                // 视 null 值的类型也为 null
-                if (value == null) {
-                    type = null;
-                }
-                return NativeSQLConverter.VALUE_CONVERTER_MAP.get(type).apply(dialect, value);
-            } catch (Exception e) {
-                return "NULL";
-            }
-        }).collect(Collectors.toList())).collect(Collectors.toList());
+        return data
+            .stream()
+            .map(it ->
+                Arrays.stream(cls.getDeclaredFields())
+                    .filter(field -> valueConverterMap.containsKey(field.getType()))
+                    .map(field -> {
+                        try {
+                            field.setAccessible(true);
+                            Class<?> type = field.getType();
+                            Object value = field.get(it);
+                            // 视 null 值的类型也为 null
+                            if (value == null) {
+                                type = null;
+                            }
+                            return NativeSQLConverter.VALUE_CONVERTER_MAP.get(type).apply(dialect, value);
+                        } catch (Exception e) {
+                            return "NULL";
+                        }
+                    })
+                    .collect(Collectors.toList())
+            )
+            .collect(Collectors.toList());
     }
 }

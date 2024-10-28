@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Customer implements Serializable {
+
     private Long id;
     private String name;
     private Integer gender;
@@ -67,5 +68,4 @@ public class Customer implements Serializable {
     public void setNote(String note) {
         this.note = note;
     }
-
 }

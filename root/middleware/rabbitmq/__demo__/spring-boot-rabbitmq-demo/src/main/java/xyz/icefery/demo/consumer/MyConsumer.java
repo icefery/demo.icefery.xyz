@@ -9,6 +9,7 @@ import xyz.icefery.demo.message.MyMessage;
 
 @Component
 public class MyConsumer {
+
     @RabbitListener(queues = { RabbitMQConfig.QUEUE })
     public void onMessage(Message message, Channel channel) {
         System.out.printf("Received raw='%s'\n", new String(message.getBody()));

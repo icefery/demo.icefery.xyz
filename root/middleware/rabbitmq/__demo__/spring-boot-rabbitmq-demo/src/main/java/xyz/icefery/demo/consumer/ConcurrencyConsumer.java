@@ -8,6 +8,7 @@ import xyz.icefery.demo.config.RabbitMQConfig;
 
 @Component
 public class ConcurrencyConsumer {
+
     @RabbitListener(queues = { RabbitMQConfig.QUEUE }, concurrency = "2")
     public void onMessage(Message message, Channel channel) {
         long thread = Thread.currentThread().getId();

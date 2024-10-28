@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(enableDefaultTransactions = false)
 @SpringBootApplication
 public class App {
+
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }

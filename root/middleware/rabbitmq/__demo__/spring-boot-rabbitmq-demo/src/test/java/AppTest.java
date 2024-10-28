@@ -7,6 +7,7 @@ import xyz.icefery.demo.producer.MyProducer;
 
 @SpringBootTest(classes = { App.class })
 class AppTest {
+
     @Autowired
     MyProducer producer;
 

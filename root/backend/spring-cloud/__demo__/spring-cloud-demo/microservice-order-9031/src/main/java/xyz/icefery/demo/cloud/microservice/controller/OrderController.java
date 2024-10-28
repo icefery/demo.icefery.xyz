@@ -2,6 +2,8 @@ package xyz.icefery.demo.cloud.microservice.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,12 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import xyz.icefery.demo.cloud.microservice.feign.PaymentFeign;
 import xyz.icefery.demo.cloud.microservice.util.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Slf4j
 @RestController
 public class OrderController {
+
     @Value("${spring.application.name}")
     private String applicationName;
 
@@ -30,9 +30,7 @@ public class OrderController {
     @Autowired
     private PaymentFeign paymentFeign;
 
-    @HystrixCommand(fallbackMethod = "wareFallback", commandProperties = {
-        @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-    })
+    @HystrixCommand(fallbackMethod = "wareFallback", commandProperties = { @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10") })
     @GetMapping("/call_ware/sleep/{milliseconds}")
     public R<Object> callWare(@PathVariable Long milliseconds) {
         R ware = restTemplate.getForObject("http://MICROSERVICE-WARE/sleep/{milliseconds}", R.class, milliseconds);

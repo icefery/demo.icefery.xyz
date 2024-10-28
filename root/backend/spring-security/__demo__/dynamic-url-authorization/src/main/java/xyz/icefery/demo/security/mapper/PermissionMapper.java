@@ -11,6 +11,4 @@ import xyz.icefery.demo.security.entity.Permission;
  * @author icefery
  * @since 2020-07-19
  */
-public interface PermissionMapper extends BaseMapper<Permission> {
-
-}
+public interface PermissionMapper extends BaseMapper<Permission> {}

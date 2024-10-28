@@ -8,6 +8,7 @@ import xyz.icefery.demo.util.R;
 
 @RestController
 public class BloomFilterController {
+
     @Autowired
     private BloomFilterService bloomFilterService;
 

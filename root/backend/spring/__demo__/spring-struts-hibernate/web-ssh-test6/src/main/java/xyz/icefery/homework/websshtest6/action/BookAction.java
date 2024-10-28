@@ -1,6 +1,8 @@
 package xyz.icefery.homework.websshtest6.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Collections;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.struts2.convention.annotation.Action;
@@ -13,8 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import xyz.icefery.homework.websshtest6.entity.Book;
 import xyz.icefery.homework.websshtest6.service.BookService;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author icefery
@@ -23,17 +23,19 @@ import java.util.List;
 @Scope(value = "prototype")
 @Namespace(value = "/book")
 @ParentPackage(value = "struts-default")
-@Results(value = {
-    @Result(name = "forward:page", location = "/WEB-INF/content/page.jsp", type = "dispatcher"),
-    @Result(name = "redirect:list", location = "/book/list", type = "redirect")
-})
+@Results(
+    value = {
+        @Result(name = "forward:page", location = "/WEB-INF/content/page.jsp", type = "dispatcher"),
+        @Result(name = "redirect:list", location = "/book/list", type = "redirect")
+    }
+)
 public class BookAction extends ActionSupport {
+
     // =================================================================================================================
     // Service
     // =================================================================================================================
     @Autowired
     private BookService bookService;
-
 
     // =================================================================================================================
     // Table data
@@ -41,7 +43,6 @@ public class BookAction extends ActionSupport {
     @Getter
     @Setter
     private List<Book> bookList;
-
 
     // =================================================================================================================
     // Form data
@@ -72,9 +73,7 @@ public class BookAction extends ActionSupport {
         if (bookToQuery == null || bookToQuery.getId() == null) {
             bookList = bookService.queryBookList();
         } else {
-            bookList = Collections.singletonList(
-                bookService.queryBookById(bookToQuery.getId())
-            );
+            bookList = Collections.singletonList(bookService.queryBookById(bookToQuery.getId()));
         }
         bookToQuery = null;
         return "forward:page";

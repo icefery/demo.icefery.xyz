@@ -12,6 +12,7 @@ import xyz.icefery.demo.stock.entity.Stock;
 @Slf4j
 @Service
 public class StockService {
+
     @Autowired
     private StockMapper stockMapper;
 

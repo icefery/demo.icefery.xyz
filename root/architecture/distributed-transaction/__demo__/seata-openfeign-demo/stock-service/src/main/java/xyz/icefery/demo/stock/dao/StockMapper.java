@@ -5,6 +5,4 @@ import org.apache.ibatis.annotations.Mapper;
 import xyz.icefery.demo.stock.entity.Stock;
 
 @Mapper
-public interface StockMapper extends BaseMapper<Stock> {
-
-}
+public interface StockMapper extends BaseMapper<Stock> {}

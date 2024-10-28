@@ -3,13 +3,11 @@
  */
 package org.jooq.codegen.maven.example;
 
-
 import org.jooq.codegen.maven.example.tables.Author;
 import org.jooq.codegen.maven.example.tables.Book;
 import org.jooq.codegen.maven.example.tables.BookStore;
 import org.jooq.codegen.maven.example.tables.BookToBookStore;
 import org.jooq.codegen.maven.example.tables.Language;
-
 
 /**
  * Convenience access to all tables in test.

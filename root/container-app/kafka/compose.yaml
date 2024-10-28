@@ -17,7 +17,7 @@ services:
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
 
   redpanda-console:
-    profiles: ['redpanda-console']
+    profiles: ["redpanda-console"]
     image: docker.redpanda.com/redpandadata/console:latest
     container_name: redpanda-console
     environment:

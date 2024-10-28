@@ -1,8 +1,8 @@
 package xyz.icefery.demo.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import xyz.icefery.demo.entity.AmountTransUnusualSummaryDTO;
-import java.util.List;
 
 @Mapper
 public interface AmountTransUnusualSummaryMapper {

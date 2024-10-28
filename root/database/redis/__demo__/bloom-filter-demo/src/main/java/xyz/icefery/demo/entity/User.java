@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class User {
+
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 

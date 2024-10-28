@@ -1,5 +1,8 @@
 package xyz.icefery.demo.security.config.security;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,15 +15,14 @@ import org.springframework.util.AntPathMatcher;
 import xyz.icefery.demo.security.entity.Permission;
 import xyz.icefery.demo.security.entity.Role;
 import xyz.icefery.demo.security.service.PermissionService;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 @Slf4j
 @Component
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
+
     @Autowired
     private AntPathMatcher antPathMatcher;
+
     @Autowired
     private PermissionService permissionService;
 
@@ -38,7 +40,6 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
         for (Permission p : permissionList) {
             if (antPathMatcher.match(p.getUrl(), requestUrl)) {
                 if (p.getAnonymous()) {
-
                     log.info("[" + requestUrl + "] 允许匿名访问");
 
                     // 返回 null 不会进入 UrlAccessDecisionManager#decide 方法 | 直接放行

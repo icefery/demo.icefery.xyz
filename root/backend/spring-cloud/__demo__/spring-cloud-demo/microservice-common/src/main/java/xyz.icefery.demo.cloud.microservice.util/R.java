@@ -6,6 +6,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class R<T> {
+
     private Integer code;
     private String message;
     private T data;

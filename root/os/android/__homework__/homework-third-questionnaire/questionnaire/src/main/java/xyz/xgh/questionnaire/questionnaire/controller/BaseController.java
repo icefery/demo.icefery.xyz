@@ -8,6 +8,7 @@ import xyz.xgh.questionnaire.questionnaire.service.TenantService;
 
 @RestController
 public class BaseController {
+
     @Autowired
     private TenantService tenantService;
 

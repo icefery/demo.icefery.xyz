@@ -1,10 +1,6 @@
 package xyz.icefery.demo.util;
 
-public record R<T>(
-    String code,
-    String message,
-    T data
-) {
+public record R<T>(String code, String message, T data) {
     public static R<Void> success() {
         return new R<>("0", "success", null);
     }
