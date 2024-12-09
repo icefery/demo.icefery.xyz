@@ -39,3 +39,56 @@
 -   [雪花算法生成的 id 是全球唯一吗？](https://www.zhihu.com/question/447384625)
 
 -   [雪花算法(Snowflake) - 改进版](https://blog.csdn.net/ciap37959/article/details/100619920)
+
+## 展开 JSON 对象数组
+
+-   MySQL `JSON_TABLE` 函数
+
+    ```sql
+    select
+        t.col_1,
+        t.col_2
+    from json_table(
+        '[{"col_1": 1, "col_2": "aa"}, {"col_1": 11, "col_2": "bb"}]',
+        '$[*]' columns (
+            col_1 bigint      path '$.col_1',
+            col_2 varchar(64) path '$.col_2'
+        )
+    ) t
+    ```
+
+-   MySQL 通用
+
+    ```sql
+    with
+    recursive seq as (
+        select 0 as i
+        union all
+        select i + 1 from seq where i < 999
+    )
+    select
+        cast(json_unquote(json_extract(row_list, concat('$[', i, '].col_1'))) as signed)      as col_1,
+        cast(json_unquote(json_extract(row_list, concat('$[', i, '].col_2'))) as varchar(64)) as col_2
+    from (
+        select '[{"col_1": 1, "col_2": "aa"}, {"col_1": 11, "col_2": "bb"}]' as row_list
+    ) t
+    join seq on i < json_length(row_list)
+    ```
+
+-   PostgreSQL `jsonb_array_elements`
+
+    ```sql
+    select
+        (t->>'col_1')::bigint      as col_1,
+        (t->>'col_2')::varchar(64) as col_2
+    from jsonb_array_elements('[{"col_1": 1, "col_2": "aa"}, {"col_1": 11, "col_2": "bb"}]'::jsonb) t;
+    ```
+
+-   DuckDB
+
+    ```sql
+    select info.*
+    from (
+        select unnest(json_transform('[{"col_1": 1, "col_2": "aa"}, {"col_1": 11, "col_2": "bb"}]'::json, '[{"col_1": "bigint", "col_2": "varchar(64)" }]'::json)) as info
+    ) t
+    ```

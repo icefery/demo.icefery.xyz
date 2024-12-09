@@ -152,3 +152,32 @@ lateral view udtf_unnest_json_array('
     ]
 ') t as c;
 ```
+
+## 访问 S3
+
+```sql
+drop resource if exists minio_duckdb;
+
+create resource minio_duckdb
+properties(
+   'type'          = 's3',
+   's3.endpoint'   = 'http://192.168.31.101:9000',
+   's3.region'     = 'us-east-1',
+   's3.bucket'     = 'duckdb',
+   's3.access_key' = 'admin',
+   's3.secret_key' = 'admin:0000'
+);
+
+
+select *
+from s3(
+    'uri'            = 's3://duckdb/test/user_info/pt=default/data_0.parquet',
+    'resource'       = 'minio_duckdb',
+    -- 's3.endpoint'    = 'http://192.168.31.101:9000',
+    -- 's3.access_key'  = 'readonly',
+    -- 's3.secret_key'  = 'readonly',
+    'format'         = 'parquet',
+    'use_path_style' = 'true'
+)
+limit 10;
+```
