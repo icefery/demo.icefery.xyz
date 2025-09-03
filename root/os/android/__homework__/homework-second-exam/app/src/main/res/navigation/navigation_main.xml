@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/navigation_home"
+>
+    <fragment
+        android:id="@+id/navigation_home"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="xyz.icefery.demo.view.home.HomeFragment"
+        tools:layout="@layout/fragment_home"
+    />
+
+    <fragment
+        android:id="@+id/navigation_baidu_map"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="xyz.icefery.demo.view.baidumap.BaiduMapFragment"
+        tools:layout="@layout/fragment_baidu_map"
+    />
+
+    <fragment
+        android:id="@+id/navigation_calculator"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="xyz.icefery.demo.view.calculator.CalculatorFragment"
+        tools:layout="@layout/fragment_calculator"
+    />
+
+    <fragment
+        android:id="@+id/navigation_honor_of_kings"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:name="xyz.icefery.demo.view.honorofking.HonorOfKingFragment"
+        tools:layout="@layout/fragment_honor_of_king"
+    />
+</navigation>

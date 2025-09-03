@@ -1,0 +1,14 @@
+security:
+  oauth2:
+    client:
+      client-id: client1
+      client-secret: client1
+      user-authorization-uri: http://localhost:1000/auth/oauth/authorize
+      access-token-uri: http://localhost:1000/auth/oauth/token
+    resource:
+      token-info-uri: http://localhost:1000/auth/oauth/check_token
+
+server:
+  port: 1100
+  servlet:
+    context-path: /client1

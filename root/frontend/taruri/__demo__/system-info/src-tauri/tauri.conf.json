@@ -1,0 +1,34 @@
+{
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devPath": "../ui",
+    "distDir": "../ui",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "system-info",
+    "version": "0.0.1"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "identifier": "xyz.icefery.demo.tauri.system-info",
+      "active": true,
+      "targets": "all",
+      "icon": ["icons/icon.ico"],
+      "resources": []
+    },
+    "windows": [
+      {
+        "title": "System Info",
+        "width": 1280,
+        "height": 720,
+        "resizable": false,
+        "titleBarStyle": "Transparent"
+      }
+    ]
+  }
+}

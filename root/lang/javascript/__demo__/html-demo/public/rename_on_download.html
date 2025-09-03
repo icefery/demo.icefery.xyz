@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <title>下载时重命名</title>
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="http://192.168.8.101:9000/bucket-test/test.docx" download="测试.docx">test.docx</a>
+      </li>
+      <li>
+        <a href="http://192.168.8.101:9000/bucket-test/test.docx" download="测试.docx" id="ref">测试.docx</a>
+      </li>
+    </ul>
+    <script type="module">
+      /**
+       * @param {string} url
+       * @param {string} name
+       */
+      function download(url, name) {
+        fetch(url, {method: 'get'})
+          .then(response => response.blob())
+          .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a')
+            a.href = url
+            a.download = name
+            a.click()
+            URL.revokeObjectURL(url)
+          })
+      }
+
+      /**
+       * @type {HTMLAnchorElement}
+       */
+      const ref = document.querySelector('#ref')
+      ref.addEventListener('click', e => {
+        e.preventDefault()
+        const url = ref.getAttribute('href')
+        const name = ref.getAttribute('download')
+        download(url, name)
+      })
+    </script>
+  </body>
+</html>

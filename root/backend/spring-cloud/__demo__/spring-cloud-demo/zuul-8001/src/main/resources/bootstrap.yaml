@@ -1,0 +1,15 @@
+server:
+  port: 8001
+
+spring:
+  cloud:
+    config:
+      # 配置中心地址
+      uri:
+        - http://localhost:8888
+      # Git 分支
+      label: netflix-dynamic
+      # {application}
+      name: zuul
+      # {profile}
+      profile: dev

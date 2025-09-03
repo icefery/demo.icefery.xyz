@@ -1,0 +1,66 @@
+### mac
+/**/.DS_Store
+
+### idea
+/**/.idea/
+/**/*.iml
+/**/out/
+
+### vscode
+/**/.vscode/
+
+### qt creator
+/**/build-*-Debug/
+/**/build-*-Release/
+
+### obsidian
+/**/.obsidian/
+
+### maven
+/**/.mvn/
+/**/mvnw
+/**/mvnw.cmd
+/**/target/
+
+### gradle
+/**/.gradle/
+/**/gradle/
+/**/gradlew
+/**/gradlew.bat
+/**/build/
+
+### npm
+/**/node_modules/
+/**/package-lock.json
+/**/yarn.lock
+/**/yarn-*.log
+/**/pnpm-*.yaml
+/**/dist/
+
+### xmake
+/**/.xmake/
+/**/build/
+
+### cmake
+/**/cmake-build-*/
+
+### cargo
+/**/Cargo.lock
+/**/target/
+
+### go
+/**/go.sum
+
+### python
+/**/venv/
+/**/__pycache__/
+
+### spring boot
+/**/HELP.md
+
+### vite
+/**/components.d.ts
+/**/auto-imports.d.ts
+
+### ruff
+/**/.ruff_cache/

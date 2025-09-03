@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@prettier/plugin-xml": "latest",
+    "prettier": "latest",
+    "prettier-plugin-java": "latest"
+  }
+}

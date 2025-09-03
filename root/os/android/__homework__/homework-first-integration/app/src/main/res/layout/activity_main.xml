@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @formatter:off -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+>
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_switch_fragment_activity_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="片段 - Fragment"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_persistence_by_file_activity_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="存储 - File"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_persistence_by_shared_preferences_activity_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="存储 - SharedPreferences"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_persistence_by_sqlite_activity_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="存储 - SQLite"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_share_data_by_content_provider_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="共享 - ContentProvider"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/send_custom_broadcast_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="广播 - CUSTOM_ACTION"
+        android:textAllCaps="false"
+    />
+    <Button
+        android:gravity="center_vertical"
+        android:id="@+id/start_log_service_btn"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="服务 - LogService"
+        android:textAllCaps="false"
+    />
+</LinearLayout>
+<!-- @formatter:on -->

@@ -1,0 +1,16 @@
+ingressClassResource:
+  default: true
+
+publishService:
+  enabled: true
+
+defaultBackend:
+  enabled: false
+
+service:
+  type: NodePort
+  nodePorts:
+    http: 30080
+    https: 30443
+  externalIPs:
+    - 192.192.192.6

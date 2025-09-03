@@ -1,0 +1,22 @@
+services:
+  crproxy:
+    image: ghcr.io/daocloud/crproxy/crproxy:v0.12.2
+    container_name: crproxy
+    environment:
+      TZ: Asia/Shanghai
+      https_proxy: http://192.168.31.101:7890
+      http_proxy: http://192.168.31.101:7890
+    command: |
+      --acme-cache-dir=/tmp/acme
+      --acme-hosts=*
+      --default-registry=docker.io
+    ports:
+      - 50080:8080
+      - 50443:8080
+    tmpfs:
+      - /tmp/acme
+
+networks:
+  default:
+    name: compose
+    external: true

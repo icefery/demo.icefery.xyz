@@ -1,0 +1,4 @@
+provider: coredns
+
+coredns:
+  etcdEndpoints: "http://etcd.kube-system.svc.cluster.local:2379"

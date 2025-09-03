@@ -1,0 +1,38 @@
+apiVersion: kubekey.kubesphere.io/v1alpha2
+kind: Cluster
+metadata:
+  name: sample
+spec:
+  hosts:
+    - { name: "k8s-101", address: "192.168.8.101", internalAddress: "192.168.8.101", port: 22, arch: "arm64", user: "root", password: "root" }
+  roleGroups:
+    etcd:
+      - k8s-101
+    control-plane:
+      - k8s-101
+    worker:
+      - k8s-101
+  controlPlaneEndpoint:
+    # internalLoadbalancer: haproxy
+    domain: lb.kubesphere.local
+    address: ""
+    port: 6443
+  kubernetes:
+    version: v1.24.7
+    clusterName: cluster.local
+    autoRenewCerts: true
+    containerManager: containerd
+  etcd:
+    type: kubekey
+  network:
+    plugin: calico
+    kubePodsCIDR: 10.8.0.0/16
+    kubeServiceCIDR: 10.16.0.0/16
+    multusCNI:
+      enabled: false
+  registry:
+    privateRegistry: ""
+    namespaceOverride: ""
+    registryMirrors: ["https://hub-mirror.c.163.com", "https://uwk49ut2.mirror.aliyuncs.com"]
+    insecureRegistries: []
+  addons: []

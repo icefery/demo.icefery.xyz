@@ -1,0 +1,90 @@
+<!doctype html>
+<meta charset="UTF-8" />
+<title>puppeteer-demo</title>
+
+<table id="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>TITLE</th>
+      <th>AUTHOR</th>
+      <th>
+        <button id="load-button">LOAD</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<script type="module">
+  const CONFIG = {
+    OAUTH2_AUTHORIZE_ENDPOINT: 'http://127.0.0.1:9000/oauth2/authorize',
+    CLIENT_ID: 'book',
+    REDIRECT_URI: 'http://127.0.0.1:8080/callback'
+  }
+
+  const tableDom = document.querySelector('#table')
+  const loadButtonDom = document.querySelector('#load-button')
+
+  window.addEventListener('load', e => {
+    const url = new URL(location.href)
+    const accessToken = url.searchParams.get('access_token')
+    if (accessToken) {
+      localStorage.setItem('access_token', accessToken)
+      url.searchParams.delete('access_token')
+      history.replaceState({}, '', url)
+    }
+  })
+
+  loadButtonDom.addEventListener('click', e => {
+    const accessToken = localStorage.getItem('access_token')
+    fetch('/api/books', {
+      method: 'post',
+      headers: {
+        ['Authorization']: 'Bearea ' + accessToken
+      }
+    }).then(async res => {
+      if (res.status === 401) {
+        location.href = `${CONFIG.OAUTH2_AUTHORIZE_ENDPOINT}?response_type=code&client_id=${CONFIG.CLIENT_ID}&redirect_uri=${CONFIG.REDIRECT_URI}`
+      } else {
+        /**
+         * @type {{data: {id: number, title: string, author: string}[]}}
+         */
+        const body = await res.json()
+        tableDom.querySelector('tbody').innerHTML = body.data
+          .map(
+            it => `
+  <tr>
+    <td>${it.id}</td>
+    <td>${it.title}</td>
+    <td>${it.author}</td>
+    <td></td>
+  </tr>
+          `
+          )
+          .join('')
+      }
+    })
+  })
+</script>
+<style>
+  table {
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px solid #ebeef5;
+    text-align: left;
+    padding: 8px;
+    width: 200px;
+  }
+
+  th {
+    background-color: #f5f7fa;
+    color: #606266;
+  }
+
+  tbody tr:hover {
+    background-color: #ecf5ff;
+  }
+</style>

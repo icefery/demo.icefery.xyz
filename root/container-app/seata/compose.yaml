@@ -1,0 +1,12 @@
+services:
+  seata:
+    image: seataio/seata-server:1.6.1
+    container_name: seata
+    ports:
+      - 7091:7091
+      - 8091:8091
+
+networks:
+  default:
+    external: true
+    name: compose

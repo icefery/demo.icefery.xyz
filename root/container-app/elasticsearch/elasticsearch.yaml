@@ -1,0 +1,33 @@
+services:
+  elasticsearch:
+    image: docker.io/bitnami/elasticsearch:8.8.0
+    container_name: elasticsearch
+    profiles: ["all", "elasticsearch"]
+    ports:
+      - 9200:9200
+    volumes:
+      - elasticsearch:/bitnami/elasticsearch
+    networks:
+      - elasticsearch
+
+  kibana:
+    image: docker.io/bitnami/kibana:8.8.0
+    container_name: kibana
+    profiles: ["all", "kibana"]
+    environment:
+      KIBANA_ELASTICSEARCH_URL: elasticsearch
+      I18N_LOCALE: zh-CN
+    ports:
+      - 5601:5601
+    volumes:
+      - kibana:/bitnami/kibana
+    networks:
+      - elasticsearch
+
+networks:
+  elasticsearch:
+    driver: bridge
+
+volumes:
+  elasticsearch:
+  kibana:

@@ -1,0 +1,86 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mysql
+  name: mysql-internal
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: mysql
+  ports:
+    - { "port": 3306 }
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mysql
+  name: mysql-external
+spec:
+  type: LoadBalancer
+  ports:
+    - { "port": 3306 }
+  selector:
+    app: mysql
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql-internal
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data
+      initContainers:
+        - name: volume-permissions
+          image: docker.io/bitnami/os-shell:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/bash
+            - -ec
+            - |
+              chown -R 1001:1001 /bitnami/mysql/data
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - { "name": "data", "mountPath": "/bitnami/mysql/data" }
+      containers:
+        - name: mysql
+          image: docker.io/bitnami/mysql:8.0.33
+          imagePullPolicy: IfNotPresent
+          env:
+            - { "name": "TZ", "value": "Asia/Shanghai" }
+            - { "name": "MYSQL_ROOT_PASSWORD", "value": "root" }
+            - { "name": "MYSQL_USER", "value": "demo" }
+            - { "name": "MYSQL_PASSWORD", "value": "demo" }
+            - { "name": "MYSQL_DATABASE", "value": "demo" }
+            - { "name": "MYSQL_AUTHENTICATION_PLUGIN", "value": "mysql_native_password" }
+            - { "name": "MYSQL_CHARACTER_SET", "value": "utf8mb4" }
+            - { "name": "MYSQL_COLLATE", "value": "utf8mb4_0900_ai_ci" }
+            - { "name": "MYSQL_EXTRA_FLAGS", "value": "--lower-case-table-names=1 --max-connections=1000" }
+          ports:
+            - { containerPort: 3306 }
+          volumeMounts:
+            - { "name": "data", "mountPath": "/bitnami/mysql/data" }
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 8Gi

@@ -1,0 +1,20 @@
+services:
+  minio:
+    image: docker.io/bitnami/minio:2024.10.13
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=admin:0000
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - minio-data:/bitnami/minio/data
+
+network:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  minio-data:

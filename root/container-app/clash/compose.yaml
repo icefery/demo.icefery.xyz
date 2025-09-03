@@ -1,0 +1,26 @@
+services:
+  clash:
+    image: ghcr.io/icefery/clash-premium:2023.08.17
+    container_name: clash
+    ports:
+      - 7890:7890
+      - 9090:9090
+    volumes:
+      - /opt/module/clash/config.yaml:/root/.config/clash/config.yaml
+  yacd:
+    profiles: ["yacd"]
+    image: ghcr.io/haishanh/yacd
+    container_name: yacd
+    ports:
+      - 80
+  subconverter:
+    profiles: ["subconverter"]
+    image: docker.io/tindy2013/subconverter
+    container_name: subconverter
+    ports:
+      - 25500:25500
+
+networks:
+  default:
+    name: compose
+    external: true

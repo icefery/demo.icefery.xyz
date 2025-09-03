@@ -1,0 +1,12 @@
+services:
+  greenplum:
+    # image: docker.io/datagrip/greenplum:6.8
+    image: docker.io/andruche/greenplum:6.25.3
+    container_name: greenplum
+    ports:
+      - 5432:5432
+
+networks:
+  default:
+    name: compose
+    external: true

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="xyz.icefery.demo">
+    <!-- 接收 BOOT_COMPLETED 广播的权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_lanucher"
+        android:label="homework-first-integrating"
+        android:theme="@style/Theme.AppCompat.DayNight"
+    >
+        <!-- Content Provider -->
+        <provider
+            android:authorities="xyz.icefery.demo.cp.GlobalContentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:name=".cp.GlobalContentProvider"
+        />
+        <!-- Service -->
+        <service android:exported="false" android:name=".service.LogService"/>
+        <!-- Boradcast Receiver -->
+        <receiver android:enabled="true" android:exported="true" android:name=".receiver.GlobalBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <!-- Activity -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SwitchFragmentActivity"/>
+        <activity android:name=".activity.PersistenceBySQLiteActivity"/>
+        <activity android:name=".activity.PersistenceBySharedPreferencesActivity"/>
+        <activity android:name=".activity.PersistenceByFileActivity"/>
+        <activity android:name=".activity.ShareDataByContentProviderActivity"/>
+    </application>
+</manifest>

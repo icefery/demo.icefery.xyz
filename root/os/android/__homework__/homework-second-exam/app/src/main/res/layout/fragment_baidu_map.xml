@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+>
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_height="match_parent" android:layout_width="match_parent">
+
+        <LinearLayout
+            android:id="@+id/data"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+        >
+
+            <EditText
+                android:ems="10"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="A"
+                android:id="@+id/marker_a_edit_text"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+            />
+
+            <EditText
+                android:ems="10"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="B"
+                android:id="@+id/marker_b_edit_text"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+            />
+
+            <EditText
+                android:ems="10"
+                android:focusable="false"
+                android:gravity="center"
+                android:hint="D"
+                android:id="@+id/marker_distance_edit_text"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+            />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/map"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/data"
+        >
+
+            <com.baidu.mapapi.map.MapView
+                android:clickable="true"
+                android:id="@+id/baidu_map_view"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+            >
+
+            </com.baidu.mapapi.map.MapView>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/control"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/data"
+            app:layout_constraintVertical_bias="0.0"
+            tools:visibility="visible"
+        >
+
+            <RadioGroup
+                android:checkedButton="@id/map_type_normal_radio_button"
+                android:id="@+id/map_type_radio_group"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+            >
+
+                <RadioButton
+                    android:id="@+id/map_type_normal_radio_button"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:text="普通视图"
+                />
+
+                <RadioButton
+                    android:id="@+id/map_type_satellite_radio_button"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:text="卫星视图"
+                />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/traffic_map_checkbox"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:text="交通视图"
+            />
+
+            <CheckBox
+                android:id="@+id/heat_map_checkbox"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:text="热力视图"
+            />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

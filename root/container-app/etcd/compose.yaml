@@ -1,0 +1,18 @@
+services:
+  etcd:
+    image: docker.io/bitnami/etcd:3.5
+    container_name: etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    ports:
+      - 2379:2379
+    volumes:
+      - etcd:/bitnami/etcd
+
+networks:
+  default:
+    external: true
+    name: compose
+
+volumes:
+  etcd:

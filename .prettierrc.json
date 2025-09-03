@@ -1,0 +1,57 @@
+{
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "embeddedLanguageFormatting": "off",
+  "endOfLine": "lf",
+  "experimentalTernaries": false,
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxSingleQuote": false,
+  "printWidth": 160,
+  "proseWrap": "preserve",
+  "quoteProps": "consistent",
+  "requirePragma": false,
+  "semi": false,
+  "singleAttributePerLine": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "useTabs": false,
+  "vueIndentScriptAndStyle": false,
+  "plugins": ["@prettier/plugin-xml", "prettier-plugin-java"],
+  "overrides": [
+    {
+      "files": ["*.yaml"],
+      "options": {
+        "tabWidth": 2,
+        "singleQuote": false
+      }
+    },
+    {
+      "files": ["*.md"],
+      "options": {
+        "tabWidth": 4
+      }
+    },
+    {
+      "files": ["*.xml"],
+      "options": {
+        "bracketSameLine": false,
+        "printWidth": 160,
+        "singleAttributePerLine": false,
+        "tabWidth": 4,
+        "xmlQuoteAttributes": "double",
+        "xmlSelfClosingSpace": false,
+        "xmlSortAttributesByKey": true,
+        "xmlWhitespaceSensitivity": "strict"
+      }
+    },
+    {
+      "files": ["*.java"],
+      "options": {
+        "tabWidth": 4
+      }
+    }
+  ]
+}

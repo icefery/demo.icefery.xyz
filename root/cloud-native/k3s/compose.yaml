@@ -1,0 +1,54 @@
+services:
+  mysql:
+    image: docker.io/bitnami/mysql:8.0.33
+    restart: always
+    container_name: mysql
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: k3s
+      MYSQL_PASSWORD: k3s
+      MYSQL_DATABASE: k3s
+      MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+      MYSQL_CHARACTER_SET: utf8mb4
+      MYSQL_COLLATE: utf8mb4_0900_ai_ci
+      MYSQL_EXTRA_FLAGS: "--lower-case-table-names=1"
+    ports:
+      - 3306:3306
+    volumes:
+      - /data/compose/bitnami/mysql/data:/bitnami/mysql/data
+
+  postgresql:
+    image: docker.io/bitnami/postgresql:16.1.0
+    restart: always
+    container_name: postgresql
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRESQL_POSTGRES_PASSWORD: postgres
+      POSTGRESQL_DATABASE: k3s
+      POSTGRESQL_USERNAME: k3s
+      POSTGRESQL_PASSWORD: k3s
+      POSTGRESQL_TIMEZONE: Asia/Shanghai
+      POSTGRESQL_LOG_TIMEZONE: Asia/Shanghai
+    ports:
+      - 5432:5432
+    volumes:
+      - /data/compose/bitnami/postgresql/data:/bitnami/postgresql/data
+
+  clash:
+    image: ghcr.io/icefery/clash-premium:2023.08.17
+    restart: always
+    container_name: clash
+    command:
+      - -f
+      - /config.yaml
+    ports:
+      - 7890:7890
+      - 9090:7890
+    volumes:
+      - /data/compose/config.yaml:/config.yaml
+
+networks:
+  default:
+    name: compose
+    external: true
