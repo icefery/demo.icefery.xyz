@@ -1,0 +1,31 @@
+---
+apiVersion: "cert-manager.io/v1"
+kind: "Certificate"
+metadata:
+  name: "my-cert-01"
+  namespace: "dev"
+spec:
+  commonName: "my-cert-01.org"
+  dnsNames:
+    - "my-cert-01.org"
+    - "*.my-cert-01.org"
+  issuerRef:
+    kind: "ClusterIssuer"
+    name: "my-ca-issuer"
+  secretName: "my-cert-01"
+
+---
+apiVersion: "cert-manager.io/v1"
+kind: "Certificate"
+metadata:
+  name: "my-cert-02"
+  namespace: "dev"
+spec:
+  commonName: "my-cert-02.org"
+  dnsNames:
+    - "my-cert-02.org"
+    - "*.my-cert-02.org"
+  issuerRef:
+    kind: "ClusterIssuer"
+    name: "my-ca-issuer"
+  secretName: "my-cert-02"
