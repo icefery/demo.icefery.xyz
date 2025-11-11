@@ -1,0 +1,19 @@
+services:
+  openobserve:
+    image: docker.io/openobserve/openobserve:v0.16.0-rc1
+    environment:
+      ZO_ROOT_USER_EMAIL: "admin@example.org"
+      ZO_ROOT_USER_PASSWORD: "admin@example.org"
+    ports:
+      - 5080:5080
+      - 5081:5081
+    volumes:
+      - openobserve-data:/data
+
+networks:
+  default:
+    name: compose
+    external: true
+
+volumes:
+  openobserve-data:
