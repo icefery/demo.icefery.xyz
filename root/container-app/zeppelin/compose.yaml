@@ -1,6 +1,6 @@
 services:
   zeppelin:
-    image: docker.io/apache/zeppelin:0.11.0
+    image: docker.io/apache/zeppelin:0.12.0
     container_name: zeppelin
     user: root
     environment:
